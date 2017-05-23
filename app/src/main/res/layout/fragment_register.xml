@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:orientation="vertical"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/myrect"
+        android:layout_weight="0.00"
+        android:elevation="19dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Sign In your Account"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:paddingLeft="10dp"
+            android:hint="Enter Accountnumber"
+            android:textColorHint="#00BFFF"
+            android:inputType="number"
+            android:id="@+id/regacnt"
+            android:background="@drawable/rounded_edittext"
+            android:layout_weight="0.30" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:paddingLeft="10dp"
+            android:hint="Enter Phonenumber"
+            android:inputType="number"
+            android:textColorHint="#00BFFF"
+            android:background="@drawable/rounded_edittext"
+            android:id="@+id/regphn"
+            android:layout_weight="0.29" />
+        <Button
+            android:layout_width="290dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_edittext"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:text="Sign In"
+            android:textSize="20dp"
+            android:id="@+id/btnregg"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:paddingLeft="10dp"
+            android:hint="Enter OTP"
+            android:inputType="number"
+            android:textColorHint="#00BFFF"
+            android:background="@drawable/rounded_edittext"
+            android:id="@+id/typeotp"
+            android:layout_weight="0.29" />
+        <Button
+            android:layout_width="290dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rounded_edittext"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:text=" SUBMIT"
+            android:textSize="20dp"
+            android:id="@+id/subotp"/>
+
+</LinearLayout>
+
+</LinearLayout>
