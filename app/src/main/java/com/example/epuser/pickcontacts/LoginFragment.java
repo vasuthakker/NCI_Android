@@ -73,6 +73,7 @@ public class LoginFragment extends Fragment  implements View.OnClickListener{
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
                 //create Jsonobject to be sent to backend
                 new LoginFragment.LoginAsyncTask().execute("POST", url, data.toString());
             }

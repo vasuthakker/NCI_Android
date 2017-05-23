@@ -98,13 +98,14 @@ public class SendOTP extends Fragment implements View.OnClickListener {
             if (value =="hey"){
                 Intent intent=new Intent(getActivity(),MainActivity.class);
                 startActivity(intent);
+                getActivity().finish();
 
             }
-            else
-            {
-                if (value =="LoginPage")
-                    startActivity(new Intent(getActivity(),LoginPage.class));
+            else if (value =="LoginPage") {
+                startActivity(new Intent(getActivity(), LoginPage.class));
+                getActivity().finish();
             }
+
 
               // here we have to decide which activity to open
             //if success update sharedpreferences, fetch data , go to homepage
