@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="100dp"
+    android:layout_height="match_parent"
+
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     android:layout_marginBottom="25dp"
@@ -15,7 +15,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Phonenumber"
+        android:hint="Phone Number"
         android:paddingLeft="10dp"
         android:textSize="30dp"
         android:layout_marginTop="20dp"
@@ -23,15 +23,15 @@
         android:layout_marginLeft="10dp"
         android:textColor="@android:color/holo_green_light"
         android:id="@+id/edtPhonenumber"
-        android:background="@drawable/rounded_edittext"
+
         android:inputType="number"
         />
 
         <QuickContactBadge
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="20dp"
 
             android:visibility="visible"
@@ -49,7 +49,7 @@
         android:layout_marginLeft="10dp"
         android:inputType="number"
         android:layout_marginTop="20dp"
-        android:background="@drawable/rounded_edittext"
+
         android:id="@+id/edtamount"
 
         />
@@ -57,8 +57,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:text="RECEIVE"
+        android:textSize="20dp"
         android:textColor="#FFF"
-        android:background="@android:color/holo_blue_bright"
+        android:background="#10D396"
         android:id="@+id/btnreceive"/>
 </LinearLayout>

@@ -9,6 +9,7 @@ import android.app.FragmentTransaction;
 //import android.nfc.Tag;
 //import android.os.AsyncTask;
 //import android.provider.ContactsContract;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 //import android.util.Log;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
    // private Button btncnt;
    // private Button btnshw;
    // private TextView textView2;
-    private ImageView txtchk;
+    private ImageView txtchk,imagerequest;
     private ImageView txtsnd;
     private ImageView txtad;
 
@@ -45,12 +46,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txtchk = (ImageView) findViewById(R.id.txtchk);
         txtsnd = (ImageView) findViewById(R.id.txtsnd);
         txtad = (ImageView) findViewById(R.id.txtad);
+        imagerequest= (ImageView) findViewById(R.id.imageView5);
 
        // btncnt.setOnClickListener(this);
        // btnshw.setOnClickListener(this);
         txtchk.setOnClickListener(this);
         txtsnd.setOnClickListener(this);
         txtad.setOnClickListener(this);
+        imagerequest.setOnClickListener(this);
 
 
     }
@@ -84,6 +87,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.fcontainer, twoFragment, "twoFragment");
             transaction.commit();
+        }
+        if(v==imagerequest){
+            Intent intent= new Intent(MainActivity.this,Request.class);
+            startActivity(intent);
         }
        /* if (v==btnshw){
             try {

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 //import android.widget.Toast;
@@ -34,7 +35,7 @@ public class OneFragment extends Fragment implements View.OnClickListener {
   //  private String TAG = OneFragment.class.getSimpleName();
     static final int RESULT_PICK_CONTACT=1;
     private EditText edtphn;
-    private Button btncnt;
+    private QuickContactBadge btncnt;
     private Button btnshw;
     private TextView textView2;
 
@@ -45,7 +46,7 @@ public class OneFragment extends Fragment implements View.OnClickListener {
 
 
         edtphn = (EditText)view.findViewById(R.id.edtphn);
-        btncnt=(Button)view.findViewById(R.id.btncnt);
+        btncnt=(QuickContactBadge) view.findViewById(R.id.btncnt);
         btnshw =(Button)view.findViewById(R.id.btnshw);
         textView2=(TextView) view.findViewById(R.id.textview2);
 
