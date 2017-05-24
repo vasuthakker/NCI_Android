@@ -2,22 +2,26 @@ package com.example.epuser.pickcontacts;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.net.URL;
 
 /**
  * Created by epuser on 5/19/2017.
@@ -26,69 +30,132 @@ import java.net.SocketAddress;
 public class LoginPage extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnlog,btnreg,checkserver;
-    private TextView txtfrgt;
-    boolean exists =false;
-
+    private TextView  forgotPassword;
     @Override
-    protected void onCreate( Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page_login);
 
-
         btnlog =(Button)findViewById(R.id.btnlog);
         btnreg=(Button)findViewById(R.id.btnreg);
-        txtfrgt=(TextView)findViewById(R.id.txtfrgt) ;
-        checkserver=(Button)findViewById(R.id.checkserver);
+        forgotPassword = (TextView)findViewById(R.id.txtfrgt);
+        checkserver = (Button)findViewById(R.id.checkserver);
 
         btnreg.setOnClickListener(this);
         btnlog.setOnClickListener(this);
-        txtfrgt.setOnClickListener(this);
+        forgotPassword.setOnClickListener(this);
         checkserver.setOnClickListener(this);
 
-
-
         FragmentManager manager = getFragmentManager();
-        LoginFragment loginFragment = new LoginFragment();
+        FirstFragment firstFragment = new FirstFragment();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.lgcontainer, loginFragment, "loginFragment");
+        transaction.add(R.id.lgcontainer, firstFragment, "firstFragment");
         transaction.commit();
+
+
+
+        SharedPreferences loginCheck =getSharedPreferences("userData", Context.MODE_PRIVATE);
+        if(!(loginCheck.getString("userName",null)==null) && loginCheck.getBoolean("isLogin",false))
+            if(CheckNetwork.isInternetAvailable(LoginPage.this)) {
+                new LoginPage.LoginViaServer().execute();
+            }
+            else{
+                Toast.makeText(LoginPage.this,"No Internet Connection,please connect to Internet to access the Application",Toast.LENGTH_LONG).show();
+            }
+        else
+        {
+
+            FragmentManager managerlogin = getFragmentManager();
+            LoginFragment loginFragment = new LoginFragment();
+            FragmentTransaction transactionlogin = managerlogin.beginTransaction();
+            transactionlogin.replace(R.id.lgcontainer, loginFragment, "loginFragment");
+            transactionlogin.commit();
+        }
     }
 
     @Override
-    public void onClick(View v) {
-        if (v==btnlog){
+    public void onClick(View v)
+    {
+        if (v==btnlog)
+        {
             FragmentManager manager = getFragmentManager();
             LoginFragment loginFragment = new LoginFragment();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.lgcontainer, loginFragment, "loginFragment");
             transaction.commit();
         }
-        if (v==btnreg){
+        if (v==btnreg)
+        {
             FragmentManager manager = getFragmentManager();
             RegisterFragment registerFragment = new RegisterFragment();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.lgcontainer, registerFragment, "registerFragment");
             transaction.commit();
         }
-        if (v==txtfrgt){
-            btnlog.setVisibility(View.GONE);
-            btnreg.setVisibility(View.GONE);
+        if(v == forgotPassword)
+        {
+
             FragmentManager manager = getFragmentManager();
             ForgotPasswordFragment forgotPasswordFragment = new ForgotPasswordFragment();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.lgcontainer, forgotPasswordFragment, "forgotPasswordFragment");
             transaction.commit();
-        }
 
+
+        }
         if(v==checkserver){
 
-            new LoginPage.LoginAsyncTask().execute();
+            new LoginPage.CheckServerAsyncTask().execute();
+
+        }
+    }
+    private class LoginViaServer extends AsyncTask<Void,Void,String>
+    {
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+
+
+            String savedMobileNo = null;
+            String savedPassword = null;
+            String serverLoginUrl = "http://api.androidhive.info/contacts/";
+            SharedPreferences loginCheck = getSharedPreferences("userData",MODE_PRIVATE);
+            savedMobileNo=loginCheck.getString("mobileNo",null);
+            savedPassword = loginCheck.getString("password",null);
+            JSONObject data = new JSONObject();
+            try {
+                data.put("HEADER", "FJGH");
+                JSONObject data1 = new JSONObject();
+                data1.put("mobNo","1234567890");
+                data1.put("reqAmount", 200);
+                data.put("DATA", data1);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            //create the required json object
+            String resultFromBackend = Utils.makeRequestNGetResponse("POST",serverLoginUrl,data.toString());
+            return resultFromBackend;
+
+
+        }
+        @Override
+        protected void onPostExecute(String result)
+        {
+            startActivity(new Intent(LoginPage.this,MainActivity.class));
+            try {
+                JSONObject jsonResult = new JSONObject(result);
+                //parse json
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
     }
 
-
-    private class LoginAsyncTask extends AsyncTask<Void,Void ,String>
+    private class CheckServerAsyncTask extends AsyncTask<Void,Void ,String>
     {
 
         @Override
@@ -103,7 +170,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                 // If the timeout occurs, SocketTimeoutException is thrown.
                 int timeoutMs = 2000;   // 2 seconds
                 sock.connect(sockaddr, timeoutMs);
-                exists = true;
                 return "server online";
                 //
             } catch(IOException e) {
@@ -114,18 +180,8 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         @Override
         protected void onPostExecute(String result)
         {
-
             Toast.makeText(LoginPage.this,result,Toast.LENGTH_SHORT).show();
-
-
-
-//            Intent intent= new Intent(LoginPage.this,MainActivity.class);
-//            startActivity(intent);
-//            finish();
-//            Toast.makeText(getActivity(),result,Toast.LENGTH_SHORT).show();
-            //if success update sharedpreferences, fetch data , go to homepage
-            //else try again logging in
-
         }
     }
 }
+

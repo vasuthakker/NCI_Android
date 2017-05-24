@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,9 @@ public class LoginFragment extends Fragment  implements View.OnClickListener{
         lgpswrd=(EditText)view.findViewById(R.id.lgpswrd);
         btnlogg=(Button)view.findViewById(R.id.btnlogg);
         btnlogg.setOnClickListener(this);
+        btnlogg.setOnClickListener(setClick("1"));
+
+
         return  view;
 
     }
@@ -79,6 +83,8 @@ public class LoginFragment extends Fragment  implements View.OnClickListener{
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+
                 JsonObjectRequest jsonRequest = new JsonObjectRequest(url, data, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -97,6 +103,7 @@ public class LoginFragment extends Fragment  implements View.OnClickListener{
                 RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
                 requestQueue.add(jsonRequest);
 
+
                 //create Jsonobject to be sent to backend
                 //new LoginFragment.LoginAsyncTask().execute("POST", url, data.toString());
             }
@@ -108,6 +115,15 @@ public class LoginFragment extends Fragment  implements View.OnClickListener{
 
 
         }
+    }
+
+    private View.OnClickListener setClick(final String value) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("value", "onClick: "+value);
+            }
+        };
     }
 
     private class LoginAsyncTask extends AsyncTask<String,Void ,String>
