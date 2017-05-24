@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.View;
 //import android.widget.Button;
 //import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 //import android.widget.Toast;
 
@@ -28,9 +29,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
    // private Button btncnt;
    // private Button btnshw;
    // private TextView textView2;
-    private TextView txtchk;
-    private TextView txtsnd;
-    private TextView txtad;
+    private ImageView txtchk;
+    private ImageView txtsnd;
+    private ImageView txtad;
 
 
     @Override
@@ -41,9 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        // btncnt = (Button) findViewById(R.id.btncnt);
        // btnshw = (Button) findViewById(R.id.btnshw);
        // textView2 = (TextView) findViewById(R.id.textview2);
-        txtchk = (TextView) findViewById(R.id.txtchk);
-        txtsnd = (TextView) findViewById(R.id.txtsnd);
-        txtad = (TextView) findViewById(R.id.txtad);
+        txtchk = (ImageView) findViewById(R.id.txtchk);
+        txtsnd = (ImageView) findViewById(R.id.txtsnd);
+        txtad = (ImageView) findViewById(R.id.txtad);
 
        // btncnt.setOnClickListener(this);
        // btnshw.setOnClickListener(this);
