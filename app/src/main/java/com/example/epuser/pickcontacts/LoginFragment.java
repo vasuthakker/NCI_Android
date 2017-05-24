@@ -39,7 +39,7 @@ public class LoginFragment extends Fragment  implements View.OnClickListener{
         lgpswrd=(EditText)view.findViewById(R.id.lgpswrd);
         btnlogg=(Button)view.findViewById(R.id.btnlogg);
         btnlogg.setOnClickListener(this);
-        btnlogg.setOnClickListener(setClick("1"));
+       // btnlogg.setOnClickListener(setClick("1"));
 
 
         return  view;
@@ -88,7 +88,7 @@ public class LoginFragment extends Fragment  implements View.OnClickListener{
                 JsonObjectRequest jsonRequest = new JsonObjectRequest(url, data, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                       // Toast.makeText(getActivity(),response.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),response.toString(),Toast.LENGTH_SHORT).show();
                         Intent intent= new Intent(getActivity(),MainActivity.class);
                         startActivity(intent);
 
@@ -117,14 +117,14 @@ public class LoginFragment extends Fragment  implements View.OnClickListener{
         }
     }
 
-    private View.OnClickListener setClick(final String value) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("value", "onClick: "+value);
-            }
-        };
-    }
+//  //  private View.OnClickListener setClick(final String value) {
+//    //    return new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d("value", "onClick: "+value);
+//            }
+//        };
+//   // }
 
     private class LoginAsyncTask extends AsyncTask<String,Void ,String>
     {
