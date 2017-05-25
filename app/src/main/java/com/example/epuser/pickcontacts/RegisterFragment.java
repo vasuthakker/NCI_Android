@@ -1,6 +1,8 @@
 package com.example.epuser.pickcontacts;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,22 +21,21 @@ import android.widget.Toast;
 
 public class RegisterFragment extends Fragment implements View.OnClickListener{
 
-    private EditText regacnt,regphn,typeotp;
-    private Button  btnregg,subotp;
-    private PopupWindow pwindo;
+    private EditText regacnt,regphn;
+    private Button  btnregg;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)  {
         View view= inflater.inflate(R.layout.fragment_register,container,false);
         regacnt =(EditText)view.findViewById(R.id.regacnt);
         regphn=(EditText)view.findViewById(R.id.regphn);
-        typeotp=(EditText) view.findViewById(R.id.typeotp);
+
         btnregg=(Button) view.findViewById(R.id.btnregg);
-        subotp=(Button)view.findViewById(R.id.subotp);
-        subotp.setOnClickListener(this);
+
         btnregg.setOnClickListener(this);
-        typeotp.setVisibility(View.GONE);
-        subotp.setVisibility(View.GONE);
+
+
         return  view;
 
     }
@@ -43,11 +44,12 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         if(v==btnregg){
             if(CheckNetwork.isInternetAvailable(getActivity())){
-                typeotp.setVisibility(View.VISIBLE);
-                subotp.setVisibility(View.VISIBLE);
-                regphn.setVisibility(View.GONE);
-                regacnt.setVisibility(View.GONE);
-                btnregg.setVisibility(View.GONE);
+                FragmentManager manager = getFragmentManager();
+                SendOTP sendOTP = new SendOTP();
+
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.lgcontainer, sendOTP, "sendOTP");
+                transaction.commit();
 
 
             }

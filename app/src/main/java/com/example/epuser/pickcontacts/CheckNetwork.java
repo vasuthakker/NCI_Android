@@ -5,9 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-/**
- * Created by epuser on 5/19/2017.
- */
+
 
 
 public class CheckNetwork {

@@ -1,5 +1,6 @@
 package com.example.epuser.pickcontacts;
 
+import android.Manifest;
 import android.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
@@ -8,6 +9,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +21,8 @@ import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 //import android.widget.Toast;
+
+import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,6 +43,15 @@ public class OneFragment extends Fragment implements View.OnClickListener {
     private QuickContactBadge btncnt;
     private Button btnshw;
     private TextView textView2;
+    private static final String LOG_TAG = "Barcode Scanner API";
+    private static final int PHOTO_REQUEST = 10;
+    private TextView scanResults;
+    private Button button;
+    private BarcodeDetector detector;
+    private Uri imageUri;
+    private static final int REQUEST_WRITE_PERMISSION = 20;
+    private static final String SAVED_INSTANCE_URI = "uri";
+    private static final String SAVED_INSTANCE_RESULT = "result";
 
     @Nullable
     @Override
@@ -49,10 +63,13 @@ public class OneFragment extends Fragment implements View.OnClickListener {
         btncnt=(QuickContactBadge) view.findViewById(R.id.btncnt);
         btnshw =(Button)view.findViewById(R.id.btnshw);
         textView2=(TextView) view.findViewById(R.id.textview2);
+        btnshw=(Button)view.findViewById(R.id.button) ;
+        scanResults=(TextView)view.findViewById(R.id.scanResults);
 
 
         btncnt.setOnClickListener(this);
         btnshw.setOnClickListener(this);
+
 
         return view;
 
@@ -60,6 +77,7 @@ public class OneFragment extends Fragment implements View.OnClickListener {
     }
     @Override
     public void onClick(View v) {
+
         if (v == btncnt) {
             Intent contactPickerIntent = new Intent(Intent.ACTION_PICK,
                     ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
@@ -185,6 +203,7 @@ public class OneFragment extends Fragment implements View.OnClickListener {
         }
 
     }
+
 
 
 }
