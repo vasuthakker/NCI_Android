@@ -38,6 +38,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     private Button btnlog,btnreg,checkserver;
     private TextView  forgotPassword;
     private static final String TAG = "LoginFragment";
+    private boolean mShowingBack = false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,18 +47,13 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         btnlog =(Button)findViewById(R.id.btnlog);
         btnreg=(Button)findViewById(R.id.btnreg);
         forgotPassword = (TextView)findViewById(R.id.txtfrgt);
-        checkserver = (Button)findViewById(R.id.checkserver);
+       // checkserver = (Button)findViewById(R.id.checkserver);
 
         btnreg.setOnClickListener(this);
         btnlog.setOnClickListener(this);
         forgotPassword.setOnClickListener(this);
-        checkserver.setOnClickListener(this);
+//        checkserver.setOnClickListener(this);
 
-        FragmentManager manager = getFragmentManager();
-        FirstFragment firstFragment = new FirstFragment();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.lgcontainer, firstFragment, "firstFragment");
-        transaction.commit();
 
         isLoggedIn();
 
@@ -69,18 +65,34 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         if (v==btnlog)
         {
             FragmentManager manager = getFragmentManager();
-            LoginFragment loginFragment = new LoginFragment();
+            FirstFragment firstFragment = new FirstFragment();
             FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.lgcontainer, loginFragment, "loginFragment");
+            transaction.add(R.id.lgcontainer, firstFragment, "firstFragment");
             transaction.commit();
+
+        }
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        if (v==btnlog)
+        {
+            flipLogin();
+//            FragmentManager manager = getFragmentManager();
+//            LoginFragment loginFragment = new LoginFragment();
+//            FragmentTransaction transaction = manager.beginTransaction();
+//            transaction.replace(R.id.lgcontainer, loginFragment, "loginFragment");
+//            transaction.commit();
         }
         if (v==btnreg)
         {
-            FragmentManager manager = getFragmentManager();
-            RegisterFragment registerFragment = new RegisterFragment();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.lgcontainer, registerFragment, "registerFragment");
-            transaction.commit();
+            flipRegister();
+//            FragmentManager manager = getFragmentManager();
+//            RegisterFragment registerFragment = new RegisterFragment();
+//            FragmentTransaction transaction = manager.beginTransaction();
+//            transaction.replace(R.id.lgcontainer, registerFragment, "registerFragment");
+//            transaction.commit();
         }
         if(v == forgotPassword)
         {
@@ -93,9 +105,54 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
 
         }
-        if(v==checkserver){
+//        if(v==checkserver){
+//
+//            new LoginPage.CheckServerAsyncTask().execute();
+//
+//        }
+    }
+    private class LoginViaServer extends AsyncTask<Void,Void,String>
+    {
 
-            new LoginPage.CheckServerAsyncTask().execute();
+        @Override
+        protected String doInBackground(Void... params) {
+
+
+
+            String savedMobileNo = null;
+            String savedPassword = null;
+            String serverLoginUrl = "http://api.androidhive.info/contacts/";
+            SharedPreferences loginCheck = getSharedPreferences("userData",MODE_PRIVATE);
+            savedMobileNo=loginCheck.getString("mobileNo",null);
+            savedPassword = loginCheck.getString("password",null);
+            JSONObject data = new JSONObject();
+            try {
+                data.put("HEADER", "FJGH");
+                JSONObject data1 = new JSONObject();
+                data1.put("mobNo","1234567890");
+                data1.put("reqAmount", 200);
+                data.put("DATA", data1);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            //create the required json object
+            String resultFromBackend = Utils.makeRequestNGetResponse("POST",serverLoginUrl,data.toString());
+            return resultFromBackend;
+
+
+        }
+        @Override
+        protected void onPostExecute(String result)
+        {
+            startActivity(new Intent(LoginPage.this,MainActivity.class));
+            try {
+                JSONObject jsonResult = new JSONObject(result);
+                //parse json
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
     }
@@ -111,20 +168,84 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                 // Create an unbound socket
                 Socket sock = new Socket();
 
-                int timeoutMs = 2000;   // 2 seconds
-                sock.connect(sockaddr, timeoutMs);
-                return "server online";
-                //
-            } catch(IOException e) {
-                //Toast.makeText(this,"server offline",Toast.LENGTH_SHORT).show();
-                return "server offline";
-            }
+        if (mShowingBack) {
+            getFragmentManager().popBackStack();
+            return;
         }
-        @Override
-        protected void onPostExecute(String result)
-        {
-            Toast.makeText(LoginPage.this,result,Toast.LENGTH_SHORT).show();
+
+        // Flip to the back.
+
+       // mShowingBack = true;
+
+        // Create and commit a new fragment transaction that adds the fragment for
+        // the back of the card, uses custom animations, and is part of the fragment
+        // manager's back stack.
+
+        getFragmentManager()
+                .beginTransaction()
+
+                // Replace the default fragment animations with animator resources
+                // representing rotations when switching to the back of the card, as
+                // well as animator resources representing rotations when flipping
+                // back to the front (e.g. when the system Back button is pressed).
+                .setCustomAnimations(
+                        R.animator.card_flip_right_in,
+                        R.animator.card_flip_right_out,
+                        R.animator.card_flip_left_in,
+                        R.animator.card_flip_left_out)
+
+                // Replace any fragments currently in the container view with a
+                // fragment representing the next page (indicated by the
+                // just-incremented currentPage variable).
+                .replace(R.id.lgcontainer, new RegisterFragment())
+
+                // Add this transaction to the back stack, allowing users to press
+                // Back to get to the front of the card.
+               // .addToBackStack(null)
+
+                // Commit the transaction.
+                .commit();
+    }
+    private void flipLogin() {
+
+
+        if (mShowingBack) {
+            getFragmentManager().popBackStack();
+            return;
         }
+
+        // Flip to the back.
+
+       // mShowingBack = true;
+
+        // Create and commit a new fragment transaction that adds the fragment for
+        // the back of the card, uses custom animations, and is part of the fragment
+        // manager's back stack.
+
+        getFragmentManager()
+                .beginTransaction()
+
+                // Replace the default fragment animations with animator resources
+                // representing rotations when switching to the back of the card, as
+                // well as animator resources representing rotations when flipping
+                // back to the front (e.g. when the system Back button is pressed).
+                .setCustomAnimations(
+                        R.animator.card_flip_right_in,
+                        R.animator.card_flip_right_out,
+                        R.animator.card_flip_left_in,
+                        R.animator.card_flip_left_out)
+
+                // Replace any fragments currently in the container view with a
+                // fragment representing the next page (indicated by the
+                // just-incremented currentPage variable).
+                .replace(R.id.lgcontainer, new LoginFragment())
+
+                // Add this transaction to the back stack, allowing users to press
+                // Back to get to the front of the card.
+                // .addToBackStack(null)
+
+                // Commit the transaction.
+                .commit();
     }
 
     protected void isLoggedIn()
