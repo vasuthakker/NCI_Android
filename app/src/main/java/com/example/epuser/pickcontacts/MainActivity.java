@@ -43,10 +43,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        // btncnt = (Button) findViewById(R.id.btncnt);
        // btnshw = (Button) findViewById(R.id.btnshw);
        // textView2 = (TextView) findViewById(R.id.textview2);
-        txtchk = (ImageView) findViewById(R.id.txtchk);
-        txtsnd = (ImageView) findViewById(R.id.txtsnd);
-        txtad = (ImageView) findViewById(R.id.txtad);
-        imagerequest= (ImageView) findViewById(R.id.imageView5);
+        txtchk = (ImageView) findViewById(R.id.main_imgbalance);
+        txtsnd = (ImageView) findViewById(R.id.main_imgpay);
+        txtad = (ImageView) findViewById(R.id.main_imgadd);
+        imagerequest= (ImageView) findViewById(R.id.main_imgreqmoney);
 
        // btncnt.setOnClickListener(this);
        // btnshw.setOnClickListener(this);
