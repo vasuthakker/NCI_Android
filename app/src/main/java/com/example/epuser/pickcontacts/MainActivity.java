@@ -24,12 +24,6 @@ import android.widget.TextView;
 //import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
- //   private String TAG = MainActivity.class.getSimpleName();
-   // static final int RESULT_PICK_CONTACT = 1;
-   // private EditText edtphn;
-   // private Button btncnt;
-   // private Button btnshw;
-   // private TextView textView2;
     private ImageView txtchk,imagerequest;
     private ImageView txtsnd;
     private ImageView txtad;
@@ -39,23 +33,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       // edtphn = (EditText) findViewById(R.id.edtphn);
-       // btncnt = (Button) findViewById(R.id.btncnt);
-       // btnshw = (Button) findViewById(R.id.btnshw);
-       // textView2 = (TextView) findViewById(R.id.textview2);
+
+        init();
+
+
+    }
+
+    private void init() {
         txtchk = (ImageView) findViewById(R.id.txtchk);
         txtsnd = (ImageView) findViewById(R.id.txtsnd);
         txtad = (ImageView) findViewById(R.id.txtad);
         imagerequest= (ImageView) findViewById(R.id.imageView5);
 
-       // btncnt.setOnClickListener(this);
-       // btnshw.setOnClickListener(this);
         txtchk.setOnClickListener(this);
         txtsnd.setOnClickListener(this);
         txtad.setOnClickListener(this);
         imagerequest.setOnClickListener(this);
-
-
     }
 
 
