@@ -58,7 +58,8 @@ public class LoginFragment extends Fragment  {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+               // login();
+                startActivity(new Intent(getActivity(),MainActivity.class));
             }
         });
     }
@@ -88,6 +89,7 @@ public class LoginFragment extends Fragment  {
     private VolleyJsonRequest.OnJsonResponse loginResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
+            startActivity(new Intent(getActivity(),MainActivity.class));
 
         }
 
