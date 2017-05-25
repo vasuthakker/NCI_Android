@@ -86,7 +86,7 @@ public class SendOTP extends Fragment implements View.OnClickListener {
         @Override
         protected String doInBackground(String... params) {
 
-            String result = Utils.makeRequestNGetResponse(params[0],params[1],params[2]);
+            String result = "";
             return result;
         }
         @Override

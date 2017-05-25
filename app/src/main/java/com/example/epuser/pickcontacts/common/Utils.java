@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.interfaces.URLProvider;
 
 /**
  * Created by Viral on 25-05-2017.
@@ -20,8 +21,8 @@ public class Utils {
     private static View customToastView;
 
     public static String generateURL(String endPoint) {
-        URLGenerator generator = URLGenerator.getInstance();
-        return generator.generateURL(endPoint);
+        URLProvider provider = URLGenerator.getInstance();
+        return provider.generateURL(endPoint);
     }
 
     public static void showToast(Context context, String message) {

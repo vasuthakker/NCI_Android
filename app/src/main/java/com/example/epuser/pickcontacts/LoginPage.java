@@ -9,10 +9,16 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.epuser.pickcontacts.common.URLGenerator;
+import com.example.epuser.pickcontacts.common.Utils;
+import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
+import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +37,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     private Button btnlog,btnreg,checkserver;
     private TextView  forgotPassword;
+    private static final String TAG = "LoginFragment";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,25 +59,8 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         transaction.add(R.id.lgcontainer, firstFragment, "firstFragment");
         transaction.commit();
 
+        isLoggedIn();
 
-
-        SharedPreferences loginCheck =getSharedPreferences("userData", Context.MODE_PRIVATE);
-        if(!(loginCheck.getString("userName",null)==null) && loginCheck.getBoolean("isLogin",false))
-            if(CheckNetwork.isInternetAvailable(LoginPage.this)) {
-                new LoginPage.LoginViaServer().execute();
-            }
-            else{
-                Toast.makeText(LoginPage.this,"No Internet Connection,please connect to Internet to access the Application",Toast.LENGTH_LONG).show();
-            }
-        else
-        {
-
-            FragmentManager managerlogin = getFragmentManager();
-            LoginFragment loginFragment = new LoginFragment();
-            FragmentTransaction transactionlogin = managerlogin.beginTransaction();
-            transactionlogin.replace(R.id.lgcontainer, loginFragment, "loginFragment");
-            transactionlogin.commit();
-        }
     }
 
     @Override
@@ -109,51 +99,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
         }
     }
-    private class LoginViaServer extends AsyncTask<Void,Void,String>
-    {
-
-        @Override
-        protected String doInBackground(Void... params) {
-
-
-
-            String savedMobileNo = null;
-            String savedPassword = null;
-            String serverLoginUrl = "http://api.androidhive.info/contacts/";
-            SharedPreferences loginCheck = getSharedPreferences("userData",MODE_PRIVATE);
-            savedMobileNo=loginCheck.getString("mobileNo",null);
-            savedPassword = loginCheck.getString("password",null);
-            JSONObject data = new JSONObject();
-            try {
-                data.put("HEADER", "FJGH");
-                JSONObject data1 = new JSONObject();
-                data1.put("mobNo","1234567890");
-                data1.put("reqAmount", 200);
-                data.put("DATA", data1);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            //create the required json object
-            String resultFromBackend = Utils.makeRequestNGetResponse("POST",serverLoginUrl,data.toString());
-            return resultFromBackend;
-
-
-        }
-        @Override
-        protected void onPostExecute(String result)
-        {
-            startActivity(new Intent(LoginPage.this,MainActivity.class));
-            try {
-                JSONObject jsonResult = new JSONObject(result);
-                //parse json
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
 
     private class CheckServerAsyncTask extends AsyncTask<Void,Void ,String>
     {
@@ -166,8 +111,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                 // Create an unbound socket
                 Socket sock = new Socket();
 
-                // This method will block no more than timeoutMs.
-                // If the timeout occurs, SocketTimeoutException is thrown.
                 int timeoutMs = 2000;   // 2 seconds
                 sock.connect(sockaddr, timeoutMs);
                 return "server online";
@@ -183,5 +126,52 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             Toast.makeText(LoginPage.this,result,Toast.LENGTH_SHORT).show();
         }
     }
+
+    protected void isLoggedIn()
+    {
+        SharedPreferences loginCheck =getSharedPreferences("userData", Context.MODE_PRIVATE);
+
+
+        if(!(loginCheck.getString("userName",null)==null) && loginCheck.getBoolean("isLogin",false))
+        {
+            VolleyJsonRequest.OnJsonResponse loginResp = new VolleyJsonRequest.OnJsonResponse() {
+                @Override
+                public void responseReceived(JSONObject jsonObj) {
+
+
+                }
+
+                @Override
+                public void errorReceived(int code, String message) {
+                    Utils.showToast(LoginPage.this, message);
+                }
+            };
+            int mobile = loginCheck.getInt("mobileNumber",0);
+            try {
+                JSONObject requestJson = new JSONObject();
+                requestJson.put("mobile", mobile);
+                VolleyJsonRequest.request(this, Utils.generateURL(URLGenerator.URL_LOGIN), requestJson, loginResp, true);
+            } catch (JSONException e) {
+                Log.e(TAG, "validateReceiveMoney: JSONException", e);
+            } catch (InternetNotAvailableException e) {
+                Toast.makeText(this, getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
+            }
+
+
+        }
+
+        else
+        {
+            FragmentManager managerlogin = getFragmentManager();
+            LoginFragment loginFragment = new LoginFragment();
+            FragmentTransaction transactionlogin = managerlogin.beginTransaction();
+            transactionlogin.replace(R.id.lgcontainer, loginFragment, "loginFragment");
+            transactionlogin.commit();
+
+        }
+
+
+    }
+
 }
 

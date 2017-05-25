@@ -31,7 +31,7 @@ import org.json.JSONObject;
  * Created by epuser on 5/20/2017.
  */
 
-public class LoginFragment extends Fragment implements View.OnClickListener {
+public class LoginFragment extends Fragment  {
 
     private EditText edtMobile, edtPassword;
     private Button btnLogin;
@@ -41,7 +41,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-        init();
+
         return view;
     }
 
@@ -49,13 +49,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         edtMobile = (EditText) getActivity().findViewById(R.id.lgphn);
         edtPassword = (EditText) getActivity().findViewById(R.id.lgpswrd);
         btnLogin = (Button) getActivity().findViewById(R.id.btnlogg);
-
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
+        init();
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,67 +96,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             Utils.showToast(getActivity(), message);
         }
     };
-
-
-    @Override
-    public void onClick(View v) {
-        if (v == btnLogin) {
-            if (CheckNetwork.isInternetAvailable(getActivity())) {
-                String phone = edtMobile.getText().toString().replaceAll("\\s+", "");
-                if (phone.length() > 9) {
-                    phone = phone.substring(phone.length() - 10);
-                } else {
-                    edtMobile.setText(null);
-                    edtPassword.setText(null);
-                    Toast.makeText(getActivity(), "Enter a valid Phone Number", Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                String loginPassword = edtPassword.getText().toString();
-                // String url = "http://192.168.10.93:8080/epcore/balance/Loader";
-                String url = "http://api.androidhive.info/contacts/";
-
-                JSONObject data = new JSONObject();
-                try {
-                    data.put("HEADER", "FJGH");
-                    JSONObject data1 = new JSONObject();
-                    data1.put("mobNo", phone);
-                    data1.put("reqAmount", 200);
-                    data.put("DATA", data1);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-                JsonObjectRequest jsonRequest = new JsonObjectRequest(url, data, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Toast.makeText(getActivity(), response.toString(), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        startActivity(intent);
-
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-                );
-                RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-                requestQueue.add(jsonRequest);
-
-
-                //create Jsonobject to be sent to backend
-                //new LoginFragment.LoginAsyncTask().execute("POST", url, data.toString());
-            } else {
-                Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-
-
 
 }
 

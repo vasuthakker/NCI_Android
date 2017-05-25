@@ -11,7 +11,7 @@ import java.net.URL;
 public class URLGenerator implements URLProvider {
 
     public static final String BASE_ADDRESS_HOST = "http://192.168.10.71:8080/";
-    public static final String URL_CONTEXT = BASE_ADDRESS_HOST + "";
+    public static final String URL_CONTEXT = BASE_ADDRESS_HOST + "epcore/balance/";
 
 
     public static URLGenerator generator;
@@ -23,7 +23,7 @@ public class URLGenerator implements URLProvider {
     }
 
 
-    public static final String URL_LOGIN = "";
+    public static final String URL_LOGIN = "Loader";
 
 
     @Override

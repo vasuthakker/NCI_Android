@@ -183,9 +183,9 @@ public class OneFragment extends Fragment implements View.OnClickListener {
             String url = "http://192.168.10.93:8080/epcore/balance/Loader";
 
 
-            String Result = Utils.makeRequestNGetResponse("POST",url,requestBody[0]);
+            //String Result = Utils.makeRequestNGetResponse("POST",url,requestBody[0]);
            // Log.v(TAG, requestBody[0]);
-            return Result;
+            return "true";
 
         }
         @Override
