@@ -22,7 +22,21 @@
             </intent-filter>
         </activity>
         <activity android:name=".Request" />
-        <activity android:name=".EnterPinActivity"></activity>
+        <activity android:name=".EnterPinActivity">
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </activity>
     </application>
 
 </manifest>
