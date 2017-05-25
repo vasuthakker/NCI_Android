@@ -55,9 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txtad.setOnClickListener(this);
         imagerequest.setOnClickListener(this);
 
-
     }
-
 
     @Override
     public void onClick(View v) {

@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,11 @@ import android.widget.EditText;
 import android.widget.QuickContactBadge;
 import android.widget.Toast;
 
+import com.example.epuser.pickcontacts.common.URLGenerator;
+import com.example.epuser.pickcontacts.common.Utils;
+import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
+import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,6 +32,7 @@ import static android.app.Activity.RESULT_OK;
 
 
 public class ThreeFragment extends Fragment  implements View.OnClickListener{
+    private static final String TAG = "ThreeFragment";
     static final int RESULT_PICK_CONTACT=1;
     private EditText TFphoneNumber,TFamount;
     private Button receiveButton;
@@ -47,7 +54,8 @@ public class ThreeFragment extends Fragment  implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
-        if (v==contactBadge){
+        if (v==contactBadge)
+        {
             Intent contactPickerIntent = new Intent(Intent.ACTION_PICK,
                     ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
             startActivityForResult(contactPickerIntent, RESULT_PICK_CONTACT);
@@ -55,75 +63,11 @@ public class ThreeFragment extends Fragment  implements View.OnClickListener{
 
         if (v == receiveButton)
         {
-            if(CheckNetwork.isInternetAvailable(getActivity())) {
-                String phone = TFphoneNumber.getText().toString().replaceAll("\\s+", "");
-
-                if (phone.length() > 9){
-                    phone = phone.substring(phone.length() - 10);
-                }
-                else {
-                    TFphoneNumber.setText(null);
-                    TFamount.setText(null);
-                    Toast.makeText(getActivity(), "Enter a valid Phone Number", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                String amount = TFamount.getText().toString();
-               // String url = "http://192.168.10.93:8080/epcore/balance/Loader";
-                String url = "http://api.androidhive.info/contacts/";
-                JSONObject data =new JSONObject();
-                try {
-                    data.put("HEADER", "FJGH");
-                    JSONObject data1 = new JSONObject();
-                    data1.put("mobNo",phone);
-                    data1.put("reqAmount", 200);
-                    data.put("DATA", data1);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                //create Jsonobject to be sent to backend
-                new ThreeFragment.ReceiveAsyncTask().execute("POST", url, data.toString());
-            }
-            else
-            {
-                Toast.makeText(getActivity(),"No Internet Connection",Toast.LENGTH_LONG).show();
-            }
-
+            receive();
         }
 
     }
 
-    private class ReceiveAsyncTask extends AsyncTask<String,Void ,String>
-    {
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            String result = "";
-            return result;
-        }
-        @Override
-        protected void onPostExecute(String result)
-        {
-
-            Toast.makeText(getActivity(),result,Toast.LENGTH_LONG).show();
-
-
-            FragmentManager manager = getFragmentManager();
-            SendOTP sendOTP = new SendOTP();
-            Bundle args = new Bundle();
-            args.putString("YourKey", diff);
-            sendOTP.setArguments(args);
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.fcontainer, sendOTP, "sendOTP");
-
-            transaction.commit();
-
-            //if success update sharedpreferences, fetch data , go to homepage
-            //else try again logging in
-
-        }
-    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // check whether the result is ok
@@ -151,6 +95,57 @@ public class ThreeFragment extends Fragment  implements View.OnClickListener{
             Log.e("MainActivity", "Failed to pick contact");
         }
     }
+
+    private void receive() {
+        String mobile = TFphoneNumber.getText().toString();
+        if (TextUtils.isEmpty(mobile)) {
+            TFphoneNumber.setError(getString(R.string.enter_mobile));
+            return;
+        } else if (mobile.length() < 10) {
+            TFphoneNumber.setError(getString(R.string.enter_valid_mobile));
+            return;
+        } else if (mobile.length() > 10)
+            mobile = mobile.substring(mobile.length() - 10);
+
+        try {
+            JSONObject requestJson = new JSONObject();
+            JSONObject jsonObject1 = new JSONObject();
+            JSONObject jsonObject2 = new JSONObject();
+            requestJson.put("HEADER",jsonObject1);
+            jsonObject2.put("mobileNumber" , "7738723068");
+            requestJson.put("DATA",jsonObject2);
+
+            Toast.makeText(getActivity(),requestJson.toString(),Toast.LENGTH_LONG).show();
+           // requestJson.put("mobile", mobile);
+           // VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_OTP), requestJson, loginResp, true);
+        } catch (JSONException e) {
+            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+        }
+//        } catch (InternetNotAvailableException e) {
+//            Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
+//        }
+    }
+
+    private VolleyJsonRequest.OnJsonResponse loginResp = new VolleyJsonRequest.OnJsonResponse() {
+        @Override
+        public void responseReceived(JSONObject jsonObj) {
+            FragmentManager manager = getFragmentManager();
+            SendOTP sendOTP = new SendOTP();
+            Bundle args = new Bundle();
+            args.putString("YourKey", diff);
+            sendOTP.setArguments(args);
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.fcontainer, sendOTP, "sendOTP");
+
+            transaction.commit();
+
+        }
+
+        @Override
+        public void errorReceived(int code, String message) {
+            Utils.showToast(getActivity(), message);
+        }
+    };
 }
 
 
