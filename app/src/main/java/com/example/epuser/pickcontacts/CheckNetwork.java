@@ -14,9 +14,6 @@ public class CheckNetwork {
 
 
     private static final String TAG = CheckNetwork.class.getSimpleName();
-
-
-
     public static boolean isInternetAvailable(Context context)
     {
         NetworkInfo info = (NetworkInfo) ((ConnectivityManager)
@@ -39,7 +36,6 @@ public class CheckNetwork {
                 Log.d(TAG," internet connection");
                 return true;
             }
-
         }
     }
 }

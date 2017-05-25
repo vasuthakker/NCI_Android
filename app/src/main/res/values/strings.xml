@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PickContacts</string>
+    <string name="internet_not_available">Internet is not available</string>
 </resources>
