@@ -10,7 +10,7 @@ import java.net.URL;
 
 public class URLGenerator implements URLProvider {
 
-    public static final String BASE_ADDRESS_HOST = "http://192.168.10.71:8080/";
+    public static final String BASE_ADDRESS_HOST = "http://192.168.10.93:8080/";
     public static final String URL_CONTEXT = BASE_ADDRESS_HOST + "";
 
 
