@@ -142,10 +142,11 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         getFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(
-                        R.animator.card_flip_right_in,
-                        R.animator.card_flip_right_out,
                         R.animator.card_flip_left_in,
-                        R.animator.card_flip_left_out)
+                        R.animator.card_flip_left_out,
+                        R.animator.card_flip_right_in,
+                        R.animator.card_flip_right_out
+                       )
 
                 .replace(R.id.lgcontainer, new RegisterFragment())
                 .commit();
