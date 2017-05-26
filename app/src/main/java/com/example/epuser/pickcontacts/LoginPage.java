@@ -68,7 +68,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         else
             flipRegister();
 
-
     }
 
     @Override
@@ -94,33 +93,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     }
 
-    private void login() {
-        // TODO: 5/26/2017  Check on login button click
-
-        int mobile = loginCheck.getInt("mobileNumber", 0);
-        try {
-            JSONObject requestJson = new JSONObject();
-            requestJson.put("mobile", mobile);
-            VolleyJsonRequest.request(this, Utils.generateURL(URLGenerator.URL_LOGIN), requestJson, loginResp, true);
-        } catch (JSONException e) {
-            Log.e(TAG, "validateReceiveMoney: JSONException", e);
-        } catch (InternetNotAvailableException e) {
-            Toast.makeText(this, getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    VolleyJsonRequest.OnJsonResponse loginResp = new VolleyJsonRequest.OnJsonResponse() {
-        @Override
-        public void responseReceived(JSONObject jsonObj) {
-
-
-        }
-
-        @Override
-        public void errorReceived(int code, String message) {
-            Utils.showToast(LoginPage.this, message);
-        }
-    };
 
     private void flipRegister() {
         if (mShowingBack) {
