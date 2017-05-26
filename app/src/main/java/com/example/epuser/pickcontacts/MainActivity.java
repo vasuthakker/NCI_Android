@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             transaction.commit();
         }
         if(v==imagerequest){
-            Intent intent= new Intent(MainActivity.this,Request.class);
+            Intent intent= new Intent(MainActivity.this,RequestMoneyActivity.class);
             startActivity(intent);
         }
        /* if (v==btnshw){
