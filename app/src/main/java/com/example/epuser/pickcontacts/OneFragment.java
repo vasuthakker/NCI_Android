@@ -93,7 +93,7 @@ public class OneFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == button) {
-            qrScan.initiateScan();
+           // qrScan.initiateScan();
             Intent intent = new Intent("com.google.zxing.client.android.SCAN");
 
 
@@ -107,6 +107,8 @@ public class OneFragment extends Fragment implements View.OnClickListener {
                     ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
             startActivityForResult(contactPickerIntent, RESULT_PICK_CONTACT);
         }
+
+
         if (v == btnshw) {
             if (CheckNetwork.isInternetAvailable(getActivity())) //returns true if internet available
             {
