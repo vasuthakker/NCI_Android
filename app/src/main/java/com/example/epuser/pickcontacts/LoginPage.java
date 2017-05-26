@@ -53,6 +53,12 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page_login);
 
+      init();
+
+        manager = getSupportFragmentManager();
+    }
+
+    private void init() {
         btnlog = (Button) findViewById(R.id.btnlog);
         btnreg = (Button) findViewById(R.id.btnreg);
         forgotPassword = (TextView) findViewById(R.id.txtfrgt);
@@ -60,8 +66,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         btnreg.setOnClickListener(this);
         btnlog.setOnClickListener(this);
         forgotPassword.setOnClickListener(this);
-
-        manager = getSupportFragmentManager();
     }
 
 
