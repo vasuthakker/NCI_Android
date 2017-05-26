@@ -34,7 +34,7 @@ import org.json.JSONObject;
 
 public class LoginFragment extends Fragment  {
 
-    private EditText edtMobile, edtPassword;
+    private EditText enterPin, edtPassword;
     private Button btnLogin;
     private static final String TAG = "LoginFragment";
 
@@ -47,7 +47,7 @@ public class LoginFragment extends Fragment  {
     }
 
     private void init() {
-        edtMobile = (EditText) getActivity().findViewById(R.id.lgphn);
+        enterPin = (EditText) getActivity().findViewById(R.id.enterpin);
         edtPassword = (EditText) getActivity().findViewById(R.id.lgpswrd);
         btnLogin = (Button) getActivity().findViewById(R.id.btnlogg);
 
@@ -67,12 +67,12 @@ public class LoginFragment extends Fragment  {
     }
 
     private void login() {
-        String mobile = edtMobile.getText().toString();
+        String mobile = enterPin.getText().toString();
         if (TextUtils.isEmpty(mobile)) {
-            edtMobile.setError(getString(R.string.enter_mobile));
+            enterPin.setError(getString(R.string.enter_mobile));
             return;
         } else if (mobile.length() < 10) {
-            edtMobile.setError(getString(R.string.enter_valid_mobile));
+            enterPin.setError(getString(R.string.enter_valid_mobile));
             return;
         } else if (mobile.length() > 9)
             mobile = mobile.substring(mobile.length() - 10);
