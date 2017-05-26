@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.common.AppConstants;
+import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.common.URLGenerator;
 import com.example.epuser.pickcontacts.common.Utils;
 import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
@@ -38,7 +39,7 @@ import java.net.URL;
 
 public class LoginPage extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnlog, btnreg, checkserver;
+    public Button btnlog, btnreg, checkserver;
     private TextView forgotPassword;
     private static final String TAG = "LoginPage";
     private boolean mShowingBack = false;
@@ -52,6 +53,23 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page_login);
 
+
+    }
+
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+         init();
+        if (Preference.getBooleanPreference(LoginPage.this, AppConstants.IS_LOGGED_IN))
+            flipLogin();
+        else
+            flipRegister();
+
+    }
+
+    private void init(){
         btnlog = (Button) findViewById(R.id.btnlog);
         btnreg = (Button) findViewById(R.id.btnreg);
         forgotPassword = (TextView) findViewById(R.id.txtfrgt);
@@ -61,25 +79,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         forgotPassword.setOnClickListener(this);
 
         manager = getSupportFragmentManager();
-    }
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        loginCheck = getSharedPreferences(AppConstants.KEY_SHARED_PREF, Context.MODE_PRIVATE);
-        if (loginCheck.getBoolean(AppConstants.IS_LOGGED_IN, false)) {
-            flipRegister();
-        }
-        else {
-            //flipLogin();
-            FragmentManager manager = getFragmentManager();
-            FirstFragment firstFragment = new FirstFragment();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.lgcontainer, firstFragment, "firstFragment");
-            transaction.commit();
-        }
     }
 
     @Override
@@ -98,33 +97,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     }
 
-    private void login() {
-        // TODO: 5/26/2017  Check on login button click
-
-        int mobile = loginCheck.getInt("mobileNumber", 0);
-        try {
-            JSONObject requestJson = new JSONObject();
-            requestJson.put("mobile", mobile);
-            VolleyJsonRequest.request(this, Utils.generateURL(URLGenerator.URL_LOGIN), requestJson, loginResp, true);
-        } catch (JSONException e) {
-            Log.e(TAG, "validateReceiveMoney: JSONException", e);
-        } catch (InternetNotAvailableException e) {
-            Toast.makeText(this, getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    VolleyJsonRequest.OnJsonResponse loginResp = new VolleyJsonRequest.OnJsonResponse() {
-        @Override
-        public void responseReceived(JSONObject jsonObj) {
-
-
-        }
-
-        @Override
-        public void errorReceived(int code, String message) {
-            Utils.showToast(LoginPage.this, message);
-        }
-    };
 
     private void flipRegister() {
         if (mShowingBack) {
@@ -137,11 +109,10 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                         R.animator.card_flip_left_in,
                         R.animator.card_flip_left_out,
                         R.animator.card_flip_right_in,
-                        R.animator.card_flip_right_out
-                       )
+                        R.animator.card_flip_right_out)
 
                 .replace(R.id.lgcontainer, new RegisterFragment())
-                .commit();
+                .commitAllowingStateLoss();
     }
 
     private void flipLogin() {
@@ -157,7 +128,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                         R.animator.card_flip_left_in,
                         R.animator.card_flip_left_out)
                 .replace(R.id.lgcontainer, new LoginFragment())
-                .commit();
+                .commitAllowingStateLoss();
     }
 
     protected void isLoggedIn() {
@@ -173,9 +144,9 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     }
 
-    public void changeFragment(Fragment fragment) {
+    public void changeFragment(android.support.v4.app.Fragment fragment) {
         FragmentTransaction transaction = manager.beginTransaction();
-        Fragment tmpFragment = manager.findFragmentById(R.id.lgcontainer);
+        android.support.v4.app.Fragment tmpFragment = manager.findFragmentById(R.id.lgcontainer);
         if (tmpFragment != null)
             transaction.replace(R.id.lgcontainer, fragment);
         else

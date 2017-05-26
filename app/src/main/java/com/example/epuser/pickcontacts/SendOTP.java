@@ -49,7 +49,7 @@ public class SendOTP extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if(v==submitOTPBtn){
-            // submitOTP();
+             submitOTP();
         }
 
     }
