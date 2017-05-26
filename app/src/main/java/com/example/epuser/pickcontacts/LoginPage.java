@@ -75,19 +75,11 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         if (v == btnlog) {
             flipLogin();
-//            FragmentManager manager = getFragmentManager();
-//            LoginFragment loginFragment = new LoginFragment();
-//            FragmentTransaction transaction = manager.beginTransaction();
-//            transaction.replace(R.id.lgcontainer, loginFragment, "loginFragment");
-//            transaction.commit();
+
         }
         if (v == btnreg) {
             flipRegister();
-//            FragmentManager manager = getFragmentManager();
-//            RegisterFragment registerFragment = new RegisterFragment();
-//            FragmentTransaction transaction = manager.beginTransaction();
-//            transaction.replace(R.id.lgcontainer, registerFragment, "registerFragment");
-//            transaction.commit();
+
         }
         if (v == forgotPassword) {
 
@@ -102,11 +94,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     }
 
-    //        if(v==checkserver){
-//
-//            new LoginPage.CheckServerAsyncTask().execute();
-//
-//        }
     private void login() {
         // TODO: 5/26/2017  Check on login button click
 
