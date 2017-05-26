@@ -32,36 +32,36 @@ import org.json.JSONObject;
 
 public class SendOTP extends Fragment implements View.OnClickListener {
     private static final String TAG = "SendOTP";
-    private EditText typeotp;
-    private Button subotp;
-    private TextView textotp;
+    private EditText enterOTP;
+    private Button submitOTPBtn;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.otp_send,container,false);
-        typeotp =(EditText)view.findViewById(R.id.typeotp);
-        subotp=(Button) view.findViewById(R.id.subotp);
-        textotp=(TextView)view.findViewById(R.id.textotp);
-        subotp.setOnClickListener(this);
+        enterOTP =(EditText)view.findViewById(R.id.enterOTP_ET);
+        submitOTPBtn=(Button) view.findViewById(R.id.submit_OTP_btn);
+
+        submitOTPBtn.setOnClickListener(this);
         return  view;
     }
 
     @Override
     public void onClick(View v) {
-        if(v==subotp){
-           // submitOTP();
+        if(v==submitOTPBtn){
+            // submitOTP();
         }
 
     }
 
     private void submitOTP()
     {
-        String mobile = textotp.getText().toString();
+        String mobile = enterOTP.getText().toString();
         if (TextUtils.isEmpty(mobile)) {
-            textotp.setError(getString(R.string.enter_mobile));
+            enterOTP.setError(getString(R.string.enter_mobile));
             return;
         } else if (mobile.length() < 10) {
-            textotp.setError(getString(R.string.enter_valid_mobile));
+            enterOTP.setError(getString(R.string.enter_valid_mobile));
             return;
         } else if (mobile.length() > 10)
             mobile = mobile.substring(mobile.length() - 10);
@@ -117,11 +117,11 @@ public class SendOTP extends Fragment implements View.OnClickListener {
             }
 
 
-              // here we have to decide which activity to open
+            // here we have to decide which activity to open
             //if success update sharedpreferences, fetch data , go to homepage
             //else try again logging in
 
         }
-        }
     }
+}
 
