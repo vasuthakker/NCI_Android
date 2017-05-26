@@ -65,9 +65,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }*/
         if (v == txtad) {
             FragmentManager manager = getFragmentManager();
-            ThreeFragment threeFragment = new ThreeFragment();
+            ReceiveMoneyFragment receiveMoneyFragment = new ReceiveMoneyFragment();
             FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.fcontainer, threeFragment, "threeFragment");
+            transaction.replace(R.id.fcontainer, receiveMoneyFragment, "receiveMoneyFragment");
             transaction.commit();
         }
         if (v == txtchk) {
