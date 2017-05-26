@@ -31,8 +31,8 @@ import org.json.JSONObject;
 import static android.app.Activity.RESULT_OK;
 
 
-public class ThreeFragment extends Fragment  implements View.OnClickListener{
-    private static final String TAG = "ThreeFragment";
+public class ReceiveMoneyFragment extends Fragment  implements View.OnClickListener{
+    private static final String TAG = "ReceiveMoneyFragment";
     static final int RESULT_PICK_CONTACT=1;
     private EditText TFphoneNumber,TFamount;
     private Button receiveButton;
@@ -129,7 +129,7 @@ public class ThreeFragment extends Fragment  implements View.OnClickListener{
     private VolleyJsonRequest.OnJsonResponse loginResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-            FragmentManager manager = getFragmentManager();
+         /*   FragmentManager manager = getFragmentManager();
             SendOTP sendOTP = new SendOTP();
             Bundle args = new Bundle();
             args.putString("YourKey", diff);
@@ -137,7 +137,7 @@ public class ThreeFragment extends Fragment  implements View.OnClickListener{
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.fcontainer, sendOTP, "sendOTP");
 
-            transaction.commit();
+            transaction.commit();*/
 
         }
 

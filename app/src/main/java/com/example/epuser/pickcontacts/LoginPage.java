@@ -1,17 +1,19 @@
 package com.example.epuser.pickcontacts;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +45,8 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     SharedPreferences loginCheck;
 
+    private FragmentManager manager;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +59,8 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         btnreg.setOnClickListener(this);
         btnlog.setOnClickListener(this);
         forgotPassword.setOnClickListener(this);
+
+        manager = getSupportFragmentManager();
     }
 
 
@@ -80,38 +86,18 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         if (v == btnlog) {
             flipLogin();
-//            FragmentManager manager = getFragmentManager();
-//            LoginFragment loginFragment = new LoginFragment();
-//            FragmentTransaction transaction = manager.beginTransaction();
-//            transaction.replace(R.id.lgcontainer, loginFragment, "loginFragment");
-//            transaction.commit();
+
         }
         if (v == btnreg) {
             flipRegister();
-//            FragmentManager manager = getFragmentManager();
-//            RegisterFragment registerFragment = new RegisterFragment();
-//            FragmentTransaction transaction = manager.beginTransaction();
-//            transaction.replace(R.id.lgcontainer, registerFragment, "registerFragment");
-//            transaction.commit();
+
         }
         if (v == forgotPassword) {
-
-            FragmentManager manager = getFragmentManager();
-            ForgotPasswordFragment forgotPasswordFragment = new ForgotPasswordFragment();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.lgcontainer, forgotPasswordFragment, "forgotPasswordFragment");
-            transaction.commit();
-
-
+            changeFragment(new ForgotPasswordFragment());
         }
 
     }
 
-    //        if(v==checkserver){
-//
-//            new LoginPage.CheckServerAsyncTask().execute();
-//
-//        }
     private void login() {
         // TODO: 5/26/2017  Check on login button click
 
@@ -187,5 +173,14 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     }
 
+    public void changeFragment(Fragment fragment) {
+        FragmentTransaction transaction = manager.beginTransaction();
+        Fragment tmpFragment = manager.findFragmentById(R.id.lgcontainer);
+        if (tmpFragment != null)
+            transaction.replace(R.id.lgcontainer, fragment);
+        else
+            transaction.add(R.id.lgcontainer, fragment);
+        transaction.commitAllowingStateLoss();
+    }
 }
 

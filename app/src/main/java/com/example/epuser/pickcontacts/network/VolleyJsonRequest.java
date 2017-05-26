@@ -74,6 +74,8 @@ public class VolleyJsonRequest {
                                     progressDialog.dismiss();
                                     progressDialog = null;
                                 }
+
+                                Log.e(TAG, "onErrorResponse: " + error.getMessage());
                                 if (error.networkResponse != null) {
                                     onResponse.errorReceived(error.networkResponse.statusCode, error.getLocalizedMessage());
                                 } else
@@ -96,7 +98,7 @@ public class VolleyJsonRequest {
     }
 
 
-    private static Map<String, String> getHeadersForRequest()  {
+    private static Map<String, String> getHeadersForRequest() {
         HashMap<String, String> params = new HashMap<String, String>();
         String creds = String.format("%s:%s", "partner01", "hjHSm518");
         String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.DEFAULT);

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -34,49 +35,45 @@ import org.json.JSONObject;
 
 public class RegisterFragment extends Fragment {
 
-    private EditText regacnt,regphn;
-    private Button  btnRegister;
+    private EditText regacnt, regphn;
+    private Button btnRegister;
     private static final String TAG = "LoginFragment";
+    private LoginPage loginActivity;
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        loginActivity = (LoginPage) context;
+    }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)  {
-        View view= inflater.inflate(R.layout.fragment_register,container,false);
-      //  regacnt =(EditText)view.findViewById(R.id.regacnt);
-
-
-
-        return  view;
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_register, container, false);
     }
 
     private void init() {
-        regphn=(EditText)getActivity().findViewById(R.id.regphn);
-
-        btnRegister=(Button) getActivity().findViewById(R.id.btnregister);
-
-
-
-
+        regphn = (EditText) getActivity().findViewById(R.id.regphn);
+        regphn.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
+        btnRegister = (Button) getActivity().findViewById(R.id.btnregister);
     }
 
     @Override
     public void onStart() {
         super.onStart();
+
+
         init();
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Register();
 
-
             }
         });
     }
 
     private void Register() {
-
         String mobile = regphn.getText().toString();
         if (TextUtils.isEmpty(mobile)) {
             regphn.setError(getString(R.string.enter_mobile));
@@ -91,9 +88,9 @@ public class RegisterFragment extends Fragment {
             JSONObject requestJson = new JSONObject();
             JSONObject jsonObject1 = new JSONObject();
             JSONObject jsonObject2 = new JSONObject();
-            requestJson.put("HEADER",jsonObject1);
-            jsonObject2.put("mobileNumber" ,mobile);
-            requestJson.put("DATA",jsonObject2);
+            requestJson.put("HEADER", jsonObject1);
+            jsonObject2.put("mobileNumber", mobile);
+            requestJson.put("DATA", jsonObject2);
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_OTP), requestJson, registerResp, true);
         } catch (JSONException e) {
@@ -106,23 +103,7 @@ public class RegisterFragment extends Fragment {
     private VolleyJsonRequest.OnJsonResponse registerResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-            try {
-                String response = jsonObj.getString(AppConstants.KEY_RESP);
-                Log.v("Response    --->>", response);
-                if(response == "REQUEST_COMPLETE")
-                {
-                    FragmentManager manager = getFragmentManager();
-                    SendOTP sendOTP = new SendOTP();
-
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    transaction.replace(R.id.lgcontainer, sendOTP, "sendOTP");
-                    transaction.commit();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
+            loginActivity.changeFragment(new SendOTP());
         }
 
         @Override
@@ -130,5 +111,5 @@ public class RegisterFragment extends Fragment {
             Utils.showToast(getActivity(), message);
         }
     };
-    }
+}
 
