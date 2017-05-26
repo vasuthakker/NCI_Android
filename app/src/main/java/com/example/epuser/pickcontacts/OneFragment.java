@@ -30,7 +30,10 @@ import com.google.zxing.integration.android.IntentResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
+
 import static android.app.Activity.RESULT_OK;
+import static android.Manifest.permission.CAMERA;
 
 /**
  * Created by epuser on 5/18/2017.
@@ -42,6 +45,8 @@ public class OneFragment extends Fragment implements View.OnClickListener {
     //  private String TAG = OneFragment.class.getSimpleName();
     static final int RESULT_PICK_CONTACT = 1;
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_CAMERA = 1;
+    private ZXingScannerView mScannerView;
     private EditText edtphn;
     private QuickContactBadge btncnt;
     private Button btnshw;
@@ -61,6 +66,10 @@ public class OneFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_one, container, false);
+
+
+
+
 
 
         edtphn = (EditText) view.findViewById(R.id.edtphn);
@@ -84,8 +93,11 @@ public class OneFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == button) {
-
             qrScan.initiateScan();
+            Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+
+
+            getActivity().startActivityForResult(intent, 0);
 
         }
 
@@ -172,12 +184,9 @@ public class OneFragment extends Fragment implements View.OnClickListener {
 
                 }
 
-            } else {
-                Log.e("MainActivity", "Failed to pick contact");
             }
-        }
-        if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_IMAGE_CAPTURE) {
+
+           else if (requestCode == 0) {
 
                 IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
                 if (result != null) {
@@ -211,4 +220,6 @@ public class OneFragment extends Fragment implements View.OnClickListener {
         }
 
     }
+
+
 }

@@ -59,19 +59,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     }
 
-    @Override
-    public void onClick(View v)
-    {
-        if (v==btnlog)
-        {
-            FragmentManager manager = getFragmentManager();
-            FirstFragment firstFragment = new FirstFragment();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.add(R.id.lgcontainer, firstFragment, "firstFragment");
-            transaction.commit();
 
-        }
-    }
 
     @Override
     public void onClick(View v)
@@ -111,63 +99,64 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 //
 //        }
     }
-    private class LoginViaServer extends AsyncTask<Void,Void,String>
-    {
+//    private class LoginViaServer extends AsyncTask<Void,Void,String>
+//    {
+//
+//        @Override
+//        protected String doInBackground(Void... params) {
+//
+//
+//
+//            String savedMobileNo = null;
+//            String savedPassword = null;
+//            String serverLoginUrl = "http://api.androidhive.info/contacts/";
+//            SharedPreferences loginCheck = getSharedPreferences("userData",MODE_PRIVATE);
+//            savedMobileNo=loginCheck.getString("mobileNo",null);
+//            savedPassword = loginCheck.getString("password",null);
+//            JSONObject data = new JSONObject();
+//            try {
+//                data.put("HEADER", "FJGH");
+//                JSONObject data1 = new JSONObject();
+//                data1.put("mobNo","1234567890");
+//                data1.put("reqAmount", 200);
+//                data.put("DATA", data1);
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//            //create the required json object
+//            String resultFromBackend = Utils.makeRequestNGetResponse("POST",serverLoginUrl,data.toString());
+//            return resultFromBackend;
+//
 
-        @Override
-        protected String doInBackground(Void... params) {
+//        }
+//        @Override
+//        protected void onPostExecute(String result)
+//        {
+//            startActivity(new Intent(LoginPage.this,MainActivity.class));
+//            try {
+//                JSONObject jsonResult = new JSONObject(result);
+//                //parse json
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//        }
+//    }
 
-
-
-            String savedMobileNo = null;
-            String savedPassword = null;
-            String serverLoginUrl = "http://api.androidhive.info/contacts/";
-            SharedPreferences loginCheck = getSharedPreferences("userData",MODE_PRIVATE);
-            savedMobileNo=loginCheck.getString("mobileNo",null);
-            savedPassword = loginCheck.getString("password",null);
-            JSONObject data = new JSONObject();
-            try {
-                data.put("HEADER", "FJGH");
-                JSONObject data1 = new JSONObject();
-                data1.put("mobNo","1234567890");
-                data1.put("reqAmount", 200);
-                data.put("DATA", data1);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            //create the required json object
-            String resultFromBackend = Utils.makeRequestNGetResponse("POST",serverLoginUrl,data.toString());
-            return resultFromBackend;
-
-
-        }
-        @Override
-        protected void onPostExecute(String result)
-        {
-            startActivity(new Intent(LoginPage.this,MainActivity.class));
-            try {
-                JSONObject jsonResult = new JSONObject(result);
-                //parse json
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-    private class CheckServerAsyncTask extends AsyncTask<Void,Void ,String>
-    {
-
-        @Override
-        protected String doInBackground(Void... params) {
-
-            try {
-                SocketAddress sockaddr = new InetSocketAddress("http://google.com", 80);
-                // Create an unbound socket
-                Socket sock = new Socket();
-
+//    private class CheckServerAsyncTask extends AsyncTask<Void,Void ,String>
+//    {
+//
+//        @Override
+//        protected String doInBackground(Void... params) {
+//
+//            try {
+//                SocketAddress sockaddr = new InetSocketAddress("http://google.com", 80);
+//                // Create an unbound socket
+//                Socket sock = new Socket();
+//
+    private void flipRegister(){
         if (mShowingBack) {
             getFragmentManager().popBackStack();
             return;
@@ -206,6 +195,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                 // Commit the transaction.
                 .commit();
     }
+
     private void flipLogin() {
 
 
@@ -284,9 +274,9 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         else
         {
             FragmentManager managerlogin = getFragmentManager();
-            LoginFragment loginFragment = new LoginFragment();
+            FirstFragment firstFragment = new FirstFragment();
             FragmentTransaction transactionlogin = managerlogin.beginTransaction();
-            transactionlogin.replace(R.id.lgcontainer, loginFragment, "loginFragment");
+            transactionlogin.replace(R.id.lgcontainer, firstFragment, "firstFragment");
             transactionlogin.commit();
 
         }
