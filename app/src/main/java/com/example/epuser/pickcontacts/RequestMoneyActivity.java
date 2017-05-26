@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.QuickContactBadge;
 
-public class Request extends AppCompatActivity  implements View.OnClickListener{
+public class RequestMoneyActivity extends AppCompatActivity  implements View.OnClickListener{
     private QuickContactBadge requestcnt;
     static final int RESULT_PICK_CONTACT=1;
     private EditText requestphn;
@@ -21,8 +21,8 @@ public class Request extends AppCompatActivity  implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request);
-        requestcnt=(QuickContactBadge)findViewById(R.id.requestcnt);
-        requestphn=(EditText)findViewById(R.id.requestphn);
+        requestcnt=(QuickContactBadge)findViewById(R.id.reqmoney_contact);
+        requestphn=(EditText)findViewById(R.id.reqmoney_edtmobile);
 
         requestcnt.setOnClickListener(this);
 

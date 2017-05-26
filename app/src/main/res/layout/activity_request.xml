@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Request">
+    tools:context=".RequestMoneyActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/reqmoney_toolbar"
@@ -36,6 +36,24 @@
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintLeft_creator="1" />
+
+    <QuickContactBadge
+        android:src="@drawable/ic_contact"
+        android:id="@+id/reqmoney_contact"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/submit"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/reqmoney_inputmobile"
+        app:layout_constraintRight_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/reqmoney_inputmobile"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1" />
 
 
     <android.support.design.widget.TextInputLayout
@@ -93,7 +111,8 @@
         app:layout_constraintRight_toLeftOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintLeft_creator="1">
+        tools:layout_constraintLeft_creator="1"
+        android:id="@+id/textInputLayout">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/reqmoney_edtremakrs"
