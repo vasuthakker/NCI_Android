@@ -22,48 +22,49 @@
 
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
         android:layout_weight="8"
-        android:weightSum="2"
+        android:elevation="19dp"
+        android:orientation="horizontal"
 
-        android:elevation="19dp">
+        android:visibility="gone"
+        android:weightSum="2">
 
         <Button
             android:id="@+id/btnreg"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/colorAccent"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:textSize="30dp"
             android:text="SIGNUP"
-            android:background="@color/colorAccent"/>
+            android:textSize="30dp" />
 
         <Button
             android:id="@+id/btnlog"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginLeft="1dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
             android:text="LOGIN"
-            android:textSize="30dp"
-            android:background="@color/colorAccent"/>
+            android:textSize="30dp" />
 
     </LinearLayout>
 
 
-
- <TextView
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_gravity="center"
-     android:layout_marginTop="10dp"
-     android:textSize="20dp"
-     android:text="Forgot Password"
-     android:id="@+id/txtfrgt"
-     android:layout_weight="1"/>
+    <TextView
+        android:id="@+id/txtfrgt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:text="Forgot Password"
+        android:textSize="20dp"
+        android:visibility="gone" />
     <!--<Button-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->

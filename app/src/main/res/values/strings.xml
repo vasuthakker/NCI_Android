@@ -1,5 +1,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">PickContacts</string>
+    <string name="app_name">NCI app</string>
     <string name="internet_not_available">Internet is not available</string>
     <string name="enter_mobile">Enter Mobile</string>
     <string name="enter_valid_mobile">Enter valid mobile number</string>
@@ -50,5 +50,9 @@
     <string name="create_new_pin">Create New Pin</string>
     <string name="enter_new_pin">Enter your new Pin</string>
     <string name="create_pin">submit</string>
+    <string name="submit">Submit</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="remarks_optional">Remarks(Optional)</string>
+    <string name="request_money">Request Money</string>
 
 </resources>

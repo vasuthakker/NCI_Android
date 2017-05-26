@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.common.AppConstants;
+import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.common.URLGenerator;
 import com.example.epuser.pickcontacts.common.Utils;
 import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
@@ -62,11 +63,11 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     public void onStart() {
         super.onStart();
 
-        loginCheck = getSharedPreferences(AppConstants.KEY_SHARED_PREF, Context.MODE_PRIVATE);
-        if (loginCheck.getBoolean(AppConstants.IS_LOGGED_IN, false))
-            flipRegister();
-        else
+        if (Preference.getBooleanPreference(LoginPage.this, AppConstants.IS_LOGGED_IN))
             flipLogin();
+        else
+            flipRegister();
+
 
     }
 
@@ -146,7 +147,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                         R.animator.card_flip_left_out,
                         R.animator.card_flip_right_in,
                         R.animator.card_flip_right_out
-                       )
+                )
 
                 .replace(R.id.lgcontainer, new RegisterFragment())
                 .commit();

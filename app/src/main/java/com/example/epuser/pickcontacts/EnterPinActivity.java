@@ -24,7 +24,6 @@ public class EnterPinActivity extends AppCompatActivity implements View.OnClickL
         forgotPin =(TextView)findViewById(R.id.forgotPin);
         ETPin = (EditText)findViewById(R.id.ETPin);
         submitPinButton = (Button)findViewById(R.id.submitPinButton);
-
     }
 
 
@@ -33,7 +32,6 @@ public class EnterPinActivity extends AppCompatActivity implements View.OnClickL
         if(v== submitPinButton)
         {
             validatePin();
-
         }
         if(v==forgotPin)
         {
