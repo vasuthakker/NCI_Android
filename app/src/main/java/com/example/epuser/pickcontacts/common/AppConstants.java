@@ -8,12 +8,12 @@ public class AppConstants {
 
     public static final String KEY_RESP_CODE = "RESP_CODE";
     public static final String KEY_RESP_MSG ="RESP_MSG" ;
+    public static final String KEY_RESP = "RESPONSE";
 
     ///////////////////////////////////////////////////////////////////////////
     // Response codes
     ///////////////////////////////////////////////////////////////////////////
     public static final int SUCCESS_DATA =100 ;
-    public static final String KEY_SHARED_PREF = "NCI_APP";
     public static final String IS_LOGGED_IN = "IS_LOGGED_IN";
     public static int SUCCESS_VALIDATION = 200;
     public static int SUCCESS_TRANSACTION=300;
