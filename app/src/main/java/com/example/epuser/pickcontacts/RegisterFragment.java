@@ -107,9 +107,9 @@ public class RegisterFragment extends Fragment {
         @Override
         public void responseReceived(JSONObject jsonObj) {
             try {
-                String response = jsonObj.getString(AppConstants.KEY_RESP);
-                Log.v("Response    --->>", response);
-                if(response == "REQUEST_COMPLETE")
+                String response1 = jsonObj.getString("RESPONSE");
+                Log.v("Response    --->>", response1);
+                if(response1 == "REQUEST_COMPLETE")
                 {
                     FragmentManager manager = getFragmentManager();
                     SendOTP sendOTP = new SendOTP();
@@ -118,6 +118,7 @@ public class RegisterFragment extends Fragment {
                     transaction.replace(R.id.lgcontainer, sendOTP, "sendOTP");
                     transaction.commit();
                 }
+                else Log.v("temp","not entering for loop");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
