@@ -48,7 +48,7 @@ public class LoginFragment extends Fragment  {
 
     private void init() {
         enterPin = (EditText) getActivity().findViewById(R.id.enterpin);
-        edtPassword = (EditText) getActivity().findViewById(R.id.lgpswrd);
+       // edtPassword = (EditText) getActivity().findViewById(R.id.lgpswrd);
         btnLogin = (Button) getActivity().findViewById(R.id.btnlogg);
 
     }

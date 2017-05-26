@@ -39,7 +39,7 @@
             android:paddingRight="8dp"
             android:textSize="30dp"
             android:text="SIGNUP"
-            android:background="#FFF"/>
+            android:background="@android:color/transparent"/>
 
         <Button
             android:id="@+id/btnlog"
@@ -50,7 +50,7 @@
             android:layout_alignParentRight="true"
             android:text="LOGIN"
             android:textSize="30dp"
-            android:background="#FFF"/>
+            android:background="@android:color/transparent"/>
 
     </LinearLayout>
 
