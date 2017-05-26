@@ -109,7 +109,7 @@ public class RegisterFragment extends Fragment {
             try {
                 String response1 = jsonObj.getString("RESPONSE");
                 Log.v("Response    --->>", response1);
-                if(response1 == "REQUEST_COMPLETE")
+                if(response1.equals("REQUEST_COMPLETE"))
                 {
                     FragmentManager manager = getFragmentManager();
                     SendOTP sendOTP = new SendOTP();
