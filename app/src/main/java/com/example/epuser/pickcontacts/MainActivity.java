@@ -17,13 +17,18 @@ import android.view.View;
 //import android.widget.Button;
 //import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 //import android.widget.Toast;
 
 //import org.json.JSONException;
 //import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+ //   private String TAG = MainActivity.class.getSimpleName();
+   // static final int RESULT_PICK_CONTACT = 1;
+   // private EditText edtphn;
+   // private Button btncnt;
+   // private Button btnshw;
+   // private TextView textView2;
     private ImageView txtchk,imagerequest;
     private ImageView txtsnd;
     private ImageView txtad;
@@ -33,24 +38,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+       // edtphn = (EditText) findViewById(R.id.edtphn);
+       // btncnt = (Button) findViewById(R.id.btncnt);
+       // btnshw = (Button) findViewById(R.id.btnshw);
+       // textView2 = (TextView) findViewById(R.id.textview2);
+        txtchk = (ImageView) findViewById(R.id.main_imgbalance);
+        txtsnd = (ImageView) findViewById(R.id.main_imgpay);
+        txtad = (ImageView) findViewById(R.id.main_imgadd);
+        imagerequest= (ImageView) findViewById(R.id.main_imgreqmoney);
 
-        init();
-
-
-    }
-
-    private void init() {
-        txtchk = (ImageView) findViewById(R.id.txtchk);
-        txtsnd = (ImageView) findViewById(R.id.txtsnd);
-        txtad = (ImageView) findViewById(R.id.txtad);
-        imagerequest= (ImageView) findViewById(R.id.imageView5);
-
+       // btncnt.setOnClickListener(this);
+       // btnshw.setOnClickListener(this);
         txtchk.setOnClickListener(this);
         txtsnd.setOnClickListener(this);
         txtad.setOnClickListener(this);
         imagerequest.setOnClickListener(this);
-    }
 
+    }
 
     @Override
     public void onClick(View v) {
@@ -68,9 +72,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (v == txtchk) {
             FragmentManager manager = getFragmentManager();
-            OneFragment oneFragment = new OneFragment();
+            BalanceFragment balanceFragment = new BalanceFragment();
             FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.fcontainer, oneFragment, "oneFragment");
+            transaction.replace(R.id.fcontainer, balanceFragment, "balanceFragment");
             transaction.commit();
 
         }
