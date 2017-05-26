@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.common.URLGenerator;
 import com.example.epuser.pickcontacts.common.Utils;
 import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
@@ -35,49 +36,43 @@ import java.net.URL;
 
 public class LoginPage extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnlog,btnreg,checkserver;
-    private TextView  forgotPassword;
-    private static final String TAG = "LoginFragment";
+    private Button btnlog, btnreg, checkserver;
+    private TextView forgotPassword;
+    private static final String TAG = "LoginPage";
     private boolean mShowingBack = false;
+
+    SharedPreferences loginCheck;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page_login);
 
-        btnlog =(Button)findViewById(R.id.btnlog);
-        btnreg=(Button)findViewById(R.id.btnreg);
-        forgotPassword = (TextView)findViewById(R.id.txtfrgt);
-       // checkserver = (Button)findViewById(R.id.checkserver);
+        btnlog = (Button) findViewById(R.id.btnlog);
+        btnreg = (Button) findViewById(R.id.btnreg);
+        forgotPassword = (TextView) findViewById(R.id.txtfrgt);
 
         btnreg.setOnClickListener(this);
         btnlog.setOnClickListener(this);
         forgotPassword.setOnClickListener(this);
-//        checkserver.setOnClickListener(this);
+    }
 
 
-        isLoggedIn();
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        loginCheck = getSharedPreferences(AppConstants.KEY_SHARED_PREF, Context.MODE_PRIVATE);
+        if (loginCheck.getBoolean(AppConstants.IS_LOGGED_IN, false))
+            flipRegister();
+        else
+            flipLogin();
 
     }
 
     @Override
-    public void onClick(View v)
-    {
-        if (v==btnlog)
-        {
-            FragmentManager manager = getFragmentManager();
-            FirstFragment firstFragment = new FirstFragment();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.add(R.id.lgcontainer, firstFragment, "firstFragment");
-            transaction.commit();
-
-        }
-    }
-
-    @Override
-    public void onClick(View v)
-    {
-        if (v==btnlog)
-        {
+    public void onClick(View v) {
+        if (v == btnlog) {
             flipLogin();
 //            FragmentManager manager = getFragmentManager();
 //            LoginFragment loginFragment = new LoginFragment();
@@ -85,8 +80,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 //            transaction.replace(R.id.lgcontainer, loginFragment, "loginFragment");
 //            transaction.commit();
         }
-        if (v==btnreg)
-        {
+        if (v == btnreg) {
             flipRegister();
 //            FragmentManager manager = getFragmentManager();
 //            RegisterFragment registerFragment = new RegisterFragment();
@@ -94,8 +88,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 //            transaction.replace(R.id.lgcontainer, registerFragment, "registerFragment");
 //            transaction.commit();
         }
-        if(v == forgotPassword)
-        {
+        if (v == forgotPassword) {
 
             FragmentManager manager = getFragmentManager();
             ForgotPasswordFragment forgotPasswordFragment = new ForgotPasswordFragment();
@@ -105,189 +98,82 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
 
         }
-//        if(v==checkserver){
+
+    }
+
+    //        if(v==checkserver){
 //
 //            new LoginPage.CheckServerAsyncTask().execute();
 //
 //        }
-    }
-    private class LoginViaServer extends AsyncTask<Void,Void,String>
-    {
+    private void login() {
+        // TODO: 5/26/2017  Check on login button click
 
-        @Override
-        protected String doInBackground(Void... params) {
-
-
-
-            String savedMobileNo = null;
-            String savedPassword = null;
-            String serverLoginUrl = "http://api.androidhive.info/contacts/";
-            SharedPreferences loginCheck = getSharedPreferences("userData",MODE_PRIVATE);
-            savedMobileNo=loginCheck.getString("mobileNo",null);
-            savedPassword = loginCheck.getString("password",null);
-            JSONObject data = new JSONObject();
-            try {
-                data.put("HEADER", "FJGH");
-                JSONObject data1 = new JSONObject();
-                data1.put("mobNo","1234567890");
-                data1.put("reqAmount", 200);
-                data.put("DATA", data1);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            //create the required json object
-            String resultFromBackend = Utils.makeRequestNGetResponse("POST",serverLoginUrl,data.toString());
-            return resultFromBackend;
-
-
-        }
-        @Override
-        protected void onPostExecute(String result)
-        {
-            startActivity(new Intent(LoginPage.this,MainActivity.class));
-            try {
-                JSONObject jsonResult = new JSONObject(result);
-                //parse json
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
+        int mobile = loginCheck.getInt("mobileNumber", 0);
+        try {
+            JSONObject requestJson = new JSONObject();
+            requestJson.put("mobile", mobile);
+            VolleyJsonRequest.request(this, Utils.generateURL(URLGenerator.URL_LOGIN), requestJson, loginResp, true);
+        } catch (JSONException e) {
+            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+        } catch (InternetNotAvailableException e) {
+            Toast.makeText(this, getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
         }
     }
 
-    private class CheckServerAsyncTask extends AsyncTask<Void,Void ,String>
-    {
+    VolleyJsonRequest.OnJsonResponse loginResp = new VolleyJsonRequest.OnJsonResponse() {
+        @Override
+        public void responseReceived(JSONObject jsonObj) {
+
+
+        }
 
         @Override
-        protected String doInBackground(Void... params) {
+        public void errorReceived(int code, String message) {
+            Utils.showToast(LoginPage.this, message);
+        }
+    };
 
-            try {
-                SocketAddress sockaddr = new InetSocketAddress("http://google.com", 80);
-                // Create an unbound socket
-                Socket sock = new Socket();
-
+    private void flipRegister() {
         if (mShowingBack) {
             getFragmentManager().popBackStack();
             return;
         }
-
-        // Flip to the back.
-
-       // mShowingBack = true;
-
-        // Create and commit a new fragment transaction that adds the fragment for
-        // the back of the card, uses custom animations, and is part of the fragment
-        // manager's back stack.
-
         getFragmentManager()
                 .beginTransaction()
-
-                // Replace the default fragment animations with animator resources
-                // representing rotations when switching to the back of the card, as
-                // well as animator resources representing rotations when flipping
-                // back to the front (e.g. when the system Back button is pressed).
                 .setCustomAnimations(
                         R.animator.card_flip_right_in,
                         R.animator.card_flip_right_out,
                         R.animator.card_flip_left_in,
                         R.animator.card_flip_left_out)
 
-                // Replace any fragments currently in the container view with a
-                // fragment representing the next page (indicated by the
-                // just-incremented currentPage variable).
                 .replace(R.id.lgcontainer, new RegisterFragment())
-
-                // Add this transaction to the back stack, allowing users to press
-                // Back to get to the front of the card.
-               // .addToBackStack(null)
-
-                // Commit the transaction.
                 .commit();
     }
+
     private void flipLogin() {
-
-
         if (mShowingBack) {
             getFragmentManager().popBackStack();
             return;
         }
-
-        // Flip to the back.
-
-       // mShowingBack = true;
-
-        // Create and commit a new fragment transaction that adds the fragment for
-        // the back of the card, uses custom animations, and is part of the fragment
-        // manager's back stack.
-
         getFragmentManager()
                 .beginTransaction()
-
-                // Replace the default fragment animations with animator resources
-                // representing rotations when switching to the back of the card, as
-                // well as animator resources representing rotations when flipping
-                // back to the front (e.g. when the system Back button is pressed).
                 .setCustomAnimations(
                         R.animator.card_flip_right_in,
                         R.animator.card_flip_right_out,
                         R.animator.card_flip_left_in,
                         R.animator.card_flip_left_out)
-
-                // Replace any fragments currently in the container view with a
-                // fragment representing the next page (indicated by the
-                // just-incremented currentPage variable).
                 .replace(R.id.lgcontainer, new LoginFragment())
-
-                // Add this transaction to the back stack, allowing users to press
-                // Back to get to the front of the card.
-                // .addToBackStack(null)
-
-                // Commit the transaction.
                 .commit();
     }
 
-    protected void isLoggedIn()
-    {
-        SharedPreferences loginCheck =getSharedPreferences("userData", Context.MODE_PRIVATE);
+    protected void isLoggedIn() {
 
+        if (loginCheck.getBoolean("isLogin", false)) {
 
-        if(!(loginCheck.getString("userName",null)==null) && loginCheck.getBoolean("isLogin",false))
-        {
-            VolleyJsonRequest.OnJsonResponse loginResp = new VolleyJsonRequest.OnJsonResponse() {
-                @Override
-                public void responseReceived(JSONObject jsonObj) {
-
-
-                }
-
-                @Override
-                public void errorReceived(int code, String message) {
-                    Utils.showToast(LoginPage.this, message);
-                }
-            };
-            int mobile = loginCheck.getInt("mobileNumber",0);
-            try {
-                JSONObject requestJson = new JSONObject();
-                requestJson.put("mobile", mobile);
-                VolleyJsonRequest.request(this, Utils.generateURL(URLGenerator.URL_LOGIN), requestJson, loginResp, true);
-            } catch (JSONException e) {
-                Log.e(TAG, "validateReceiveMoney: JSONException", e);
-            } catch (InternetNotAvailableException e) {
-                Toast.makeText(this, getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
-            }
-
-
-        }
-
-        else
-        {
-            FragmentManager managerlogin = getFragmentManager();
-            LoginFragment loginFragment = new LoginFragment();
-            FragmentTransaction transactionlogin = managerlogin.beginTransaction();
-            transactionlogin.replace(R.id.lgcontainer, loginFragment, "loginFragment");
-            transactionlogin.commit();
+        } else {
+            startActivity(new Intent(LoginPage.this, EnterPinActivity.class));
+            //flipLogin();
 
         }
 
