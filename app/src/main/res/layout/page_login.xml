@@ -26,7 +26,9 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_weight="8"
-        android:weightSum="2">
+        android:weightSum="2"
+
+        android:elevation="19dp">
 
         <Button
             android:id="@+id/btnreg"
@@ -37,7 +39,7 @@
             android:paddingRight="8dp"
             android:textSize="30dp"
             android:text="SIGNUP"
-            android:background="#DFFBEF"/>
+            android:background="#FFF"/>
 
         <Button
             android:id="@+id/btnlog"
@@ -48,7 +50,7 @@
             android:layout_alignParentRight="true"
             android:text="LOGIN"
             android:textSize="30dp"
-            android:background="#DFFBEF"/>
+            android:background="#FFF"/>
 
     </LinearLayout>
 

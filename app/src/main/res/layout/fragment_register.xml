@@ -1,93 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
 
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
 
-        android:background="@drawable/myrect"
-        android:layout_weight="0.00"
-        android:elevation="19dp"
-        android:weightSum="1">
+        android:background="@color/colorAccent"
+        android:text="@string/sign_in"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="49dp"
+        app:layout_constraintTop_toBottomOf="@+id/editText7"
+        android:layout_marginRight="50dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="50dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="Sign In your Account"
-            android:textSize="20dp"
-            android:textColor="@android:color/black"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:paddingLeft="10dp"
-            android:hint="Enter Accountnumber"
-            android:textColorHint="#00BFFF"
-            android:inputType="number"
-            android:id="@+id/regacnt"
+    <EditText
+        android:id="@+id/editText7"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
 
-             />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:hint="@string/enter_mobile"
 
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:paddingLeft="10dp"
-            android:hint="Enter Phonenumber"
-            android:inputType="number"
-            android:textColorHint="#00BFFF"
+        android:inputType="number"
+        android:paddingLeft="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintVertical_bias="0.32" />
 
-            android:id="@+id/regphn"
-             />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:backgroundTint="@android:color/holo_blue_dark"
-            android:text="Sign In"
-            android:textSize="20dp"
-            android:layout_marginTop="20dp"
-            android:id="@+id/btnregg"/>
-        <!--<EditText-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="20dp"-->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_easypay"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/editText7" />
 
-            <!--android:layout_marginTop="60dp"-->
-            <!--android:layout_marginRight="30dp"-->
-            <!--android:layout_marginLeft="30dp"-->
-            <!--android:paddingLeft="10dp"-->
-            <!--android:hint="Enter OTP"-->
-            <!--android:inputType="number"-->
-            <!--android:textColorHint="#00BFFF"-->
-            <!--android:background="@drawable/rounded_edittext"-->
-            <!--android:id="@+id/typeotp"-->
-            <!--android:layout_weight="0.29" />-->
-        <!--<Button-->
-            <!--android:layout_width="290dp"-->
-            <!--android:layout_height="35dp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginTop="30dp"-->
-            <!--android:background="@drawable/rounded_edittext"-->
-            <!--android:backgroundTint="@android:color/holo_blue_dark"-->
-            <!--android:text=" SUBMIT"-->
-            <!--android:textSize="20dp"-->
-            <!--android:id="@+id/subotp"/>-->
-
-</LinearLayout>
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

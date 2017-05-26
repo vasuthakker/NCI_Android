@@ -17,7 +17,6 @@ import android.view.View;
 //import android.widget.Button;
 //import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 //import android.widget.Toast;
 
 //import org.json.JSONException;
@@ -73,9 +72,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (v == txtchk) {
             FragmentManager manager = getFragmentManager();
-            OneFragment oneFragment = new OneFragment();
+            BalanceFragment balanceFragment = new BalanceFragment();
             FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.fcontainer, oneFragment, "oneFragment");
+            transaction.replace(R.id.fcontainer, balanceFragment, "balanceFragment");
             transaction.commit();
 
         }
