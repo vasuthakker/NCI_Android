@@ -37,7 +37,7 @@ import java.net.URL;
 
 public class LoginPage extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnlog, btnreg, checkserver;
+    public Button btnlog, btnreg, checkserver;
     private TextView forgotPassword;
     private static final String TAG = "LoginPage";
     private boolean mShowingBack = false;

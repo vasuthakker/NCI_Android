@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.common.URLGenerator;
 import com.example.epuser.pickcontacts.common.Utils;
 import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
@@ -36,6 +37,7 @@ public class RegisterFragment extends Fragment {
     private EditText regacnt,regphn;
     private Button  btnRegister;
     private static final String TAG = "LoginFragment";
+
 
     @Nullable
     @Override
@@ -56,6 +58,7 @@ public class RegisterFragment extends Fragment {
 
 
 
+
     }
 
     @Override
@@ -66,12 +69,8 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Register();
-                FragmentManager manager = getFragmentManager();
-                SendOTP sendOTP = new SendOTP();
 
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.lgcontainer, sendOTP, "sendOTP");
-                transaction.commit();
+
             }
         });
     }
@@ -90,8 +89,13 @@ public class RegisterFragment extends Fragment {
 
         try {
             JSONObject requestJson = new JSONObject();
-            requestJson.put("mobile", mobile);
-            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_LOGIN), requestJson, registerResp, true);
+            JSONObject jsonObject1 = new JSONObject();
+            JSONObject jsonObject2 = new JSONObject();
+            requestJson.put("HEADER",jsonObject1);
+            jsonObject2.put("mobileNumber" ,mobile);
+            requestJson.put("DATA",jsonObject2);
+
+            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_OTP), requestJson, registerResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
         } catch (InternetNotAvailableException e) {
@@ -102,12 +106,23 @@ public class RegisterFragment extends Fragment {
     private VolleyJsonRequest.OnJsonResponse registerResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-//            FragmentManager manager = getFragmentManager();
-//            SendOTP sendOTP = new SendOTP();
-//
-//            FragmentTransaction transaction = manager.beginTransaction();
-//            transaction.replace(R.id.lgcontainer, sendOTP, "sendOTP");
-//            transaction.commit();
+            try {
+                String response = jsonObj.getString(AppConstants.KEY_RESP);
+                Log.v("Response    --->>", response);
+                if(response == "REQUEST_COMPLETE")
+                {
+                    FragmentManager manager = getFragmentManager();
+                    SendOTP sendOTP = new SendOTP();
+
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.replace(R.id.lgcontainer, sendOTP, "sendOTP");
+                    transaction.commit();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
         }
 
         @Override
@@ -116,32 +131,4 @@ public class RegisterFragment extends Fragment {
         }
     };
     }
-
-
-//    @Override
-//    public void onClick(View v) {
-//        if(v==btnregister){
-//            if(CheckNetwork.isInternetAvailable(getActivity())){
-//                FragmentManager manager = getFragmentManager();
-//                SendOTP sendOTP = new SendOTP();
-//
-//                FragmentTransaction transaction = manager.beginTransaction();
-//                transaction.replace(R.id.lgcontainer, sendOTP, "sendOTP");
-//                transaction.commit();
-//
-//
-//            }
-//            else {
-//
-//                Toast.makeText(getActivity(),"No Internet Connection",Toast.LENGTH_SHORT).show();
-//
-//
-//
-//            }
-//
-//
-//
-//        }
-//
-//    }
 
