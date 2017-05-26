@@ -3,4 +3,10 @@
     <string name="internet_not_available">Internet is not available</string>
     <string name="enter_mobile">Enter Mobile</string>
     <string name="enter_valid_mobile">Enter valid mobile number</string>
+    <string name="tap_action">Tap icon to perform action</string>
+    <string name="send">Send Money</string>
+    <string name="req_money">Request Money</string>
+    <string name="receive_money">Receive Money</string>
+    <string name="balance">Balance</string>
+    <string name="add_money">Add Money</string>
 </resources>
