@@ -63,11 +63,17 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         super.onStart();
 
         loginCheck = getSharedPreferences(AppConstants.KEY_SHARED_PREF, Context.MODE_PRIVATE);
-        if (loginCheck.getBoolean(AppConstants.IS_LOGGED_IN, false))
+        if (loginCheck.getBoolean(AppConstants.IS_LOGGED_IN, false)) {
             flipRegister();
-        else
-            flipLogin();
-
+        }
+        else {
+            //flipLogin();
+            FragmentManager manager = getFragmentManager();
+            FirstFragment firstFragment = new FirstFragment();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.lgcontainer, firstFragment, "firstFragment");
+            transaction.commit();
+        }
     }
 
     @Override

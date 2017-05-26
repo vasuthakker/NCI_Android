@@ -66,6 +66,7 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Register();
+
                 FragmentManager manager = getFragmentManager();
                 SendOTP sendOTP = new SendOTP();
 
