@@ -61,5 +61,14 @@
     <string name="forgot_pin">Forgot Pin?</string>
     <string name="request_complete">REQUEST_COMPLETE</string>
     <string name="otp_successfully_verified">OTP_SUCCESSFULLY_VERIFIED</string>
+    <string name="security_answer">Your answer</string>
+
+
+    <string-array name="security_questions">
+        <item>a</item>
+        <item>b</item>
+        <item>c</item>
+
+    </string-array>
 
 </resources>
