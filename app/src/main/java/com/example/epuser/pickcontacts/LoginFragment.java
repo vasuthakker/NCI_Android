@@ -25,7 +25,7 @@ import org.json.JSONObject;
  * Created by epuser on 5/20/2017.
  */
 
-public class LoginFragment extends Fragment  {
+public class LoginFragment extends Fragment {
 
     private EditText enterPin, edtPassword;
     private Button btnLogin;

@@ -33,7 +33,7 @@ import static android.app.Activity.RESULT_OK;
  * Created by epuser on 5/18/2017.
  */
 
-public class BalanceFragment extends Fragment implements View.OnClickListener {
+public class BalanceFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
 
     //  private String TAG = BalanceFragment.class.getSimpleName();
@@ -136,6 +136,7 @@ public class BalanceFragment extends Fragment implements View.OnClickListener {
             // Check for the request cod usign multiple startAe, we might bectivityForReslut
             // switch (requestCode) {
             //  case RESULT_PICK_CONTACT:
+
             if (requestCode == RESULT_PICK_CONTACT) {
                 Cursor cursor = null;
                 try {

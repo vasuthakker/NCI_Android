@@ -74,20 +74,22 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         super.onStart();
 
         if (Preference.getBooleanPreference(LoginPage.this, AppConstants.IS_LOGGED_IN))
-            flipLogin();
+            changeFragment(new LoginFragment());
         else
-            flipRegister();
+            changeFragment(new RegisterFragment());
 
     }
 
     @Override
     public void onClick(View v) {
         if (v == btnlog) {
-            flipLogin();
+            //flipLogin();
+            changeFragment(new LoginFragment());
 
         }
         if (v == btnreg) {
-            flipRegister();
+           // flipRegister();
+            changeFragment(new RegisterFragment());
 
         }
         if (v == forgotPassword) {
@@ -97,39 +99,40 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     }
 
 
-    private void flipRegister() {
-        if (mShowingBack) {
-            getFragmentManager().popBackStack();
-            return;
-        }
-        getFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(
-                        R.animator.card_flip_left_in,
-                        R.animator.card_flip_left_out,
-                        R.animator.card_flip_right_in,
-                        R.animator.card_flip_right_out
-                )
-
-                .replace(R.id.lgcontainer, new RegisterFragment())
-                .commit();
-    }
-
-    private void flipLogin() {
-        if (mShowingBack) {
-            getFragmentManager().popBackStack();
-            return;
-        }
-//        getFragmentManager()
+//    private void flipRegister() {
+//        if (mShowingBack) {
+//            getSupportFragmentManager().popBackStack();
+//            return;
+//        }
+//        getSupportFragmentManager()
 //                .beginTransaction()
 //                .setCustomAnimations(
-//                        R.animator.card_flip_right_in,
-//                        R.animator.card_flip_right_out,
-//                        R.animator.card_flip_left_in,
-//                        R.animator.card_flip_left_out)
+//                        R.anim.to_middle,
+//                        R.anim.from_middle
+//                       // R.anim.card_flip_right_in,
+//                       // R.anim.card_flip_right_out
+//                )
+//
+//                .replace(R.id.lgcontainer, new RegisterFragment())
+//                .commit();
+//    }
+//
+//    private void flipLogin() {
+//        if (mShowingBack) {
+//            getSupportFragmentManager().popBackStack();
+//            return;
+//        }
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .setCustomAnimations(
+//                        R.anim.from_middle,
+//                        R.anim.to_middle
+//                       // R.anim.card_flip_left_in,
+//                       // R.anim.card_flip_left_out)
+//                )
 //                .replace(R.id.lgcontainer, new LoginFragment())
 //                .commit();
-    }
+//    }
 
     protected void isLoggedIn() {
 

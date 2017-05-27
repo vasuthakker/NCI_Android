@@ -33,7 +33,7 @@ import org.json.JSONObject;
  * Created by epuser on 5/20/2017.
  */
 
-public class RegisterFragment extends Fragment {
+public class RegisterFragment extends android.support.v4.app.Fragment {
 
     private EditText regacnt, regphn;
     private Button btnRegister;

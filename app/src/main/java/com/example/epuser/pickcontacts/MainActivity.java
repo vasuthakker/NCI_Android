@@ -29,31 +29,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
    // private Button btncnt;
    // private Button btnshw;
    // private TextView textView2;
-    private ImageView txtchk,imagerequest;
-    private ImageView txtsnd;
-    private ImageView txtad;
+    private ImageView checkBalance,imagerequest,sendBalance,addMoney,receiveMoney;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       // edtphn = (EditText) findViewById(R.id.edtphn);
-       // btncnt = (Button) findViewById(R.id.btncnt);
-       // btnshw = (Button) findViewById(R.id.btnshw);
-       // textView2 = (TextView) findViewById(R.id.textview2);
-        txtchk = (ImageView) findViewById(R.id.main_imgbalance);
-        txtsnd = (ImageView) findViewById(R.id.main_imgpay);
-        txtad = (ImageView) findViewById(R.id.main_imgadd);
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        init();
+    }
+
+    private void init() {
+        // edtphn = (EditText) findViewById(R.id.edtphn);
+        // btncnt = (Button) findViewById(R.id.btncnt);
+        // btnshw = (Button) findViewById(R.id.btnshw);
+        // textView2 = (TextView) findViewById(R.id.textview2);
+        checkBalance = (ImageView) findViewById(R.id.main_imgbalance);
+        sendBalance = (ImageView) findViewById(R.id.main_imgpay);
+        addMoney = (ImageView) findViewById(R.id.main_imgadd);
         imagerequest= (ImageView) findViewById(R.id.main_imgreqmoney);
+        receiveMoney=(ImageView)findViewById(R.id.main_imgaccept) ;
 
-       // btncnt.setOnClickListener(this);
-       // btnshw.setOnClickListener(this);
-        txtchk.setOnClickListener(this);
-        txtsnd.setOnClickListener(this);
-        txtad.setOnClickListener(this);
+        // btncnt.setOnClickListener(this);
+        // btnshw.setOnClickListener(this);
+        checkBalance.setOnClickListener(this);
+        sendBalance.setOnClickListener(this);
+        addMoney.setOnClickListener(this);
+        receiveMoney.setOnClickListener(this);
         imagerequest.setOnClickListener(this);
-
     }
 
     @Override
@@ -63,30 +74,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
             startActivityForResult(contactPickerIntent, RESULT_PICK_CONTACT);
         }*/
-        if (v == txtad) {
-            FragmentManager manager = getFragmentManager();
-            ReceiveMoneyFragment receiveMoneyFragment = new ReceiveMoneyFragment();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.fcontainer, receiveMoneyFragment, "receiveMoneyFragment");
-            transaction.commit();
-        }
-        if (v == txtchk) {
-            FragmentManager manager = getFragmentManager();
-            BalanceFragment balanceFragment = new BalanceFragment();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.fcontainer, balanceFragment, "balanceFragment");
-            transaction.commit();
+        if (v == addMoney) {
+            Intent intent=new Intent(MainActivity.this,AddMoneyActivity.class);
+            startActivity(intent);
 
         }
-        if (v == txtsnd) {
-            FragmentManager manager = getFragmentManager();
-            TwoFragment twoFragment = new TwoFragment();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.fcontainer, twoFragment, "twoFragment");
-            transaction.commit();
+        else if (v == checkBalance) {
+
+
+            Intent intent=new Intent(MainActivity.this,BalanceActivity.class);
+            startActivity(intent);
+
         }
-        if(v==imagerequest){
+        else if (v == sendBalance) {
+            Intent intent=new Intent(MainActivity.this,SendActivity.class);
+            startActivity(intent);
+        }
+        else if(v==imagerequest){
             Intent intent= new Intent(MainActivity.this,RequestMoneyActivity.class);
+            startActivity(intent);
+        }
+        else if(v==receiveMoney){
+            Intent intent= new Intent(MainActivity.this,ReceiveActivity.class);
             startActivity(intent);
         }
        /* if (v==btnshw){

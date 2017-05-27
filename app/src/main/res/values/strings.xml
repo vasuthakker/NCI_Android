@@ -4,7 +4,7 @@
     <string name="enter_mobile">Enter Mobile</string>
     <string name="enter_valid_mobile">Enter valid mobile number</string>
     <string name="tap_action">Tap icon to perform action</string>
-    <string name="send">Send Money</string>
+    <string name="send">Send</string>
     <string name="req_money">Request Money</string>
     <string name="receive_money">Receive Money</string>
     <string name="balance">Balance</string>
@@ -55,5 +55,8 @@
     <string name="remarks_optional">Remarks(Optional)</string>
     <string name="request_money">Request Money</string>
     <string name="enter_valid_pin">enter a valid pin</string>
+    <string name="current_balance">Your Current Balance is</string>
+    <string name="send_money">Send Money</string>
+    <string name="add">Add</string>
 
 </resources>

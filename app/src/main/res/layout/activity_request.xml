@@ -38,17 +38,16 @@
         tools:layout_constraintLeft_creator="1" />
 
     <QuickContactBadge
-        android:src="@drawable/ic_contact"
         android:id="@+id/reqmoney_contact"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="0dp"
         android:layout_marginRight="8dp"
-        android:text="@string/submit"
-        android:textColor="@android:color/white"
+        android:src="@drawable/ic_contact"
+        android:background="@drawable/myrect"
+        android:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/reqmoney_inputmobile"
         app:layout_constraintRight_toLeftOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/reqmoney_inputmobile"
@@ -65,7 +64,9 @@
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintLeft_creator="1"
         android:layout_marginTop="80dp"
-        app:layout_constraintTop_toBottomOf="@+id/reqmoney_toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/reqmoney_toolbar"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginRight="40dp">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/reqmoney_edtmobile"
