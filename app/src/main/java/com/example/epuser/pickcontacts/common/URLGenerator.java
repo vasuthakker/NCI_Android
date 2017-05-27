@@ -29,6 +29,7 @@ public class URLGenerator implements URLProvider {
     public static final String URL_OTP = "OtpGenerationStatus";
     public static final String URL_OTP_VERIFICATION = "OtpVerifyStatus";
     public static final String URL_CREATE_PIN = "pinSetup";
+    public static final String URL_PIN_VERIFICATION="PinVerifyStatus";
 
 
 
