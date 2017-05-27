@@ -1,5 +1,6 @@
 package com.example.epuser.pickcontacts;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -29,6 +30,7 @@ public class SendOTP extends Fragment implements View.OnClickListener {
     private static final String TAG = "SendOTP";
     private EditText enterOTP;
     private Button submitOTPBtn;
+    private LoginPage loginActivity;
 
     @Nullable
     @Override
@@ -45,10 +47,16 @@ public class SendOTP extends Fragment implements View.OnClickListener {
         submitOTPBtn.setOnClickListener(this);
 
     }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        loginActivity = (LoginPage) context;
+    }
 
     @Override
     public void onClick(View v) {
         if(v==submitOTPBtn){
+
              submitOTP();
         }
 
@@ -58,18 +66,23 @@ public class SendOTP extends Fragment implements View.OnClickListener {
     {
         String mobile = enterOTP.getText().toString();
         if (TextUtils.isEmpty(mobile)) {
-            enterOTP.setError(getString(R.string.enter_mobile));
+            enterOTP.setError(getString(R.string.enter_pin));
             return;
-        } else if (mobile.length() < 10) {
-            enterOTP.setError(getString(R.string.enter_valid_mobile));
+        } else if (mobile.length() != 6) {
+            enterOTP.setError(getString(R.string.enter_valid_pin));
             return;
-        } else if (mobile.length() > 10)
-            mobile = mobile.substring(mobile.length() - 10);
+        }
 
         try {
             JSONObject requestJson = new JSONObject();
-            requestJson.put("mobile", mobile);
-            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_LOGIN), requestJson, loginResp, true);
+            JSONObject jsonObject1 = new JSONObject();
+            JSONObject jsonObject2 = new JSONObject();
+            requestJson.put("HEADER", jsonObject1);
+            jsonObject2.put("mobileNumber", "9987582933");
+            jsonObject2.put("otp",mobile);
+            requestJson.put("DATA", jsonObject2);
+
+            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_OTP_VERIFICATION), requestJson, loginResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
         } catch (InternetNotAvailableException e) {
@@ -80,6 +93,9 @@ public class SendOTP extends Fragment implements View.OnClickListener {
     private VolleyJsonRequest.OnJsonResponse loginResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
+            Log.v("responsefrombackend:::",jsonObj.toString());
+            loginActivity.changeFragment(new CreatePinFragment());
+
 
 
         }

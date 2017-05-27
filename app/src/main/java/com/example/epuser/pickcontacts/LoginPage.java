@@ -53,23 +53,12 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page_login);
 
+      init();
 
+        manager = getSupportFragmentManager();
     }
 
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-         init();
-        if (Preference.getBooleanPreference(LoginPage.this, AppConstants.IS_LOGGED_IN))
-            flipLogin();
-        else
-            flipRegister();
-
-    }
-
-    private void init(){
+    private void init() {
         btnlog = (Button) findViewById(R.id.btnlog);
         btnreg = (Button) findViewById(R.id.btnreg);
         forgotPassword = (TextView) findViewById(R.id.txtfrgt);
@@ -77,8 +66,18 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         btnreg.setOnClickListener(this);
         btnlog.setOnClickListener(this);
         forgotPassword.setOnClickListener(this);
+    }
 
-        manager = getSupportFragmentManager();
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if (Preference.getBooleanPreference(LoginPage.this, AppConstants.IS_LOGGED_IN))
+            flipLogin();
+        else
+            flipRegister();
+
     }
 
     @Override
@@ -109,10 +108,11 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                         R.animator.card_flip_left_in,
                         R.animator.card_flip_left_out,
                         R.animator.card_flip_right_in,
-                        R.animator.card_flip_right_out)
+                        R.animator.card_flip_right_out
+                )
 
                 .replace(R.id.lgcontainer, new RegisterFragment())
-                .commitAllowingStateLoss();
+                .commit();
     }
 
     private void flipLogin() {
@@ -120,15 +120,15 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             getFragmentManager().popBackStack();
             return;
         }
-        getFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(
-                        R.animator.card_flip_right_in,
-                        R.animator.card_flip_right_out,
-                        R.animator.card_flip_left_in,
-                        R.animator.card_flip_left_out)
-                .replace(R.id.lgcontainer, new LoginFragment())
-                .commitAllowingStateLoss();
+//        getFragmentManager()
+//                .beginTransaction()
+//                .setCustomAnimations(
+//                        R.animator.card_flip_right_in,
+//                        R.animator.card_flip_right_out,
+//                        R.animator.card_flip_left_in,
+//                        R.animator.card_flip_left_out)
+//                .replace(R.id.lgcontainer, new LoginFragment())
+//                .commit();
     }
 
     protected void isLoggedIn() {
@@ -144,9 +144,9 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     }
 
-    public void changeFragment(android.support.v4.app.Fragment fragment) {
+    public void changeFragment(Fragment fragment) {
         FragmentTransaction transaction = manager.beginTransaction();
-        android.support.v4.app.Fragment tmpFragment = manager.findFragmentById(R.id.lgcontainer);
+        Fragment tmpFragment = manager.findFragmentById(R.id.lgcontainer);
         if (tmpFragment != null)
             transaction.replace(R.id.lgcontainer, fragment);
         else
