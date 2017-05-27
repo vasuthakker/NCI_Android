@@ -1,6 +1,6 @@
 package com.example.epuser.pickcontacts;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -21,6 +21,7 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.common.AppConstants;
+import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.common.URLGenerator;
 import com.example.epuser.pickcontacts.common.Utils;
 import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
@@ -83,6 +84,7 @@ public class RegisterFragment extends Fragment {
             return;
         } else if (mobile.length() > 9)
             mobile = mobile.substring(mobile.length() - 10);
+        Preference.savePreference(getActivity(),AppConstants.MOBILE_NUMBER,mobile);
 
         try {
             JSONObject requestJson = new JSONObject();
@@ -103,7 +105,17 @@ public class RegisterFragment extends Fragment {
     private VolleyJsonRequest.OnJsonResponse registerResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-            loginActivity.changeFragment(new SendOTP());
+            try {
+                String response =jsonObj.getString(AppConstants.KEY_RESP);
+                if(response.equals(getString(R.string.request_complete))) {
+
+                    loginActivity.changeFragment(new SendOTP());
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
 
         @Override

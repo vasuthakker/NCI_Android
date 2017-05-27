@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.epuser.pickcontacts.common.AppConstants;
+import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.common.URLGenerator;
 import com.example.epuser.pickcontacts.common.Utils;
 import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
@@ -64,11 +66,11 @@ public class SendOTP extends Fragment implements View.OnClickListener {
 
     private void submitOTP()
     {
-        String mobile = enterOTP.getText().toString();
-        if (TextUtils.isEmpty(mobile)) {
+        String otp = enterOTP.getText().toString();
+        if (TextUtils.isEmpty(otp)) {
             enterOTP.setError(getString(R.string.enter_pin));
             return;
-        } else if (mobile.length() != 6) {
+        } else if (otp.length() != 6) {
             enterOTP.setError(getString(R.string.enter_valid_pin));
             return;
         }
@@ -78,8 +80,8 @@ public class SendOTP extends Fragment implements View.OnClickListener {
             JSONObject jsonObject1 = new JSONObject();
             JSONObject jsonObject2 = new JSONObject();
             requestJson.put("HEADER", jsonObject1);
-            jsonObject2.put("mobileNumber", "9987582933");
-            jsonObject2.put("otp",mobile);
+            jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(),AppConstants.MOBILE_NUMBER));
+            jsonObject2.put("otp",otp);
             requestJson.put("DATA", jsonObject2);
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_OTP_VERIFICATION), requestJson, loginResp, true);
@@ -93,8 +95,15 @@ public class SendOTP extends Fragment implements View.OnClickListener {
     private VolleyJsonRequest.OnJsonResponse loginResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-            Log.v("responsefrombackend:::",jsonObj.toString());
-            loginActivity.changeFragment(new CreatePinFragment());
+            try {
+                String response =jsonObj.getString(AppConstants.KEY_RESP);
+                if(response.equals(getString(R.string.otp_successfully_verified)));
+                loginActivity.changeFragment(new CreatePinFragment());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
 
 
 

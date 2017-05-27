@@ -14,8 +14,10 @@ public class AppConstants {
     // Response codes
     ///////////////////////////////////////////////////////////////////////////
     public static final int SUCCESS_DATA =100 ;
-    public static int SUCCESS_VALIDATION = 200;
+    public static int SUCCESS_VALIDATION = 1004;
     public static int SUCCESS_TRANSACTION=300;
 
     public static final String IS_LOGGED_IN = "IS_LOGGED_IN";
+    public static final String PIN = "PIN";
+    public static final String MOBILE_NUMBER = "MOBILE_NUMBER";
 }

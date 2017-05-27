@@ -38,6 +38,7 @@ import java.net.URL;
  */
 
 public class LoginPage extends AppCompatActivity implements View.OnClickListener {
+    // TODO: 5/27/2017 today:  otp finalisation + layouts + all java programs
 
     public Button btnlog, btnreg, checkserver;
     private TextView forgotPassword;
@@ -74,73 +75,25 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         super.onStart();
 
         if (Preference.getBooleanPreference(LoginPage.this, AppConstants.IS_LOGGED_IN))
-            flipLogin();
+            changeFragment(new LoginFragment());
         else
-            flipRegister();
+            changeFragment(new RegisterFragment());
 
     }
 
     @Override
     public void onClick(View v) {
         if (v == btnlog) {
-            flipLogin();
+            changeFragment(new LoginFragment());
 
         }
         if (v == btnreg) {
-            flipRegister();
+            changeFragment(new RegisterFragment());
 
         }
         if (v == forgotPassword) {
             changeFragment(new ForgotPasswordFragment());
         }
-
-    }
-
-
-    private void flipRegister() {
-        if (mShowingBack) {
-            getFragmentManager().popBackStack();
-            return;
-        }
-        getFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(
-                        R.animator.card_flip_left_in,
-                        R.animator.card_flip_left_out,
-                        R.animator.card_flip_right_in,
-                        R.animator.card_flip_right_out
-                )
-
-                .replace(R.id.lgcontainer, new RegisterFragment())
-                .commit();
-    }
-
-    private void flipLogin() {
-        if (mShowingBack) {
-            getFragmentManager().popBackStack();
-            return;
-        }
-//        getFragmentManager()
-//                .beginTransaction()
-//                .setCustomAnimations(
-//                        R.animator.card_flip_right_in,
-//                        R.animator.card_flip_right_out,
-//                        R.animator.card_flip_left_in,
-//                        R.animator.card_flip_left_out)
-//                .replace(R.id.lgcontainer, new LoginFragment())
-//                .commit();
-    }
-
-    protected void isLoggedIn() {
-
-        if (loginCheck.getBoolean("isLogin", false)) {
-
-        } else {
-            startActivity(new Intent(LoginPage.this, EnterPinActivity.class));
-            //flipLogin();
-
-        }
-
 
     }
 

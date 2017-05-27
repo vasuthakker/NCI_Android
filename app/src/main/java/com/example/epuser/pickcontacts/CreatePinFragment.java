@@ -4,11 +4,23 @@ import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.epuser.pickcontacts.common.AppConstants;
+import com.example.epuser.pickcontacts.common.Preference;
+import com.example.epuser.pickcontacts.common.URLGenerator;
+import com.example.epuser.pickcontacts.common.Utils;
+import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
+import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by epuser on 5/26/2017.
@@ -18,6 +30,7 @@ public class CreatePinFragment extends Fragment {
     private EditText pin_ET , confirm_pin_ET;
     private Button create_pin_btn;
     private LoginPage loginActivity;
+    private static final String TAG = "CreatePinFragment";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -56,10 +69,23 @@ public class CreatePinFragment extends Fragment {
         {
             if(pin.length()==4)
             {
-                // TODO: 5/26/2017  save in sharedpreferences
-                loginActivity.changeFragment(new LoginFragment());
+                Preference.savePreference(getActivity(),AppConstants.PIN,pin);
+                try {
+                    JSONObject requestJson = new JSONObject();
+                    JSONObject header = new JSONObject();
+                    JSONObject data = new JSONObject();
+                    requestJson.put("HEADER", header);
+                    data.put("mobileNumber", Preference.getStringPreference(getActivity(),AppConstants.MOBILE_NUMBER));
+                    data.put("mPin1",pin);
+                    data.put("mPin2",pin);
+                    requestJson.put("DATA", data);
 
-
+                    VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_CREATE_PIN), requestJson, registerResp, true);
+                } catch (JSONException e) {
+                    Log.e(TAG, "validateReceiveMoney: JSONException", e);
+                } catch (InternetNotAvailableException e) {
+                    Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
+                }
             }
             else
             {
@@ -70,9 +96,30 @@ public class CreatePinFragment extends Fragment {
         else
         {
             confirm_pin_ET.setError("pins did not match");
-            return;
+
         }
     }
+    private VolleyJsonRequest.OnJsonResponse registerResp = new VolleyJsonRequest.OnJsonResponse() {
+        @Override
+        public void responseReceived(JSONObject jsonObj) {
+            try {
+                Preference.savePreference(getActivity(),AppConstants.IS_LOGGED_IN,true);
+                String response =jsonObj.getString(AppConstants.KEY_RESP);
+                if(response.equals(getString(R.string.request_complete))) {
+                    loginActivity.changeFragment(new LoginFragment());
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        @Override
+        public void errorReceived(int code, String message) {
+            Utils.showToast(getActivity(), message);
+        }
+    };
 
 
 }

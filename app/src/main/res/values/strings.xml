@@ -55,5 +55,8 @@
     <string name="remarks_optional">Remarks(Optional)</string>
     <string name="request_money">Request Money</string>
     <string name="enter_valid_pin">enter a valid pin</string>
+    <string name="forgot_pin">Forgot Pin?</string>
+    <string name="request_complete">REQUEST_COMPLETE</string>
+    <string name="otp_successfully_verified">OTP_SUCCESSFULLY_VERIFIED</string>
 
 </resources>
