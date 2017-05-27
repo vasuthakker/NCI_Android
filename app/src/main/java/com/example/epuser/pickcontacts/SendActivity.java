@@ -24,7 +24,7 @@ import org.json.JSONObject;
 
 public class SendActivity extends AppCompatActivity implements View.OnClickListener {
     static final int RESULT_PICK_CONTACT=1;
-    private EditText phoneNumber,amount,whatIsItFor;
+    private EditText sendphoneNumber,sendamount,whatIsItFor;
     private Button sendButton ;
     private QuickContactBadge contactButton;
 
@@ -32,6 +32,21 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send);
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        init();
+    }
+
+    private void init() {
+       sendphoneNumber =(EditText)findViewById(R.id.sendmoney_edtmobile);
+        sendamount=(EditText)findViewById(R.id.sendmoney_edtamount);
+        sendButton=(Button)findViewById(R.id.sendButton);
+        contactButton=(QuickContactBadge)findViewById(R.id.sendmoney_contact);
 
         sendButton.setOnClickListener(this);
         contactButton.setOnClickListener(this);
@@ -46,21 +61,21 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             startActivityForResult(contactPickerIntent, RESULT_PICK_CONTACT);
         }
 
-        if(v == sendButton)
+        else if(v == sendButton)
         {
             if(CheckNetwork.isInternetAvailable(this)) {
-                String phone = phoneNumber.getText().toString().replaceAll("\\s+", "");
+                String phone = sendphoneNumber.getText().toString().replaceAll("\\s+", "");
 
                 if (phone.length() > 9){
                     phone = phone.substring(phone.length() - 10);
                 }
                 else {
-                    phoneNumber.setText(null);
-                    amount.setText(null);
+                   sendphoneNumber.setText(null);
+                    sendamount.setText(null);
                     Toast.makeText(this, "Enter a valid Phone Number", Toast.LENGTH_LONG).show();
                     return;
                 }
-                String amountToBeSent = amount.getText().toString();
+                String amountToBeSent = sendamount.getText().toString();
 
                 String url = "http://192.168.10.93:8080/epcore/balance/Loader";
 
@@ -116,12 +131,11 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                         String phoneNo = null ;
                         String name = null;
                         Uri uri = data.getData();
-                        cursor = SendActivity.this.getContentResolver().query(uri, null, null, null, null);
+                        cursor =getContentResolver().query(uri, null, null, null, null);
                         cursor.moveToFirst();
                         int  phoneIndex =cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
                         phoneNo = cursor.getString(phoneIndex);
-
-                        phoneNumber.setText(phoneNo);
+                        sendphoneNumber.setText(phoneNo);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

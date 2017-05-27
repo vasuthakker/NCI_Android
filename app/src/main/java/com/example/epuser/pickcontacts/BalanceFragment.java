@@ -2,6 +2,7 @@ package com.example.epuser.pickcontacts;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -26,11 +27,13 @@ import org.json.JSONObject;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by epuser on 5/18/2017.
  */
 
-public class BalanceFragment extends Fragment implements View.OnClickListener {
+public class BalanceFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
 
     //  private String TAG = BalanceFragment.class.getSimpleName();
@@ -129,43 +132,45 @@ public class BalanceFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         //check whether the result is ok
-//        if (resultCode == RESULT_OK) {
-//            // Check for the request cod usign multiple startAe, we might bectivityForReslut
-//            // switch (requestCode) {
-//            //  case RESULT_PICK_CONTACT:
-//            if (requestCode == RESULT_PICK_CONTACT) {
-//                Cursor cursor = null;
-//                try {
-//                    String phoneNo = null;
-//                    String name = null;
-//                    Uri uri = data.getData();
-//                    cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
-//                    cursor.moveToFirst();
-//                    int phoneIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
-//                    phoneNo = cursor.getString(phoneIndex);
-//
-//                    edtphn.setText(phoneNo);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    Log.e("MainActivity", "Failed to pick contact");
-//
-//                }
-//
-//            }
+        if (resultCode == RESULT_OK) {
+            // Check for the request cod usign multiple startAe, we might bectivityForReslut
+            // switch (requestCode) {
+            //  case RESULT_PICK_CONTACT:
+
+            if (requestCode == RESULT_PICK_CONTACT) {
+                Cursor cursor = null;
+                try {
+                    String phoneNo = null;
+                    String name = null;
+                    Uri uri = data.getData();
+                    cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
+                    cursor.moveToFirst();
+                    int phoneIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+                    phoneNo = cursor.getString(phoneIndex);
+
+                    edtphn.setText(phoneNo);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e("MainActivity", "Failed to pick contact");
+
+                }
+
+            }
+        }
 //
 //           else if (requestCode == 0) {
 
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null) {
-            if (result.getContents() == null) {
-                Toast.makeText(getActivity(), "Result Not Found", Toast.LENGTH_LONG).show();
-            } else {
-                    Log.d("QR Result", "onActivityResult:"+result.getContents());
-                Toast.makeText(getActivity(), result.getContents(), Toast.LENGTH_LONG).show();
-                }
-        }
-
-    }
+//        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+//        if (result != null) {
+//            if (result.getContents() == null) {
+//                Toast.makeText(getActivity(), "Result Not Found", Toast.LENGTH_LONG).show();
+//            } else {
+//                    Log.d("QR Result", "onActivityResult:"+result.getContents());
+//                Toast.makeText(getActivity(), result.getContents(), Toast.LENGTH_LONG).show();
+//                }
+//        }
+//
+      }
 
 
 }

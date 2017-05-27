@@ -1,6 +1,5 @@
 package com.example.epuser.pickcontacts;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -11,29 +10,39 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.QuickContactBadge;
+import android.widget.Toast;
 
 public class RequestMoneyActivity extends AppCompatActivity  implements View.OnClickListener{
     private QuickContactBadge requestcnt;
     static final int RESULT_PICK_CONTACT=1;
-    private EditText requestphn;
+    private EditText requestphn,requestAmount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        init();
+    }
+
+    private void init() {
         requestcnt=(QuickContactBadge)findViewById(R.id.reqmoney_contact);
         requestphn=(EditText)findViewById(R.id.reqmoney_edtmobile);
-
+        requestAmount=(EditText)findViewById(R.id.reqmoney_edtamount);
         requestcnt.setOnClickListener(this);
-
     }
 
     @Override
     public void onClick(View v) {
-        if(v==requestcnt){
-            Intent contactPickerIntent = new Intent(Intent.ACTION_PICK,
-                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+        if(v==requestcnt)
+        {
+            Intent contactPickerIntent = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
             startActivityForResult(contactPickerIntent, RESULT_PICK_CONTACT);
+
         }
     }
 
@@ -42,6 +51,7 @@ public class RequestMoneyActivity extends AppCompatActivity  implements View.OnC
         // check whether the result is ok
         if (resultCode == RESULT_OK) {
             // Check for the request cod usign multiple startAe, we might bectivityForReslut
+
             switch (requestCode) {
                 case RESULT_PICK_CONTACT:
                     Cursor cursor = null;
@@ -49,11 +59,10 @@ public class RequestMoneyActivity extends AppCompatActivity  implements View.OnC
                         String phoneNo = null ;
                         String name = null;
                         Uri uri = data.getData();
-                        cursor =this.getContentResolver().query(uri, null, null, null, null);
+                        cursor =getContentResolver().query(uri, null, null, null, null);
                         cursor.moveToFirst();
                         int  phoneIndex =cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
                         phoneNo = cursor.getString(phoneIndex);
-
                         requestphn.setText(phoneNo);
                     } catch (Exception e) {
                         e.printStackTrace();
