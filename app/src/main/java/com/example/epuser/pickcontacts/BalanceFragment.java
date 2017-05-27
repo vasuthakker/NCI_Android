@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +49,7 @@ public class BalanceFragment extends android.support.v4.app.Fragment implements 
     private static final String LOG_TAG = "Barcode Scanner API";
     private static final int PHOTO_REQUEST = 10;
     private TextView scanResults;
+
     private Button btnScan;
     private BarcodeDetector detector;
     private Uri imageUri;
@@ -79,6 +81,7 @@ public class BalanceFragment extends android.support.v4.app.Fragment implements 
         btnScan = (Button) getActivity().findViewById(R.id.button);
         scanResults = (TextView) getActivity().findViewById(R.id.scanResults);
         qrScan = new IntentIntegrator(getActivity());
+
 
         btncnt.setOnClickListener(this);
         btnshw.setOnClickListener(this);
@@ -157,6 +160,11 @@ public class BalanceFragment extends android.support.v4.app.Fragment implements 
 
             }
         }
+
+
+
+
+
 //
 //           else if (requestCode == 0) {
 

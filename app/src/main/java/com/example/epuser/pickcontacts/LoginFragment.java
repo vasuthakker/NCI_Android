@@ -81,21 +81,75 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private void login() {
         String pin = enterPin.getText().toString();
-        if(pin.equals((Preference.getStringPreference(getActivity(), AppConstants.PIN))))
-        {
-            Intent intent = new Intent(getActivity(),MainActivity.class);
-            startActivity(intent);
-            getActivity().finish();
-        }
-        else
-        {
-            enterPin.setError("wrong pin! Try again");
-        }
 
+
+        if (TextUtils.isEmpty(pin)) {
+            enterPin.setError(getString(R.string.enter_mobile));
+            return;
+        } else if (pin.length() < 4) {
+            enterPin.setError(getString(R.string.enter_valid_mobile));
+            return;
+        } else if (pin.length() > 3)
+            pin = pin.substring(pin.length() - 4);
+        Preference.savePreference(getActivity(),AppConstants.MOBILE_NUMBER,pin);
+
+        try {
+            JSONObject requestJson = new JSONObject();
+            JSONObject jsonObject1 = new JSONObject();
+            JSONObject jsonObject2 = new JSONObject();
+            requestJson.put("HEADER", jsonObject1);
+            jsonObject2.put("PIN", pin);
+            jsonObject2.put("mobileNumber",Preference.getStringPreference(getActivity(),AppConstants.MOBILE_NUMBER));
+            requestJson.put("DATA", jsonObject2);
+
+            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_PIN_VERIFICATION), requestJson, LoginCheckResp, true);
+        } catch (JSONException e) {
+            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+        } catch (InternetNotAvailableException e) {
+            Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
+        }
     }
 
+    private VolleyJsonRequest.OnJsonResponse LoginCheckResp = new VolleyJsonRequest.OnJsonResponse() {
+        @Override
+        public void responseReceived(JSONObject jsonObj) {
+            try {
+                String response =jsonObj.getString(AppConstants.KEY_RESP);
+                if(response.equals(getString(R.string.pin_successfully_verified))) {
+
+                    Intent intent =new Intent(getActivity(),MainActivity.class);
+                    startActivity(intent);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        @Override
+        public void errorReceived(int code, String message) {
+            Utils.showToast(getActivity(), message);
+        }
+    };
+
+
+
+//        if(pin.equals((Preference.getStringPreference(getActivity(), AppConstants.PIN))))
+//        {
+//            Intent intent = new Intent(getActivity(),MainActivity.class);
+//            startActivity(intent);
+//            getActivity().finish();
+//        }
+//        else
+//        {
+//            enterPin.setError("wrong pin! Try again");
+//        }
 
 }
+
+
+
 
 
 
