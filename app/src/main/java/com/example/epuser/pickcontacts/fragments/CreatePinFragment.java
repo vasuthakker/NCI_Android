@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.activities.LoginPage;
@@ -31,12 +32,14 @@ import org.json.JSONObject;
  */
 
 public class CreatePinFragment extends Fragment {
-    private EditText pin_ET , confirm_pin_ET;
+    private EditText pin_ET , confirm_pin_ET ;
     private Button create_pin_btn;
     private LoginPage loginActivity;
     private static final String TAG = "CreatePinFragment";
     private Spinner security_questions_spinner;
     private String selected_security_question = null;
+    private TextView textview6;
+    private EditText edtsecurityanswer;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -48,6 +51,8 @@ public class CreatePinFragment extends Fragment {
         confirm_pin_ET = (EditText)getActivity().findViewById(R.id.confirm_pin_ET);
         create_pin_btn = (Button)getActivity().findViewById(R.id.create_pin_btn);
         security_questions_spinner = (Spinner)getActivity().findViewById(R.id.security_question_spinner);
+        textview6=(TextView)getActivity().findViewById(R.id.textView6);
+        edtsecurityanswer=(EditText)getActivity().findViewById(R.id.security_answer_ET);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.security_questions, android.R.layout.simple_spinner_item);
 

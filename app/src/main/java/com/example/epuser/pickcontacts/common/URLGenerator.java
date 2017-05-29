@@ -1,5 +1,6 @@
 package com.example.epuser.pickcontacts.common;
 
+import com.example.epuser.pickcontacts.activities.SendActivity;
 import com.example.epuser.pickcontacts.interfaces.URLProvider;
 
 import java.net.URL;
@@ -32,6 +33,7 @@ public class URLGenerator implements URLProvider {
     public static final String URL_CREATE_PIN = "pinSetup";
     public static final String URL_PIN_VERIFICATION="loginStatus";
     public static final String URL_CHANGE_PIN = "pinChange";
+    public static final String URL_SECURITY_ANS_VERIFICATION="as per url";
 
 
 

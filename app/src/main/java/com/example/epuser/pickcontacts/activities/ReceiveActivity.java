@@ -7,8 +7,10 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.QuickContactBadge;
 
@@ -16,7 +18,8 @@ import com.example.epuser.pickcontacts.R;
 
 public class ReceiveActivity extends AppCompatActivity implements View.OnClickListener{
     private QuickContactBadge selectContact;
-    private EditText edtreceivePhonenumber,edtenterAmount;
+    private EditText edtreceivePhonenumber,edtenterAmount,receiveOtp,receiveRemarks;
+    private Button btnreceiveOtp,receivebtn;
     static final int RESULT_PICK_CONTACT=1;
 
     @Override
@@ -35,7 +38,16 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
         selectContact =(QuickContactBadge)findViewById(R.id.receivemoney_contact);
         edtreceivePhonenumber=(EditText)findViewById(R.id.receivemoney_edtmobile) ;
         edtenterAmount=(EditText) findViewById(R.id.receivemoney_edtamount);
+        receiveRemarks=(EditText)findViewById(R.id.receivemoney_edtremakrs) ;
+
+        receivebtn=(Button)findViewById(R.id.receivebutton) ;
+        btnreceiveOtp=(Button)findViewById(R.id.receive_money_btn_otp);
+        receiveOtp=(EditText)findViewById(R.id.receive_enter_otp) ;
+
+
+        btnreceiveOtp.setOnClickListener(this);
         selectContact.setOnClickListener(this);
+        receivebtn.setOnClickListener(this);
     }
 
     @Override
@@ -45,6 +57,39 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
                     ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
             startActivityForResult(contactPickerIntent, RESULT_PICK_CONTACT);
         }
+         else if(v==btnreceiveOtp){
+
+            checkConfirmation();
+
+
+        }
+        else if(v==receivebtn){
+
+            sendOtpToPhonenumber();
+
+
+            selectContact.setVisibility(View.GONE);
+            edtreceivePhonenumber.setVisibility(View.GONE);
+            edtenterAmount.setVisibility(View.GONE);
+            receivebtn.setVisibility(View.GONE);
+            selectContact.setVisibility(View.GONE);
+            receiveRemarks.setVisibility(View.GONE);
+
+
+            btnreceiveOtp.setVisibility(View.VISIBLE);
+            receiveOtp.setVisibility(View.VISIBLE);
+
+
+
+        }
+    }
+
+    private void sendOtpToPhonenumber() {
+    }
+
+    private void checkConfirmation() {
+
+
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -11,14 +11,16 @@
 
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Enter Your Phonenumber"
+            android:hint="SECURITY QUESTION"
             android:textSize="20dp"
             android:textColor="@android:color/black"
-            android:id="@+id/textphone"
+            android:id="@+id/security_question_show"
             android:layout_marginBottom="40dp"
+
             app:layout_constraintBottom_toTopOf="@+id/textInputLayout10"
             android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent"
@@ -40,13 +42,13 @@
         app:layout_constraintVertical_bias="0.32999998">
 
         <EditText
-            android:id="@+id/forgotphn"
+            android:id="@+id/security_answer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="60dp"
-            android:hint="Enter Phonenumber"
+            android:hint="@string/answer_security"
 
             android:inputType="phone"
             android:paddingLeft="10dp"
@@ -61,9 +63,9 @@
             android:layout_height="48dp"
             android:layout_gravity="center"
             android:backgroundTint="@color/colorPrimary"
-            android:text="SEND OTP"
+            android:text="@string/submit_security_answer"
             android:textSize="20dp"
-            android:id="@+id/btnotp"
+            android:id="@+id/btnanssub"
             android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginLeft="8dp"
