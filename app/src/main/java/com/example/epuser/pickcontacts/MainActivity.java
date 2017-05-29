@@ -75,29 +75,58 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivityForResult(contactPickerIntent, RESULT_PICK_CONTACT);
         }*/
         if (v == addMoney) {
-            Intent intent=new Intent(MainActivity.this,AddMoneyActivity.class);
+            Intent intent = new Intent(MainActivity.this, AddMoneyActivity.class);
             startActivity(intent);
 
-        }
-        else if (v == checkBalance) {
+        } else if (v == checkBalance) {
 
 
-            Intent intent=new Intent(MainActivity.this,BalanceActivity.class);
+            Intent intent = new Intent(MainActivity.this, BalanceActivity.class);
             startActivity(intent);
 
-        }
-        else if (v == sendBalance) {
-            Intent intent=new Intent(MainActivity.this,SendActivity.class);
+        } else if (v == sendBalance) {
+            Intent intent = new Intent(MainActivity.this, SendActivity.class);
+            startActivity(intent);
+        } else if (v == imagerequest) {
+            Intent intent = new Intent(MainActivity.this, RequestMoneyActivity.class);
+            startActivity(intent);
+        } else if (v == receiveMoney) {
+            Intent intent = new Intent(MainActivity.this, ReceiveActivity.class);
             startActivity(intent);
         }
-        else if(v==imagerequest){
-            Intent intent= new Intent(MainActivity.this,RequestMoneyActivity.class);
-            startActivity(intent);
+    }
+
+
+
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            // Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.menu_main, menu);
+            return true;
         }
-        else if(v==receiveMoney){
-            Intent intent= new Intent(MainActivity.this,ReceiveActivity.class);
-            startActivity(intent);
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            // Handle action bar item clicks here. The action bar will
+            // automatically handle clicks on the Home/Up button, so long
+            // as you specify a parent activity in AndroidManifest.xml.
+            int id = item.getItemId();
+
+            //noinspection SimplifiableIfStatement
+            if (id == R.id.share) {
+                //Do something
+                return true;
+            } else if (id == R.id.email) {
+                //Do something
+                return true;
+            } else if (id == R.id.search) {
+                //Do something
+                return true;
+            }
+
+            return super.onOptionsItemSelected(item);
         }
+}
        /* if (v==btnshw){
             try {
 //                String phoneNo = null;
@@ -198,5 +227,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }*/
 
 
-    }
-}
+
