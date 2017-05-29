@@ -109,7 +109,7 @@ public class CreatePinFragment extends Fragment {
                     data.put("mPin2",pin);
                     requestJson.put("DATA", data);
 
-                    VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_CREATE_PIN), requestJson, registerResp, true);
+                    VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_CREATE_PIN), requestJson, createPinResp, true);
                 } catch (JSONException e) {
                     Log.e(TAG, "validateReceiveMoney: JSONException", e);
                 } catch (InternetNotAvailableException e) {
@@ -118,17 +118,17 @@ public class CreatePinFragment extends Fragment {
             }
             else
             {
-                pin_ET.setError("pins did not match");
+                pin_ET.setError(getString(R.string.pins_dont_match));
             }
 
         }
         else
         {
-            confirm_pin_ET.setError(getString(R.string.enter_a_four_digit_pin));
+            confirm_pin_ET.setError(getString(R.string.enter_valid_pin));
 
         }
     }
-    private VolleyJsonRequest.OnJsonResponse registerResp = new VolleyJsonRequest.OnJsonResponse() {
+    private VolleyJsonRequest.OnJsonResponse createPinResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
             try {

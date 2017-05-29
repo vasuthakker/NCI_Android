@@ -87,7 +87,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
 
          if (pin.length() != 4) {
-            enterPin.setError(getString(R.string.enter_a_four_digit_pin));
+            enterPin.setError(getString(R.string.enter_valid_pin));
             return;
         }
 

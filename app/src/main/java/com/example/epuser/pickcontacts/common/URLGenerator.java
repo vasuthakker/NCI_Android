@@ -14,6 +14,7 @@ public class URLGenerator implements URLProvider {
     public static final String URL_CONTEXT = BASE_ADDRESS_HOST + "epnci/";
 
 
+
     // http://localhost:8080/epnci/OtpGenerationStatus
     //http://localhost:8080/epnci/OtpVerifyStatus
     public static URLGenerator generator;
@@ -30,6 +31,7 @@ public class URLGenerator implements URLProvider {
     public static final String URL_OTP_VERIFICATION = "OtpVerifyStatus";
     public static final String URL_CREATE_PIN = "pinSetup";
     public static final String URL_PIN_VERIFICATION="loginStatus";
+    public static final String URL_CHANGE_PIN = "pinChange";
 
 
 
