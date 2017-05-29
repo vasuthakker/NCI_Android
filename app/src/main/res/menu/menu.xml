@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.epuser.pickcontacts.activities.MainActivity">
+
+    <item
+        android:id="@+id/changepin"
+
+        android:orderInCategory="100"
+        app:showAsAction="never"
+
+        android:title="Change PIN" />
+
+    <item
+        android:id="@+id/menusetting"
+
+        android:orderInCategory="200"
+        app:showAsAction="never"
+        android:title="Setting" />
+    <item
+        android:title="Profile"
+        android:id="@+id/profile"
+        app:showAsAction="never"
+        android:orderInCategory="300"/>
+
+
+</menu>
