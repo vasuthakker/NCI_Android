@@ -34,7 +34,7 @@ public class CreatePinFragment extends Fragment {
     private Button create_pin_btn;
     private LoginPage loginActivity;
     private static final String TAG = "CreatePinFragment";
-    private Spinner sequrity_questions_spinner;
+    private Spinner security_questions_spinner;
     private String selected_security_question = null;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -46,13 +46,13 @@ public class CreatePinFragment extends Fragment {
         pin_ET = (EditText)getActivity().findViewById(R.id.pin_ET);
         confirm_pin_ET = (EditText)getActivity().findViewById(R.id.confirm_pin_ET);
         create_pin_btn = (Button)getActivity().findViewById(R.id.create_pin_btn);
-        sequrity_questions_spinner = (Spinner)getActivity().findViewById(R.id.security_question_spinner);
+        security_questions_spinner = (Spinner)getActivity().findViewById(R.id.security_question_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.security_questions, android.R.layout.simple_spinner_item);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        sequrity_questions_spinner.setAdapter(adapter);
+        security_questions_spinner.setAdapter(adapter);
 
 
     }
@@ -68,11 +68,18 @@ public class CreatePinFragment extends Fragment {
                 createPin();
             }
         });
-        sequrity_questions_spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        security_questions_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                selected_security_question =  (parent.getItemAtPosition(position)).toString();
-//                Log.v(TAG, "selected question is: " + selected_security_question);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               if(position!=0)
+               {
+                   selected_security_question = parent.getItemAtPosition(position).toString();
+               }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -115,7 +122,7 @@ public class CreatePinFragment extends Fragment {
         }
         else
         {
-            confirm_pin_ET.setError("Please enter a four digit pin");
+            confirm_pin_ET.setError(getString(R.string.enter_a_four_digit_pin));
 
         }
     }

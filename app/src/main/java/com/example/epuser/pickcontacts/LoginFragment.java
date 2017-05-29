@@ -83,22 +83,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         String pin = enterPin.getText().toString();
 
 
-        if (TextUtils.isEmpty(pin)) {
-            enterPin.setError(getString(R.string.enter_mobile));
+
+         if (pin.length() != 4) {
+            enterPin.setError(getString(R.string.enter_a_four_digit_pin));
             return;
-        } else if (pin.length() < 4) {
-            enterPin.setError(getString(R.string.enter_valid_mobile));
-            return;
-        } else if (pin.length() > 3)
-            pin = pin.substring(pin.length() - 4);
-        Preference.savePreference(getActivity(),AppConstants.MOBILE_NUMBER,pin);
+        }
 
         try {
             JSONObject requestJson = new JSONObject();
             JSONObject jsonObject1 = new JSONObject();
             JSONObject jsonObject2 = new JSONObject();
             requestJson.put("HEADER", jsonObject1);
-            jsonObject2.put("PIN", pin);
+            jsonObject2.put("mPin", pin);
             jsonObject2.put("mobileNumber",Preference.getStringPreference(getActivity(),AppConstants.MOBILE_NUMBER));
             requestJson.put("DATA", jsonObject2);
 
@@ -115,7 +111,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         public void responseReceived(JSONObject jsonObj) {
             try {
                 String response =jsonObj.getString(AppConstants.KEY_RESP);
-                if(response.equals(getString(R.string.pin_successfully_verified))) {
+                if(response.equals(getString(R.string.request_complete))) {
 
                     Intent intent =new Intent(getActivity(),MainActivity.class);
                     startActivity(intent);
