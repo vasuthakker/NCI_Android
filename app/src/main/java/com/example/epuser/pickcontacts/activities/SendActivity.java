@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,12 +20,20 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.common.AppConstants;
+import com.example.epuser.pickcontacts.common.Preference;
+import com.example.epuser.pickcontacts.common.URLGenerator;
+import com.example.epuser.pickcontacts.common.Utils;
+import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
+import com.example.epuser.pickcontacts.fragments.SendOTP;
 import com.example.epuser.pickcontacts.network.CheckNetwork;
+import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SendActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "SendActivity";
     static final int RESULT_PICK_CONTACT=1;
     private EditText sendphoneNumber,sendamount,whatIsItFor;
     private Button sendButton ;
@@ -47,6 +56,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private void init() {
        sendphoneNumber =(EditText)findViewById(R.id.sendmoney_edtmobile);
         sendamount=(EditText)findViewById(R.id.sendmoney_edtamount);
+        whatIsItFor = (EditText)findViewById(R.id.sendmoney_edtremakrs);
         sendButton=(Button)findViewById(R.id.sendButton);
         contactButton=(QuickContactBadge)findViewById(R.id.sendmoney_contact);
 
@@ -63,64 +73,65 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             startActivityForResult(contactPickerIntent, RESULT_PICK_CONTACT);
         }
 
-        else if(v == sendButton)
-        {
-            if(CheckNetwork.isInternetAvailable(this)) {
-                String phone = sendphoneNumber.getText().toString().replaceAll("\\s+", "");
+        else if(v == sendButton) {
+            send();
+        }
 
-                if (phone.length() > 9){
-                    phone = phone.substring(phone.length() - 10);
+    }
+
+    private void send() {
+        String sendMobile = sendphoneNumber.getText().toString();
+        if (TextUtils.isEmpty(sendMobile)) {
+            sendphoneNumber.setError(getString(R.string.enter_mobile));
+            return;
+        } else if (sendMobile.length() < 10) {
+            sendphoneNumber.setError(getString(R.string.enter_valid_mobile));
+            return;
+        } else if (sendMobile.length() > 9)
+            sendMobile = sendMobile.substring(sendMobile.length() - 10);
+        String remarks = whatIsItFor.getText().toString();
+        String amountToBeSend = sendamount.getText().toString();
+
+        try {
+            JSONObject requestJson = new JSONObject();
+            JSONObject jsonObject1 = new JSONObject();
+            JSONObject jsonObject2 = new JSONObject();
+            requestJson.put("HEADER", jsonObject1);
+            jsonObject2.put("mobileNumber", sendMobile);
+            requestJson.put("DATA", jsonObject2);
+
+            VolleyJsonRequest.request(SendActivity.this, Utils.generateURL(URLGenerator.URL_OTP), requestJson, sendResp, true);
+        } catch (JSONException e) {
+            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+        } catch (InternetNotAvailableException e) {
+            Toast.makeText(SendActivity.this, getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private VolleyJsonRequest.OnJsonResponse sendResp = new VolleyJsonRequest.OnJsonResponse() {
+        @Override
+        public void responseReceived(JSONObject jsonObj) {
+            try {
+                String response =jsonObj.getString(AppConstants.KEY_RESP);
+                if(response.equals(getString(R.string.request_complete))) {
+
+
                 }
-                else {
-                   sendphoneNumber.setText(null);
-                    sendamount.setText(null);
-                    Toast.makeText(this, "Enter a valid Phone Number", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                String amountToBeSent = sendamount.getText().toString();
 
-                String url = "http://192.168.10.93:8080/epcore/balance/Loader";
-
-                JSONObject data =new JSONObject();
-                try {
-                    data.put("HEADER", "FJGH");
-                    JSONObject data1 = new JSONObject();
-                    data1.put("mobNo",phone);
-                    data1.put("reqAmount", 200);
-                    data.put("DATA", data1);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                JsonObjectRequest jsonRequest = new JsonObjectRequest(url, data, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Toast.makeText(SendActivity.this,response.toString(),Toast.LENGTH_SHORT).show();
-                        Intent intent= new Intent(SendActivity.this,MainActivity.class);
-                        startActivity(intent);
-
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(SendActivity.this, error.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                }
-                );
-                RequestQueue requestQueue = Volley.newRequestQueue(SendActivity.this);
-                requestQueue.add(jsonRequest);
-
-
-
-            }
-            else
-            {
-                Toast.makeText(SendActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
 
         }
 
-    }
+        @Override
+        public void errorReceived(int code, String message) {
+            Utils.showToast(SendActivity.this, message);
+        }
+    };
+
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // check whether the result is ok
