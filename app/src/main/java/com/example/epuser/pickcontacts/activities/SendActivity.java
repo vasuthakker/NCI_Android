@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,12 +20,20 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.common.AppConstants;
+import com.example.epuser.pickcontacts.common.Preference;
+import com.example.epuser.pickcontacts.common.URLGenerator;
+import com.example.epuser.pickcontacts.common.Utils;
+import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
+import com.example.epuser.pickcontacts.fragments.SendOTP;
 import com.example.epuser.pickcontacts.network.CheckNetwork;
+import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SendActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "SendActivity";
     static final int RESULT_PICK_CONTACT=1;
     private EditText sendphoneNumber,sendamount,whatIsItFor;
     private Button sendButton ;
@@ -47,6 +56,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private void init() {
        sendphoneNumber =(EditText)findViewById(R.id.sendmoney_edtmobile);
         sendamount=(EditText)findViewById(R.id.sendmoney_edtamount);
+        whatIsItFor = (EditText)findViewById(R.id.sendmoney_edtremakrs);
         sendButton=(Button)findViewById(R.id.sendButton);
         contactButton=(QuickContactBadge)findViewById(R.id.sendmoney_contact);
 
@@ -70,8 +80,57 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void send() {
+        String sendMobile = sendphoneNumber.getText().toString();
+        if (TextUtils.isEmpty(sendMobile)) {
+            sendphoneNumber.setError(getString(R.string.enter_mobile));
+            return;
+        } else if (sendMobile.length() < 10) {
+            sendphoneNumber.setError(getString(R.string.enter_valid_mobile));
+            return;
+        } else if (sendMobile.length() > 9)
+            sendMobile = sendMobile.substring(sendMobile.length() - 10);
+        String remarks = whatIsItFor.getText().toString();
+        String amountToBeSend = sendamount.getText().toString();
 
+        try {
+            JSONObject requestJson = new JSONObject();
+            JSONObject jsonObject1 = new JSONObject();
+            JSONObject jsonObject2 = new JSONObject();
+            requestJson.put("HEADER", jsonObject1);
+            jsonObject2.put("mobileNumber", sendMobile);
+            requestJson.put("DATA", jsonObject2);
+
+            VolleyJsonRequest.request(SendActivity.this, Utils.generateURL(URLGenerator.URL_OTP), requestJson, sendResp, true);
+        } catch (JSONException e) {
+            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+        } catch (InternetNotAvailableException e) {
+            Toast.makeText(SendActivity.this, getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
+        }
     }
+
+    private VolleyJsonRequest.OnJsonResponse sendResp = new VolleyJsonRequest.OnJsonResponse() {
+        @Override
+        public void responseReceived(JSONObject jsonObj) {
+            try {
+                String response =jsonObj.getString(AppConstants.KEY_RESP);
+                if(response.equals(getString(R.string.request_complete))) {
+
+
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        @Override
+        public void errorReceived(int code, String message) {
+            Utils.showToast(SendActivity.this, message);
+        }
+    };
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
