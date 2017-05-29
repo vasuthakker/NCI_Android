@@ -62,5 +62,14 @@
     <string name="request_complete">REQUEST_COMPLETE</string>
     <string name="otp_successfully_verified">OTP_SUCCESSFULLY_VERIFIED</string>
     <string name="pin_successfully_verified">PIN_SUCCESSFULLY_VERIFIED</string>
+    <string name="security_answer">Your answer</string>
+
+
+    <string-array name="security_questions">
+        <item>a</item>
+        <item>b</item>
+        <item>c</item>
+
+    </string-array>
 
 </resources>
