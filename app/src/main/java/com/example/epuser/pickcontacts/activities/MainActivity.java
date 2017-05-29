@@ -7,31 +7,22 @@ package com.example.epuser.pickcontacts.activities;
 //import android.nfc.Tag;
 //import android.os.AsyncTask;
 //import android.provider.ContactsContract;
+
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-//import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-//import android.widget.Button;
-//import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.epuser.pickcontacts.R;
-//import android.widget.Toast;
 
-//import org.json.JSONException;
-//import org.json.JSONObject;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
- //   private String TAG = MainActivity.class.getSimpleName();
-   // static final int RESULT_PICK_CONTACT = 1;
-   // private EditText edtphn;
-   // private Button btncnt;
-   // private Button btnshw;
-   // private TextView textView2;
+
     private ImageView checkBalance,imagerequest,sendBalance,addMoney,receiveMoney;
     private Menu menusetting,changepin,profile;
     private Toolbar myToolbar;
@@ -53,10 +44,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void init() {
-        // edtphn = (EditText) findViewById(R.id.edtphn);
-        // btncnt = (Button) findViewById(R.id.btncnt);
-        // btnshw = (Button) findViewById(R.id.btnshw);
-        // textView2 = (TextView) findViewById(R.id.textview2);
         checkBalance = (ImageView) findViewById(R.id.main_imgbalance);
         sendBalance = (ImageView) findViewById(R.id.main_imgpay);
         addMoney = (ImageView) findViewById(R.id.main_imgadd);
