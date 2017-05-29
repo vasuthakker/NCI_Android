@@ -56,7 +56,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private void init() {
        sendphoneNumber =(EditText)findViewById(R.id.sendmoney_edtmobile);
         sendamount=(EditText)findViewById(R.id.sendmoney_edtamount);
-        whatIsItFor = (EditText)findViewById(R.id.sendmoney_edtremakrs);
+        whatIsItFor = (EditText)findViewById(R.id.sendmoney_edtremarks);
         sendButton=(Button)findViewById(R.id.sendButton);
         contactButton=(QuickContactBadge)findViewById(R.id.sendmoney_contact);
 
@@ -91,14 +91,19 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             sendMobile = sendMobile.substring(sendMobile.length() - 10);
         String remarks = whatIsItFor.getText().toString();
         String amountToBeSend = sendamount.getText().toString();
+        if(TextUtils.isEmpty(amountToBeSend))
+        {
+            sendamount.setError(getString(R.string.please_enter_amount));
+            return;
+        }
 
         try {
             JSONObject requestJson = new JSONObject();
             JSONObject jsonObject1 = new JSONObject();
             JSONObject jsonObject2 = new JSONObject();
-            requestJson.put("HEADER", jsonObject1);
-            jsonObject2.put("mobileNumber", sendMobile);
-            requestJson.put("DATA", jsonObject2);
+            requestJson.put(getString(R.string.header), jsonObject1);
+            jsonObject2.put(getString(R.string.mobile_number), sendMobile);
+            requestJson.put(getString(R.string.data), jsonObject2);
 
             VolleyJsonRequest.request(SendActivity.this, Utils.generateURL(URLGenerator.URL_OTP), requestJson, sendResp, true);
         } catch (JSONException e) {
@@ -114,6 +119,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             try {
                 String response =jsonObj.getString(AppConstants.KEY_RESP);
                 if(response.equals(getString(R.string.request_complete))) {
+                    Toast.makeText(SendActivity.this,"money successfully sent",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(SendActivity.this,MainActivity.class));
 
 
                 }

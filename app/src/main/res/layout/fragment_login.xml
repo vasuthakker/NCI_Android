@@ -73,7 +73,7 @@
             android:layout_marginStart="30dp"
             android:layout_weight="1"
             android:hint="@string/enter_pin"
-            android:inputType="phone"
+            android:inputType="numberPassword"
             android:paddingLeft="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
