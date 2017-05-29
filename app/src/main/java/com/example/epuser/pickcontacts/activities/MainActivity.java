@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         changepin=(Menu)findViewById(R.id.changepin);
         profile=(Menu)findViewById(R.id.profile);
         myToolbar = (Toolbar) findViewById(R.id.toolbar5);
-        trans_history=(Menu)findViewById(R.id.trans_history); 
+        trans_history=(Menu)findViewById(R.id.trans_history);
         setSupportActionBar(myToolbar);
 
         // btncnt.setOnClickListener(this);
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                addNotification();
                 return true;
             }else if(id==R.id.trans_history){
-                
+
                 return true;
             }
 

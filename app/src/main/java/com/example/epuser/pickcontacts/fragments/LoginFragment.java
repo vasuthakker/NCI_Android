@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,19 +43,19 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
-
-        return view;
+        return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
     private void init() {
         enterPin = (EditText) getActivity().findViewById(R.id.enterpin);
+        enterPin.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
         btnLogin = (Button) getActivity().findViewById(R.id.btnlogg);
-        forgot_pin_TV = (TextView)getActivity().findViewById(R.id.forgot_pin_TV);
+        forgot_pin_TV = (TextView) getActivity().findViewById(R.id.forgot_pin_TV);
         btnLogin.setOnClickListener(this);
         forgot_pin_TV.setOnClickListener(this);
 
     }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -67,14 +68,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         init();
 
     }
+
     @Override
     public void onClick(View v) {
-        if(v==btnLogin)
-        {
+        if (v == btnLogin) {
             login();
-        }
-        else if(v == forgot_pin_TV)
-        {
+        } else if (v == forgot_pin_TV) {
             loginActivity.changeFragment(new ForgotPasswordFragment());
 
         }
@@ -84,9 +83,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private void login() {
         String pin = enterPin.getText().toString();
 
-
-
-         if (pin.length() != 4) {
+        if (pin.length() != 4) {
             enterPin.setError(getString(R.string.enter_a_four_digit_pin));
             return;
         }
@@ -97,7 +94,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             JSONObject jsonObject2 = new JSONObject();
             requestJson.put("HEADER", jsonObject1);
             jsonObject2.put("mPin", pin);
-            jsonObject2.put("mobileNumber",Preference.getStringPreference(getActivity(),AppConstants.MOBILE_NUMBER));
+            jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
             requestJson.put("DATA", jsonObject2);
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_PIN_VERIFICATION), requestJson, LoginCheckResp, true);
@@ -111,18 +108,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private VolleyJsonRequest.OnJsonResponse LoginCheckResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-            try {
-                String response =jsonObj.getString(AppConstants.KEY_RESP);
-                if(response.equals(getString(R.string.request_complete))) {
-
-                    Intent intent =new Intent(getActivity(),MainActivity.class);
-                    startActivity(intent);
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
         }
 
         @Override
@@ -131,18 +118,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
     };
 
-
-
-//        if(pin.equals((Preference.getStringPreference(getActivity(), AppConstants.PIN))))
-//        {
-//            Intent intent = new Intent(getActivity(),MainActivity.class);
-//            startActivity(intent);
-//            getActivity().finish();
-//        }
-//        else
-//        {
-//            enterPin.setError("wrong pin! Try again");
-//        }
 
 }
 

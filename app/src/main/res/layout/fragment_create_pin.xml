@@ -22,8 +22,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
         app:layout_constraintVertical_bias="0.63" />
+
+
 
 
     <android.support.design.widget.TextInputLayout
@@ -57,7 +58,7 @@
         android:layout_height="wrap_content"
         android:text="@string/create_new_pin"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="7dp"
         android:textSize="20dp"
         android:textColor="@android:color/black"
         android:layout_marginRight="8dp"

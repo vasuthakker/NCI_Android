@@ -55,7 +55,8 @@
         app:layout_constraintVertical_bias="0.39">
 
         <EditText
-            android:id="@+id/new_pin1"
+            android:id="@+id/new_pin"
+            android:inputType="numberPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/new_pin" />
@@ -73,10 +74,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout8">
 
         <EditText
-            android:id="@+id/new_pin2"
+            android:id="@+id/confirm_new_pin"
+            android:inputType="numberPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/new_pin" />
+            android:hint="@string/confirm_pin" />
     </android.support.design.widget.TextInputLayout>
 
     <Button

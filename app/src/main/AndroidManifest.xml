@@ -22,7 +22,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.RequestMoneyActivity" />
-        <activity android:name=".activities.EnterPinActivity" />
         <activity android:name=".activities.BalanceActivity" />
         <activity android:name=".activities.AddMoneyActivity" />
         <activity android:name=".activities.ReceiveActivity" />

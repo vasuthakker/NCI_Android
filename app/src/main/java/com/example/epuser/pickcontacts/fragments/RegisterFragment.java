@@ -34,7 +34,7 @@ public class RegisterFragment extends Fragment {
 
     private EditText regacnt, regphn;
     private Button btnRegister;
-    private static final String TAG = "LoginFragment";
+    private static final String TAG = "RegisterFragment";
     private LoginPage loginActivity;
 
     @Override
