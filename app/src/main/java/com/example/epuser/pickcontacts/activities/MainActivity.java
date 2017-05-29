@@ -1,8 +1,6 @@
-package com.example.epuser.pickcontacts;
+package com.example.epuser.pickcontacts.activities;
 
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 //import android.content.Intent;
 //import android.database.Cursor;
 //import android.net.Uri;
@@ -17,6 +15,8 @@ import android.view.View;
 //import android.widget.Button;
 //import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.example.epuser.pickcontacts.R;
 //import android.widget.Toast;
 
 //import org.json.JSONException;

@@ -1,8 +1,7 @@
-package com.example.epuser.pickcontacts;
+package com.example.epuser.pickcontacts.fragments;
 
 import android.support.v4.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.epuser.pickcontacts.activities.LoginPage;
+import com.example.epuser.pickcontacts.R;
 import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.common.URLGenerator;
@@ -61,6 +62,7 @@ public class CreatePinFragment extends Fragment {
     public void onStart() {
         super.onStart();
         init();
+        getSecurityQuestions();
 
         create_pin_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +136,45 @@ public class CreatePinFragment extends Fragment {
                 String response =jsonObj.getString(AppConstants.KEY_RESP);
                 if(response.equals(getString(R.string.request_complete))) {
                     loginActivity.changeFragment(new LoginFragment());
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        @Override
+        public void errorReceived(int code, String message) {
+            Utils.showToast(getActivity(), message);
+        }
+    };
+
+    private void getSecurityQuestions() {
+        try {
+            JSONObject requestJson = new JSONObject();
+            JSONObject jsonObject1 = new JSONObject();
+            JSONObject jsonObject2 = new JSONObject();
+            requestJson.put("HEADER", jsonObject1);
+            jsonObject2.put("mobileNumber", "");
+            requestJson.put("DATA", jsonObject2);
+
+            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_OTP), requestJson, securityQuestionsResp, true);
+        } catch (JSONException e) {
+            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+        } catch (InternetNotAvailableException e) {
+            Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private VolleyJsonRequest.OnJsonResponse securityQuestionsResp = new VolleyJsonRequest.OnJsonResponse() {
+        @Override
+        public void responseReceived(JSONObject jsonObj) {
+            try {
+                String response =jsonObj.getString(AppConstants.KEY_RESP);
+                if(response.equals(getString(R.string.request_complete))) {
+
+
                 }
 
             } catch (JSONException e) {

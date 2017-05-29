@@ -1,4 +1,4 @@
-package com.example.epuser.pickcontacts;
+package com.example.epuser.pickcontacts.network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

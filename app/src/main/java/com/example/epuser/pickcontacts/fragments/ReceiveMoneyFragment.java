@@ -1,4 +1,4 @@
-package com.example.epuser.pickcontacts;
+package com.example.epuser.pickcontacts.fragments;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.QuickContactBadge;
 import android.widget.Toast;
 
+import com.example.epuser.pickcontacts.R;
 import com.example.epuser.pickcontacts.common.URLGenerator;
 import com.example.epuser.pickcontacts.common.Utils;
 import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;

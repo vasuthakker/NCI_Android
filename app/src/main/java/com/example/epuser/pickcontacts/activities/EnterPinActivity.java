@@ -1,4 +1,4 @@
-package com.example.epuser.pickcontacts;
+package com.example.epuser.pickcontacts.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.epuser.pickcontacts.R;
 
 public class EnterPinActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView forgotPin;
