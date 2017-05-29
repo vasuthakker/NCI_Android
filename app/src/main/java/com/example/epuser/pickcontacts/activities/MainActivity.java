@@ -11,6 +11,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 //import android.util.Log;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 //import android.widget.Button;
 //import android.widget.EditText;
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
    // private Button btnshw;
    // private TextView textView2;
     private ImageView checkBalance,imagerequest,sendBalance,addMoney,receiveMoney;
+    private Menu menusetting,changepin,profile;
+    private Toolbar myToolbar;
 
 
 
@@ -57,6 +62,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addMoney = (ImageView) findViewById(R.id.main_imgadd);
         imagerequest= (ImageView) findViewById(R.id.main_imgreqmoney);
         receiveMoney=(ImageView)findViewById(R.id.main_imgaccept) ;
+        menusetting=(Menu)findViewById(R.id.menusetting);
+        changepin=(Menu)findViewById(R.id.changepin);
+        profile=(Menu)findViewById(R.id.profile);
+        myToolbar = (Toolbar) findViewById(R.id.toolbar5);
+        setSupportActionBar(myToolbar);
 
         // btncnt.setOnClickListener(this);
         // btnshw.setOnClickListener(this);
@@ -101,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public boolean onCreateOptionsMenu(Menu menu) {
             // Inflate the menu; this adds items to the action bar if it is present.
-            getMenuInflater().inflate(R.menu.menu_main, menu);
+            getMenuInflater().inflate(R.menu.menu, menu);
             return true;
         }
 
@@ -113,13 +123,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             int id = item.getItemId();
 
             //noinspection SimplifiableIfStatement
-            if (id == R.id.share) {
+            if (id == R.id.changepin) {
+                //Do something
+                Intent intent=new Intent(MainActivity.this,ChangePin.class);
+                startActivity(intent);
+                return true;
+            } else if (id == R.id.profile) {
                 //Do something
                 return true;
-            } else if (id == R.id.email) {
-                //Do something
-                return true;
-            } else if (id == R.id.search) {
+            } else if (id == R.id.menusetting) {
                 //Do something
                 return true;
             }
