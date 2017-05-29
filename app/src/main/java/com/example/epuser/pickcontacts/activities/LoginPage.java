@@ -46,24 +46,17 @@ public class LoginPage extends AppCompatActivity  {
         btnreg = (Button) findViewById(R.id.btnreg);
         forgotPassword = (TextView) findViewById(R.id.txtfrgt);
 
-
     }
 
 
     @Override
     public void onStart() {
         super.onStart();
-
         if (Preference.getBooleanPreference(LoginPage.this, AppConstants.IS_LOGGED_IN))
             changeFragment(new LoginFragment());
         else
-
             changeFragment(new RegisterFragment());
-
     }
-
-
-
     public void changeFragment(Fragment fragment) {
         FragmentTransaction transaction = manager.beginTransaction();
         Fragment tmpFragment = manager.findFragmentById(R.id.lgcontainer);
