@@ -1,4 +1,4 @@
-package com.example.epuser.pickcontacts;
+package com.example.epuser.pickcontacts.fragments;
 
 
 import android.os.Bundle;
@@ -12,7 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.epuser.pickcontacts.R;
 
 
 public class ForgotPasswordFragment extends Fragment implements View.OnClickListener {

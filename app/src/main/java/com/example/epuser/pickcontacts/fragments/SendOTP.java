@@ -1,4 +1,4 @@
-package com.example.epuser.pickcontacts;
+package com.example.epuser.pickcontacts.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,11 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.activities.LoginPage;
 import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.common.URLGenerator;
 import com.example.epuser.pickcontacts.common.Utils;
 import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
+import com.example.epuser.pickcontacts.fragments.CreatePinFragment;
 import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
 
 import org.json.JSONException;

@@ -1,13 +1,11 @@
-package com.example.epuser.pickcontacts;
+package com.example.epuser.pickcontacts.fragments;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 //import android.widget.Toast;
 
+import com.example.epuser.pickcontacts.network.CheckNetwork;
+import com.example.epuser.pickcontacts.R;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
