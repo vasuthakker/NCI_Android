@@ -63,64 +63,16 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             startActivityForResult(contactPickerIntent, RESULT_PICK_CONTACT);
         }
 
-        else if(v == sendButton)
-        {
-            if(CheckNetwork.isInternetAvailable(this)) {
-                String phone = sendphoneNumber.getText().toString().replaceAll("\\s+", "");
-
-                if (phone.length() > 9){
-                    phone = phone.substring(phone.length() - 10);
-                }
-                else {
-                   sendphoneNumber.setText(null);
-                    sendamount.setText(null);
-                    Toast.makeText(this, "Enter a valid Phone Number", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                String amountToBeSent = sendamount.getText().toString();
-
-                String url = "http://192.168.10.93:8080/epcore/balance/Loader";
-
-                JSONObject data =new JSONObject();
-                try {
-                    data.put("HEADER", "FJGH");
-                    JSONObject data1 = new JSONObject();
-                    data1.put("mobNo",phone);
-                    data1.put("reqAmount", 200);
-                    data.put("DATA", data1);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                JsonObjectRequest jsonRequest = new JsonObjectRequest(url, data, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Toast.makeText(SendActivity.this,response.toString(),Toast.LENGTH_SHORT).show();
-                        Intent intent= new Intent(SendActivity.this,MainActivity.class);
-                        startActivity(intent);
-
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(SendActivity.this, error.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                }
-                );
-                RequestQueue requestQueue = Volley.newRequestQueue(SendActivity.this);
-                requestQueue.add(jsonRequest);
-
-
-
-            }
-            else
-            {
-                Toast.makeText(SendActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
-            }
-
+        else if(v == sendButton) {
+            send();
         }
 
     }
+
+    private void send() {
+
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // check whether the result is ok
