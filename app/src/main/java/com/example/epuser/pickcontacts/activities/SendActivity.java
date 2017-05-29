@@ -56,7 +56,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private void init() {
        sendphoneNumber =(EditText)findViewById(R.id.sendmoney_edtmobile);
         sendamount=(EditText)findViewById(R.id.sendmoney_edtamount);
-        whatIsItFor = (EditText)findViewById(R.id.sendmoney_edtremakrs);
+        whatIsItFor = (EditText)findViewById(R.id.sendmoney_edtremarks);
         sendButton=(Button)findViewById(R.id.sendButton);
         contactButton=(QuickContactBadge)findViewById(R.id.sendmoney_contact);
 

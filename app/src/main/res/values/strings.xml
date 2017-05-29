@@ -68,6 +68,7 @@
     <string name="old_pin">Enter your old PIN</string>
     <string name="new_pin">Enter your new PIN</string>
     <string name="Change_pinnew">Set new PIN</string>
+    <string name="security_ques">Set a security question</string>
 
 
     <string-array name="security_questions">
