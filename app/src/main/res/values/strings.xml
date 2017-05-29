@@ -65,6 +65,9 @@
     <string name="security_answer">Your answer</string>
     <string name="enter_a_four_digit_pin">Please enter a four digit pin</string>
     <string name="pin_change">Set your new  PIN here</string>
+    <string name="old_pin">Enter your old PIN</string>
+    <string name="new_pin">Enter your new PIN</string>
+    <string name="Change_pinnew">Set new PIN</string>
     <string name="please_enter_amount">Please enter amount</string>
     <string name="header">HEADER</string>
     <string name="mobile_number">mobileNumber</string>
