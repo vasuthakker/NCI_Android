@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,12 +38,13 @@ import java.util.List;
  */
 
 public class CreatePinFragment extends Fragment {
-    private EditText pin_ET , confirm_pin_ET;
+    private EditText pin_ET , confirm_pin_ET,secAnsET;
     private Button create_pin_btn;
     private LoginPage loginActivity;
     private static final String TAG = "CreatePinFragment";
     private Spinner spQuestions;
-    private String selected_security_question = null;
+    private int selected_qn_position =0;
+    private int selected_sec_Id ;
     private List<QuestionDetails> questions;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -55,13 +57,7 @@ public class CreatePinFragment extends Fragment {
         confirm_pin_ET = (EditText)getActivity().findViewById(R.id.confirm_pin_ET);
         create_pin_btn = (Button)getActivity().findViewById(R.id.create_pin_btn);
         spQuestions = (Spinner)getActivity().findViewById(R.id.security_question_spinner);
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-//                R.array.security_questions, android.R.layout.simple_spinner_item);
-//
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//
-//        spQuestions.setAdapter(adapter);
-
+        secAnsET = (EditText)getActivity().findViewById(R.id.security_answer_ET);
 
     }
 
@@ -75,16 +71,18 @@ public class CreatePinFragment extends Fragment {
         create_pin_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createPin();
+                saveSecurityAns();
+                //createPin();
             }
         });
         spQuestions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               if(position!=0)
-               {
-                   selected_security_question = parent.getItemAtPosition(position).toString();
-               }
+
+
+                QuestionDetails question =  questions.get(position);
+                selected_sec_Id = question.getId();
+                selected_qn_position = position;
             }
 
             @Override
@@ -101,6 +99,16 @@ public class CreatePinFragment extends Fragment {
     }
 
     private void createPin() {
+        if(selected_qn_position ==0)
+        {
+            Toast.makeText(getActivity(),"Please select a question",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(secAnsET.getText().toString()))
+        {
+            secAnsET.setError(getString(R.string.enter_sec_ans));
+            return;
+        }
         String pin = pin_ET.getText().toString();
         if (pin.length() ==4)
         {
@@ -139,17 +147,8 @@ public class CreatePinFragment extends Fragment {
     private VolleyJsonRequest.OnJsonResponse createPinResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-            try {
-                Preference.savePreference(getActivity(),AppConstants.IS_LOGGED_IN,true);
-                String response =jsonObj.getString(AppConstants.KEY_RESP);
-                if(response.equals(getString(R.string.request_complete))) {
-                    loginActivity.changeFragment(new LoginFragment());
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
+            Preference.savePreference(getActivity(),AppConstants.IS_LOGGED_IN,true);
+            saveSecurityAns();
         }
 
         @Override
@@ -157,6 +156,8 @@ public class CreatePinFragment extends Fragment {
             Utils.showToast(getActivity(), message);
         }
     };
+
+
 
     private void getSecurityQuestions() {
         try {
@@ -166,7 +167,7 @@ public class CreatePinFragment extends Fragment {
             requestJson.put("HEADER", jsonObject1);
             jsonObject2.put("mobileNumber", "");
            // requestJson.put("DATA", jsonObject2);
-
+            // TODO: 5/30/2017   get  url using url generator
             VolleyJsonRequest.request(getActivity(), "http://192.168.10.60:8080/epnci/securityQnA", requestJson, securityQuestionsResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
@@ -178,11 +179,15 @@ public class CreatePinFragment extends Fragment {
     private VolleyJsonRequest.OnJsonResponse securityQuestionsResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-            Toast.makeText(getActivity(),jsonObj.toString(),Toast.LENGTH_LONG).show();
+
             try {
                 questions=new ArrayList<>();
                 JSONArray queArray=jsonObj.getJSONArray("DATA");
                 QuestionDetails question;
+                question = new QuestionDetails();
+                question.setId(0);
+                question.setValue(getString(R.string.select_sec_qn));
+                questions.add(question);
                 for (int i = 0; i <queArray.length() ; i++) {
                     JSONObject objQue=queArray.getJSONObject(i);
                     question=new QuestionDetails();
@@ -199,9 +204,45 @@ public class CreatePinFragment extends Fragment {
                 spQuestions.setAdapter(adapter);
 
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG,"",e);
             }
 
+
+        }
+
+        @Override
+        public void errorReceived(int code, String message) {
+            Utils.showToast(getActivity(), message);
+        }
+    };
+
+
+
+    private void saveSecurityAns() {
+        try {
+            JSONObject requestJson = new JSONObject();
+            JSONObject header = new JSONObject();
+            JSONObject data = new JSONObject();
+            requestJson.put(getString(R.string.header), header);
+            data.put(getString(R.string.mobile_number), Preference.getStringPreference(getActivity(),AppConstants.MOBILE_NUMBER));
+            data.put(getString(R.string.sec_qn_id),selected_sec_Id);
+            data.put(getString(R.string.sec_ans_key),secAnsET.getText().toString());
+            requestJson.put("DATA", data);
+            // TODO: 5/30/2017 get url using urlgenerator
+            VolleyJsonRequest.request(getActivity(), "http://192.168.10.60:8080/epnci/securityQnAUpdate", requestJson, secQnsUpdtResp, true);
+        } catch (JSONException e) {
+            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+        } catch (InternetNotAvailableException e) {
+            Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
+    private VolleyJsonRequest.OnJsonResponse secQnsUpdtResp = new VolleyJsonRequest.OnJsonResponse() {
+        @Override
+        public void responseReceived(JSONObject jsonObj) {
+            loginActivity.changeFragment(new LoginFragment());
 
         }
 

@@ -37,6 +37,7 @@ public class BalanceFragment extends android.support.v4.app.Fragment implements 
 
 
     //  private String TAG = BalanceFragment.class.getSimpleName();
+    private static final String TAG = "BalanceFragment";
     static final int RESULT_PICK_CONTACT = 1;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_CAMERA = 1;
@@ -120,7 +121,7 @@ public class BalanceFragment extends android.support.v4.app.Fragment implements 
                     data.put("DATA", data1);
 
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.e(TAG,"",e);
                 }
 
             } else {

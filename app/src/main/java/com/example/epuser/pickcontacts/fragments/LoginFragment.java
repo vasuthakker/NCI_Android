@@ -36,7 +36,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private EditText enterPin, edtPassword;
     private Button btnLogin;
-    private TextView forgot_pin_TV;
+    private TextView forgot_pin_TV,registerTV;
     private static final String TAG = "LoginFragment";
     private LoginPage loginActivity;
 
@@ -51,6 +51,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         enterPin.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
         btnLogin = (Button) getActivity().findViewById(R.id.btnlogg);
         forgot_pin_TV = (TextView) getActivity().findViewById(R.id.forgot_pin_TV);
+        registerTV = (TextView)getActivity().findViewById(R.id.registerTV);
         btnLogin.setOnClickListener(this);
         forgot_pin_TV.setOnClickListener(this);
 
@@ -76,6 +77,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         } else if (v == forgot_pin_TV) {
             loginActivity.changeFragment(new ForgotPasswordFragment());
 
+        }
+        else if (v == registerTV)
+        {
+            loginActivity.changeFragment(new RegisterFragment());
         }
 
     }

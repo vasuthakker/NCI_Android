@@ -19,6 +19,7 @@ import android.widget.QuickContactBadge;
 import com.example.epuser.pickcontacts.R;
 
 public class ReceiveActivity extends AppCompatActivity implements View.OnClickListener{
+    private static final String TAG = "ReceiveActivity";
     private QuickContactBadge selectContact;
     private EditText edtreceivePhonenumber,edtenterAmount,receiveOtp,receiveRemarks;
     private Button btnreceiveOtp,receivebtn;
@@ -112,7 +113,7 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
 
                         edtreceivePhonenumber.setText(phoneNo);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Log.e(TAG,"",e);
                     }
                     break;
             }

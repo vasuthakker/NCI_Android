@@ -88,7 +88,7 @@ public class ReceiveMoneyFragment extends Fragment  implements View.OnClickListe
 
                         TFphoneNumber.setText(phoneNo);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Log.e(TAG,"",e);
                     }
                     break;
             }

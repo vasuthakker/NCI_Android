@@ -56,7 +56,7 @@ public class LoginPage extends AppCompatActivity  {
         if (Preference.getBooleanPreference(LoginPage.this, AppConstants.IS_LOGGED_IN))
             changeFragment(new LoginFragment());
         else
-            changeFragment(new CreatePinFragment());
+            changeFragment(new RegisterFragment());
     }
     public void changeFragment(Fragment fragment) {
         FragmentTransaction transaction = manager.beginTransaction();

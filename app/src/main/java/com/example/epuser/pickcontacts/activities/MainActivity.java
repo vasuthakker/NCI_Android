@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new GetBalance().execute(data.toString());
 
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG,"",e);
             }
 
 
@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         edtphn.setText(phoneNo);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Log.e(TAG,"",e);
                     }
                     break;
             }
@@ -257,7 +257,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 JSONObject Balance = new JSONObject(result);
                textView2.setText(Balance.getString("Finalbalance"));
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG,"",e);
             }
 
 
