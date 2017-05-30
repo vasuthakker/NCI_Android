@@ -36,6 +36,7 @@ public class URLGenerator implements URLProvider {
     public static final String URL_PIN_VERIFICATION="loginStatus";
     public static final String URL_CHANGE_PIN = "pinChange";
     public static final String URL_GET_SEC_QNS ="securityQnA" ;
+    public static final String URL_SECURITY_ANS_VERIFICATION="as per url";
 
 
 
