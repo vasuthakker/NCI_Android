@@ -119,7 +119,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
                 }
 
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG,"validateRegister:JSONException",e);
             }
 
         }

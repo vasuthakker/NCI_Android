@@ -37,6 +37,12 @@ public class URLGenerator implements URLProvider {
     public static final String URL_GET_SEC_QNS ="securityQnA" ;
     public static final String URL_SECURITY_ANS_VERIFICATION = "";
 
+    public static final String URL_OTP_BENEFACTOR="as per url2";
+    public static final String URL_CARD_LOAD="as per url3";
+
+
+
+
 
 
     @Override

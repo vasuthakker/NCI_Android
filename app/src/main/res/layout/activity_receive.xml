@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.RequestMoneyActivity">
 
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/receivemoney_toolbar"
         android:layout_width="0dp"
