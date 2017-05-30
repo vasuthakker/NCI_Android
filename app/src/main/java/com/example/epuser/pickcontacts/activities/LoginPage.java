@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.fragments.CreatePinFragment;
 import com.example.epuser.pickcontacts.fragments.RegisterFragment;
 import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.common.Preference;
@@ -55,7 +56,7 @@ public class LoginPage extends AppCompatActivity  {
         if (Preference.getBooleanPreference(LoginPage.this, AppConstants.IS_LOGGED_IN))
             changeFragment(new LoginFragment());
         else
-            changeFragment(new RegisterFragment());
+            changeFragment(new CreatePinFragment());
     }
     public void changeFragment(Fragment fragment) {
         FragmentTransaction transaction = manager.beginTransaction();

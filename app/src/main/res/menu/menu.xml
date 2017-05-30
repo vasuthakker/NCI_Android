@@ -2,27 +2,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
      xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.epuser.pickcontacts.activities.MainActivity">
+    tools:context="com.example.epuser.pickcontacts.activities.MainActivity"
+    >
 
     <item
         android:id="@+id/changepin"
 
-        android:orderInCategory="100"
+        android:orderInCategory="2"
         app:showAsAction="never"
 
-        android:title="Change PIN" />
+        android:title="@string/changing_pin"/>
 
     <item
         android:id="@+id/menusetting"
 
-        android:orderInCategory="200"
+        android:orderInCategory="4"
         app:showAsAction="never"
-        android:title="Setting" />
+        android:title="@string/setting" />
     <item
-        android:title="Profile"
+        android:title="@string/profile"
         android:id="@+id/profile"
         app:showAsAction="never"
-        android:orderInCategory="300"/>
+        android:orderInCategory="1"/>
+    <item
+        android:title="@string/trans_history"
+        android:id="@+id/trans_history"
+        app:showAsAction="never"
+        android:orderInCategory="3"/>
 
 
 </menu>

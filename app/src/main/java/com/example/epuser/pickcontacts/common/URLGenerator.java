@@ -1,5 +1,6 @@
 package com.example.epuser.pickcontacts.common;
 
+import com.example.epuser.pickcontacts.activities.SendActivity;
 import com.example.epuser.pickcontacts.interfaces.URLProvider;
 
 import java.net.URL;
@@ -11,7 +12,9 @@ import java.net.URL;
 public class URLGenerator implements URLProvider {
 
     public static final String BASE_ADDRESS_HOST = "http://192.168.10.86:8080/";
+    public static final String BASE_ADDRESS_HOST2 = "http://192.168.10.60:8080/";
     public static final String URL_CONTEXT = BASE_ADDRESS_HOST + "epnci/";
+    public static final String URL_CONTEXT2 = BASE_ADDRESS_HOST2 + "epnci/";
 
 
 
@@ -32,6 +35,8 @@ public class URLGenerator implements URLProvider {
     public static final String URL_CREATE_PIN = "pinSetup";
     public static final String URL_PIN_VERIFICATION="loginStatus";
     public static final String URL_CHANGE_PIN = "pinChange";
+    public static final String URL_GET_SEC_QNS ="securityQnA" ;
+    public static final String URL_SECURITY_ANS_VERIFICATION="as per url";
 
 
 

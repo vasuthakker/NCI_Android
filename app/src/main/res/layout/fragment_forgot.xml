@@ -1,59 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     >
 
-    <LinearLayout
-        android:layout_width="350dp"
-        android:layout_height="300dp"
-        android:orientation="vertical"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/myrect"
-        android:layout_weight="0.00"
-        android:elevation="19dp"
-        android:weightSum="1">
+
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Enter Your Phonenumber"
+            android:hint="SECURITY QUESTION"
             android:textSize="20dp"
             android:textColor="@android:color/black"
-            android:id="@+id/textphone"/>
+            android:id="@+id/security_question_show"
+            android:layout_marginBottom="40dp"
+
+            app:layout_constraintBottom_toTopOf="@+id/textInputLayout10"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/textInputLayout10"
+        app:layout_constraintVertical_bias="0.32999998">
 
         <EditText
+            android:id="@+id/security_answer"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginRight="30dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:paddingLeft="10dp"
-            android:hint="Enter Phonenumber"
-            android:textColorHint="#00BFFF"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="60dp"
+            android:hint="@string/answer_security"
+
             android:inputType="phone"
-            android:id="@+id/forgotphn"
-            android:background="@drawable/rounded_edittext"
-            android:layout_weight="0.30" />
+            android:paddingLeft="10dp"
+
+            />
+
+    </android.support.design.widget.TextInputLayout>
 
 
         <Button
             android:layout_width="290dp"
-            android:layout_height="35dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/rounded_edittext"
-            android:backgroundTint="@android:color/holo_blue_dark"
-            android:text="SEND OTP"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/submit_security_answer"
             android:textSize="20dp"
-            android:id="@+id/btnotp"/>
+            android:id="@+id/btnanssub"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout10" />
 
 
-        </LinearLayout>
-</LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

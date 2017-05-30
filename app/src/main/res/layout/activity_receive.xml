@@ -39,7 +39,9 @@
         android:layout_marginTop="91dp"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
         android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp" />
+        android:layout_marginRight="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp" />
 
     <QuickContactBadge
         android:src="@drawable/ic_contact"
@@ -48,15 +50,14 @@
         android:layout_height="30dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="0dp"
         android:layout_marginRight="8dp"
         android:background="@drawable/myrect"
         android:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/receivemoney_inputmobile"
         app:layout_constraintRight_toLeftOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/receivemoney_inputmobile"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginEnd="8dp" />
 
 
     <android.support.design.widget.TextInputLayout
@@ -69,7 +70,8 @@
         tools:layout_constraintLeft_creator="1"
         android:layout_marginTop="80dp"
         app:layout_constraintTop_toBottomOf="@+id/receivemoney_toolbar"
-        android:layout_marginRight="40dp">
+        android:layout_marginRight="40dp"
+        android:layout_marginEnd="40dp">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/receivemoney_edtmobile"
@@ -136,7 +138,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="30dp"
         tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="354dp" />
+        tools:layout_editor_absoluteX="382dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
@@ -146,6 +148,46 @@
         app:layout_constraintGuide_begin="30dp"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="30dp" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout13"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35000002"
+        >
+
+
+        <EditText
+            android:id="@+id/receive_enter_otp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter OTP"
+            android:inputType="number"
+            android:visibility="gone"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/receive_money_btn_otp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:text="@string/submit_OTP"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="70dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout13"
+        app:layout_constraintHorizontal_bias="0.0" />
 
 
 </android.support.constraint.ConstraintLayout>

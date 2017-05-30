@@ -7,24 +7,37 @@ package com.example.epuser.pickcontacts.activities;
 //import android.nfc.Tag;
 //import android.os.AsyncTask;
 //import android.provider.ContactsContract;
-
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+//import android.util.Log;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+//import android.widget.Button;
+//import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.epuser.pickcontacts.R;
+//import android.widget.Toast;
 
-
+//import org.json.JSONException;
+//import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
+ //   private String TAG = MainActivity.class.getSimpleName();
+   // static final int RESULT_PICK_CONTACT = 1;
+   // private EditText edtphn;
+   // private Button btncnt;
+   // private Button btnshw;
+   // private TextView textView2;
     private ImageView checkBalance,imagerequest,sendBalance,addMoney,receiveMoney;
-    private Menu menusetting,changepin,profile;
+    private Menu menusetting,changepin,profile,trans_history;
     private Toolbar myToolbar;
 
 
@@ -44,6 +57,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void init() {
+        // edtphn = (EditText) findViewById(R.id.edtphn);
+        // btncnt = (Button) findViewById(R.id.btncnt);
+        // btnshw = (Button) findViewById(R.id.btnshw);
+        // textView2 = (TextView) findViewById(R.id.textview2);
         checkBalance = (ImageView) findViewById(R.id.main_imgbalance);
         sendBalance = (ImageView) findViewById(R.id.main_imgpay);
         addMoney = (ImageView) findViewById(R.id.main_imgadd);
@@ -53,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         changepin=(Menu)findViewById(R.id.changepin);
         profile=(Menu)findViewById(R.id.profile);
         myToolbar = (Toolbar) findViewById(R.id.toolbar5);
+        trans_history=(Menu)findViewById(R.id.trans_history);
         setSupportActionBar(myToolbar);
 
         // btncnt.setOnClickListener(this);
@@ -119,12 +137,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //Do something
                 return true;
             } else if (id == R.id.menusetting) {
-                //Do something
+
+//                addNotification();
+                return true;
+            }else if(id==R.id.trans_history){
+
                 return true;
             }
 
             return super.onOptionsItemSelected(item);
         }
+
+//    private void addNotification() {
+//
+//        NotificationCompat.Builder builder =
+//                (NotificationCompat.Builder) new  NotificationCompat.Builder(this)
+//                        .setSmallIcon(R.drawable.progress_2)
+//                        .setContentTitle("Notifications Example")
+//                        .setContentText("This is a test notification");
+//
+//        Intent notificationIntent = new Intent(this, LoginPage.class);
+//        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
+//                PendingIntent.FLAG_UPDATE_CURRENT);
+//        builder.setContentIntent(contentIntent);
+//
+//        // Add as notification
+//        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//        manager.notify(0, builder.build());
+//    }
 }
        /* if (v==btnshw){
             try {
