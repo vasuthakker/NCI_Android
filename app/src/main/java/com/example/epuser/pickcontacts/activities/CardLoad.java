@@ -99,7 +99,7 @@ public class CardLoad extends AppCompatActivity implements View.OnClickListener 
 
             VolleyJsonRequest.request(this, Utils.generateURL(URLGenerator.URL_CARD_LOAD), requestJson, CardLoadResp, true);
         } catch (JSONException e) {
-            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+            Log.e(TAG, "validateCardLoad: JSONException", e);
         } catch (InternetNotAvailableException e) {
             Toast.makeText(this, getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
         }
@@ -137,7 +137,7 @@ public class CardLoad extends AppCompatActivity implements View.OnClickListener 
                         phoneNo = cursor.getString(phoneIndex);
                         cl_phonenumber.setText(phoneNo);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Log.e(TAG, "unable to load contact", e);
                     }
                     break;
             }
