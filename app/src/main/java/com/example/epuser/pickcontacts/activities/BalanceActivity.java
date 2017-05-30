@@ -61,7 +61,7 @@ public class BalanceActivity extends AppCompatActivity {
                 }
 
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG,"",e);
             }
 
         }

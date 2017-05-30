@@ -31,11 +31,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ReceiveActivity extends AppCompatActivity implements View.OnClickListener{
+    private static final String TAG = "ReceiveActivity";
     private QuickContactBadge selectContact;
     private EditText edtreceivePhonenumber,edtenterAmount,receiveRemarks;
     private Button btnreceiveOtp,receivebtn;
     static final int RESULT_PICK_CONTACT=1;
-    private static final String TAG = "ReceiveActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +103,7 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
 
                         edtreceivePhonenumber.setText(phoneNo);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Log.e(TAG,"",e);
                     }
                     break;
             }

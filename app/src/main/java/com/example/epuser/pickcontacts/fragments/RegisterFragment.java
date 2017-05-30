@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
@@ -30,9 +31,10 @@ import org.json.JSONObject;
  * Created by epuser on 5/20/2017.
  */
 
-public class RegisterFragment extends Fragment {
+public class RegisterFragment extends Fragment implements View.OnClickListener{
 
     private EditText regacnt, regphn;
+    private TextView loginTV;
     private Button btnRegister;
     private static final String TAG = "RegisterFragment";
     private LoginPage loginActivity;
@@ -53,22 +55,31 @@ public class RegisterFragment extends Fragment {
         regphn = (EditText) getActivity().findViewById(R.id.regphn);
         regphn.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
         btnRegister = (Button) getActivity().findViewById(R.id.btnregister);
+        loginTV = (TextView)getActivity().findViewById(R.id.loginTV);
+
+        btnRegister.setOnClickListener(this);
+        loginTV.setOnClickListener(this);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
-
         init();
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //loginActivity.changeFragment(new CreatePinFragment());
-                Register();
 
-            }
-        });
+    }
+    @Override
+    public void onClick(View v) {
+        if(v ==btnRegister)
+        {
+            Register();
+        }
+        else if (v ==loginTV)
+        {
+            if (Preference.getBooleanPreference(getActivity(),AppConstants.IS_LOGGED_IN))
+                loginActivity.changeFragment(new LoginFragment());
+            else loginActivity.changeFragment(new MainLoginFragment());
+        }
+
     }
 
     private void Register() {
@@ -120,5 +131,7 @@ public class RegisterFragment extends Fragment {
             Utils.showToast(getActivity(), message);
         }
     };
+
+
 }
 

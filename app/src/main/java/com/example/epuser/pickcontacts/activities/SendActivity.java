@@ -126,7 +126,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG,"",e);
             }
 
         }
@@ -157,7 +157,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                         phoneNo = cursor.getString(phoneIndex);
                         sendphoneNumber.setText(phoneNo);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Log.e(TAG,"",e);
                     }
                     break;
             }
