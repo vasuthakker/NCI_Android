@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,17 +69,17 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
 
             sendOtpToPhonenumber();
 
-
-            selectContact.setVisibility(View.GONE);
-            edtreceivePhonenumber.setVisibility(View.GONE);
-            edtenterAmount.setVisibility(View.GONE);
-            receivebtn.setVisibility(View.GONE);
-            selectContact.setVisibility(View.GONE);
-            receiveRemarks.setVisibility(View.GONE);
-
-
-            btnreceiveOtp.setVisibility(View.VISIBLE);
-            receiveOtp.setVisibility(View.VISIBLE);
+            showChangeLangDialog();
+//            selectContact.setVisibility(View.GONE);
+//            edtreceivePhonenumber.setVisibility(View.GONE);
+//            edtenterAmount.setVisibility(View.GONE);
+//            receivebtn.setVisibility(View.GONE);
+//            selectContact.setVisibility(View.GONE);
+//            receiveRemarks.setVisibility(View.GONE);
+//
+//
+//            btnreceiveOtp.setVisibility(View.VISIBLE);
+//            receiveOtp.setVisibility(View.VISIBLE);
 
 
 
@@ -117,6 +119,30 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
         } else {
             Log.e("MainActivity", "Failed to pick contact");
         }
+    }
+
+    public void showChangeLangDialog() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.custom_dialog, null);
+        dialogBuilder.setView(dialogView);
+
+        final EditText edt = (EditText) dialogView.findViewById(R.id.edit1);
+
+        dialogBuilder.setTitle("Custom dialog");
+        dialogBuilder.setMessage("Enter text below");
+        dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //do something with edt.getText().toString();
+            }
+        });
+        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //pass
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
     }
 }
 
