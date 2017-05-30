@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/enter_ur_pin"
             android:paddingLeft="10dp"
-            android:inputType="number"
+            android:inputType="numberPassword"
             />
     </android.support.design.widget.TextInputLayout>
 
