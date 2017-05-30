@@ -1,5 +1,6 @@
 package com.example.epuser.pickcontacts.activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,20 +10,32 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.QuickContactBadge;
+import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.common.AppConstants;
+import com.example.epuser.pickcontacts.common.Preference;
+import com.example.epuser.pickcontacts.common.URLGenerator;
+import com.example.epuser.pickcontacts.common.Utils;
+import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
+import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ReceiveActivity extends AppCompatActivity implements View.OnClickListener{
     private QuickContactBadge selectContact;
-    private EditText edtreceivePhonenumber,edtenterAmount,receiveOtp,receiveRemarks;
+    private EditText edtreceivePhonenumber,edtenterAmount,receiveRemarks;
     private Button btnreceiveOtp,receivebtn;
     static final int RESULT_PICK_CONTACT=1;
+    private static final String TAG = "ReceiveActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +56,10 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
         receiveRemarks=(EditText)findViewById(R.id.receivemoney_edtremakrs) ;
 
         receivebtn=(Button)findViewById(R.id.receivebutton) ;
-        btnreceiveOtp=(Button)findViewById(R.id.receive_money_btn_otp);
-        receiveOtp=(EditText)findViewById(R.id.receive_enter_otp) ;
 
 
-        btnreceiveOtp.setOnClickListener(this);
+
+
         selectContact.setOnClickListener(this);
         receivebtn.setOnClickListener(this);
     }
@@ -59,40 +71,18 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
                     ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
             startActivityForResult(contactPickerIntent, RESULT_PICK_CONTACT);
         }
-         else if(v==btnreceiveOtp){
 
-            checkConfirmation();
-
-
-        }
         else if(v==receivebtn){
 
-            sendOtpToPhonenumber();
+            sendOtpToBenefactor();
 
-            showChangeLangDialog();
-//            selectContact.setVisibility(View.GONE);
-//            edtreceivePhonenumber.setVisibility(View.GONE);
-//            edtenterAmount.setVisibility(View.GONE);
-//            receivebtn.setVisibility(View.GONE);
-//            selectContact.setVisibility(View.GONE);
-//            receiveRemarks.setVisibility(View.GONE);
-//
-//
-//            btnreceiveOtp.setVisibility(View.VISIBLE);
-//            receiveOtp.setVisibility(View.VISIBLE);
 
 
 
         }
     }
 
-    private void sendOtpToPhonenumber() {
-    }
 
-    private void checkConfirmation() {
-
-
-    }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // check whether the result is ok
@@ -121,7 +111,7 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    public void showChangeLangDialog() {
+    public void showOTPDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.custom_dialog, null);
@@ -129,20 +119,83 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
 
         final EditText edt = (EditText) dialogView.findViewById(R.id.edit1);
 
-        dialogBuilder.setTitle("Custom dialog");
-        dialogBuilder.setMessage("Enter text below");
-        dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+        dialogBuilder.setTitle("OTP");
+        dialogBuilder.setMessage("Enter the OTP sent to Benefactor's Phone Number ");
+        dialogBuilder.setPositiveButton("SUBMIT", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
+
+              checkConfirmation();
                 //do something with edt.getText().toString();
+                //send to server fpr verification
             }
         });
         dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
+
+
                 //pass
+
             }
         });
         AlertDialog b = dialogBuilder.create();
         b.show();
+    }
+
+    private void sendOtpToBenefactor() {
+
+        String mobile = edtreceivePhonenumber.getText().toString();
+        String amountreceive=edtenterAmount.getText().toString();
+        String remarksreceive=receiveRemarks.getText().toString();
+        if (TextUtils.isEmpty(mobile)) {
+            edtreceivePhonenumber.setError(getString(R.string.enter_mobile));
+            return;
+        } else if (mobile.length() < 10) {
+            edtreceivePhonenumber.setError(getString(R.string.enter_valid_mobile));
+            return;
+        } else if (mobile.length() > 9)
+            mobile = mobile.substring(mobile.length() - 10);
+
+
+
+        try {
+            JSONObject requestJson = new JSONObject();
+            JSONObject jsonObject1 = new JSONObject();
+            JSONObject jsonObject2 = new JSONObject();
+            requestJson.put("HEADER", jsonObject1);
+            jsonObject2.put("mobilenumberofbenefactor", mobile);
+            jsonObject2.put("amount",amountreceive);
+            jsonObject2.put("remarks",remarksreceive);
+            jsonObject2.put("mobileNumber", Preference.getStringPreference(this, AppConstants.MOBILE_NUMBER));
+            requestJson.put("DATA", jsonObject2);
+
+            VolleyJsonRequest.request(this, Utils.generateURL(URLGenerator.URL_OTP_BENEFACTOR), requestJson, otpBenefactorResp, true);
+        } catch (JSONException e) {
+            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+        } catch (InternetNotAvailableException e) {
+            Toast.makeText(this, getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private VolleyJsonRequest.OnJsonResponse otpBenefactorResp = new VolleyJsonRequest.OnJsonResponse() {
+        @Override
+        public void responseReceived(JSONObject jsonObj) {
+            showOTPDialog();
+
+        }
+
+        @Override
+        public void errorReceived(int code, String message) {
+            Utils.showToast(ReceiveActivity.this, message);
+        }
+    };
+
+
+
+    private void checkConfirmation() {
+
+
+
+
     }
 }
 

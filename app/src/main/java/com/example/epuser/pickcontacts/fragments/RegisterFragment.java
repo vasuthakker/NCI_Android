@@ -110,7 +110,7 @@ public class RegisterFragment extends Fragment {
                 }
 
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG,"validateRegister:JSONException",e);
             }
 
         }
