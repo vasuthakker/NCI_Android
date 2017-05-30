@@ -168,7 +168,7 @@ public class CreatePinFragment extends Fragment {
             jsonObject2.put("mobileNumber", "");
            // requestJson.put("DATA", jsonObject2);
             // TODO: 5/30/2017   get  url using url generator
-            VolleyJsonRequest.request(getActivity(), "http://192.168.10.60:8080/epnci/securityQnA", requestJson, securityQuestionsResp, true);
+            VolleyJsonRequest.request(getActivity(), "http://192.168.10.65:8080/epnci/securityQnA", requestJson, securityQuestionsResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
         } catch (InternetNotAvailableException e) {
@@ -229,7 +229,7 @@ public class CreatePinFragment extends Fragment {
             data.put(getString(R.string.sec_ans_key),secAnsET.getText().toString());
             requestJson.put("DATA", data);
             // TODO: 5/30/2017 get url using urlgenerator
-            VolleyJsonRequest.request(getActivity(), "http://192.168.10.60:8080/epnci/securityQnAUpdate", requestJson, secQnsUpdtResp, true);
+            VolleyJsonRequest.request(getActivity(), "http://192.168.10.65:8080/epnci/securityQnAUpdate", requestJson, secQnsUpdtResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
         } catch (InternetNotAvailableException e) {

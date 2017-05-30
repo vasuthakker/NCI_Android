@@ -54,7 +54,7 @@ public class LoginPage extends AppCompatActivity  {
     public void onStart() {
         super.onStart();
         if (Preference.getBooleanPreference(LoginPage.this, AppConstants.IS_LOGGED_IN))
-            changeFragment(new LoginFragment());
+            changeFragment(new CreatePinFragment());
         else
             changeFragment(new RegisterFragment());
     }
