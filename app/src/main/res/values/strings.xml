@@ -101,5 +101,7 @@
     <string name="enter_sec_ans">Please enter the security answer</string>
     <string name="sec_qn_id">ControlDtlId</string>
     <string name="sec_ans_key">SecurityAns</string>
+    <string name="register">Register</string>
+    <string name="log_in">Log In</string>
 
 </resources>

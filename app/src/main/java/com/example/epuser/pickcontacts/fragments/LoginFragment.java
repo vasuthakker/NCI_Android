@@ -54,6 +54,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         registerTV = (TextView)getActivity().findViewById(R.id.registerTV);
         btnLogin.setOnClickListener(this);
         forgot_pin_TV.setOnClickListener(this);
+        registerTV.setOnClickListener(this);
 
     }
 
@@ -115,6 +116,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         public void responseReceived(JSONObject jsonObj) {
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
+            getActivity().finish();
         }
 
         @Override

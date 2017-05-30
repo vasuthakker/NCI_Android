@@ -36,7 +36,7 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
     private EditText edtreceivePhonenumber,edtenterAmount,receiveRemarks;
     private Button btnreceiveOtp,receivebtn;
     static final int RESULT_PICK_CONTACT=1;
-    private static final String TAG = "ReceiveActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

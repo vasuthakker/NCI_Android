@@ -75,7 +75,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         }
         else if (v ==loginTV)
         {
-            loginActivity.changeFragment(new MainLoginFragment());
+            if (Preference.getBooleanPreference(getActivity(),AppConstants.IS_LOGGED_IN))
+                loginActivity.changeFragment(new LoginFragment());
+            else loginActivity.changeFragment(new MainLoginFragment());
         }
 
     }

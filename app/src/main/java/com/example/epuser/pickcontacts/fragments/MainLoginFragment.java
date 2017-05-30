@@ -3,6 +3,7 @@ package com.example.epuser.pickcontacts.fragments;
 /**
  * Created by epuser on 5/29/2017.
  */
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,9 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.activities.LoginPage;
 import com.example.epuser.pickcontacts.activities.MainActivity;
 import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.common.Preference;
@@ -31,8 +34,17 @@ import org.json.JSONObject;
 
 public class MainLoginFragment extends Fragment {
     private EditText phoneNumberET,enterPinET;
+    private TextView resisterTV;
     private Button loginBtn;
     private static final String TAG = "MainLoginFragment";
+    private LoginPage loginActivity;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        loginActivity = (LoginPage) context;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,6 +61,13 @@ public class MainLoginFragment extends Fragment {
                 login();
             }
         });
+        resisterTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginActivity.changeFragment(new RegisterFragment());
+
+            }
+        });
     }
 
 
@@ -57,6 +76,7 @@ public class MainLoginFragment extends Fragment {
         phoneNumberET = (EditText)getActivity().findViewById(R.id.phone_number_ET);
         phoneNumberET.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
         enterPinET = (EditText)getActivity().findViewById(R.id.enter_pin_ET);
+        resisterTV = (TextView)getActivity().findViewById(R.id.register_TV);
         loginBtn = (Button)getActivity().findViewById(R.id.login_btn);
     }
 
@@ -99,8 +119,9 @@ public class MainLoginFragment extends Fragment {
     private VolleyJsonRequest.OnJsonResponse mainLoginResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-
+            Preference.savePreference(getActivity(),AppConstants.IS_LOGGED_IN,true);
             startActivity(new Intent(getActivity(), MainActivity.class));
+            getActivity().finish();
         }
 
         @Override
