@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
    // private Button btncnt;
    // private Button btnshw;
    // private TextView textView2;
-    private ImageView checkBalance,imagerequest,sendBalance,addMoney,receiveMoney;
+    private ImageView checkBalance,imagerequest,sendBalance,addMoney,receiveMoney,cardLoad;
     private Menu menusetting,changepin,profile,trans_history;
     private Toolbar myToolbar;
 
@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addMoney = (ImageView) findViewById(R.id.main_imgadd);
         imagerequest= (ImageView) findViewById(R.id.main_imgreqmoney);
         receiveMoney=(ImageView)findViewById(R.id.main_imgaccept) ;
+        cardLoad=(ImageView)findViewById(R.id.card_load);
         menusetting=(Menu)findViewById(R.id.menusetting);
         changepin=(Menu)findViewById(R.id.changepin);
         profile=(Menu)findViewById(R.id.profile);
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // btncnt.setOnClickListener(this);
         // btnshw.setOnClickListener(this);
+        cardLoad.setOnClickListener(this);
         checkBalance.setOnClickListener(this);
         sendBalance.setOnClickListener(this);
         addMoney.setOnClickListener(this);
@@ -84,18 +86,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        /*if (v==btncnt ){
-            Intent contactPickerIntent = new Intent(Intent.ACTION_PICK,
-                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
-            startActivityForResult(contactPickerIntent, RESULT_PICK_CONTACT);
-        }*/
+
         if (v == addMoney) {
             Intent intent = new Intent(MainActivity.this, AddMoneyActivity.class);
             startActivity(intent);
 
         } else if (v == checkBalance) {
-
-
             Intent intent = new Intent(MainActivity.this, BalanceActivity.class);
             startActivity(intent);
 
@@ -107,6 +103,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         } else if (v == receiveMoney) {
             Intent intent = new Intent(MainActivity.this, ReceiveActivity.class);
+            startActivity(intent);
+        }
+        else if(v==cardLoad){
+            Intent intent= new Intent(MainActivity.this,CardLoad.class);
             startActivity(intent);
         }
     }
