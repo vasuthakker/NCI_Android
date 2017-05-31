@@ -11,14 +11,14 @@
 
 
         <TextView
-
+            android:id="@+id/security_question_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:hint="SECURITY QUESTION"
             android:textSize="20dp"
             android:textColor="@android:color/black"
-            android:id="@+id/security_question_show"
+
             android:layout_marginBottom="40dp"
 
             app:layout_constraintBottom_toTopOf="@+id/textInputLayout10"
@@ -50,7 +50,7 @@
             android:layout_marginTop="60dp"
             android:hint="@string/answer_security"
 
-            android:inputType="phone"
+
             android:paddingLeft="10dp"
 
             />
@@ -59,13 +59,15 @@
 
 
         <Button
+            android:id="@+id/btnanssub"
             android:layout_width="290dp"
             android:layout_height="48dp"
             android:layout_gravity="center"
             android:backgroundTint="@color/colorPrimary"
             android:text="@string/submit_security_answer"
             android:textSize="20dp"
-            android:id="@+id/btnanssub"
+            android:textColor="@android:color/white"
+
             android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginLeft="8dp"

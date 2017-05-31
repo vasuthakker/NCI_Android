@@ -32,9 +32,9 @@ import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainLoginFragment extends Fragment {
+public class MainLoginFragment extends Fragment implements View.OnClickListener {
     private EditText phoneNumberET,enterPinET;
-    private TextView resisterTV;
+    private TextView resisterTV,forgotPinTV;
     private Button loginBtn;
     private static final String TAG = "MainLoginFragment";
     private LoginPage loginActivity;
@@ -55,20 +55,20 @@ public class MainLoginFragment extends Fragment {
     public void onStart() {
         super.onStart();
         init();
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
-        resisterTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginActivity.changeFragment(new RegisterFragment());
 
-            }
-        });
     }
+
+    @Override
+    public void onClick(View v) {
+        if (v == loginBtn)
+            login();
+        else if (v == resisterTV)
+            loginActivity.changeFragment(new RegisterFragment());
+        else if (v == forgotPinTV)
+            loginActivity.changeFragment(new ForgotPasswordFragment());
+
+    }
+
 
 
 
@@ -77,7 +77,11 @@ public class MainLoginFragment extends Fragment {
         phoneNumberET.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
         enterPinET = (EditText)getActivity().findViewById(R.id.enter_pin_ET);
         resisterTV = (TextView)getActivity().findViewById(R.id.register_TV);
+        forgotPinTV = (TextView)getActivity().findViewById(R.id.ForgotPinTV) ;
         loginBtn = (Button)getActivity().findViewById(R.id.login_btn);
+        loginBtn.setOnClickListener(this);
+        resisterTV.setOnClickListener(this);
+        forgotPinTV.setOnClickListener(this);
     }
 
     private void login() {
@@ -129,4 +133,6 @@ public class MainLoginFragment extends Fragment {
             Utils.showToast(getActivity(), message);
         }
     };
+
+
 }
