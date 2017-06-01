@@ -23,13 +23,8 @@ import com.example.epuser.pickcontacts.fragments.LoginFragment;
 
 public class LoginPage extends AppCompatActivity  {
 
-    public Button btnlog, btnreg, checkserver;
-    private TextView forgotPassword;
     private static final String TAG = "LoginPage";
     private boolean mShowingBack = false;
-
-    SharedPreferences loginCheck;
-
     private FragmentManager manager;
 
     @Override
@@ -37,18 +32,8 @@ public class LoginPage extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page_login);
 
-      init();
-
         manager = getSupportFragmentManager();
     }
-
-    private void init() {
-        btnlog = (Button) findViewById(R.id.btnlog);
-        btnreg = (Button) findViewById(R.id.btnreg);
-        forgotPassword = (TextView) findViewById(R.id.txtfrgt);
-
-    }
-
 
     @Override
     public void onStart() {
@@ -58,6 +43,7 @@ public class LoginPage extends AppCompatActivity  {
         else
             changeFragment(new RegisterFragment());
     }
+
     public void changeFragment(Fragment fragment) {
         FragmentTransaction transaction = manager.beginTransaction();
         Fragment tmpFragment = manager.findFragmentById(R.id.lgcontainer);

@@ -69,9 +69,6 @@ public class MainLoginFragment extends Fragment implements View.OnClickListener 
 
     }
 
-
-
-
     private void init() {
         phoneNumberET = (EditText)getActivity().findViewById(R.id.phone_number_ET);
         phoneNumberET.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
@@ -106,10 +103,10 @@ public class MainLoginFragment extends Fragment implements View.OnClickListener 
             JSONObject requestJson = new JSONObject();
             JSONObject jsonObject1 = new JSONObject();
             JSONObject jsonObject2 = new JSONObject();
-            requestJson.put("HEADER", jsonObject1);
+            requestJson.put(getString(R.string.header), jsonObject1);
             jsonObject2.put("mPin", pin);
-            jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
-            requestJson.put("DATA", jsonObject2);
+            jsonObject2.put(getString(R.string.mobile_number), Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
+            requestJson.put(getString(R.string.data), jsonObject2);
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_PIN_VERIFICATION), requestJson, mainLoginResp, true);
         } catch (JSONException e) {

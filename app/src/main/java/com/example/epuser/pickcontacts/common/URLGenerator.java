@@ -16,7 +16,6 @@ public class URLGenerator implements URLProvider {
 
 
 
-
     // http://localhost:8080/epnci/OtpGenerationStatus
     //http://localhost:8080/epnci/OtpVerifyStatus
     public static URLGenerator generator;
@@ -36,6 +35,7 @@ public class URLGenerator implements URLProvider {
     public static final String URL_CHANGE_PIN = "pinChange";
     public static final String URL_GET_SEC_QNS ="securityQnA" ;
     public static final String URL_SECURITY_ANS_VERIFICATION = "";
+    public static final String URL_CHANGE_FORGOT_PIN = "pinChangeForgotPin";
 
     public static final String URL_OTP_BENEFACTOR="as per url2";
     public static final String URL_CARD_LOAD="as per url3";

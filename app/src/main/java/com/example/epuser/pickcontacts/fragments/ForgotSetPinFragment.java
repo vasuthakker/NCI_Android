@@ -1,5 +1,6 @@
 package com.example.epuser.pickcontacts.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.activities.LoginPage;
 import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.common.URLGenerator;
@@ -30,6 +32,13 @@ import static com.example.epuser.pickcontacts.R.id.pin_ET;
 public class ForgotSetPinFragment extends Fragment  implements View.OnClickListener{
     private EditText pinafterForgot,confirmPinForgot;
     private Button submitpinForgot;
+    private LoginPage loginActivity;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        loginActivity = (LoginPage) context;
+    }
 
 
     @Nullable
@@ -75,11 +84,11 @@ public class ForgotSetPinFragment extends Fragment  implements View.OnClickListe
                     JSONObject data = new JSONObject();
                     requestJson.put("HEADER", header);
                     data.put("mobileNumber", Preference.getStringPreference(getActivity(),AppConstants.MOBILE_NUMBER));
-                    data.put("mPin1",pin);
-                    data.put("mPin2",pin);
+                    data.put("mNewPin",pin);
+
                     requestJson.put("DATA", data);
                     // TODO: 5/31/2017 generate url using urlgenerator
-                    VolleyJsonRequest.request(getActivity(), "http://192.168.10.65:8080/epnci/forgotPinSecurityQues", requestJson, createPinResp, true);
+                    VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_CHANGE_FORGOT_PIN), requestJson, changePinResp, true);
                 } catch (JSONException e) {
                     Log.e(TAG, "validateReceiveMoney: JSONException", e);
                 } catch (InternetNotAvailableException e) {
@@ -98,9 +107,10 @@ public class ForgotSetPinFragment extends Fragment  implements View.OnClickListe
 
         }
     }
-    private VolleyJsonRequest.OnJsonResponse createPinResp = new VolleyJsonRequest.OnJsonResponse() {
+    private VolleyJsonRequest.OnJsonResponse changePinResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
+            loginActivity.changeFragment(new LoginFragment());
 
         }
 

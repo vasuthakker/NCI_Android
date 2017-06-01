@@ -22,8 +22,11 @@ import android.view.View;
 //import android.widget.Button;
 //import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.common.AppConstants;
+import com.example.epuser.pickcontacts.common.Preference;
 //import android.widget.Toast;
 
 //import org.json.JSONException;
@@ -134,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 return true;
             } else if (id == R.id.profile) {
+                Toast.makeText(this,"Your Contact Number is: " + Preference.getStringPreference(this,AppConstants.MOBILE_NUMBER),Toast.LENGTH_LONG).show();
 
 
                 return true;
