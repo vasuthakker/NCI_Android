@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    tools:context="com.example.epuser.pickcontacts.activities.HomeActivity">
+
+    <android.support.v7.widget.Toolbar
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+android:id="@+id/toolbarnew"
+    android:background="@color/colorPrimary"
+    >
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          >
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="10dp"
+              android:text="TRANSACTION HISTORY"
+              android:textSize="25dp"
+              android:textStyle="bold"
+              android:textColor="@android:color/white"
+              android:id="@+id/toolbarneww"
+              android:layout_alignParentLeft="true"/>
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerHorizontal="true"
+              android:orientation="horizontal"
+              android:layout_marginTop="15dp"
+              android:layout_below="@+id/toolbarneww"
+              android:id="@+id/lnblnc">
+          <TextView
+              android:id="@+id/blnctext"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@android:color/white"
+
+              android:layout_centerHorizontal="true"
+              android:textSize="20dp"
+              android:text="CURRENT BALANCE :  "
+             />
+          <TextView
+              android:id="@+id/current_balance"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:drawableLeft="@drawable/ic_inr"
+              android:drawablePadding="5dp"
+              android:hint="Balance"
+              android:textColor="@android:color/white"
+
+              android:textSize="15dp"
+              android:layout_toRightOf="@id/blnctext"
+
+              />
+          </LinearLayout>
+          <TextView
+              android:id="@+id/date"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="SELECT DATE"
+              android:textSize="18dp"
+              android:layout_marginTop="10dp"
+              android:textColor="@android:color/white"
+
+
+              android:layout_alignParentRight="true"
+              android:layout_below="@+id/lnblnc"/>
+
+          <Spinner
+              android:layout_width="wrap_content"
+              android:layout_height="15dp"
+              android:layout_marginTop="10dp"
+              android:layout_below="@+id/lnblnc"
+              android:id="@+id/spinner">
+
+          </Spinner>
+
+      </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>
