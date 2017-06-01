@@ -76,6 +76,7 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
         else if(v==receivebtn){
 
             sendOtpToBenefactor();
+            showOTPDialog();
 
 
 
@@ -180,7 +181,7 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
     private VolleyJsonRequest.OnJsonResponse otpBenefactorResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-            showOTPDialog();
+          //  showOTPDialog();
 
         }
 

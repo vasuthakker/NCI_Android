@@ -52,7 +52,7 @@
             android:drawableLeft="@drawable/ic_inr"
             android:drawablePadding="10dp"
             android:hint="@string/enter_amount"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"

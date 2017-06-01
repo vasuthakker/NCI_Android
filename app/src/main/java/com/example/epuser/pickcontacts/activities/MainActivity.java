@@ -134,7 +134,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 return true;
             } else if (id == R.id.profile) {
-                //Do something
+
+
                 return true;
             } else if (id == R.id.menusetting) {
 
