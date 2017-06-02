@@ -50,9 +50,9 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> 
         Transactions transactions = DataList.get(position);
 
 
-        holder.utility.setText(transactions.getTxntype());
+        holder.utility.setText(transactions.getTxnreftype());
         holder.id.setText(transactions.getTxnid().toString());
-        holder.amount.setText(Double.toString(transactions.getTxnamount()));
+        holder.amount.setText(Double.toString(transactions.getAmountpaid()));
         holder.number.setText(transactions.getTransectionrefno().toString());
     }
 

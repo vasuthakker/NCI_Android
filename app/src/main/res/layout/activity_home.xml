@@ -11,6 +11,7 @@
     android:layout_width="match_parent"
     android:layout_height="150dp"
 android:id="@+id/toolbarnew"
+        android:elevation="5dp"
     android:background="@color/colorPrimary"
     >
 
@@ -22,7 +23,7 @@ android:id="@+id/toolbarnew"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginLeft="10dp"
-              android:text="TRANSACTION HISTORY"
+              android:text="@string/trans_history"
               android:textSize="25dp"
               android:textStyle="bold"
               android:textColor="@android:color/white"

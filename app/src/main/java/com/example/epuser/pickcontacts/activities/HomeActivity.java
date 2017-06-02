@@ -116,10 +116,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     };
 
 
-
+    Transactions transactions= new Transactions();
     private void prepareData( JSONObject hello) {
 
-        Transactions transactions= new Transactions();
+
 
         JSONArray histories = null;
         try {
