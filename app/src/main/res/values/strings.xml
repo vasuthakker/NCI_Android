@@ -75,7 +75,7 @@
     <string name="enter_old_pin">Please enter your 4 digit old pin</string>
     <string name="different_old_and_new_pins">Old pin and new pin should be different</string>
     <string name="pins_dont_match">Pins did not match</string>
-    <string name="security_ques">Set a security question</string>
+    <string name="security_ques">Please set your security answer</string>
     <string name="enter_a_four_digit_pin">Enter a Four digit PIN</string>
     <string name="changing_pin">Change PIN</string>
     <string name="setting">Setting</string>
@@ -89,6 +89,15 @@
         <item>What is your favourite movie?</item>
         <item>b</item>
         <item>c</item>
+
+    </string-array>
+
+    <string-array name="home_date_filter">
+        <item>Today</item>
+        <item>Yesterday</item>
+        <item>Last 7 days</item>
+        <item>This month</item>
+        <item>Till date</item>
 
     </string-array>
 

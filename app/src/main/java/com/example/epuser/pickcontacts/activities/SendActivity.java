@@ -105,7 +105,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             jsonObject2.put(getString(R.string.mobile_number), sendMobile);
             requestJson.put(getString(R.string.data), jsonObject2);
 
-            VolleyJsonRequest.request(SendActivity.this, Utils.generateURL(URLGenerator.URL_OTP), requestJson, sendResp, true);
+            VolleyJsonRequest.request(SendActivity.this, Utils.generateURL(URLGenerator.URL_SEND), requestJson, sendResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
         } catch (InternetNotAvailableException e) {

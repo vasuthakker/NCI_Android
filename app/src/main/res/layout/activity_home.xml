@@ -1,94 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_height="wrap_content"
     tools:context="com.example.epuser.pickcontacts.activities.HomeActivity">
 
     <android.support.v7.widget.Toolbar
-    android:layout_width="match_parent"
-    android:layout_height="150dp"
-android:id="@+id/toolbarnew"
-        android:elevation="5dp"
-    android:background="@color/colorPrimary"
-    >
-
-      <RelativeLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          >
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginLeft="10dp"
-              android:text="@string/trans_history"
-              android:textSize="25dp"
-              android:textStyle="bold"
-              android:textColor="@android:color/white"
-              android:id="@+id/toolbarneww"
-              android:layout_alignParentLeft="true"/>
-          <LinearLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_centerHorizontal="true"
-              android:orientation="horizontal"
-              android:layout_marginTop="15dp"
-              android:layout_below="@+id/toolbarneww"
-              android:id="@+id/lnblnc">
-          <TextView
-              android:id="@+id/blnctext"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:textColor="@android:color/white"
-
-              android:layout_centerHorizontal="true"
-              android:textSize="20dp"
-              android:text="CURRENT BALANCE :  "
-             />
-          <TextView
-              android:id="@+id/current_balance"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:drawableLeft="@drawable/ic_inr"
-              android:drawablePadding="5dp"
-              android:hint="Balance"
-              android:textColor="@android:color/white"
-
-              android:textSize="15dp"
-              android:layout_toRightOf="@id/blnctext"
-
-              />
-          </LinearLayout>
-          <TextView
-              android:id="@+id/date"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="SELECT DATE"
-              android:textSize="18dp"
-              android:layout_marginTop="10dp"
-              android:textColor="@android:color/white"
+        android:id="@+id/toolbarnew"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:background="@color/colorPrimary"
+        app:title="@string/trans_history"
+        app:titleTextColor="@android:color/white"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-              android:layout_alignParentRight="true"
-              android:layout_below="@+id/lnblnc"/>
+    <View
+        android:id="@+id/view4"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarnew" />
 
-          <Spinner
-              android:layout_width="wrap_content"
-              android:layout_height="15dp"
-              android:layout_marginTop="10dp"
-              android:layout_below="@+id/lnblnc"
-              android:id="@+id/spinner">
+    <LinearLayout
+            android:id="@+id/lnblnc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarnew"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
 
-          </Spinner>
+            <TextView
+                android:id="@+id/blnctext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
 
-      </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                android:text="CURRENT BALANCE :  "
+                android:textColor="@android:color/white"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/current_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/blnctext"
+                android:drawablePadding="5dp"
+
+                android:textColor="@android:color/white"
+                android:textSize="15dp"
+
+                />
+        </LinearLayout>
+
+        <Spinner
+            android:entries="@array/home_date_filter"
+            android:id="@+id/home_spfilter"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_below="@+id/lnblnc"
+            android:layout_marginRight="15dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/lnblnc"
+            android:layout_marginEnd="15dp">
+
+        </Spinner>
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/home_swipelayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view4"
+>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -96,7 +98,7 @@ android:id="@+id/toolbarnew"
             android:layout_height="wrap_content"
             android:scrollbars="vertical" />
 
-    </RelativeLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
