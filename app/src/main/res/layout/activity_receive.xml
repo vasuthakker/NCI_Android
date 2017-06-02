@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.RequestMoneyActivity">
 
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/receivemoney_toolbar"
         android:layout_width="0dp"
@@ -128,7 +129,7 @@
             android:gravity="top|left"
             android:hint="@string/remarks_optional"
             android:inputType="text"
-            android:singleLine="true" />
+            android:maxLines="1" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.constraint.Guideline

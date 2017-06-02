@@ -1,5 +1,6 @@
 package com.example.epuser.pickcontacts.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.epuser.pickcontacts.activities.HomeActivity;
 import com.example.epuser.pickcontacts.activities.LoginPage;
 import com.example.epuser.pickcontacts.activities.MainActivity;
 import com.example.epuser.pickcontacts.R;
@@ -36,7 +38,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private EditText enterPin, edtPassword;
     private Button btnLogin;
-    private TextView forgot_pin_TV;
+    private TextView forgot_pin_TV,registerTV;
     private static final String TAG = "LoginFragment";
     private LoginPage loginActivity;
 
@@ -51,8 +53,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         enterPin.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
         btnLogin = (Button) getActivity().findViewById(R.id.btnlogg);
         forgot_pin_TV = (TextView) getActivity().findViewById(R.id.forgot_pin_TV);
+        registerTV = (TextView)getActivity().findViewById(R.id.registerTV);
         btnLogin.setOnClickListener(this);
         forgot_pin_TV.setOnClickListener(this);
+        registerTV.setOnClickListener(this);
 
     }
 
@@ -75,7 +79,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             login();
         } else if (v == forgot_pin_TV) {
             loginActivity.changeFragment(new ForgotPasswordFragment());
+
         }
+        else if (v == registerTV)
+        {
+            loginActivity.changeFragment(new RegisterFragment());
+        }
+
     }
 
     private void login() {
@@ -95,7 +105,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
             requestJson.put("DATA", jsonObject2);
 
-            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_PIN_VERIFICATION), requestJson, LoginCheckResp, true);
+            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_LOGIN), requestJson, LoginCheckResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
         } catch (InternetNotAvailableException e) {
@@ -106,8 +116,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private VolleyJsonRequest.OnJsonResponse LoginCheckResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
+            Intent intent = new Intent(getActivity(), HomeActivity.class);
             startActivity(intent);
+            getActivity().finish();
         }
 
         @Override

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.epuser.pickcontacts.R;
 
 public class RequestMoneyActivity extends AppCompatActivity  implements View.OnClickListener{
+    private static final String TAG = "RequestMoneyActivity";
     private QuickContactBadge requestcnt;
     static final int RESULT_PICK_CONTACT=1;
     private EditText requestphn,requestAmount;
@@ -67,7 +68,7 @@ public class RequestMoneyActivity extends AppCompatActivity  implements View.OnC
                         phoneNo = cursor.getString(phoneIndex);
                         requestphn.setText(phoneNo);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Log.e(TAG,"",e);
                     }
                     break;
             }

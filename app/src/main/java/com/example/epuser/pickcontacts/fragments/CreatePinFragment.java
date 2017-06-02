@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,16 +33,20 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.id.message;
+
 /**
  * Created by epuser on 5/26/2017.
  */
 
 public class CreatePinFragment extends Fragment {
-    private EditText pin_ET , confirm_pin_ET;
+    private EditText pin_ET , confirm_pin_ET,secAnsET;
     private Button create_pin_btn;
     private LoginPage loginActivity;
     private static final String TAG = "CreatePinFragment";
     private Spinner spQuestions;
+    private int selected_qn_position =0;
+    private int selected_sec_Id ;
     private List<QuestionDetails> questions;
     private QuestionDetails selectedQuestion;
 
@@ -55,13 +60,7 @@ public class CreatePinFragment extends Fragment {
         confirm_pin_ET = (EditText)getActivity().findViewById(R.id.confirm_pin_ET);
         create_pin_btn = (Button)getActivity().findViewById(R.id.create_pin_btn);
         spQuestions = (Spinner)getActivity().findViewById(R.id.security_question_spinner);
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-//                R.array.security_questions, android.R.layout.simple_spinner_item);
-//
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//
-//        spQuestions.setAdapter(adapter);
-
+        secAnsET = (EditText)getActivity().findViewById(R.id.security_answer_ET);
 
     }
 
@@ -75,11 +74,10 @@ public class CreatePinFragment extends Fragment {
         create_pin_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createPin();
+               // saveSecurityAns();
+                createPinAndSecQn();
             }
         });
-
-
         spQuestions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -113,13 +111,15 @@ public class CreatePinFragment extends Fragment {
                     JSONObject requestJson = new JSONObject();
                     JSONObject header = new JSONObject();
                     JSONObject data = new JSONObject();
-                    requestJson.put("HEADER", header);
-                    data.put("mobileNumber", Preference.getStringPreference(getActivity(),AppConstants.MOBILE_NUMBER));
+                    requestJson.put(getString(R.string.header), header);
+                    data.put(getString(R.string.mobile_number), Preference.getStringPreference(getActivity(),AppConstants.MOBILE_NUMBER));
                     data.put("mPin1",pin);
                     data.put("mPin2",pin);
+                    data.put(getString(R.string.sec_qn_id),selected_sec_Id);
+                    data.put(getString(R.string.sec_ans_key),secAnsET.getText().toString());
                     requestJson.put("DATA", data);
 
-                    VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_CREATE_PIN), requestJson, createPinResp, true);
+                    VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_CREATE_PIN_AND_SEC_QN), requestJson, createPinAndSecQnResp, true);
                 } catch (JSONException e) {
                     Log.e(TAG, "validateReceiveMoney: JSONException", e);
                 } catch (InternetNotAvailableException e) {
@@ -135,21 +135,14 @@ public class CreatePinFragment extends Fragment {
         else
         {
             pin_ET.setError(getString(R.string.enter_valid_pin));
+
         }
     }
-    private VolleyJsonRequest.OnJsonResponse createPinResp = new VolleyJsonRequest.OnJsonResponse() {
+    private VolleyJsonRequest.OnJsonResponse createPinAndSecQnResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-            try {
-                Preference.savePreference(getActivity(),AppConstants.IS_LOGGED_IN,true);
-                String response =jsonObj.getString(AppConstants.KEY_RESP);
-                if(response.equals(getString(R.string.request_complete))) {
-                    loginActivity.changeFragment(new LoginFragment());
-                }
-
-            } catch (JSONException e) {
-                Log.e(TAG, "responseReceived: ",e );
-            }
+            Preference.savePreference(getActivity(),AppConstants.IS_LOGGED_IN,true);
+            loginActivity.changeFragment(new LoginFragment());
 
         }
 
@@ -158,6 +151,8 @@ public class CreatePinFragment extends Fragment {
             Utils.showToast(getActivity(), message);
         }
     };
+
+
 
     private void getSecurityQuestions() {
         try {
@@ -168,7 +163,7 @@ public class CreatePinFragment extends Fragment {
             jsonObject2.put("mobileNumber", "");
            // requestJson.put("DATA", jsonObject2);
 
-            VolleyJsonRequest.request(getActivity(), "http://192.168.10.60:8080/epnci/securityQnA", requestJson, securityQuestionsResp, true);
+            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_GET_SEC_QNS), requestJson, securityQuestionsResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
         } catch (InternetNotAvailableException e) {
@@ -184,21 +179,30 @@ public class CreatePinFragment extends Fragment {
                 questions=new ArrayList<>();
                 JSONArray queArray=jsonObj.getJSONArray("DATA");
                 QuestionDetails question;
+                question = new QuestionDetails();
+                question.setId(0);
+                question.setValue(getString(R.string.select_sec_qn));
+                questions.add(question);
                 for (int i = 0; i <queArray.length() ; i++) {
                     JSONObject objQue=queArray.getJSONObject(i);
                     question=new QuestionDetails();
                     question.setId(objQue.getInt("Id"));
                     question.setValue(objQue.getString("SecQue"));
                     questions.add(question);
+
+
+
                 }
                 ArrayAdapter<QuestionDetails> adapter = new ArrayAdapter<QuestionDetails>(getActivity(),android.R.layout.simple_list_item_1,questions);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
                 spQuestions.setAdapter(adapter);
                 selectedQuestion=questions.get(0);
 
             } catch (JSONException e) {
-                Log.e(TAG, "responseReceived: ", e);
+                e.printStackTrace();
             }
+
 
         }
 

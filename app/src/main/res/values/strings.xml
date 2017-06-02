@@ -1,7 +1,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">NCI app</string>
     <string name="internet_not_available">Internet is not available</string>
-    <string name="enter_mobile">Enter Mobile</string>
+    <string name="enter_mobile">Enter Phone Number</string>
     <string name="enter_valid_mobile">Enter valid mobile number</string>
     <string name="tap_action">Tap icon to perform action</string>
     <string name="send">Send Money</string>
@@ -44,7 +44,7 @@
     <string name="sign_in">Sign In</string>
     <string name="enter_pin">Enter Pin</string>
     <string name="submit_OTP">submit</string>
-    <string name="enter_otp">OTP</string>
+    <string name="enter_otp"> Enter OTP</string>
     <string name="please_enter_otp">Please enter the OTP</string>
     <string name="confirm_pin">Confirm PIN</string>
     <string name="create_new_pin">Create your 4 digit New Pin</string>
@@ -92,10 +92,25 @@
 
     </string-array>
 
+    <string-array name="home_date_filter">
+        <item>Today</item>
+        <item>Yesterday</item>
+        <item>Last 7 days</item>
+        <item>This month</item>
+        <item>Till date</item>
+
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="forgot_set_pin">Set a new 4-digit PIN here</string>
     <string name="enter_phonenumber">Enter your Phone Number</string>
     <string name="enter_ur_pin">Enter your 4-digit PIN</string>
+    <string name="select_sec_qn">---select your security question---</string>
+    <string name="enter_sec_ans">Please enter the security answer</string>
+    <string name="sec_qn_id">ControlDtlId</string>
+    <string name="sec_ans_key">SecurityAns</string>
+    <string name="register">Register</string>
+    <string name="log_in">Log In</string>
 
 </resources>

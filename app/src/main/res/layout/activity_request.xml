@@ -127,7 +127,7 @@
             android:gravity="top|left"
             android:hint="@string/remarks_optional"
             android:inputType="text"
-            android:singleLine="true" />
+            android:maxLines="1" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.constraint.Guideline

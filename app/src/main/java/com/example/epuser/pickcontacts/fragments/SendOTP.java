@@ -103,7 +103,7 @@ public class SendOTP extends Fragment implements View.OnClickListener {
                 if(response.equals(getString(R.string.otp_successfully_verified)));
                 loginActivity.changeFragment(new CreatePinFragment());
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG,"",e);
             }
 
 

@@ -42,7 +42,7 @@ public class BalanceActivity extends AppCompatActivity {
             jsonObject2.put(getString(R.string.mobile_number), Preference.getStringPreference(BalanceActivity.this,AppConstants.MOBILE_NUMBER));
             requestJson.put(getString(R.string.data), jsonObject2);
 
-            VolleyJsonRequest.request(BalanceActivity.this, Utils.generateURL(URLGenerator.URL_OTP), requestJson, sendResp, true);
+            VolleyJsonRequest.request(BalanceActivity.this, Utils.generateURL(URLGenerator.URL_FETCH_BAlANCE), requestJson, sendResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
         } catch (InternetNotAvailableException e) {
@@ -61,7 +61,7 @@ public class BalanceActivity extends AppCompatActivity {
                 }
 
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG,"",e);
             }
 
         }

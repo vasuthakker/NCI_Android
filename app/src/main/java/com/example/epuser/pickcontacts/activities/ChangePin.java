@@ -105,10 +105,11 @@ public class ChangePin extends AppCompatActivity {
                     Toast.makeText(ChangePin.this,"Pin successfully changed",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(ChangePin.this,MainActivity.class));
 
+
                 }
 
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG,"",e);
             }
 
         }
