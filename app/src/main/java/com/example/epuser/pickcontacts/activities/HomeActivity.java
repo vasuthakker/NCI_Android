@@ -45,7 +45,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        date=(TextView)findViewById(R.id.date);
+       // date=(TextView)findViewById(R.id.date);
         currentBalance=(TextView)findViewById(R.id.current_balance);
 
         mAdapter = new DataAdapter(DataList);
@@ -53,7 +53,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
-        date.setOnClickListener(this);
+       // date.setOnClickListener(this);
 
 
         LoadTransactions();
@@ -64,10 +64,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if(v==date){
-
-           showDatePickerDialog();
-        }
+//        if(v==date){
+//
+//           showDatePickerDialog();
+//        }
     }
 
 
