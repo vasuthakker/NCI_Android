@@ -108,7 +108,7 @@ public class MainLoginFragment extends Fragment implements View.OnClickListener 
             jsonObject2.put(getString(R.string.mobile_number), Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
             requestJson.put(getString(R.string.data), jsonObject2);
 
-            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_PIN_VERIFICATION), requestJson, mainLoginResp, true);
+            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_LOGIN), requestJson, mainLoginResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
         } catch (InternetNotAvailableException e) {

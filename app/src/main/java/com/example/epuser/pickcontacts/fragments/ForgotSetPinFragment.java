@@ -87,7 +87,7 @@ public class ForgotSetPinFragment extends Fragment  implements View.OnClickListe
                     data.put("mNewPin",pin);
 
                     requestJson.put("DATA", data);
-                    // TODO: 5/31/2017 generate url using urlgenerator
+
                     VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_CHANGE_FORGOT_PIN), requestJson, changePinResp, true);
                 } catch (JSONException e) {
                     Log.e(TAG, "validateReceiveMoney: JSONException", e);

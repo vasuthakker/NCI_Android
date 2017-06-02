@@ -31,7 +31,8 @@ public class DatePicker  extends DialogFragment implements DatePickerDialog.OnDa
 
     @Override
     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
-     //take date from here
+     String s;
+
 
     }
 

@@ -91,8 +91,8 @@ public class ForgotPasswordFragment extends Fragment implements View.OnClickList
             jsonObject2.put("Security_Ans", answer);
             jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
             requestJson.put("DATA", jsonObject2);
-            // TODO: 5/31/2017 generate url using urlgenerator
-            VolleyJsonRequest.request(getActivity(), "http://192.168.10.65:8080/epnci/forgotPinSecAnsVer", requestJson, CheckAnsResp, true);
+
+            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_SECURITY_ANS_VERIFICATION), requestJson, CheckAnsResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
         } catch (InternetNotAvailableException e) {
@@ -126,7 +126,7 @@ public class ForgotPasswordFragment extends Fragment implements View.OnClickList
             jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
             requestJson.put("DATA", jsonObject2);
 
-            VolleyJsonRequest.request(getActivity(), "http://192.168.10.65:8080/epnci/forgotPinSecurityQues", requestJson, getsecqnResp, true);
+            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_GET_SEC_QN), requestJson, getsecqnResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
         } catch (InternetNotAvailableException e) {
