@@ -48,6 +48,7 @@ public class CreatePinFragment extends Fragment {
     private int selected_qn_position =0;
     private int selected_sec_Id ;
     private List<QuestionDetails> questions;
+    private QuestionDetails selectedQuestion;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -80,11 +81,10 @@ public class CreatePinFragment extends Fragment {
         spQuestions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-
-                QuestionDetails question =  questions.get(position);
-                selected_sec_Id = question.getId();
-                selected_qn_position = position;
+               if(position!=0)
+               {
+                   selectedQuestion = questions.get(position);
+               }
             }
 
             @Override
@@ -100,17 +100,7 @@ public class CreatePinFragment extends Fragment {
         loginActivity = (LoginPage) context;
     }
 
-    private void createPinAndSecQn() {
-        if(selected_qn_position ==0)
-        {
-            Toast.makeText(getActivity(),"Please select a question",Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if(TextUtils.isEmpty(secAnsET.getText().toString()))
-        {
-            secAnsET.setError(getString(R.string.enter_sec_ans));
-            return;
-        }
+    private void createPin() {
         String pin = pin_ET.getText().toString();
         if (pin.length() ==4)
         {
@@ -170,6 +160,8 @@ public class CreatePinFragment extends Fragment {
             JSONObject jsonObject1 = new JSONObject();
             JSONObject jsonObject2 = new JSONObject();
             requestJson.put("HEADER", jsonObject1);
+            jsonObject2.put("mobileNumber", "");
+           // requestJson.put("DATA", jsonObject2);
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_GET_SEC_QNS), requestJson, securityQuestionsResp, true);
         } catch (JSONException e) {
@@ -182,7 +174,7 @@ public class CreatePinFragment extends Fragment {
     private VolleyJsonRequest.OnJsonResponse securityQuestionsResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-
+            Toast.makeText(getActivity(),jsonObj.toString(),Toast.LENGTH_LONG).show();
             try {
                 questions=new ArrayList<>();
                 JSONArray queArray=jsonObj.getJSONArray("DATA");
@@ -205,9 +197,10 @@ public class CreatePinFragment extends Fragment {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
                 spQuestions.setAdapter(adapter);
+                selectedQuestion=questions.get(0);
 
             } catch (JSONException e) {
-                Log.e(TAG,"",e);
+                e.printStackTrace();
             }
 
 
@@ -218,4 +211,6 @@ public class CreatePinFragment extends Fragment {
             Utils.showToast(getActivity(), message);
         }
     };
+
+
 }
