@@ -42,8 +42,8 @@ public class CreatePinFragment extends Fragment {
     private LoginPage loginActivity;
     private static final String TAG = "CreatePinFragment";
     private Spinner spQuestions;
-    private String selected_security_question = null;
     private List<QuestionDetails> questions;
+    private QuestionDetails selectedQuestion;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -78,12 +78,14 @@ public class CreatePinFragment extends Fragment {
                 createPin();
             }
         });
+
+
         spQuestions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                if(position!=0)
                {
-                   selected_security_question = parent.getItemAtPosition(position).toString();
+                   selectedQuestion = questions.get(position);
                }
             }
 
@@ -133,7 +135,6 @@ public class CreatePinFragment extends Fragment {
         else
         {
             pin_ET.setError(getString(R.string.enter_valid_pin));
-
         }
     }
     private VolleyJsonRequest.OnJsonResponse createPinResp = new VolleyJsonRequest.OnJsonResponse() {
@@ -147,7 +148,7 @@ public class CreatePinFragment extends Fragment {
                 }
 
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG, "responseReceived: ",e );
             }
 
         }
@@ -189,19 +190,15 @@ public class CreatePinFragment extends Fragment {
                     question.setId(objQue.getInt("Id"));
                     question.setValue(objQue.getString("SecQue"));
                     questions.add(question);
-
-
-
                 }
                 ArrayAdapter<QuestionDetails> adapter = new ArrayAdapter<QuestionDetails>(getActivity(),android.R.layout.simple_list_item_1,questions);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
                 spQuestions.setAdapter(adapter);
+                selectedQuestion=questions.get(0);
 
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG, "responseReceived: ", e);
             }
-
 
         }
 

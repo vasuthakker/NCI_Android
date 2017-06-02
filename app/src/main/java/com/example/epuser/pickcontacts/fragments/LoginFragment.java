@@ -75,9 +75,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             login();
         } else if (v == forgot_pin_TV) {
             loginActivity.changeFragment(new ForgotPasswordFragment());
-
         }
-
     }
 
     private void login() {
