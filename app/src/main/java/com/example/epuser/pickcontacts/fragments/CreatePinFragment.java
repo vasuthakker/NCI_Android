@@ -75,7 +75,7 @@ public class CreatePinFragment extends Fragment {
             @Override
             public void onClick(View v) {
                // saveSecurityAns();
-                createPinAndSecQn();
+                createPin();
             }
         });
         spQuestions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
