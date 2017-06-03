@@ -85,13 +85,6 @@
     <string name="submit_security_answer">submit</string>
 
 
-    <string-array name="security_questions">
-        <item>What is your favourite movie?</item>
-        <item>b</item>
-        <item>c</item>
-
-    </string-array>
-
     <string-array name="home_date_filter">
         <item>Today</item>
         <item>Yesterday</item>
