@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.R.id.message;
+import static com.example.epuser.pickcontacts.R.id.regphn;
 
 /**
  * Created by epuser on 5/26/2017.
@@ -57,7 +59,9 @@ public class CreatePinFragment extends Fragment {
     }
     private void init() {
         pin_ET = (EditText)getActivity().findViewById(R.id.pin_ET);
+        pin_ET.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
         confirm_pin_ET = (EditText)getActivity().findViewById(R.id.confirm_pin_ET);
+        confirm_pin_ET.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
         create_pin_btn = (Button)getActivity().findViewById(R.id.create_pin_btn);
         spQuestions = (Spinner)getActivity().findViewById(R.id.security_question_spinner);
         secAnsET = (EditText)getActivity().findViewById(R.id.security_answer_ET);
@@ -74,17 +78,17 @@ public class CreatePinFragment extends Fragment {
         create_pin_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // saveSecurityAns();
+                // saveSecurityAns();
                 createPin();
             }
         });
         spQuestions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               if(position!=0)
-               {
-                   selectedQuestion = questions.get(position);
-               }
+                if(position!=0)
+                {
+                    selectedQuestion = questions.get(position);
+                }
             }
 
             @Override
@@ -115,7 +119,7 @@ public class CreatePinFragment extends Fragment {
                     data.put(getString(R.string.mobile_number), Preference.getStringPreference(getActivity(),AppConstants.MOBILE_NUMBER));
                     data.put("mPin1",pin);
                     data.put("mPin2",pin);
-                    data.put(getString(R.string.sec_qn_id),selected_sec_Id);
+                    data.put(getString(R.string.sec_qn_id),selectedQuestion.getId());
                     data.put(getString(R.string.sec_ans_key),secAnsET.getText().toString());
                     requestJson.put("DATA", data);
 
@@ -161,7 +165,7 @@ public class CreatePinFragment extends Fragment {
             JSONObject jsonObject2 = new JSONObject();
             requestJson.put("HEADER", jsonObject1);
             jsonObject2.put("mobileNumber", "");
-           // requestJson.put("DATA", jsonObject2);
+            // requestJson.put("DATA", jsonObject2);
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_GET_SEC_QNS), requestJson, securityQuestionsResp, true);
         } catch (JSONException e) {
@@ -187,7 +191,7 @@ public class CreatePinFragment extends Fragment {
                     JSONObject objQue=queArray.getJSONObject(i);
                     question=new QuestionDetails();
                     question.setId(objQue.getInt("Id"));
-                    question.setValue(objQue.getString("SecQue"));
+                    question.setValue(objQue.getString("SecurityQuestions"));
                     questions.add(question);
 
 

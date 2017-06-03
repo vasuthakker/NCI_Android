@@ -65,6 +65,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     public void onStart() {
         super.onStart();
         init();
+        Preference.savePreference(getActivity(),AppConstants.IS_LOGGED_IN,false);
 
     }
     @Override
@@ -75,9 +76,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         }
         else if (v ==loginTV)
         {
-            if (Preference.getBooleanPreference(getActivity(),AppConstants.IS_LOGGED_IN))
-                loginActivity.changeFragment(new LoginFragment());
-            else loginActivity.changeFragment(new MainLoginFragment());
+
+            loginActivity.changeFragment(new MainLoginFragment());
         }
 
     }
@@ -100,9 +100,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
             JSONObject jsonObject2 = new JSONObject();
             requestJson.put("HEADER", jsonObject1);
             jsonObject2.put("mobileNumber", mobile);
+
+            jsonObject2.put("udid",LoginPage.getDeviceId(getActivity()));
             requestJson.put("DATA", jsonObject2);
 
-            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_OTP), requestJson, registerResp, true);
+            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_VERIFY_USER), requestJson, registerResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
         } catch (InternetNotAvailableException e) {
@@ -113,16 +115,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     private VolleyJsonRequest.OnJsonResponse registerResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-            try {
-                String response =jsonObj.getString(AppConstants.KEY_RESP);
-                if(response.equals(getString(R.string.request_complete))) {
-
-                    loginActivity.changeFragment(new SendOTP());
-                }
-
-            } catch (JSONException e) {
-                Log.e(TAG,"validateRegister:JSONException",e);
-            }
+            loginActivity.changeFragment(new SendOTP());
 
         }
 

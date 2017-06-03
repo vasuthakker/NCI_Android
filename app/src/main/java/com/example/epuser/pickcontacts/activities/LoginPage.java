@@ -1,6 +1,8 @@
 package com.example.epuser.pickcontacts.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.SharedPreferences;
@@ -42,8 +44,8 @@ public class LoginPage extends AppCompatActivity  {
         if (Preference.getBooleanPreference(LoginPage.this, AppConstants.IS_LOGGED_IN))
             changeFragment(new LoginFragment());
         else
-            startActivity(new Intent(this,HomeActivity.class));
-            //changeFragment(new RegisterFragment());
+            //startActivity(new Intent(this,HomeActivity.class));
+            changeFragment(new RegisterFragment());
     }
 
     public void changeFragment(Fragment fragment) {
@@ -54,6 +56,11 @@ public class LoginPage extends AppCompatActivity  {
         else
             transaction.add(R.id.lgcontainer, fragment);
         transaction.commitAllowingStateLoss();
+    }
+
+    public static String getDeviceId(Context context) {
+        return Settings.Secure.getString(context.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
     }
 }
 

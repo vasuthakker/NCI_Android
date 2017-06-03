@@ -24,7 +24,7 @@ public class URLGenerator implements URLProvider {
         return generator;
     }
 
-
+    public static final String URL_VERIFY_USER ="checkUserForOtp" ;
     public static final String URL_LOGIN = "loginDetails";
     public static final String URL_OTP = "OtpGenerationStatus";
     public static final String URL_OTP_VERIFICATION = "OtpVerifyStatus";

@@ -3,6 +3,7 @@ package com.example.epuser.pickcontacts.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,8 @@ import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static com.example.epuser.pickcontacts.R.id.regphn;
 
 public class ChangePin extends AppCompatActivity {
     private static final String TAG = "ChangePin";
@@ -46,8 +49,11 @@ public class ChangePin extends AppCompatActivity {
 
     private void init() {
         oldPinET = (EditText)findViewById(R.id.old_pin);
+        oldPinET.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
         newPinET = (EditText)findViewById(R.id.new_pin);
+        newPinET.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
         confirmPinET = (EditText)findViewById(R.id.confirm_new_pin);
+        confirmPinET.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
         changePinbtn = (Button)findViewById(R.id.newpinbutton);
     }
 
