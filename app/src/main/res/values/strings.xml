@@ -105,5 +105,8 @@
     <string name="sec_ans_key">SecurityAns</string>
     <string name="register">Register</string>
     <string name="log_in">Log In</string>
+    <string name="utility">Utility : </string>
+    <string name="trans_id">Transaction Id :</string>
+    <string name="ref_no">Ref no :</string>
 
 </resources>

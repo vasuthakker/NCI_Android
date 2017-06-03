@@ -43,7 +43,7 @@ public class LoginPage extends AppCompatActivity  {
             changeFragment(new LoginFragment());
         else
             startActivity(new Intent(this,HomeActivity.class));
-            //changeFragment(new RegisterFragment());
+           // changeFragment(new RegisterFragment());
     }
 
     public void changeFragment(Fragment fragment) {

@@ -187,7 +187,7 @@ public class CreatePinFragment extends Fragment {
                     JSONObject objQue=queArray.getJSONObject(i);
                     question=new QuestionDetails();
                     question.setId(objQue.getInt("Id"));
-                    question.setValue(objQue.getString("SecQue"));
+                    question.setValue(objQue.getString("SecurityQuestions"));
                     questions.add(question);
 
 

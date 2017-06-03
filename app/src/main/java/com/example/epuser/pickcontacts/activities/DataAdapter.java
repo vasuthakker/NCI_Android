@@ -19,7 +19,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView utility,id,number,amount;
+        public TextView utility,id,number,amount,txn_time;
 
         public MyViewHolder(View view) {
 
@@ -28,6 +28,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> 
             id = (TextView) view.findViewById(R.id.id);
             amount = (TextView) view.findViewById(R.id.amount);
             number=(TextView)view.findViewById(R.id.number);
+            txn_time=(TextView)view.findViewById(R.id.txt_time);
 
         }
     }
@@ -52,8 +53,9 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> 
 
         holder.utility.setText(transactions.getTxnreftype());
         holder.id.setText(transactions.getTxnid().toString());
-        holder.amount.setText(Double.toString(transactions.getAmountpaid()));
-        holder.number.setText(transactions.getTransectionrefno().toString());
+        holder.amount.setText(Double.toString(transactions.getTxnamount()));
+        holder.number.setText(transactions.getTransectionrefno());
+        holder.txn_time.setText(transactions.getTxntime());
     }
 
     @Override
