@@ -212,7 +212,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
             else {
                 noRecords.setVisibility(View.GONE);
-            for (int i = 0; i < histories.length(); i++) {
+            for (int i = histories.length() -1; i >=0 ; i--) {
 
 
                     transactions = new Transactions();
