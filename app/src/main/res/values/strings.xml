@@ -108,5 +108,6 @@
     <string name="utility">Utility : </string>
     <string name="trans_id">Transaction Id :</string>
     <string name="ref_no">Ref no :</string>
+    <string name="Order_id">ORDER_ID</string>
 
 </resources>
