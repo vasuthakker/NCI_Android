@@ -5,14 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.epuser.pickcontacts.activities.HomeActivity">
+    tools:context="com.example.epuser.pickcontacts.activities.HomeActivity"
+android:background="#FAFBFB"
+    >
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarnew"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:background="@color/colorPrimary"
+        android:background="#2C9549"
         app:title="@string/trans_history"
+
         app:titleTextColor="@android:color/white"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -23,7 +26,7 @@
         android:id="@+id/view4"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:background="@color/colorPrimary"
+        android:background="#2C9549"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarnew" />
@@ -55,11 +58,11 @@
 
             <TextView
                 android:id="@+id/current_balance"
+                android:drawableLeft="@drawable/ic_inr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/blnctext"
                 android:drawablePadding="5dp"
-
                 android:textColor="@android:color/white"
                 android:textSize="20dp"
 
@@ -70,7 +73,7 @@
             android:entries="@array/home_date_filter"
             android:id="@+id/home_spfilter"
             android:layout_width="wrap_content"
-            android:layout_height="15dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/lnblnc"
             android:layout_marginRight="15dp"
             app:layout_constraintRight_toRightOf="parent"
@@ -78,6 +81,9 @@
             app:layout_constraintTop_toBottomOf="@+id/lnblnc"
             android:layout_marginEnd="15dp">
         </Spinner>
+
+
+
 
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -89,7 +95,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view4"
->
+        android:layout_marginTop="0dp">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -98,6 +104,25 @@
             android:scrollbars="vertical" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <TextView
+        android:id="@+id/no_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="No Records Found"
+
+        android:textSize="25dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/home_swipelayout"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view4"
+        app:layout_constraintVertical_bias="0.050000012" />
 
 
 </android.support.constraint.ConstraintLayout>
