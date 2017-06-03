@@ -158,7 +158,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if(v==signout){
 
             Intent intent = new Intent(HomeActivity.this,LoginPage.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                    Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                    Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+            finish();
+
         }
     }
 
