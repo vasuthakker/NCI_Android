@@ -1,5 +1,6 @@
 package com.example.epuser.pickcontacts.activities;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -51,7 +52,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private TextView date;
     private Spinner spFilter;
     private static final String TAG = "HomeActivity";
-    private TextView currentBalance,noRecords;
+    private TextView currentBalance,noRecords,signout;
     private SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
     private String fromDate, toDate;
     private SwipeRefreshLayout  mSwipeRefreshLayout;
@@ -114,6 +115,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private void init() {
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.home_swipelayout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
+        signout=(TextView)findViewById(R.id.signout);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarnew);
         setSupportActionBar(toolbar);
@@ -130,7 +132,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
-
+         signout.setOnClickListener(this);
         // date.setOnClickListener(this);
 
 
@@ -138,6 +140,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onRefresh() {
+
         LoadTransactions();
         Toast.makeText(this, "Refresh", Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
@@ -152,10 +155,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-//        if(v==date){
-//
-//           showDatePickerDialog();
-//        }
+        if(v==signout){
+
+            Intent intent = new Intent(HomeActivity.this,LoginPage.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                    Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                    Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+
+        }
     }
 
 
