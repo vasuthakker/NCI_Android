@@ -23,7 +23,6 @@ import com.example.epuser.pickcontacts.fragments.LoginFragment;
 /**
  * Created by epuser on 5/19/2017.
  */
-
 public class LoginPage extends AppCompatActivity  {
 
     private static final String TAG = "LoginPage";
