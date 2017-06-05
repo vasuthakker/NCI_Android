@@ -178,7 +178,7 @@ public class CreatePinFragment extends Fragment {
     private VolleyJsonRequest.OnJsonResponse securityQuestionsResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-            Toast.makeText(getActivity(),jsonObj.toString(),Toast.LENGTH_LONG).show();
+
             try {
                 questions=new ArrayList<>();
                 JSONArray queArray=jsonObj.getJSONArray("DATA");

@@ -156,6 +156,49 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     private VolleyJsonRequest.OnJsonResponse registerResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
+            generateOTP();
+
+        }
+
+        @Override
+        public void errorReceived(int code, String message) {
+            Utils.showToast(getActivity(), message);
+        }
+    };
+
+    private void generateOTP() {
+        String mobile = regphn.getText().toString();
+//        if (TextUtils.isEmpty(mobile)) {
+//            regphn.setError(getString(R.string.enter_mobile));
+//            return;
+//        } else if (mobile.length() < 10) {
+//            regphn.setError(getString(R.string.enter_valid_mobile));
+//            return;
+//        } else if (mobile.length() > 9)
+//            mobile = mobile.substring(mobile.length() - 10);
+        Preference.savePreference(getActivity(),AppConstants.MOBILE_NUMBER,mobile);
+
+        try {
+            JSONObject requestJson = new JSONObject();
+            JSONObject jsonObject1 = new JSONObject();
+            JSONObject jsonObject2 = new JSONObject();
+            requestJson.put("HEADER", jsonObject1);
+            jsonObject2.put("mobileNumber", mobile);
+
+            //jsonObject2.put("udid",LoginPage.getDeviceId(getActivity()));
+            requestJson.put("DATA", jsonObject2);
+
+            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_OTP), requestJson, generateOTPResp, true);
+        } catch (JSONException e) {
+            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+        } catch (InternetNotAvailableException e) {
+            Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private VolleyJsonRequest.OnJsonResponse generateOTPResp = new VolleyJsonRequest.OnJsonResponse() {
+        @Override
+        public void responseReceived(JSONObject jsonObj) {
             loginActivity.changeFragment(new SendOTP());
 
         }
