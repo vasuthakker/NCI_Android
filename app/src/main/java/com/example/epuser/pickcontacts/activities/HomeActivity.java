@@ -142,7 +142,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onRefresh() {
 
         LoadTransactions();
-        Toast.makeText(this, "Refresh", Toast.LENGTH_SHORT).show();
+
         new Handler().postDelayed(new Runnable() {
 
             @Override
@@ -176,7 +176,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             JSONObject data = new JSONObject();
             requestJson.put(getString(R.string.header), header);
 
-            // jsonObject2.put("mobileNumber", Preference.getStringPreference(this, AppConstants.MOBILE_NUMBER));
+            // data.put("mobileNumber", Preference.getStringPreference(this, AppConstants.MOBILE_NUMBER));
+            // TODO: 6/5/2017  generalise for the number entered by the user
             data.put("mobileNumber", "9462025020");
             data.put("fromDate", fromDate);
             data.put("toDate", toDate);
