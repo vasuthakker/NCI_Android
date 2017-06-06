@@ -134,8 +134,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
         LoadTransactions();
-    }
- signout.setOnClickListener(this);
+
+         signout.setOnClickListener(this);
         String[] filterList=getResources().getStringArray(R.array.home_date_filter);
         ArrayAdapter spAdapter = new ArrayAdapter<String>(HomeActivity.this, R.layout.home_filter_item, filterList);
         spAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
@@ -146,7 +146,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if(v==date){
-           showDatePickerDialog();
+          // showDatePickerDialog();
         }
         else if(v==signout){
 
