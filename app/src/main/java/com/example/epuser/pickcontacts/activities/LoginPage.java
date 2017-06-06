@@ -1,19 +1,14 @@
 package com.example.epuser.pickcontacts.activities;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.epuser.pickcontacts.R;
-import com.example.epuser.pickcontacts.fragments.CreatePinFragment;
-import com.example.epuser.pickcontacts.fragments.RegisterFragment;
 import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.fragments.LoginFragment;

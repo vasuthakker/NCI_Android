@@ -1,14 +1,16 @@
 package com.example.epuser.pickcontacts.activities;
 
+import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +37,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "HomeActivity";
     private TextView currentBalance;
     private long random=  System.currentTimeMillis();
+    private Spinner spFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarnew);
         setSupportActionBar(toolbar);
 
+        spFilter= (Spinner) findViewById(R.id.home_spfilter);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         date=(TextView)findViewById(R.id.date);
         currentBalance=(TextView)findViewById(R.id.current_balance);
@@ -55,21 +59,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setAdapter(mAdapter);
         date.setOnClickListener(this);
 
-
         LoadTransactions();
+
+        String[] filterList=getResources().getStringArray(R.array.home_date_filter);
+        ArrayAdapter spAdapter = new ArrayAdapter<String>(HomeActivity.this, R.layout.home_filter_item, filterList);
+        spAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+        spFilter.setAdapter(spAdapter);
+
     }
-
-
-
 
     @Override
     public void onClick(View v) {
         if(v==date){
-
            showDatePickerDialog();
         }
     }
-
 
     private void LoadTransactions() {
 
@@ -97,8 +101,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private VolleyJsonRequest.OnJsonResponse CheckBalanceResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-
-
             try {
                 JSONObject hello = jsonObj.getJSONObject("objectData");
                 currentBalance.setText(hello.getString("balance"));
@@ -106,7 +108,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             } catch (JSONException e) {
                 Log.e(TAG,"error");
             }
-
         }
 
         @Override
