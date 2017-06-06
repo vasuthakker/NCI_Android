@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ import org.json.JSONObject;
 import static android.content.ContentValues.TAG;
 import static com.example.epuser.pickcontacts.R.id.confirm_pin_ET;
 import static com.example.epuser.pickcontacts.R.id.pin_ET;
+import static com.example.epuser.pickcontacts.R.id.regphn;
 
 
 public class ForgotSetPinFragment extends Fragment  implements View.OnClickListener{
@@ -57,7 +59,9 @@ public class ForgotSetPinFragment extends Fragment  implements View.OnClickListe
     private void init() {
 
         pinafterForgot =(EditText)getActivity().findViewById(R.id.set_pin_forgot);
+        pinafterForgot.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
         confirmPinForgot=(EditText)getActivity().findViewById(R.id.confirm_pin_forgot);
+        confirmPinForgot.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
         submitpinForgot=(Button)getActivity().findViewById(R.id.sub_set_pin_forgot);
         submitpinForgot.setOnClickListener(this);
     }
@@ -110,6 +114,7 @@ public class ForgotSetPinFragment extends Fragment  implements View.OnClickListe
     private VolleyJsonRequest.OnJsonResponse changePinResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
+            Preference.savePreference(getActivity(),AppConstants.IS_LOGGED_IN,true);
             loginActivity.changeFragment(new LoginFragment());
 
         }

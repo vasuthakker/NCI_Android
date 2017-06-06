@@ -1,6 +1,7 @@
 package com.example.epuser.pickcontacts.fragments;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
@@ -104,7 +105,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             jsonObject2.put("mPin", pin);
             jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
             requestJson.put("DATA", jsonObject2);
-
+            enterPin.setText(null);
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_LOGIN), requestJson, LoginCheckResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);

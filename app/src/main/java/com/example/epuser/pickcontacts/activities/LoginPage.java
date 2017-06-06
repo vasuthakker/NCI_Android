@@ -1,14 +1,21 @@
 package com.example.epuser.pickcontacts.activities;
 
+import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.fragments.CreatePinFragment;
+import com.example.epuser.pickcontacts.fragments.RegisterFragment;
 import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.fragments.LoginFragment;
@@ -37,8 +44,8 @@ public class LoginPage extends AppCompatActivity  {
         if (Preference.getBooleanPreference(LoginPage.this, AppConstants.IS_LOGGED_IN))
             changeFragment(new LoginFragment());
         else
-            startActivity(new Intent(this,HomeActivity.class));
-            //changeFragment(new RegisterFragment());
+            //startActivity(new Intent(this,HomeActivity.class));
+            changeFragment(new RegisterFragment());
     }
 
     public void changeFragment(Fragment fragment) {
@@ -49,6 +56,11 @@ public class LoginPage extends AppCompatActivity  {
         else
             transaction.add(R.id.lgcontainer, fragment);
         transaction.commitAllowingStateLoss();
+    }
+
+    public static String getDeviceId(Context context) {
+        return Settings.Secure.getString(context.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
     }
 }
 

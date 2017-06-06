@@ -85,13 +85,6 @@
     <string name="submit_security_answer">submit</string>
 
 
-    <string-array name="security_questions">
-        <item>What is your favourite movie?</item>
-        <item>b</item>
-        <item>c</item>
-
-    </string-array>
-
     <string-array name="home_date_filter">
         <item>Today</item>
         <item>Yesterday</item>
@@ -112,5 +105,9 @@
     <string name="sec_ans_key">SecurityAns</string>
     <string name="register">Register</string>
     <string name="log_in">Log In</string>
+    <string name="utility">Utility : </string>
+    <string name="trans_id">Transaction Id :</string>
+    <string name="ref_no">Ref no :</string>
+    <string name="Order_id">ORDER_ID</string>
 
 </resources>

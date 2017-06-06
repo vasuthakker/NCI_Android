@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +26,8 @@ import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static com.example.epuser.pickcontacts.R.id.regphn;
 
 
 /**
@@ -48,6 +51,7 @@ public class SendOTP extends Fragment implements View.OnClickListener {
     public void onStart(){
         super.onStart();
         enterOTP =(EditText)getActivity().findViewById(R.id.enterOTP_ET);
+        enterOTP.setFilters(new InputFilter[]{new InputFilter.LengthFilter(6)});
         submitOTPBtn=(Button)getActivity().findViewById(R.id.submit_OTP_btn);
         submitOTPBtn.setOnClickListener(this);
 

@@ -3,6 +3,7 @@ package com.example.epuser.pickcontacts.fragments;
 /**
  * Created by epuser on 5/29/2017.
  */
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.activities.HomeActivity;
 import com.example.epuser.pickcontacts.activities.LoginPage;
 import com.example.epuser.pickcontacts.activities.MainActivity;
 import com.example.epuser.pickcontacts.common.AppConstants;
@@ -31,6 +33,8 @@ import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static com.example.epuser.pickcontacts.R.id.regphn;
 
 public class MainLoginFragment extends Fragment implements View.OnClickListener {
     private EditText phoneNumberET,enterPinET;
@@ -73,6 +77,7 @@ public class MainLoginFragment extends Fragment implements View.OnClickListener 
         phoneNumberET = (EditText)getActivity().findViewById(R.id.phone_number_ET);
         phoneNumberET.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
         enterPinET = (EditText)getActivity().findViewById(R.id.enter_pin_ET);
+        enterPinET.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
         resisterTV = (TextView)getActivity().findViewById(R.id.register_TV);
         forgotPinTV = (TextView)getActivity().findViewById(R.id.ForgotPinTV) ;
         loginBtn = (Button)getActivity().findViewById(R.id.login_btn);
@@ -121,7 +126,7 @@ public class MainLoginFragment extends Fragment implements View.OnClickListener 
         @Override
         public void responseReceived(JSONObject jsonObj) {
             Preference.savePreference(getActivity(),AppConstants.IS_LOGGED_IN,true);
-            startActivity(new Intent(getActivity(), MainActivity.class));
+            startActivity(new Intent(getActivity(), HomeActivity.class));
             getActivity().finish();
         }
 

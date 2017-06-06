@@ -4,40 +4,111 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:focusable="true"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     android:clickable="true"
-    android:background="?android:attr/selectableItemBackground"
-    android:orientation="vertical">
+    android:background="@drawable/myrect"
+    android:elevation="2dp"
+    android:orientation="vertical"
+    >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/utility"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:id="@+id/ad_utility"
+        android:layout_alignParentTop="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ad_utility"
+        android:textColor="#000"
+        android:text="@string/trans_id"
+        android:textSize="20dp"
+        android:id="@+id/trans_id"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:text="@string/ref_no"
+        android:layout_below="@id/trans_id"
+        android:textSize="20dp"
+        android:id="@+id/ref_no"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txntime"
+        android:text="Time :"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:layout_below="@+id/ref_no"/>
+
+
+
+
 
     <TextView
         android:id="@+id/utility"
-        android:textColor="@color/colorAccent"
-        android:textSize="16dp"
+
+        android:textSize="22dp"
+        android:paddingLeft="4dp"
         android:textStyle="bold"
-        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/ad_utility"
+
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/id"
-        android:layout_below="@id/utility"
-        android:layout_width="match_parent"
+        android:layout_toRightOf="@+id/trans_id"
+        android:layout_below="@+id/ad_utility"
+
+        android:textSize="20dp"
+        android:paddingLeft="4dp"
+
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/id" />
+        android:textSize="20dp"
+
+        android:paddingLeft="4dp"
+
+        android:layout_toRightOf="@+id/ref_no"
+        android:layout_below="@+id/trans_id"/>
 
     <TextView
         android:id="@+id/amount"
-        android:textColor="@color/colorAccent"
+
+        android:drawableLeft="@drawable/ic_inr"
+
+        android:drawablePadding="8dp"
+        android:textSize="21dp"
+
         android:layout_width="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_time"
+        android:paddingLeft="4dp"
+        android:textSize="20dp"
+        android:layout_toRightOf="@+id/txntime"
+        android:layout_below="@+id/ref_no"/>
 
 
 

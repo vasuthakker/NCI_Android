@@ -18,13 +18,15 @@ public class Transactions {
     private String mobileno;
     private String proxynumber;
     private String order_id;
-    private Double txnid,transectionrefno,txnamount , amountpaid,charges;
+    private String txnid;
+    private String transectionrefno;
+    private Double txnamount , amountpaid,charges;
 
     public Transactions() {
     }
 
-    public Transactions(        Double txnid,
-                               Double transectionrefno,
+    public Transactions(        String txnid,
+                                String transectionrefno,
                                Double txnamount ,
                                Double amountpaid,
                               Double  charges,
@@ -108,19 +110,19 @@ public class Transactions {
         this.order_id = order_id;
     }
 
-    public Double getTxnid() {
+    public String getTxnid() {
         return txnid;
     }
 
-    public void setTxnid(Double txnid) {
+    public void setTxnid(String txnid) {
         this.txnid = txnid;
     }
 
-    public Double getTransectionrefno() {
+    public String getTransectionrefno() {
         return transectionrefno;
     }
 
-    public void setTransectionrefno(Double transectionrefno) {
+    public void setTransectionrefno(String transectionrefno) {
         this.transectionrefno = transectionrefno;
     }
 

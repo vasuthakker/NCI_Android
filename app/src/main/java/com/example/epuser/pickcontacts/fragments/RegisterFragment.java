@@ -65,24 +65,24 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     public void onStart() {
         super.onStart();
         init();
+        Preference.savePreference(getActivity(),AppConstants.IS_LOGGED_IN,false);
 
     }
     @Override
     public void onClick(View v) {
         if(v ==btnRegister)
         {
-            Register();
+            checkIfRegistered();
         }
         else if (v ==loginTV)
         {
-            if (Preference.getBooleanPreference(getActivity(),AppConstants.IS_LOGGED_IN))
-                loginActivity.changeFragment(new LoginFragment());
-            else loginActivity.changeFragment(new MainLoginFragment());
+
+            loginActivity.changeFragment(new MainLoginFragment());
         }
 
     }
 
-    private void Register() {
+    private void checkIfRegistered() {
         String mobile = regphn.getText().toString();
         if (TextUtils.isEmpty(mobile)) {
             regphn.setError(getString(R.string.enter_mobile));
@@ -92,6 +92,47 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
             return;
         } else if (mobile.length() > 9)
             mobile = mobile.substring(mobile.length() - 10);
+        try {
+            JSONObject requestJson = new JSONObject();
+            JSONObject jsonObject1 = new JSONObject();
+            JSONObject jsonObject2 = new JSONObject();
+            requestJson.put("HEADER", jsonObject1);
+            jsonObject2.put("mobileNumber", mobile);
+
+            jsonObject2.put(getString(R.string.Order_id),System.currentTimeMillis());
+            requestJson.put("DATA", jsonObject2);
+
+            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_REGISTRATION_CHECK), requestJson, isRegisteredResp, true);
+        } catch (JSONException e) {
+            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+        } catch (InternetNotAvailableException e) {
+            Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+    private VolleyJsonRequest.OnJsonResponse isRegisteredResp = new VolleyJsonRequest.OnJsonResponse() {
+        @Override
+        public void responseReceived(JSONObject jsonObj) {
+            Register();
+
+        }
+
+        @Override
+        public void errorReceived(int code, String message) {
+            Utils.showToast(getActivity(), message);
+        }
+    };
+
+    private void Register() {
+        String mobile = regphn.getText().toString();
+//        if (TextUtils.isEmpty(mobile)) {
+//            regphn.setError(getString(R.string.enter_mobile));
+//            return;
+//        } else if (mobile.length() < 10) {
+//            regphn.setError(getString(R.string.enter_valid_mobile));
+//            return;
+//        } else if (mobile.length() > 9)
+//            mobile = mobile.substring(mobile.length() - 10);
         Preference.savePreference(getActivity(),AppConstants.MOBILE_NUMBER,mobile);
 
         try {
@@ -100,9 +141,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
             JSONObject jsonObject2 = new JSONObject();
             requestJson.put("HEADER", jsonObject1);
             jsonObject2.put("mobileNumber", mobile);
+
+            jsonObject2.put("udid",LoginPage.getDeviceId(getActivity()));
             requestJson.put("DATA", jsonObject2);
 
-            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_OTP), requestJson, registerResp, true);
+            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_VERIFY_USER), requestJson, registerResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
         } catch (InternetNotAvailableException e) {
@@ -113,16 +156,50 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     private VolleyJsonRequest.OnJsonResponse registerResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-            try {
-                String response =jsonObj.getString(AppConstants.KEY_RESP);
-                if(response.equals(getString(R.string.request_complete))) {
+            generateOTP();
 
-                    loginActivity.changeFragment(new SendOTP());
-                }
+        }
 
-            } catch (JSONException e) {
-                Log.e(TAG,"validateRegister:JSONException",e);
-            }
+        @Override
+        public void errorReceived(int code, String message) {
+            Utils.showToast(getActivity(), message);
+        }
+    };
+
+    private void generateOTP() {
+        String mobile = regphn.getText().toString();
+//        if (TextUtils.isEmpty(mobile)) {
+//            regphn.setError(getString(R.string.enter_mobile));
+//            return;
+//        } else if (mobile.length() < 10) {
+//            regphn.setError(getString(R.string.enter_valid_mobile));
+//            return;
+//        } else if (mobile.length() > 9)
+//            mobile = mobile.substring(mobile.length() - 10);
+        Preference.savePreference(getActivity(),AppConstants.MOBILE_NUMBER,mobile);
+
+        try {
+            JSONObject requestJson = new JSONObject();
+            JSONObject jsonObject1 = new JSONObject();
+            JSONObject jsonObject2 = new JSONObject();
+            requestJson.put("HEADER", jsonObject1);
+            jsonObject2.put("mobileNumber", mobile);
+
+            //jsonObject2.put("udid",LoginPage.getDeviceId(getActivity()));
+            requestJson.put("DATA", jsonObject2);
+
+            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_OTP), requestJson, generateOTPResp, true);
+        } catch (JSONException e) {
+            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+        } catch (InternetNotAvailableException e) {
+            Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private VolleyJsonRequest.OnJsonResponse generateOTPResp = new VolleyJsonRequest.OnJsonResponse() {
+        @Override
+        public void responseReceived(JSONObject jsonObj) {
+            loginActivity.changeFragment(new SendOTP());
 
         }
 
