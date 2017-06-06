@@ -2,10 +2,10 @@ package com.example.epuser.pickcontacts.activities;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -122,9 +124,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         noRecords=(TextView)findViewById(R.id.no_record);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        // date=(TextView)findViewById(R.id.date);
-        currentBalance = (TextView) findViewById(R.id.current_balance);
-        spFilter = (Spinner) findViewById(R.id.home_spfilter);
+        date=(TextView)findViewById(R.id.date);
+        currentBalance=(TextView)findViewById(R.id.current_balance);
 
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -132,30 +133,22 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
-         signout.setOnClickListener(this);
-        // date.setOnClickListener(this);
-
-
-    }
-
-    @Override
-    public void onRefresh() {
-
         LoadTransactions();
+    }
+ signout.setOnClickListener(this);
+        String[] filterList=getResources().getStringArray(R.array.home_date_filter);
+        ArrayAdapter spAdapter = new ArrayAdapter<String>(HomeActivity.this, R.layout.home_filter_item, filterList);
+        spAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+        spFilter.setAdapter(spAdapter);
 
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        }, 0);
     }
 
     @Override
     public void onClick(View v) {
-        if(v==signout){
+        if(v==date){
+           showDatePickerDialog();
+        }
+        else if(v==signout){
 
             Intent intent = new Intent(HomeActivity.this,LoginPage.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
@@ -195,6 +188,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private VolleyJsonRequest.OnJsonResponse CheckBalanceResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
+
+
             try {
                 JSONObject data = jsonObj.getJSONObject("DATA");
                 currentBalance.setText(data.getString("balance"));
@@ -202,7 +197,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             } catch (JSONException e) {
                 Log.e(TAG, "", e);
             }
+
         }
+
         @Override
         public void errorReceived(int code, String message) {
             Utils.showToast(getApplicationContext(), message);
