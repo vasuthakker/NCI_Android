@@ -27,6 +27,7 @@ import com.example.epuser.pickcontacts.common.URLGenerator;
 import com.example.epuser.pickcontacts.common.Utils;
 import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
 import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
+import com.goodiebag.pinview.Pinview;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +38,8 @@ import org.json.JSONObject;
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
 
-    private EditText enterPin, edtPassword;
+    private EditText edtPassword;
+    private Pinview  enterPin;
     private Button btnLogin;
     private TextView forgot_pin_TV,registerTV;
     private static final String TAG = "LoginFragment";
@@ -50,8 +52,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void init() {
-        enterPin = (EditText) getActivity().findViewById(R.id.enterpin);
-        enterPin.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
+        enterPin = (Pinview) getActivity().findViewById(R.id.enterpin);
+
         btnLogin = (Button) getActivity().findViewById(R.id.btnlogg);
         forgot_pin_TV = (TextView) getActivity().findViewById(R.id.forgot_pin_TV);
         registerTV = (TextView)getActivity().findViewById(R.id.registerTV);
@@ -71,13 +73,22 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
         init();
+        enterPin.setPinViewEventListener(new Pinview.PinViewEventListener() {
+            @Override
+            public void onDataEntered(Pinview pinview, boolean b) {
+                login();
+            }
+        });
 
     }
+
+
+
 
     @Override
     public void onClick(View v) {
         if (v == btnLogin) {
-            login();
+
         } else if (v == forgot_pin_TV) {
             loginActivity.changeFragment(new ForgotPasswordFragment());
 
@@ -90,12 +101,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void login() {
-        String pin = enterPin.getText().toString();
+        String pin = enterPin.getValue().toString();
 
-        if (pin.length() != 4) {
-            enterPin.setError(getString(R.string.enter_valid_pin));
-            return;
-        }
+//        if (pin.length() != 4) {
+//            enterPin.setError(getString(R.string.enter_valid_pin));
+//            return;
+//        }
 
         try {
             JSONObject requestJson = new JSONObject();
@@ -105,7 +116,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             jsonObject2.put("mPin", pin);
             jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
             requestJson.put("DATA", jsonObject2);
-            enterPin.setText(null);
+            enterPin.setValue(null);
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_LOGIN), requestJson, LoginCheckResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
