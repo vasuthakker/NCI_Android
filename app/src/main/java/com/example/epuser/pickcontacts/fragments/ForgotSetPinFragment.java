@@ -61,7 +61,7 @@ public class ForgotSetPinFragment extends Fragment  implements View.OnClickListe
         pinafterForgot =(EditText)getActivity().findViewById(R.id.set_pin_forgot);
         pinafterForgot.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
         confirmPinForgot=(EditText)getActivity().findViewById(R.id.confirm_pin_forgot);
-        confirmPinForgot.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
+        confirmPinForgot.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
         submitpinForgot=(Button)getActivity().findViewById(R.id.sub_set_pin_forgot);
         submitpinForgot.setOnClickListener(this);
     }

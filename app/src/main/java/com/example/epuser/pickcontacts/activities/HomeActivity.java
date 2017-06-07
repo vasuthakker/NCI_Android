@@ -1,11 +1,9 @@
 package com.example.epuser.pickcontacts.activities;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.support.v4.app.DialogFragment;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +21,6 @@ import com.example.epuser.pickcontacts.common.URLGenerator;
 import com.example.epuser.pickcontacts.common.Utils;
 import com.example.epuser.pickcontacts.entities.Transactions;
 import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
-import com.example.epuser.pickcontacts.fragments.DatePicker;
 import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
 
 import org.json.JSONArray;
@@ -35,10 +33,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-import static android.R.attr.duration;
-import static android.R.attr.switchMinWidth;
-
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener,SwipeRefreshLayout.OnRefreshListener{
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int TODAY = 0;
     private static final int YESTERDAY = 1;
@@ -49,13 +44,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private List<Transactions> DataList = new ArrayList<>();
     private RecyclerView recyclerView;
     private DataAdapter mAdapter;
-    private TextView date;
     private Spinner spFilter;
     private static final String TAG = "HomeActivity";
-    private TextView currentBalance,noRecords,signout;
+    private TextView currentBalance, noRecords, signout;
     private SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
     private String fromDate, toDate;
-    private SwipeRefreshLayout  mSwipeRefreshLayout;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,32 +66,29 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onStart();
         init();
 
-
-
         spFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Calendar calendar=Calendar.getInstance();
+                Calendar calendar = Calendar.getInstance();
                 toDate = formatter.format(calendar.getTimeInMillis());
-                switch(position)
-                {
+                switch (position) {
                     case TODAY:
                         fromDate = toDate;
                         break;
                     case YESTERDAY:
-                        calendar.add(Calendar.DAY_OF_YEAR,-1);
+                        calendar.add(Calendar.DAY_OF_YEAR, -1);
                         fromDate = toDate = formatter.format(calendar.getTimeInMillis());
                         break;
                     case LAST_7_DAYS:
-                        calendar.add(Calendar.DAY_OF_YEAR,-7);
-                        fromDate=formatter.format(calendar.getTimeInMillis());
+                        calendar.add(Calendar.DAY_OF_YEAR, -7);
+                        fromDate = formatter.format(calendar.getTimeInMillis());
                         break;
                     case THIS_MONTH:
-                        calendar.add(Calendar.MONTH,-1);
-                        fromDate=formatter.format(calendar.getTimeInMillis());
+                        calendar.add(Calendar.MONTH, -1);
+                        fromDate = formatter.format(calendar.getTimeInMillis());
                         break;
                     case TILL_NOW:
-                        fromDate="";
+                        fromDate = "";
                         break;
                 }
                 LoadTransactions();
@@ -114,59 +105,48 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private void init() {
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.home_swipelayout);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
-        signout=(TextView)findViewById(R.id.signout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                LoadTransactions();
+            }
+        });
+        signout = (TextView) findViewById(R.id.signout);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarnew);
         setSupportActionBar(toolbar);
-        noRecords=(TextView)findViewById(R.id.no_record);
+        noRecords = (TextView) findViewById(R.id.no_record);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        // date=(TextView)findViewById(R.id.date);
         currentBalance = (TextView) findViewById(R.id.current_balance);
-        spFilter = (Spinner) findViewById(R.id.home_spfilter);
 
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
-         signout.setOnClickListener(this);
-        // date.setOnClickListener(this);
-
-
-    }
-
-    @Override
-    public void onRefresh() {
-
         LoadTransactions();
-        Toast.makeText(this, "Refresh", Toast.LENGTH_SHORT).show();
-        new Handler().postDelayed(new Runnable() {
 
-            @Override
-            public void run() {
+        signout.setOnClickListener(this);
+        String[] filterList = getResources().getStringArray(R.array.home_date_filter);
+        ArrayAdapter spAdapter = new ArrayAdapter<String>(HomeActivity.this, R.layout.home_filter_item, filterList);
+        spAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+        spFilter.setAdapter(spAdapter);
 
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        }, 0);
     }
+
 
     @Override
     public void onClick(View v) {
-        if(v==signout){
-
-            Intent intent = new Intent(HomeActivity.this,LoginPage.class);
+        if (v == signout) {
+            Intent intent = new Intent(HomeActivity.this, LoginPage.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                     Intent.FLAG_ACTIVITY_CLEAR_TASK |
                     Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
-
         }
     }
-
 
     private void LoadTransactions() {
 
@@ -176,7 +156,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             JSONObject data = new JSONObject();
             requestJson.put(getString(R.string.header), header);
 
-            // jsonObject2.put("mobileNumber", Preference.getStringPreference(this, AppConstants.MOBILE_NUMBER));
+            // data.put("mobileNumber", Preference.getStringPreference(this, AppConstants.MOBILE_NUMBER));
+            // TODO: 6/5/2017  generalise for the number entered by the user
             data.put("mobileNumber", "9462025020");
             data.put("fromDate", fromDate);
             data.put("toDate", toDate);
@@ -201,7 +182,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             } catch (JSONException e) {
                 Log.e(TAG, "", e);
             }
+
         }
+
         @Override
         public void errorReceived(int code, String message) {
             Utils.showToast(getApplicationContext(), message);
@@ -210,18 +193,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void prepareData(JSONObject jsonObj) {
-        List<Transactions> DataList=new ArrayList<>();
+        List<Transactions> DataList = new ArrayList<>();
         Transactions transactions;
         try {
             JSONArray histories = jsonObj.getJSONArray("histories");
-            Log.v(TAG,"History is:" +histories.toString());
-            if(histories.length()==0){
+            Log.v(TAG, "History is:" + histories.toString());
+            if (histories.length() == 0) {
 
                 noRecords.setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 noRecords.setVisibility(View.GONE);
-            for (int i = histories.length() -1; i >=0 ; i--) {
+                for (int i = histories.length() - 1; i >= 0; i--) {
 
 
                     transactions = new Transactions();
