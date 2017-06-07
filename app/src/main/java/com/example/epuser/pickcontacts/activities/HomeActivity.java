@@ -105,6 +105,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void init() {
+        spFilter= (Spinner) findViewById(R.id.home_spfilter);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.home_swipelayout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -126,11 +127,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
         LoadTransactions();
 
-         signout.setOnClickListener(this);
-        String[] filterList=getResources().getStringArray(R.array.home_date_filter);
 
         signout.setOnClickListener(this);
         String[] filterList = getResources().getStringArray(R.array.home_date_filter);

@@ -13,7 +13,7 @@ android:background="#FAFBFB"
         android:id="@+id/toolbarnew"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:background="#2C9549"
+        android:background="@color/colorPrimary"
         app:title="@string/trans_history"
 
         app:titleTextColor="@android:color/white"
@@ -26,8 +26,8 @@ android:background="#FAFBFB"
     <View
         android:id="@+id/view4"
         android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:background="#2C9549"
+        android:layout_height="80dp"
+        android:background="@color/colorPrimary"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarnew" />
@@ -145,18 +145,7 @@ android:background="#FAFBFB"
         android:layout_marginEnd="8dp"
         app:layout_constraintVertical_bias="0.42000002" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="35dp"
-        android:layout_height="40dp"
-        app:srcCompat="@drawable/signout"
-        app:layout_constraintRight_toLeftOf="@+id/signout"
-        android:layout_marginRight="0dp"
-        app:layout_constraintTop_toTopOf="@+id/toolbarnew"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/view4"
-        app:layout_constraintVertical_bias="0.0" />
+
 
 
 
