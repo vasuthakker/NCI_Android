@@ -76,7 +76,7 @@
     <string name="different_old_and_new_pins">Old pin and new pin should be different</string>
     <string name="pins_dont_match">Pins did not match</string>
     <string name="security_ques">Please set your security answer</string>
-    <string name="enter_a_four_digit_pin">Enter a Four digit PIN</string>
+    <string name="enter_a_four_digit_pin">Enter the 4 digit PIN</string>
     <string name="changing_pin">Change PIN</string>
     <string name="setting">Setting</string>
     <string name="profile">Profile</string>

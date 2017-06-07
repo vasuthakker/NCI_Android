@@ -101,7 +101,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void login() {
-        String pin = enterPin.getValue().toString();
+        String pin = enterPin.getValue();
 
 //        if (pin.length() != 4) {
 //            enterPin.setError(getString(R.string.enter_valid_pin));
@@ -116,7 +116,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             jsonObject2.put("mPin", pin);
             jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
             requestJson.put("DATA", jsonObject2);
-            enterPin.setValue(null);
+           // enterPin.setValue(null);
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_LOGIN), requestJson, LoginCheckResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
