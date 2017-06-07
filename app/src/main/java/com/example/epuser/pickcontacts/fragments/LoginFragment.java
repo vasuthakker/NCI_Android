@@ -36,7 +36,7 @@ import org.json.JSONObject;
  * Created by epuser on 5/20/2017.
  */
 
-public class LoginFragment extends Fragment implements View.OnClickListener {
+public class LoginFragment extends Fragment implements View.OnClickListener,Pinview.PinViewEventListener{
 
     private EditText edtPassword;
     private Pinview  enterPin;
@@ -48,12 +48,17 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
         return inflater.inflate(R.layout.fragment_login, container, false);
+
     }
+
+
+
 
     private void init() {
         enterPin = (Pinview) getActivity().findViewById(R.id.enterpin);
-
         btnLogin = (Button) getActivity().findViewById(R.id.btnlogg);
         forgot_pin_TV = (TextView) getActivity().findViewById(R.id.forgot_pin_TV);
         registerTV = (TextView)getActivity().findViewById(R.id.registerTV);
@@ -73,23 +78,26 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
         init();
-        enterPin.setPinViewEventListener(new Pinview.PinViewEventListener() {
-            @Override
-            public void onDataEntered(Pinview pinview, boolean b) {
-                login();
-            }
-        });
+    }
+
+
+    @Override
+    public void onDataEntered(Pinview pinview, boolean b) {
+        if(pinview == enterPin ){
+            login();
+        }
 
     }
 
 
 
 
+
+
+
     @Override
     public void onClick(View v) {
-        if (v == btnLogin) {
-
-        } else if (v == forgot_pin_TV) {
+        if (v == forgot_pin_TV) {
             loginActivity.changeFragment(new ForgotPasswordFragment());
 
         }
@@ -98,10 +106,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             loginActivity.changeFragment(new RegisterFragment());
         }
 
+
+
     }
 
     private void login() {
-        String pin = enterPin.getValue().toString();
+        String pin = enterPin.getValue();
 
 //        if (pin.length() != 4) {
 //            enterPin.setError(getString(R.string.enter_valid_pin));
@@ -116,7 +126,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             jsonObject2.put("mPin", pin);
             jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
             requestJson.put("DATA", jsonObject2);
-            enterPin.setValue(null);
+
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_LOGIN), requestJson, LoginCheckResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
@@ -138,6 +148,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             Utils.showToast(getActivity(), message);
         }
     };
+
 
 
 }
