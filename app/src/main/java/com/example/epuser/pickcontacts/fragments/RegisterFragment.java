@@ -232,17 +232,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
 
         dialogBuilder.setTitle("LOGIN");
         dialogBuilder.setMessage("Please enter your Phone Number ");
-        dialogBuilder.setPositiveButton("SUBMIT", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                String mobile = mobileET.getText().toString();
-                if (mobile.length() ==10) {
-                    Preference.savePreference(getActivity(), AppConstants.MOBILE_NUMBER, mobile);
-                    loginActivity.changeFragment(new LoginFragment());
-                }
+        dialogBuilder.setPositiveButton("SUBMIT", null);
 
-
-            }
-        });
         dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
 
@@ -251,7 +242,31 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
 
             }
         });
-        AlertDialog b = dialogBuilder.create();
+        final AlertDialog b = dialogBuilder.create();
+        b.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+                        String mobile = mobileET.getText().toString();
+                        if (mobile.length() ==10) {
+                            Preference.savePreference(getActivity(), AppConstants.MOBILE_NUMBER, mobile);
+                            loginActivity.changeFragment(new LoginFragment());
+                            b.dismiss();
+                        }
+                        else
+                            mobileET.setError(getString(R.string.enter_valid_mobile));
+
+
+
+                    }
+                });
+            }
+        });
+
         b.show();
     }
 
