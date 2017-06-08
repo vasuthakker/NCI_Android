@@ -48,7 +48,7 @@ public class CreatePinFragment extends Fragment {
     private static final String TAG = "CreatePinFragment";
     private Spinner spQuestions;
     private int selected_qn_position =0;
-    private int selected_sec_Id ;
+
     private List<QuestionDetails> questions;
     private QuestionDetails selectedQuestion;
 
@@ -85,10 +85,9 @@ public class CreatePinFragment extends Fragment {
         spQuestions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position!=0)
-                {
+
                     selectedQuestion = questions.get(position);
-                }
+                    selected_qn_position = position;
             }
 
             @Override
@@ -105,6 +104,13 @@ public class CreatePinFragment extends Fragment {
     }
 
     private void createPin() {
+        if (selected_qn_position ==0)
+            return;
+        if (TextUtils.isEmpty(secAnsET.getText().toString()))
+        {
+            secAnsET.setError("Enter the Answer");
+            return;
+        }
         String pin = pin_ET.getText().toString();
         if (pin.length() ==4)
         {
@@ -116,12 +122,12 @@ public class CreatePinFragment extends Fragment {
                     JSONObject header = new JSONObject();
                     JSONObject data = new JSONObject();
                     requestJson.put(getString(R.string.header), header);
-                    data.put(getString(R.string.mobile_number), Preference.getStringPreference(getActivity(),AppConstants.MOBILE_NUMBER));
+                    data.put(getString(R.string.mobile_number), Preference.getStringPreference(getActivity(),AppConstants.TEMP_MOBILE_NUMBER));
                     data.put("mPin1",pin);
                     data.put("mPin2",pin);
                     data.put(getString(R.string.sec_qn_id),selectedQuestion.getId());
                     data.put(getString(R.string.sec_ans_key),secAnsET.getText().toString());
-                    requestJson.put("DATA", data);
+                    requestJson.put(getString(R.string.data), data);
 
                     VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_CREATE_PIN_AND_SEC_QN), requestJson, createPinAndSecQnResp, true);
                 } catch (JSONException e) {
@@ -146,6 +152,7 @@ public class CreatePinFragment extends Fragment {
         @Override
         public void responseReceived(JSONObject jsonObj) {
             Preference.savePreference(getActivity(),AppConstants.IS_LOGGED_IN,true);
+            Preference.savePreference(getActivity(),AppConstants.MOBILE_NUMBER,Preference.getStringPreference(getActivity(),AppConstants.TEMP_MOBILE_NUMBER));
             loginActivity.changeFragment(new LoginFragment());
 
         }
