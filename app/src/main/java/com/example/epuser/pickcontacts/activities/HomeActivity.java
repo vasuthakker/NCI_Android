@@ -163,9 +163,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             // data.put("mobileNumber", Preference.getStringPreference(this, AppConstants.MOBILE_NUMBER));
             // TODO: 6/5/2017  generalise for the number entered by the user
-            data.put("mobileNumber", "9462025020");
+            data.put("mobileNumber", "9164024092");
             data.put("fromDate", fromDate);
             data.put("toDate", toDate);
+            data.put("hmipatientId",2);
             data.put(getString(R.string.Order_id), System.currentTimeMillis());
             requestJson.put(getString(R.string.data), data);
 
