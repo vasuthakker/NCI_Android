@@ -15,7 +15,6 @@ public class AppConstants {
     ///////////////////////////////////////////////////////////////////////////
     public static final int SUCCESS_DATA =100 ;
 
-    public static int SUCCESS_VALIDATION = 1004;
     public static int SUCCESS_TRANSACTION=300;
 
     public static final String IS_LOGGED_IN = "IS_LOGGED_IN";

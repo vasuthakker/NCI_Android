@@ -55,7 +55,7 @@ public class VolleyJsonRequest {
                                     Log.v("Vollyresponse", response.toString());
                                     try {
                                         int respCode = response.getInt(AppConstants.KEY_RESP_CODE);
-                                        if (respCode == AppConstants.SUCCESS_VALIDATION || respCode == AppConstants.SUCCESS_DATA ||
+                                        if (respCode == AppConstants.SUCCESS_DATA ||
                                                 respCode == AppConstants.SUCCESS_TRANSACTION)
                                             onResponse.responseReceived(response);
                                         else {

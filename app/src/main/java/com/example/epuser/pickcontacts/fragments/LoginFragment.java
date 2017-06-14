@@ -87,9 +87,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v == btnLogin) {
-
-        } else if (v == forgot_pin_TV) {
+        if (v == forgot_pin_TV) {
             loginActivity.changeFragment(new ForgotPasswordFragment());
 
         }
@@ -128,6 +126,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private VolleyJsonRequest.OnJsonResponse LoginCheckResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
+            Preference.savePreference(getActivity(),AppConstants.IS_LOGGED_IN,true);
             Intent intent = new Intent(getActivity(), HomeActivity.class);
             startActivity(intent);
             getActivity().finish();

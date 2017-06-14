@@ -11,7 +11,7 @@ import java.net.URL;
 
 public class URLGenerator implements URLProvider {
 
-    public static final String BASE_ADDRESS_HOST = "http://192.168.10.55:8080/";
+    public static final String BASE_ADDRESS_HOST = "http://192.168.10.67:8080/";
     public static final String URL_CONTEXT = BASE_ADDRESS_HOST + "epnci/";
 
 
@@ -23,7 +23,7 @@ public class URLGenerator implements URLProvider {
             generator = new URLGenerator();
         return generator;
     }
-    public static final String URL_REGISTRATION_CHECK = "checkmobilenumber";
+    public static final String URL_REGISTRATION_CHECK = "wrest/checkmobilenumber";
     public static final String URL_VERIFY_USER ="checkUserForOtp" ;
     public static final String URL_LOGIN = "loginDetails";
     public static final String URL_OTP = "OtpGenerationStatus";
@@ -41,7 +41,7 @@ public class URLGenerator implements URLProvider {
     public static final String URL_CARD_LOAD="as per url3";
     public static final String  URL_FETCH_BAlANCE="checkBalance";
 
-    public static final String   URL_FETCH_TRANSACTIONS="txnhistory";
+    public static final String   URL_FETCH_TRANSACTIONS="wrest/txnhistory";
     public static final String URL_SEND = "";
 
 

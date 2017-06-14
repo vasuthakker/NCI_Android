@@ -87,7 +87,7 @@ public class SendOTP extends Fragment implements View.OnClickListener {
             JSONObject jsonObject1 = new JSONObject();
             JSONObject jsonObject2 = new JSONObject();
             requestJson.put("HEADER", jsonObject1);
-            jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(),AppConstants.MOBILE_NUMBER));
+            jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(),AppConstants.TEMP_MOBILE_NUMBER));
             jsonObject2.put("otp",otp);
             requestJson.put("DATA", jsonObject2);
 
@@ -102,17 +102,7 @@ public class SendOTP extends Fragment implements View.OnClickListener {
     private VolleyJsonRequest.OnJsonResponse loginResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-            try {
-                String response =jsonObj.getString(AppConstants.KEY_RESP);
-                if(response.equals(getString(R.string.otp_successfully_verified)));
-                loginActivity.changeFragment(new CreatePinFragment());
-            } catch (JSONException e) {
-                Log.e(TAG,"",e);
-            }
-
-
-
-
+            loginActivity.changeFragment(new CreatePinFragment());
 
         }
 
