@@ -24,7 +24,7 @@
         android:text="@string/utility"
         android:textColor="#000"
         android:textStyle="bold"
-        android:textSize="22dp"
+        android:textSize="20dp"
         android:id="@+id/ad_utility"
         android:layout_alignParentTop="true"/>
     <TextView
@@ -33,7 +33,7 @@
         android:layout_below="@+id/ad_utility"
         android:textColor="#000"
         android:text="@string/trans_id"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:id="@+id/trans_id"/>
     <TextView
         android:layout_width="wrap_content"
@@ -41,14 +41,14 @@
         android:textColor="#000"
         android:text="@string/ref_no"
         android:layout_below="@id/trans_id"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:id="@+id/ref_no"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txntime"
         android:text="Time :"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textColor="#000"
         android:layout_below="@+id/ref_no"/>
 
@@ -59,13 +59,13 @@
     <TextView
         android:id="@+id/utility"
 
-        android:textSize="22dp"
-        android:paddingLeft="4dp"
+        android:textSize="20dp"
+        android:paddingLeft="6dp"
         android:textStyle="bold"
         android:layout_toRightOf="@+id/ad_utility"
 
 
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <TextView
@@ -73,8 +73,8 @@
         android:layout_toRightOf="@+id/trans_id"
         android:layout_below="@+id/ad_utility"
 
-        android:textSize="20dp"
-        android:paddingLeft="4dp"
+        android:textSize="18dp"
+        android:paddingLeft="6dp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -82,21 +82,32 @@
         android:id="@+id/number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-
-        android:paddingLeft="4dp"
-
+        android:textSize="18dp"
+        android:paddingLeft="6dp"
+        android:layout_alignBaseline="@+id/ref_no"
+        android:layout_alignBottom="@+id/ref_no"
         android:layout_toRightOf="@+id/ref_no"
-        android:layout_below="@+id/trans_id"/>
+         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="12dp"
+        android:text="+"
+        android:textSize="20dp"
+        android:textColor="@android:color/black"
+
+        android:layout_toLeftOf="@+id/amount"
+        android:layout_alignParentTop="true"
+        android:id="@+id/plus"
+        />
+
 
     <TextView
         android:id="@+id/amount"
-
         android:drawableLeft="@drawable/ic_inr"
-
         android:drawablePadding="8dp"
-        android:textSize="21dp"
 
+        android:textSize="21dp"
         android:layout_width="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_height="wrap_content"
@@ -105,8 +116,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txt_time"
-        android:paddingLeft="4dp"
-        android:textSize="20dp"
+        android:paddingLeft="6dp"
+        android:textSize="18dp"
         android:layout_toRightOf="@+id/txntime"
         android:layout_below="@+id/ref_no"/>
 

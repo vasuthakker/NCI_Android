@@ -50,7 +50,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private TextView currentBalance, noRecords, signout;
     private SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
     private String fromDate, toDate;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,13 +106,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private void init() {
         spFilter= (Spinner) findViewById(R.id.home_spfilter);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.home_swipelayout);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                LoadTransactions();
-            }
-        });
+
         signout = (TextView) findViewById(R.id.signout);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarnew);

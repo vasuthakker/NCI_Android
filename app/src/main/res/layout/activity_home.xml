@@ -20,7 +20,9 @@ android:background="#FAFBFB"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.0"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1" />
 
 
     <View
@@ -30,7 +32,9 @@ android:background="#FAFBFB"
         android:background="@color/colorPrimary"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarnew" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarnew"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1" />
 
     <LinearLayout
             android:id="@+id/lnblnc"
@@ -40,12 +44,10 @@ android:background="#FAFBFB"
             android:orientation="horizontal"
             android:layout_marginTop="5dp"
             app:layout_constraintTop_toBottomOf="@+id/toolbarnew"
-            android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1">
 
             <TextView
                 android:id="@+id/blnctext"
@@ -76,18 +78,13 @@ android:background="#FAFBFB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/lnblnc"
-            android:layout_marginRight="0dp"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="5dp"
-            app:layout_constraintTop_toBottomOf="@+id/lnblnc"
-            android:layout_marginEnd="0dp">
+            app:layout_constraintTop_toBottomOf="@+id/lnblnc">
         </Spinner>
 
 
-
-
-
-    <android.support.v4.widget.SwipeRefreshLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/home_swipelayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -95,25 +92,34 @@ android:background="#FAFBFB"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view4">
+        app:layout_constraintTop_toBottomOf="@+id/view4"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scrollbars="vertical"
-            tools:layout_editor_absoluteX="53dp"
-            tools:layout_editor_absoluteY="-45dp" />
+            tools:layout_constraintTop_creator="1"
+            tools:layout_constraintRight_creator="1"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="5dp"
+            tools:layout_constraintLeft_creator="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </android.support.constraint.ConstraintLayout>
 
     <TextView
         android:id="@+id/no_record"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:hint="No Records Found"
 
@@ -125,8 +131,8 @@ android:background="#FAFBFB"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view4"
         app:layout_constraintVertical_bias="0.050000012"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1" />
 
     <TextView
         android:id="@+id/signout"
@@ -136,7 +142,7 @@ android:background="#FAFBFB"
         android:textStyle="bold"
         android:textSize="20dp"
 
-        android:layout_marginRight="9dp"
+        android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="@+id/toolbarnew"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="8dp"

@@ -17,13 +17,15 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> 
 
     private List<Transactions> DataList;
 
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView utility,id,number,amount,txn_time;
+        public TextView utility,id,number,amount,txn_time,plus;
 
         public MyViewHolder(View view) {
 
             super(view);
+            plus=(TextView)view.findViewById(R.id.plus);
             utility = (TextView) view.findViewById(R.id.utility);
             id = (TextView) view.findViewById(R.id.id);
             amount = (TextView) view.findViewById(R.id.amount);
@@ -52,6 +54,11 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> 
 
 
         holder.utility.setText(transactions.getTxnreftype());
+        if(transactions.getTxnreftype().equals("UNLOAD")){
+            holder.plus.setText("-");
+        }else if(transactions.getTxnreftype().equals("LOAD")){
+            holder.plus.setText("+");
+        }
         holder.id.setText(transactions.getTxnid().toString());
         holder.amount.setText(Double.toString(transactions.getTxnamount()));
         holder.number.setText(transactions.getTransectionrefno());
