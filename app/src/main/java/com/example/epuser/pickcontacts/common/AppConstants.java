@@ -14,6 +14,7 @@ public class AppConstants {
     // Response codes
     ///////////////////////////////////////////////////////////////////////////
     public static final int SUCCESS_DATA =100 ;
+    public static final String PATIENT_ID ="PATIENT_ID" ;
 
     public static int SUCCESS_TRANSACTION=300;
 

@@ -19,6 +19,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.MyViewHo
     private List<PatientID> DataList;
 
 
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public TextView patient_id,patient_name;
@@ -36,10 +37,11 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.MyViewHo
 
     public PatientAdapter(List<PatientID> DataList) {
         this.DataList = DataList;
+
     }
 
     @Override
-    public PatientAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PatientAdapter.MyViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.dialog_patient_id, parent, false);
 
@@ -59,6 +61,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.MyViewHo
     public int getItemCount() {
         return DataList.size();
     }
+
 
 
 }

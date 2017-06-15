@@ -28,6 +28,7 @@ import com.example.epuser.pickcontacts.activities.LoginPage;
 import com.example.epuser.pickcontacts.activities.MainActivity;
 import com.example.epuser.pickcontacts.R;
 import com.example.epuser.pickcontacts.activities.PatientAdapter;
+import com.example.epuser.pickcontacts.activities.RecyclerItemClickListener;
 import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.common.URLGenerator;
@@ -52,9 +53,9 @@ import java.util.List;
 public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private EditText edtPassword;
-    private Pinview  enterPin;
+    private Pinview enterPin;
     private Button btnLogin;
-    private TextView forgot_pin_TV,registerTV;
+    private TextView forgot_pin_TV, registerTV;
     private static final String TAG = "LoginFragment";
     private LoginPage loginActivity;
     private PatientAdapter pAdapter;
@@ -72,7 +73,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         btnLogin = (Button) getActivity().findViewById(R.id.btnlogg);
         forgot_pin_TV = (TextView) getActivity().findViewById(R.id.forgot_pin_TV);
-        registerTV = (TextView)getActivity().findViewById(R.id.registerTV);
+        registerTV = (TextView) getActivity().findViewById(R.id.registerTV);
         btnLogin.setOnClickListener(this);
         forgot_pin_TV.setOnClickListener(this);
         registerTV.setOnClickListener(this);
@@ -99,16 +100,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
 
-
-
     @Override
     public void onClick(View v) {
         if (v == forgot_pin_TV) {
             loginActivity.changeFragment(new ForgotPasswordFragment());
 
-        }
-        else if (v == registerTV)
-        {
+        } else if (v == registerTV) {
             loginActivity.changeFragment(new RegisterFragment());
         }
 
@@ -137,10 +134,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private VolleyJsonRequest.OnJsonResponse LoginCheckResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-            Preference.savePreference(getActivity(),AppConstants.IS_LOGGED_IN,true);
-           // Intent intent = new Intent(getActivity(), HomeActivity.class);
-           // startActivity(intent);
-          //  getActivity().finish();
+            Preference.savePreference(getActivity(), AppConstants.IS_LOGGED_IN, true);
+            // Intent intent = new Intent(getActivity(), HomeActivity.class);
+            // startActivity(intent);
+            //  getActivity().finish();
             getPatientID();
         }
 
@@ -157,8 +154,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             JSONObject jsonObject1 = new JSONObject();
             JSONObject jsonObject2 = new JSONObject();
             requestJson.put("HEADER", jsonObject1);
-           // jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
-            jsonObject2.put("mobileNumber","9164024091");
+            // TODO: 6/15/2017   generalise the phone number
+            // jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
+            jsonObject2.put("mobileNumber", "9164024091");
             requestJson.put("DATA", jsonObject2);
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_PATIENTID), requestJson, PatientGetResp, true);
@@ -188,27 +186,41 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     };
 
 
-
-    private void showPatientID( JSONArray jsonObject) {
+    private void showPatientID(JSONArray jsonObject) {
 
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.custom_dialog_for_patientid,null);
+        final View dialogView = inflater.inflate(R.layout.custom_dialog_for_patientid, null);
         dialogBuilder.setView(dialogView);
 
         RecyclerView recycler_patient = (RecyclerView) dialogView.findViewById(R.id.recycler_patient);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recycler_patient.setLayoutManager(mLayoutManager);
         recycler_patient.setItemAnimator(new DefaultItemAnimator());
-        pAdapter = new PatientAdapter(DataList);
-        recycler_patient.setAdapter(pAdapter);
+        recycler_patient.addOnItemTouchListener(
+                new RecyclerItemClickListener(getContext(), recycler_patient, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        // do whatever
+                        PatientID patientID = DataList.get(position);
+                        Preference.savePreference(getActivity(),AppConstants.PATIENT_ID,patientID.getPatientId());
+                        Intent intent = new Intent(getActivity(), HomeActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                       // Toast.makeText(getActivity(), patientID.getPatientId() + " is selected!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                })
+        );
+
         dialogBuilder.setTitle("PatientID");
         dialogBuilder.setMessage("Please choose your PatientID ");
-
-
-
-        List<PatientID> DataList = new ArrayList<>();
+        DataList = new ArrayList<>();
         PatientID patientId;
         try {
             Log.v(TAG, "History is:" + jsonObject.toString());
@@ -219,6 +231,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 patientId.setPatientnName(c.getString("firstname"));
                 DataList.add(patientId);
             }
+
+            pAdapter = new PatientAdapter(DataList);
+            recycler_patient.setAdapter(pAdapter);
+
         } catch (JSONException e) {
             Log.e(TAG, "some error occurred", e);
         }
@@ -234,9 +250,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         b.show();
     }
-
-
-
 
 
 }
