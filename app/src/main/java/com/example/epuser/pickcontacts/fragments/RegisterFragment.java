@@ -1,11 +1,15 @@
 package com.example.epuser.pickcontacts.fragments;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -37,6 +41,7 @@ import org.json.JSONObject;
 
 public class RegisterFragment extends Fragment implements View.OnClickListener{
 
+    private static final int PERMISSION_READSMS =1 ;
     private EditText regacnt, regphn;
     private TextView loginTV;
     private Button btnRegister;
@@ -70,6 +75,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     public void onStart() {
         super.onStart();
         init();
+        askForSMSPermission();
 
 
     }
@@ -77,7 +83,17 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         if(v ==btnRegister)
         {
+            mobile = regphn.getText().toString();
+            if (TextUtils.isEmpty(mobile)) {
+                regphn.setError(getString(R.string.enter_mobile));
+                return;
+            } else if (mobile.length() < 10) {
+                regphn.setError(getString(R.string.enter_valid_mobile));
+                return;
+            } else if (mobile.length() > 9)
+                mobile = mobile.substring(mobile.length() - 10);
             checkIfRegistered();
+            //generateOTP();
         }
         else if (v ==loginTV)
         {
@@ -85,7 +101,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
                 loginActivity.changeFragment(new LoginFragment());
             else
             {
-                showOTPDialog();
+                showLoginDialog();
             }
 
 
@@ -94,15 +110,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     }
 
     private void checkIfRegistered() {
-         mobile = regphn.getText().toString();
-        if (TextUtils.isEmpty(mobile)) {
-            regphn.setError(getString(R.string.enter_mobile));
-            return;
-        } else if (mobile.length() < 10) {
-            regphn.setError(getString(R.string.enter_valid_mobile));
-            return;
-        } else if (mobile.length() > 9)
-            mobile = mobile.substring(mobile.length() - 10);
+
         try {
             JSONObject requestJson = new JSONObject();
             JSONObject jsonObject1 = new JSONObject();
@@ -178,16 +186,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     };
 
     private void generateOTP() {
-        // mobile = regphn.getText().toString();
-//        if (TextUtils.isEmpty(mobile)) {
-//            regphn.setError(getString(R.string.enter_mobile));
-//            return;
-//        } else if (mobile.length() < 10) {
-//            regphn.setError(getString(R.string.enter_valid_mobile));
-//            return;
-//        } else if (mobile.length() > 9)
-//            mobile = mobile.substring(mobile.length() - 10);
-
 
         try {
             JSONObject requestJson = new JSONObject();
@@ -221,7 +219,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         }
     };
 
-    public void showOTPDialog() {
+    public void showLoginDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.custom_dialog_for_login, null);
@@ -259,15 +257,40 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
                         }
                         else
                             mobileET.setError(getString(R.string.enter_valid_mobile));
-
-
-
                     }
                 });
             }
         });
 
         b.show();
+    }
+
+    private void askForSMSPermission() {
+        if (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS},
+                    PERMISSION_READSMS);
+
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_READSMS: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+
+
+                } else {
+                    Toast.makeText(getActivity(), getString(R.string.sms_permission), Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+        }
     }
 
 

@@ -59,7 +59,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         final Calendar cal = Calendar.getInstance();
         fromDate = toDate = formatter.format(cal.getTimeInMillis());
 
-        LoadTransactions();
+       // LoadTransactions();
     }
 
     @Override
@@ -127,7 +127,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        LoadTransactions();
+        //LoadTransactions();
 
 
         signout.setOnClickListener(this);
