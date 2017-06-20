@@ -15,6 +15,7 @@ public class AppConstants {
     ///////////////////////////////////////////////////////////////////////////
     public static final int SUCCESS_DATA =100 ;
     public static final String EP_SMS_HOST = "IM-ESYPAY";
+    public static final String PATIENT_ID ="PATIENT_ID" ;
 
     public static int SUCCESS_TRANSACTION=300;
 

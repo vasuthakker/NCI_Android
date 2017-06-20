@@ -43,6 +43,7 @@ public class URLGenerator implements URLProvider {
 
     public static final String   URL_FETCH_TRANSACTIONS="txnhistory";
     public static final String URL_SEND = "";
+    public static final String URL_PATIENTID="searchmobilewithpatientid";
 
 
 

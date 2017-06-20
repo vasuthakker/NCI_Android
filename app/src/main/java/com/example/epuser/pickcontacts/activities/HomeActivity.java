@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.common.AppConstants;
+import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.common.URLGenerator;
 import com.example.epuser.pickcontacts.common.Utils;
 import com.example.epuser.pickcontacts.entities.Transactions;
@@ -50,7 +52,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private TextView currentBalance, noRecords, signout;
     private SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
     private String fromDate, toDate;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,13 +108,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private void init() {
         spFilter= (Spinner) findViewById(R.id.home_spfilter);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.home_swipelayout);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                LoadTransactions();
-            }
-        });
+
         signout = (TextView) findViewById(R.id.signout);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarnew);
@@ -166,7 +162,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             data.put("mobileNumber", "9164024092");
             data.put("fromDate", fromDate);
             data.put("toDate", toDate);
-            data.put("hmipatientId",2);
+            data.put("hmipatientId", Preference.getStringPreference(this, AppConstants.PATIENT_ID));
             data.put(getString(R.string.Order_id), System.currentTimeMillis());
             requestJson.put(getString(R.string.data), data);
 
