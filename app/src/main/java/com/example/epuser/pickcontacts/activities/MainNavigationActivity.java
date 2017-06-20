@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.recyler.FaqFragment;
 
 public class MainNavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -97,6 +98,8 @@ public class MainNavigationActivity extends AppCompatActivity
         } else if (id == R.id.nav_my_account) {
 
         } else if (id == R.id.nav_faq) {
+
+            changeFragment( new FaqFragment());
 
         } else if (id == R.id.nav_contact_us) {
 
