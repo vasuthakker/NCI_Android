@@ -1,7 +1,5 @@
 package com.example.epuser.pickcontacts.fragments;
 
-import android.app.Activity;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
@@ -12,7 +10,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,10 +19,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.epuser.pickcontacts.activities.DataAdapter;
-import com.example.epuser.pickcontacts.activities.HomeActivity;
+import com.example.epuser.pickcontacts.activities.HistoryFragment;
 import com.example.epuser.pickcontacts.activities.LoginPage;
-import com.example.epuser.pickcontacts.activities.MainActivity;
 import com.example.epuser.pickcontacts.R;
 import com.example.epuser.pickcontacts.activities.MainNavigationActivity;
 import com.example.epuser.pickcontacts.activities.PatientAdapter;
@@ -35,7 +30,6 @@ import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.common.URLGenerator;
 import com.example.epuser.pickcontacts.common.Utils;
 import com.example.epuser.pickcontacts.entities.PatientID;
-import com.example.epuser.pickcontacts.entities.Transactions;
 import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
 import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
 import com.goodiebag.pinview.Pinview;
@@ -206,7 +200,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         // do whatever
                         PatientID patientID = DataList.get(position);
                         Preference.savePreference(getActivity(),AppConstants.PATIENT_ID,patientID.getPatientId());
-                        Intent intent = new Intent(getActivity(), HomeActivity.class);
+                        Intent intent = new Intent(getActivity(), HistoryFragment.class);
                         startActivity(intent);
                         getActivity().finish();
                        // Toast.makeText(getActivity(), patientID.getPatientId() + " is selected!", Toast.LENGTH_SHORT).show();

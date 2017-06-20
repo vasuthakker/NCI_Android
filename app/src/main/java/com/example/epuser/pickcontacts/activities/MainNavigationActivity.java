@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,22 +21,17 @@ import com.example.epuser.pickcontacts.R;
 
 public class MainNavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private FragmentManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_navigation);
+
+        manager = getSupportFragmentManager();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -43,6 +41,9 @@ public class MainNavigationActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        getSupportActionBar().setTitle("HOME");
+        changeFragment(new MainFragment());
     }
 
     @Override
@@ -70,7 +71,9 @@ public class MainNavigationActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_change_pin) {
+            Intent intent = new Intent(MainNavigationActivity.this, ChangePin.class);
+            startActivity(intent);
             return true;
         }
 
@@ -84,10 +87,12 @@ public class MainNavigationActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            getSupportActionBar().setTitle("HOME");
+            changeFragment(new MainFragment());
+
         } else if (id == R.id.nav_trans_history) {
-            Intent intent = new Intent(MainNavigationActivity.this,HomeActivity.class);
-            startActivity(intent);
+            getSupportActionBar().setTitle("Transaction History");
+           changeFragment(new HistoryFragment());
 
         } else if (id == R.id.nav_my_account) {
 
@@ -112,5 +117,15 @@ public class MainNavigationActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void changeFragment(Fragment fragment) {
+        FragmentTransaction transaction = manager.beginTransaction();
+        Fragment tmpFragment = manager.findFragmentById(R.id.content_frame);
+        if (tmpFragment != null)
+            transaction.replace(R.id.content_frame, fragment);
+        else
+            transaction.add(R.id.content_frame, fragment);
+        transaction.commitAllowingStateLoss();
     }
 }

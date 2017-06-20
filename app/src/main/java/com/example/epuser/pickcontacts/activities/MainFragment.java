@@ -7,33 +7,28 @@ package com.example.epuser.pickcontacts.activities;
 //import android.nfc.Tag;
 //import android.os.AsyncTask;
 //import android.provider.ContactsContract;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 //import android.util.Log;
-import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 //import android.widget.Button;
 //import android.widget.EditText;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
-import com.example.epuser.pickcontacts.common.AppConstants;
-import com.example.epuser.pickcontacts.common.Preference;
 //import android.widget.Toast;
 
 //import org.json.JSONException;
 //import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    //   private String TAG = MainActivity.class.getSimpleName();
+public class MainFragment extends Fragment implements View.OnClickListener {
+    //   private String TAG = MainFragment.class.getSimpleName();
     // static final int RESULT_PICK_CONTACT = 1;
     // private EditText edtphn;
     // private Button btncnt;
@@ -44,40 +39,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Toolbar myToolbar;
 
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_main, container, false);
     }
 
+
+
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         init();
     }
 
     private void init() {
-        // edtphn = (EditText) findViewById(R.id.edtphn);
-        // btncnt = (Button) findViewById(R.id.btncnt);
-        // btnshw = (Button) findViewById(R.id.btnshw);
-        // textView2 = (TextView) findViewById(R.id.textview2);
-        checkBalance = (ImageView) findViewById(R.id.main_imgbalance);
-        sendBalance = (ImageView) findViewById(R.id.main_imgpay);
-        addMoney = (ImageView) findViewById(R.id.main_imgadd);
-        imagerequest = (ImageView) findViewById(R.id.main_imgreqmoney);
-        receiveMoney = (ImageView) findViewById(R.id.main_imgaccept);
-        cardLoad = (ImageView) findViewById(R.id.card_load);
-        menusetting = (Menu) findViewById(R.id.menusetting);
-        changepin = (Menu) findViewById(R.id.changepin);
-        profile = (Menu) findViewById(R.id.profile);
-        myToolbar = (Toolbar) findViewById(R.id.toolbar5);
-        trans_history = (Menu) findViewById(R.id.trans_history);
-        setSupportActionBar(myToolbar);
 
-        // btncnt.setOnClickListener(this);
-        // btnshw.setOnClickListener(this);
+        checkBalance = (ImageView)getActivity().findViewById(R.id.main_imgbalance);
+        sendBalance = (ImageView)getActivity().findViewById(R.id.main_imgpay);
+        addMoney = (ImageView)getActivity().findViewById(R.id.main_imgadd);
+        imagerequest = (ImageView)getActivity().findViewById(R.id.main_imgreqmoney);
+        receiveMoney = (ImageView)getActivity().findViewById(R.id.main_imgaccept);
+        cardLoad = (ImageView)getActivity().findViewById(R.id.card_load);
+//        menusetting = (Menu) findViewById(R.id.menusetting);
+//        changepin = (Menu) findViewById(R.id.changepin);
+      //  profile = (Menu) findViewById(R.id.profile);
+//        myToolbar = (Toolbar) findViewById(R.id.toolbar5);
+//        trans_history = (Menu) findViewById(R.id.trans_history);
+//        setSupportActionBar(myToolbar);
+
+
         cardLoad.setOnClickListener(this);
         checkBalance.setOnClickListener(this);
         sendBalance.setOnClickListener(this);
@@ -90,37 +81,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         if (v == addMoney) {
-            Intent intent = new Intent(MainActivity.this, AddMoneyActivity.class);
+            Intent intent = new Intent(getActivity(), AddMoneyActivity.class);
             startActivity(intent);
 
         } else if (v == checkBalance) {
-            Intent intent = new Intent(MainActivity.this, BalanceActivity.class);
+            Intent intent = new Intent(getActivity(), BalanceActivity.class);
             startActivity(intent);
 
         } else if (v == sendBalance) {
-            Intent intent = new Intent(MainActivity.this, SendActivity.class);
+            Intent intent = new Intent(getActivity(), SendActivity.class);
             startActivity(intent);
         } else if (v == imagerequest) {
-            Intent intent = new Intent(MainActivity.this, RequestMoneyActivity.class);
+            Intent intent = new Intent(getActivity(), RequestMoneyActivity.class);
             startActivity(intent);
         } else if (v == receiveMoney) {
-            Intent intent = new Intent(MainActivity.this, ReceiveActivity.class);
+            Intent intent = new Intent(getActivity(), ReceiveActivity.class);
             startActivity(intent);
         } else if (v == cardLoad) {
-            Intent intent = new Intent(MainActivity.this, CardLoad.class);
+            Intent intent = new Intent(getActivity(), CardLoad.class);
             startActivity(intent);
         }
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu, menu);
+//        return true;
+//    }
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -130,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //noinspection SimplifiableIfStatement
         if (id == R.id.changepin) {
             //Do something
-            Intent intent = new Intent(MainActivity.this, ChangePin.class);
+            Intent intent = new Intent(MainFragment.this, ChangePin.class);
             startActivity(intent);
             return true;
         } else if (id == R.id.profile) {
@@ -148,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }
 
 //    private void addNotification() {

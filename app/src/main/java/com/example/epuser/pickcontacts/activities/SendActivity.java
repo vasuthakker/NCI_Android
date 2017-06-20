@@ -14,19 +14,11 @@ import android.widget.EditText;
 import android.widget.QuickContactBadge;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.epuser.pickcontacts.R;
 import com.example.epuser.pickcontacts.common.AppConstants;
-import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.common.URLGenerator;
 import com.example.epuser.pickcontacts.common.Utils;
 import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
-import com.example.epuser.pickcontacts.fragments.SendOTP;
-import com.example.epuser.pickcontacts.network.CheckNetwork;
 import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
 
 import org.json.JSONException;
@@ -120,7 +112,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 String response =jsonObj.getString(AppConstants.KEY_RESP);
                 if(response.equals(getString(R.string.request_complete))) {
                     Toast.makeText(SendActivity.this,"money successfully sent",Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(SendActivity.this,MainActivity.class));
+                    startActivity(new Intent(SendActivity.this,MainFragment.class));
 
 
                 }
@@ -162,7 +154,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                     break;
             }
         } else {
-            Log.e("MainActivity", "Failed to pick contact");
+            Log.e("MainFragment", "Failed to pick contact");
         }
     }
 }

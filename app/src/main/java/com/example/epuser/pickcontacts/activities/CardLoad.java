@@ -142,7 +142,7 @@ public class CardLoad extends AppCompatActivity implements View.OnClickListener 
                     break;
             }
         } else {
-            Log.e("MainActivity", "Failed to pick contact");
+            Log.e("MainFragment", "Failed to pick contact");
         }
     }
 }

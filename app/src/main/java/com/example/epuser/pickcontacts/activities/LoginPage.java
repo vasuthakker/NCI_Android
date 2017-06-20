@@ -39,7 +39,7 @@ public class LoginPage extends AppCompatActivity  {
         if (Preference.getBooleanPreference(LoginPage.this, AppConstants.IS_LOGGED_IN))
             changeFragment(new LoginFragment());
         else
-            //startActivity(new Intent(this,HomeActivity.class));
+            //startActivity(new Intent(this,HistoryFragment.class));
             changeFragment(new RegisterFragment());
     }
 

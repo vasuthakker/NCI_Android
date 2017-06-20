@@ -16,13 +16,10 @@ import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.common.URLGenerator;
 import com.example.epuser.pickcontacts.common.Utils;
 import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
-import com.example.epuser.pickcontacts.fragments.LoginFragment;
 import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import static com.example.epuser.pickcontacts.R.id.regphn;
 
 public class ChangePin extends AppCompatActivity {
     private static final String TAG = "ChangePin";
@@ -109,7 +106,7 @@ public class ChangePin extends AppCompatActivity {
                 String response =jsonObj.getString(AppConstants.KEY_RESP);
                 if(response.equals(getString(R.string.request_complete))) {
                     Toast.makeText(ChangePin.this,"Pin successfully changed",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(ChangePin.this,MainActivity.class);
+                    Intent intent = new Intent(ChangePin.this,MainNavigationActivity.class);
                     startActivity(intent);
                     ChangePin.this.finish();
 

@@ -109,7 +109,7 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
                     break;
             }
         } else {
-            Log.e("MainActivity", "Failed to pick contact");
+            Log.e("MainFragment", "Failed to pick contact");
         }
     }
 

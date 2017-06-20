@@ -1,16 +1,15 @@
 package com.example.epuser.pickcontacts.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -35,11 +34,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import static android.R.attr.duration;
-import static android.R.attr.switchMinWidth;
-import static com.example.epuser.pickcontacts.R.drawable.signout;
 
-public class HomeActivity extends Fragment implements View.OnClickListener {
+public class HistoryFragment extends Fragment implements View.OnClickListener {
 
     private static final int TODAY = 0;
     private static final int YESTERDAY = 1;
@@ -51,26 +47,20 @@ public class HomeActivity extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerView;
     private DataAdapter mAdapter;
     private Spinner spFilter;
-    private static final String TAG = "HomeActivity";
+    private static final String TAG = "HistoryFragment";
     private TextView currentBalance, noRecords;
     private SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
     private String fromDate, toDate;
 
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        final Calendar cal = Calendar.getInstance();
-        fromDate = toDate = formatter.format(cal.getTimeInMillis());
-
-       // LoadTransactions();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_history, container, false);
     }
 
-
-
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         init();
 
@@ -112,28 +102,25 @@ public class HomeActivity extends Fragment implements View.OnClickListener {
 
 
     private void init() {
-        spFilter= (Spinner) findViewById(R.id.home_spfilter);
+        final Calendar cal = Calendar.getInstance();
+        fromDate = toDate = formatter.format(cal.getTimeInMillis());
 
-       // signout = (TextView) findViewById(R.id.signout);
+        spFilter= (Spinner)getActivity().findViewById(R.id.home_spfilter);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarnew);
-        setSupportActionBar(toolbar);
-        noRecords = (TextView) findViewById(R.id.no_record);
+//        Toolbar toolbar = (Toolbar)getActivity().findViewById(R.id.toolbarnew);
+//        setSupportActionBar(toolbar);
+        noRecords = (TextView)getActivity().findViewById(R.id.no_record);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        currentBalance = (TextView) findViewById(R.id.current_balance);
+        recyclerView = (RecyclerView)getActivity().findViewById(R.id.recycler_view);
+        currentBalance = (TextView)getActivity().findViewById(R.id.current_balance);
 
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        //LoadTransactions();
-
-
-
         String[] filterList = getResources().getStringArray(R.array.home_date_filter);
-        ArrayAdapter spAdapter = new ArrayAdapter<String>(HomeActivity.this, R.layout.home_filter_item, filterList);
+        ArrayAdapter spAdapter = new ArrayAdapter<String>(getActivity(), R.layout.home_filter_item, filterList);
         spAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         spFilter.setAdapter(spAdapter);
 
@@ -142,15 +129,7 @@ public class HomeActivity extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-//        if (v == signout) {
-////            Intent intent = new Intent(HomeActivity.this, LoginPage.class);
-////            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-////                    Intent.FLAG_ACTIVITY_CLEAR_TASK |
-////                    Intent.FLAG_ACTIVITY_NEW_TASK);
-////            startActivity(intent);
-////            finish();
-//
-//        }
+
     }
 
 
@@ -167,15 +146,15 @@ public class HomeActivity extends Fragment implements View.OnClickListener {
             data.put("mobileNumber", "9164024092");
             data.put("fromDate", fromDate);
             data.put("toDate", toDate);
-            data.put("hmipatientId", Preference.getStringPreference(this, AppConstants.PATIENT_ID));
+            data.put("hmipatientId", Preference.getStringPreference(getActivity(), AppConstants.PATIENT_ID));
             data.put(getString(R.string.Order_id), System.currentTimeMillis());
             requestJson.put(getString(R.string.data), data);
 
-            VolleyJsonRequest.request(this, Utils.generateURL(URLGenerator.URL_FETCH_TRANSACTIONS), requestJson, CheckBalanceResp, true);
+            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_FETCH_TRANSACTIONS), requestJson, CheckBalanceResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
         } catch (InternetNotAvailableException e) {
-            Toast.makeText(this, getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -196,7 +175,7 @@ public class HomeActivity extends Fragment implements View.OnClickListener {
 
         @Override
         public void errorReceived(int code, String message) {
-            Utils.showToast(getApplicationContext(), message);
+            Utils.showToast(getActivity(), message);
         }
     };
 

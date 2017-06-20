@@ -2,7 +2,6 @@ package com.example.epuser.pickcontacts.fragments;
 
 import android.Manifest;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -24,7 +23,6 @@ import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
 import com.example.epuser.pickcontacts.activities.LoginPage;
-import com.example.epuser.pickcontacts.activities.MainActivity;
 import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.common.URLGenerator;
