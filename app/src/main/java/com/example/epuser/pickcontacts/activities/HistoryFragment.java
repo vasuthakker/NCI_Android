@@ -2,6 +2,7 @@ package com.example.epuser.pickcontacts.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -36,7 +37,9 @@ import java.util.List;
 import java.util.Locale;
 import static android.R.attr.duration;
 import static android.R.attr.switchMinWidth;
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+import static com.example.epuser.pickcontacts.R.drawable.signout;
+
+public class HomeActivity extends Fragment implements View.OnClickListener {
 
     private static final int TODAY = 0;
     private static final int YESTERDAY = 1;
@@ -49,7 +52,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private DataAdapter mAdapter;
     private Spinner spFilter;
     private static final String TAG = "HomeActivity";
-    private TextView currentBalance, noRecords, signout;
+    private TextView currentBalance, noRecords;
     private SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
     private String fromDate, toDate;
 
@@ -111,7 +114,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private void init() {
         spFilter= (Spinner) findViewById(R.id.home_spfilter);
 
-        signout = (TextView) findViewById(R.id.signout);
+       // signout = (TextView) findViewById(R.id.signout);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarnew);
         setSupportActionBar(toolbar);
@@ -128,7 +131,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         //LoadTransactions();
 
 
-        signout.setOnClickListener(this);
+
         String[] filterList = getResources().getStringArray(R.array.home_date_filter);
         ArrayAdapter spAdapter = new ArrayAdapter<String>(HomeActivity.this, R.layout.home_filter_item, filterList);
         spAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
@@ -139,15 +142,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (v == signout) {
-            Intent intent = new Intent(HomeActivity.this, LoginPage.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                    Intent.FLAG_ACTIVITY_CLEAR_TASK |
-                    Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
-
-        }
+//        if (v == signout) {
+////            Intent intent = new Intent(HomeActivity.this, LoginPage.class);
+////            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+////                    Intent.FLAG_ACTIVITY_CLEAR_TASK |
+////                    Intent.FLAG_ACTIVITY_NEW_TASK);
+////            startActivity(intent);
+////            finish();
+//
+//        }
     }
 
 

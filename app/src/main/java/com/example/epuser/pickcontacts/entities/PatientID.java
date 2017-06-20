@@ -6,15 +6,43 @@ package com.example.epuser.pickcontacts.entities;
 
 public class PatientID {
     private String patientId;
-    private String patientName;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    private String firstName,middleName,lastName;
 
     public PatientID(){
 
     }
 
-    public PatientID(String patientID,String patientName){
+    public PatientID(String patientID,String firstName,String middleName,String lastName){
         this.patientId=patientID;
-        this.patientName=patientName;
+        this.firstName=firstName;
+        this.middleName=middleName;
+        this.lastName=lastName;
+
 
     }
 
@@ -26,13 +54,7 @@ public class PatientID {
         this.patientId = patientId;
     }
 
-    public String getPatientnName() {
-        return patientName;
-    }
 
-    public void setPatientnName(String patientnName) {
-        this.patientName = patientnName;
-    }
 
 
 

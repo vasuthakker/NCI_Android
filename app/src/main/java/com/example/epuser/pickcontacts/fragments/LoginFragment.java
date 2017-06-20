@@ -229,7 +229,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 patientId = new PatientID();
                 JSONObject c = jsonObject.getJSONObject(i);
                 patientId.setPatientId(c.getString("hmipatientId"));
-                patientId.setPatientnName(c.getString("firstname"));
+                patientId.setFirstName(c.getString("firstname"));
+                patientId.setMiddleName(c.getString("middlename"));
+                patientId.setLastName(c.getString("lastname"));
                 DataList.add(patientId);
             }
 

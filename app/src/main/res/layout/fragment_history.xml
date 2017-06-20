@@ -5,26 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.epuser.pickcontacts.activities.HomeActivity"
+    tools:context="com.example.epuser.pickcontacts.activities.HistoryFragment"
 android:background="#FAFBFB"
     >
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarnew"
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        app:title="@string/trans_history"
 
-        app:titleTextColor="@android:color/white"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginTop="0dp"
-        android:layout_marginLeft="0dp" />
+        tools:layout_constraintLeft_creator="1" >
+
+
+    </android.support.v7.widget.Toolbar>
 
 
     <View
@@ -136,24 +135,23 @@ android:background="#FAFBFB"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintLeft_creator="1" />
 
+
+
     <TextView
-        android:id="@+id/signout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SIGN OUT"
+        android:text="@string/trans_history"
+        android:textColor="@android:color/white"
         android:textStyle="bold"
-        android:textSize="20dp"
-
+        android:textSize="23dp"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="@+id/toolbarnew"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/lnblnc"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintVertical_bias="0.42000002" />
-
-
+        app:layout_constraintBottom_toTopOf="@+id/view4"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp" />
 
 
 
