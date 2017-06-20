@@ -22,7 +22,9 @@ android:background="#FAFBFB"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintLeft_creator="1" />
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="0dp" />
 
 
     <View

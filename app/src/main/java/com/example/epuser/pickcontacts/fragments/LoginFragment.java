@@ -27,6 +27,7 @@ import com.example.epuser.pickcontacts.activities.HomeActivity;
 import com.example.epuser.pickcontacts.activities.LoginPage;
 import com.example.epuser.pickcontacts.activities.MainActivity;
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.activities.MainNavigationActivity;
 import com.example.epuser.pickcontacts.activities.PatientAdapter;
 import com.example.epuser.pickcontacts.activities.RecyclerItemClickListener;
 import com.example.epuser.pickcontacts.common.AppConstants;
@@ -135,10 +136,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         @Override
         public void responseReceived(JSONObject jsonObj) {
             Preference.savePreference(getActivity(), AppConstants.IS_LOGGED_IN, true);
-            // Intent intent = new Intent(getActivity(), HomeActivity.class);
-            // startActivity(intent);
-            //  getActivity().finish();
-            getPatientID();
+             Intent intent = new Intent(getActivity(), MainNavigationActivity.class);
+             startActivity(intent);
+              getActivity().finish();
+//            getPatientID();
         }
 
         @Override
@@ -155,8 +156,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             JSONObject jsonObject2 = new JSONObject();
             requestJson.put("HEADER", jsonObject1);
             // TODO: 6/15/2017   generalise the phone number
-            // jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
-            jsonObject2.put("mobileNumber", "9164024091");
+             jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
+          //  jsonObject2.put("mobileNumber", "9164024091");
             requestJson.put("DATA", jsonObject2);
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_PATIENTID), requestJson, PatientGetResp, true);

@@ -15,9 +15,9 @@
         android:background="@color/colorAccent"
         android:text="@string/sign_in"
         android:textColor="@android:color/white"
-        android:layout_marginRight="0dp"
+        android:layout_marginRight="30dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="0dp"
+        android:layout_marginLeft="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
@@ -27,27 +27,37 @@
 
     <ImageView
         android:id="@+id/imageView"
+        android:layout_width="298dp"
+        android:layout_height="150dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_yes_bank_logo"
+        android:layout_marginTop="0dp" />
+
+    <TextView
+        android:id="@+id/loginTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_easypay"
+        android:text="Login"
+        android:layout_marginRight="81dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginBottom="60dp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout4" />
+        android:layout_marginTop="25dp"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@+id/btnregister"
+        android:layout_marginEnd="81dp" />
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="0dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:id="@+id/textInputLayout4"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="0dp"
-        app:layout_constraintVertical_bias="0.32">
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.39999998">
 
         <EditText
             android:id="@+id/regphn"
@@ -70,17 +80,5 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.32" />
     </android.support.design.widget.TextInputLayout>
-
-    <TextView
-        android:id="@+id/loginTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:layout_marginRight="81dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="25dp"
-        android:textSize="25sp"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintTop_toBottomOf="@+id/btnregister" />
 
 </android.support.constraint.ConstraintLayout>

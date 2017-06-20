@@ -109,8 +109,9 @@ public class ChangePin extends AppCompatActivity {
                 String response =jsonObj.getString(AppConstants.KEY_RESP);
                 if(response.equals(getString(R.string.request_complete))) {
                     Toast.makeText(ChangePin.this,"Pin successfully changed",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(ChangePin.this,MainActivity.class));
-
+                    Intent intent = new Intent(ChangePin.this,MainActivity.class);
+                    startActivity(intent);
+                    ChangePin.this.finish();
 
                 }
 

@@ -110,5 +110,11 @@
     <string name="ref_no">Ref no :</string>
     <string name="Order_id">ORDER_ID</string>
     <string name="sms_permission">Please give SMS permission to continue</string>
+    <string name="title_activity_main_navigation">MainNavigationActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 
 </resources>

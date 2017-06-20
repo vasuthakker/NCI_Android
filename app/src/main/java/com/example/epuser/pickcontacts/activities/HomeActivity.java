@@ -64,6 +64,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
        // LoadTransactions();
     }
 
+
+
     @Override
     protected void onStart() {
         super.onStart();
