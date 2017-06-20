@@ -71,11 +71,14 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/enterpin"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="0dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:textSize="25sp"/>
+
+        android:textSize="25sp"
+        app:layout_constraintVertical_bias="0.755"
+
+        android:layout_marginLeft="40dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <com.goodiebag.pinview.Pinview
         android:id="@+id/enterpin"
@@ -98,6 +101,19 @@
         app:pinHeight="50dp"
         app:pinLength="4"
         app:pinWidth="50dp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:srcCompat="@drawable/ic_lock"
+
+        app:layout_constraintRight_toLeftOf="@+id/EnterPinET"
+        android:layout_marginRight="10dp"
+        app:layout_constraintTop_toTopOf="@+id/EnterPinET"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/EnterPinET"
+        android:layout_marginBottom="5dp" />
 
 
 </android.support.constraint.ConstraintLayout>

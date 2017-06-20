@@ -40,9 +40,11 @@ public class BalanceActivity extends AppCompatActivity {
             JSONObject jsonObject2 = new JSONObject();
             requestJson.put(getString(R.string.header), jsonObject1);
             jsonObject2.put(getString(R.string.mobile_number), Preference.getStringPreference(BalanceActivity.this,AppConstants.MOBILE_NUMBER));
+           // jsonObject2.put(getString(R.string.mobile_number), Preference.getStringPreference(BalanceActivity.this,AppConstants.MOBILE_NUMBER));
+            jsonObject2.put(getString(R.string.Order_id), System.currentTimeMillis());
             requestJson.put(getString(R.string.data), jsonObject2);
 
-            VolleyJsonRequest.request(BalanceActivity.this, Utils.generateURL(URLGenerator.URL_FETCH_BAlANCE), requestJson, sendResp, true);
+            VolleyJsonRequest.request(BalanceActivity.this, Utils.generateURL(URLGenerator.URL_FETCH_BAlANCE), requestJson, balanceResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);
         } catch (InternetNotAvailableException e) {
@@ -51,18 +53,10 @@ public class BalanceActivity extends AppCompatActivity {
 
     }
 
-    private VolleyJsonRequest.OnJsonResponse sendResp = new VolleyJsonRequest.OnJsonResponse() {
+    private VolleyJsonRequest.OnJsonResponse balanceResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-            try {
-                String response =jsonObj.getString(AppConstants.KEY_RESP);
-                if(response.equals(getString(R.string.request_complete))) {
 
-                }
-
-            } catch (JSONException e) {
-                Log.e(TAG,"",e);
-            }
 
         }
         @Override

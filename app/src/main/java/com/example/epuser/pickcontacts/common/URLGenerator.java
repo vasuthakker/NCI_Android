@@ -41,7 +41,7 @@ public class URLGenerator implements URLProvider {
     public static final String URL_CARD_LOAD="as per url3";
     public static final String  URL_FETCH_BAlANCE="checkBalance";
 
-    public static final String   URL_FETCH_TRANSACTIONS="txnhistory";
+    public static final String URL_FETCH_TRANSACTIONS="txnhistory";
     public static final String URL_SEND = "";
     public static final String URL_PATIENTID="searchmobilewithpatientid";
 
