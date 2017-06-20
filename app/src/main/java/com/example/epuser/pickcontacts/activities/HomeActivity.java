@@ -109,7 +109,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private void init() {
         spFilter= (Spinner) findViewById(R.id.home_spfilter);
 
-        signout = (TextView) findViewById(R.id.signout);
+       // signout = (TextView) findViewById(R.id.signout);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarnew);
         setSupportActionBar(toolbar);
@@ -138,12 +138,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == signout) {
-            Intent intent = new Intent(HomeActivity.this, LoginPage.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                    Intent.FLAG_ACTIVITY_CLEAR_TASK |
-                    Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+//            Intent intent = new Intent(HomeActivity.this, LoginPage.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+//                    Intent.FLAG_ACTIVITY_CLEAR_TASK |
+//                    Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(intent);
+//            finish();
 
         }
     }

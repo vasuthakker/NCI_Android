@@ -22,13 +22,15 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.MyViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView patient_id,patient_name;
+        public TextView patient_id,firstName,middleName,lastName;
 
         public MyViewHolder(View view) {
 
             super(view);
             patient_id=(TextView)view.findViewById(R.id.patient_id);
-            patient_name = (TextView) view.findViewById(R.id.patient_name);
+            firstName = (TextView) view.findViewById(R.id.first_name);
+            middleName=(TextView) view.findViewById(R.id.middle_name);
+            lastName=(TextView) view.findViewById(R.id.last_name);
 
 
         }
@@ -54,7 +56,9 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.MyViewHo
 
 
         holder.patient_id.setText(patientId.getPatientId());
-        holder.patient_name.setText(patientId.getPatientnName());
+        holder.firstName.setText(patientId.getFirstName());
+        holder.middleName.setText(patientId.getMiddleName());
+        holder.lastName.setText(patientId.getLastName());
     }
 
     @Override
