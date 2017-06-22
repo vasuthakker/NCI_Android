@@ -122,7 +122,7 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
         final EditText edt = (EditText) dialogView.findViewById(R.id.edit1);
 
         dialogBuilder.setTitle("OTP");
-        dialogBuilder.setMessage("Enter the OTP sent to Benefactor's Phone Number ");
+        dialogBuilder.setMessage("Enter the OTP sent to Benefactor's Questions Number ");
         dialogBuilder.setPositiveButton("SUBMIT", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
 

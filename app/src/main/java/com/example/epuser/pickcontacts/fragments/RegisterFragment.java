@@ -227,7 +227,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         mobileET.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
 
         dialogBuilder.setTitle("LOGIN");
-        dialogBuilder.setMessage("Please enter your Phone Number ");
+        dialogBuilder.setMessage("Please enter your Questions Number ");
         dialogBuilder.setPositiveButton("SUBMIT", null);
 
         dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

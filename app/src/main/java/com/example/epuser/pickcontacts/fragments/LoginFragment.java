@@ -19,7 +19,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.epuser.pickcontacts.activities.HistoryFragment;
 import com.example.epuser.pickcontacts.activities.LoginPage;
 import com.example.epuser.pickcontacts.R;
 import com.example.epuser.pickcontacts.activities.MainNavigationActivity;

@@ -1,4 +1,4 @@
-package com.example.epuser.pickcontacts.activities;
+package com.example.epuser.pickcontacts.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.activities.DataAdapter;
 import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.common.URLGenerator;

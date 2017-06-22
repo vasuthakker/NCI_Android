@@ -10,9 +10,9 @@ import java.util.List;
  * Created by epuser on 6/16/2017.
  */
 @SuppressLint("ParcelCreator")
-public class MobileOS extends ExpandableGroup<Phone> {
+public class QuestionType extends ExpandableGroup<Questions> {
 
-    public MobileOS(String title, List<Phone> items) {
+    public QuestionType(String title, List<Questions> items) {
         super(title, items);
     }
 }

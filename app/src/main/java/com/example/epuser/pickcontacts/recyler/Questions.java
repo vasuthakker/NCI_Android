@@ -7,11 +7,11 @@ import android.os.Parcelable;
  * Created by epuser on 6/16/2017.
  */
 
-public class Phone implements Parcelable {
+public class Questions implements Parcelable {
 
     private String name;
 
-    public Phone(Parcel in) {
+    public Questions(Parcel in) {
         name = in.readString();
     }
 
@@ -23,7 +23,7 @@ public class Phone implements Parcelable {
         this.name = name;
     }
 
-    public Phone(String name) {
+    public Questions(String name) {
         this.name = name;
     }
 
@@ -37,15 +37,15 @@ public class Phone implements Parcelable {
         return 0;
     }
 
-    public static final Creator<Phone> CREATOR = new Creator<Phone>() {
+    public static final Creator<Questions> CREATOR = new Creator<Questions>() {
         @Override
-        public Phone createFromParcel(Parcel in) {
-            return new Phone(in);
+        public Questions createFromParcel(Parcel in) {
+            return new Questions(in);
         }
 
         @Override
-        public Phone[] newArray(int size) {
-            return new Phone[size];
+        public Questions[] newArray(int size) {
+            return new Questions[size];
         }
     };
 }

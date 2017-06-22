@@ -13,10 +13,10 @@ import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
  * Created by epuser on 6/16/2017.
  */
 
-public class OSViewHolder extends GroupViewHolder {
+public class QuestionsTypeViewHolder extends GroupViewHolder {
     private TextView osName;
 
-    public OSViewHolder(View itemView) {
+    public QuestionsTypeViewHolder(View itemView) {
         super(itemView);
 
         osName = (TextView) itemView.findViewById(R.id.mobile_os);
