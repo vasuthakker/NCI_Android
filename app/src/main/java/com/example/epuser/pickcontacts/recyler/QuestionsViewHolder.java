@@ -12,18 +12,18 @@ import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
  * Created by epuser on 6/16/2017.
  */
 
-public class PhoneViewHolder extends ChildViewHolder {
+public class QuestionsViewHolder extends ChildViewHolder {
 
     private TextView phoneName;
 
-    public PhoneViewHolder(View itemView) {
+    public QuestionsViewHolder(View itemView) {
         super(itemView);
 
         phoneName = (TextView) itemView.findViewById(R.id.phone_name);
     }
 
-    public void onBind(Phone phone, ExpandableGroup group) {
-        phoneName.setText(phone.getName());
+    public void onBind(Questions questions, ExpandableGroup group) {
+        phoneName.setText(questions.getName());
         if (group.getTitle().equals("Android")) {
             phoneName.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         } else if (group.getTitle().equals("iOS")) {

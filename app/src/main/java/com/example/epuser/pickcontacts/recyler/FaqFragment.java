@@ -1,6 +1,5 @@
 package com.example.epuser.pickcontacts.recyler;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 public class FaqFragment extends android.support.v4.app.Fragment {
 
     private RecyclerView recyclerView;
-    private ArrayList<MobileOS> mobileOSes;
+    private ArrayList<QuestionType> mobileOSes;
     private RecyclerAdapter adapter;
 
     @Nullable
@@ -63,38 +62,38 @@ public class FaqFragment extends android.support.v4.app.Fragment {
     }
 
     private void setData() {
-        ArrayList<Phone> iphones = new ArrayList<>();
-        iphones.add(new Phone("iPhone 4"));
-        iphones.add(new Phone("iPhone 4S"));
-        iphones.add(new Phone("iPhone 5"));
-        iphones.add(new Phone("iPhone 5S"));
-        iphones.add(new Phone("iPhone 6"));
-        iphones.add(new Phone("iPhone 6Plus"));
-        iphones.add(new Phone("iPhone 6S"));
-        iphones.add(new Phone("iPhone 6S Plus"));
+        ArrayList<Questions> iphones = new ArrayList<>();
+        iphones.add(new Questions("iPhone 4"));
+        iphones.add(new Questions("iPhone 4S"));
+        iphones.add(new Questions("iPhone 5"));
+        iphones.add(new Questions("iPhone 5S"));
+        iphones.add(new Questions("iPhone 6"));
+        iphones.add(new Questions("iPhone 6Plus"));
+        iphones.add(new Questions("iPhone 6S"));
+        iphones.add(new Questions("iPhone 6S Plus"));
 
-        ArrayList<Phone> nexus = new ArrayList<>();
-        nexus.add(new Phone("Nexus One"));
-        nexus.add(new Phone("Nexus S"));
-        nexus.add(new Phone("Nexus 4"));
-        nexus.add(new Phone("Nexus 5"));
-        nexus.add(new Phone("Nexus 6"));
-        nexus.add(new Phone("Nexus 5X"));
-        nexus.add(new Phone("Nexus 6P"));
-        nexus.add(new Phone("Nexus 7"));
+        ArrayList<Questions> nexus = new ArrayList<>();
+        nexus.add(new Questions("Nexus One"));
+        nexus.add(new Questions("Nexus S"));
+        nexus.add(new Questions("Nexus 4"));
+        nexus.add(new Questions("Nexus 5"));
+        nexus.add(new Questions("Nexus 6"));
+        nexus.add(new Questions("Nexus 5X"));
+        nexus.add(new Questions("Nexus 6P"));
+        nexus.add(new Questions("Nexus 7"));
 
-        ArrayList<Phone> windowPhones = new ArrayList<>();
-        windowPhones.add(new Phone("Nokia Lumia 800"));
-        windowPhones.add(new Phone("Nokia Lumia 710"));
-        windowPhones.add(new Phone("Nokia Lumia 900"));
-        windowPhones.add(new Phone("Nokia Lumia 610"));
-        windowPhones.add(new Phone("Nokia Lumia 510"));
-        windowPhones.add(new Phone("Nokia Lumia 820"));
-        windowPhones.add(new Phone("Nokia Lumia 920"));
+        ArrayList<Questions> windowQuestionses = new ArrayList<>();
+        windowQuestionses.add(new Questions("Nokia Lumia 800"));
+        windowQuestionses.add(new Questions("Nokia Lumia 710"));
+        windowQuestionses.add(new Questions("Nokia Lumia 900"));
+        windowQuestionses.add(new Questions("Nokia Lumia 610"));
+        windowQuestionses.add(new Questions("Nokia Lumia 510"));
+        windowQuestionses.add(new Questions("Nokia Lumia 820"));
+        windowQuestionses.add(new Questions("Nokia Lumia 920"));
 
-        mobileOSes.add(new MobileOS("iOS", iphones));
-        mobileOSes.add(new MobileOS("Android", nexus));
-        mobileOSes.add(new MobileOS("Window Phone", windowPhones));
+        mobileOSes.add(new QuestionType("iOS", iphones));
+        mobileOSes.add(new QuestionType("Android", nexus));
+        mobileOSes.add(new QuestionType("Window Questions", windowQuestionses));
     }
 
 }

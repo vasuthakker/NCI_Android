@@ -1,6 +1,5 @@
 package com.example.epuser.pickcontacts.recyler;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,7 @@ import java.util.List;
  * Created by epuser on 6/16/2017.
  */
 
-public class RecyclerAdapter extends ExpandableRecyclerViewAdapter<OSViewHolder, PhoneViewHolder> {
+public class RecyclerAdapter extends ExpandableRecyclerViewAdapter<QuestionsTypeViewHolder, QuestionsViewHolder> {
 
     private android.support.v4.app.Fragment activity;
 
@@ -27,29 +26,29 @@ public class RecyclerAdapter extends ExpandableRecyclerViewAdapter<OSViewHolder,
     }
 
     @Override
-    public OSViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
+    public QuestionsTypeViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
        LayoutInflater inflater = (LayoutInflater)activity.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.group_view_holder, parent, false);
 
-        return new OSViewHolder(view);
+        return new QuestionsTypeViewHolder(view);
     }
 
     @Override
-    public PhoneViewHolder onCreateChildViewHolder(ViewGroup parent, final int viewType) {
+    public QuestionsViewHolder onCreateChildViewHolder(ViewGroup parent, final int viewType) {
         LayoutInflater inflater = (LayoutInflater) activity.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.child_view_holder, parent, false);
 
-        return new PhoneViewHolder(view);
+        return new QuestionsViewHolder(view);
     }
 
     @Override
-    public void onBindChildViewHolder(PhoneViewHolder holder, int flatPosition, ExpandableGroup group, int childIndex) {
-        final Phone phone = ((MobileOS) group).getItems().get(childIndex);
-        holder.onBind(phone,group);
+    public void onBindChildViewHolder(QuestionsViewHolder holder, int flatPosition, ExpandableGroup group, int childIndex) {
+        final Questions questions = ((QuestionType) group).getItems().get(childIndex);
+        holder.onBind(questions,group);
     }
 
     @Override
-    public void onBindGroupViewHolder(OSViewHolder holder, int flatPosition, ExpandableGroup group) {
+    public void onBindGroupViewHolder(QuestionsTypeViewHolder holder, int flatPosition, ExpandableGroup group) {
         holder.setGroupName(group);
     }
 }
