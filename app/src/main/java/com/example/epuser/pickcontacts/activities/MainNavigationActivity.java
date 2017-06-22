@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -45,8 +46,8 @@ public class MainNavigationActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        getSupportActionBar().setTitle("HOME");
-        changeFragment(new MainFragment());
+        getSupportActionBar().setTitle(R.string.title_my_account);
+        changeFragment(new MyAccountFragment());
     }
 
     @Override
@@ -118,13 +119,15 @@ public class MainNavigationActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_trans_history) {
             getSupportActionBar().setTitle("Transaction History");
-            changeFragment(new HistoryFragment());
+           changeFragment(new HistoryFragment());
 
         } else if (id == R.id.nav_my_account) {
+            getSupportActionBar().setTitle(R.string.title_my_account);
+            changeFragment(new MyAccountFragment());
 
         } else if (id == R.id.nav_faq) {
 
-            changeFragment(new FaqFragment());
+            changeFragment( new FaqFragment());
 
         } else if (id == R.id.nav_contact_us) {
 
@@ -158,9 +161,4 @@ public class MainNavigationActivity extends AppCompatActivity
             transaction.add(R.id.content_frame, fragment);
         transaction.commitAllowingStateLoss();
     }
-
 }
-
-
-
-
