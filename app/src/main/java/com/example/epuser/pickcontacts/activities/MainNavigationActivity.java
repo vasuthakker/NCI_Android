@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.fragments.MyAccountFragment;
 import com.example.epuser.pickcontacts.recyler.FaqFragment;
 
 public class MainNavigationActivity extends AppCompatActivity
@@ -43,8 +44,8 @@ public class MainNavigationActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        getSupportActionBar().setTitle("HOME");
-        changeFragment(new MainFragment());
+        getSupportActionBar().setTitle(R.string.title_my_account);
+        changeFragment(new MyAccountFragment());
     }
 
     @Override
@@ -96,6 +97,8 @@ public class MainNavigationActivity extends AppCompatActivity
            changeFragment(new HistoryFragment());
 
         } else if (id == R.id.nav_my_account) {
+            getSupportActionBar().setTitle(R.string.title_my_account);
+            changeFragment(new MyAccountFragment());
 
         } else if (id == R.id.nav_faq) {
 
