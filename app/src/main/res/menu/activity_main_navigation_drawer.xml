@@ -28,14 +28,15 @@
             android:icon="@drawable/ic_change"
             android:title="Change Device" />
         <item
-            android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_logout"
-            android:title="Logout" />
-        <item
             android:id="@+id/nav_feedback"
             android:title="Feedback"
             android:icon="@drawable/ic_feedback"
             />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Logout" />
+
     </group>
 
 </menu>

@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.epuser.pickcontacts.R;
 import com.example.epuser.pickcontacts.fragments.FeedbackFragment;
 import com.example.epuser.pickcontacts.fragments.HistoryFragment;
+import com.example.epuser.pickcontacts.fragments.MyAccountFragment;
 import com.example.epuser.pickcontacts.recyler.FaqFragment;
 
 public class MainNavigationActivity extends AppCompatActivity
@@ -132,6 +133,7 @@ public class MainNavigationActivity extends AppCompatActivity
         } else if (id == R.id.nav_contact_us) {
 
         }else if(id==R.id.nav_feedback){
+            getSupportActionBar().setTitle(R.string.title_feedback);
             changeFragment(new FeedbackFragment());
         }
         else if (id == R.id.nav_change_device) {

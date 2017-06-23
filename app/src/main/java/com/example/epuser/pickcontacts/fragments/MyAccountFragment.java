@@ -19,12 +19,13 @@ import com.example.epuser.pickcontacts.activities.MainNavigationActivity;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
+
 /**
  * Created by epuser on 20-Jun-17.
  */
 
 public class MyAccountFragment extends Fragment implements View.OnClickListener {
-   private EditText ETFirstName , ETLastName , ETMobile , ETEmail ;
+   private EditText ETFirstName  , ETMobile , ETEmail ;
    private TextView TVUpdateDetails , TVsave , TVChangePin;
     private MainNavigationActivity mainNavigationActivity;
 
@@ -50,7 +51,6 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
 
     private void init() {
         ETFirstName = (EditText)getActivity().findViewById(R.id.ETFirstName);
-        ETLastName = (EditText)getActivity().findViewById(R.id.ETLastName);
         ETMobile = (EditText)getActivity().findViewById(R.id.ETMyAccMobile);
         ETEmail = (EditText)getActivity().findViewById(R.id.ETMyAccEmail);
         TVUpdateDetails = (TextView) getActivity().findViewById(R.id.TVUpdateDetails);
@@ -60,8 +60,8 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         TVsave.setOnClickListener(this);
         TVChangePin.setOnClickListener(this);
 
-        ETFirstName.setText("Bittu");
-        ETLastName.setText("Kumar");
+        ETFirstName.setText("Bittu Kumar");
+
         ETEmail.setText("bittu.dakshana15@gmail.com");
         ETMobile.setText("9987582933");
     }
@@ -72,7 +72,7 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         {
 
             ETFirstName.setEnabled(true);
-            ETLastName.setEnabled(true);
+
             // ETMobile.setEnabled(true);
             ETEmail.setEnabled(true);
             TVsave.setVisibility(View.VISIBLE);

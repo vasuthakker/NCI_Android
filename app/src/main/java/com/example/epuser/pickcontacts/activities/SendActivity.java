@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -52,6 +53,13 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         sendButton=(Button)findViewById(R.id.sendButton);
         contactButton=(QuickContactBadge)findViewById(R.id.sendmoney_contact);
 
+        Toolbar toolbar = (Toolbar)findViewById(R.id.sendmoney_toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         sendButton.setOnClickListener(this);
         contactButton.setOnClickListener(this);
     }
