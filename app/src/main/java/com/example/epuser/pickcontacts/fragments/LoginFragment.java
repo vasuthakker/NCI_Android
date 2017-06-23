@@ -117,6 +117,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
             requestJson.put("DATA", jsonObject2);
 
+
+
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_LOGIN), requestJson, LoginCheckResp, true);
         } catch (JSONException e) {
             Log.e(TAG, "validateReceiveMoney: JSONException", e);

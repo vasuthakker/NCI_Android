@@ -1,12 +1,10 @@
 package com.example.epuser.pickcontacts.activities;
 
-import android.content.Intent;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.widget.EditText;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +26,14 @@ public class BalanceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_balance);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.BalanceActToolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         currentBalance=(TextView)findViewById(R.id.currentbalance);
         showBalance();

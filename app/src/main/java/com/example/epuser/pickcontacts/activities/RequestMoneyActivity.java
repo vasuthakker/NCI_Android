@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -36,6 +37,15 @@ public class RequestMoneyActivity extends AppCompatActivity  implements View.OnC
         requestcnt=(QuickContactBadge)findViewById(R.id.reqmoney_contact);
         requestphn=(EditText)findViewById(R.id.reqmoney_edtmobile);
         requestAmount=(EditText)findViewById(R.id.reqmoney_edtamount);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.reqmoney_toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         requestcnt.setOnClickListener(this);
     }
 

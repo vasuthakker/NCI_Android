@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,11 +56,15 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
         edtreceivePhonenumber=(EditText)findViewById(R.id.receivemoney_edtmobile) ;
         edtenterAmount=(EditText) findViewById(R.id.receivemoney_edtamount);
         receiveRemarks=(EditText)findViewById(R.id.receivemoney_edtremakrs) ;
-
         receivebtn=(Button)findViewById(R.id.receivebutton) ;
 
-
-
+        Toolbar toolbar = (Toolbar)findViewById(R.id.receivemoney_toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         selectContact.setOnClickListener(this);
         receivebtn.setOnClickListener(this);

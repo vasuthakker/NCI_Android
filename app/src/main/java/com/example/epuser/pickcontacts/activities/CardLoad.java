@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -49,6 +50,14 @@ public class CardLoad extends AppCompatActivity implements View.OnClickListener 
         cl_btn=(Button)findViewById(R.id.cl_btn);
         cl_contact=(QuickContactBadge)findViewById(R.id.cl_quickContactBadge);
         cl_phonenumber=(EditText)findViewById(R.id.cl_phnonenumber);
+
+        Toolbar toolbar  = (Toolbar)findViewById(R.id.cardLoadToolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         cl_contact.setOnClickListener(this);
         cl_btn.setOnClickListener(this);

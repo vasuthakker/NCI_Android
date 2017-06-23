@@ -134,6 +134,7 @@ public class MainNavigationActivity extends AppCompatActivity
         } else if (id == R.id.nav_contact_us) {
 
         }else if(id==R.id.nav_feedback){
+            getSupportActionBar().setTitle(R.string.title_feedback);
             changeFragment(new FeedbackFragment());
         }
         else if (id == R.id.nav_change_device) {
