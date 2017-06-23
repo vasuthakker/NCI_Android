@@ -18,8 +18,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.fragments.AboutUs;
 import com.example.epuser.pickcontacts.fragments.FeedbackFragment;
 import com.example.epuser.pickcontacts.fragments.HistoryFragment;
+import com.example.epuser.pickcontacts.fragments.MyAccountFragment;
 import com.example.epuser.pickcontacts.recyler.FaqFragment;
 
 public class MainNavigationActivity extends AppCompatActivity
@@ -136,7 +138,11 @@ public class MainNavigationActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_change_device) {
 
-        } else if (id == R.id.nav_logout) {
+        }else if(id==R.id.nav_about_us){
+            changeFragment(new AboutUs());
+        }
+
+        else if (id == R.id.nav_logout) {
             Intent intent = new Intent(MainNavigationActivity.this, LoginPage.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                     Intent.FLAG_ACTIVITY_CLEAR_TASK |
