@@ -137,7 +137,8 @@
     <string name="ls_tv_faqs">FAQs</string>
     <string name="ls_tv_about_us">About Us</string>
     <string name="title_faqs">FAQs</string>
-    <string name="enter_feedback">Enter Your Feedback</string>
+    <string name="enter_feedback">Give Your Valuable Feedback</string>
     <string name="empty_feedback_error">Please enter your Feedback</string>
+    <string name="Faq">Frequently Asked Questions</string>
 
 </resources>
