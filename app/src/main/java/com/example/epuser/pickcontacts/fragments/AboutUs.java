@@ -34,7 +34,11 @@ public class AboutUs extends android.support.v4.app.Fragment {
     private void init() {
 
         WebView myWebView = (WebView)getActivity(). findViewById(R.id.webview);
-        myWebView.setWebViewClient(new WebViewClient());
+        myWebView.setWebViewClient(new WebViewClient(){
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return true;
+            }
+        });
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
