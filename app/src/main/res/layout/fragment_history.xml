@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.epuser.pickcontacts.fragments.HistoryFragment"
-android:background="#FAFBFB"
-    >
+    tools:context="com.example.epuser.pickcontacts.fragments.HistoryFragment">
 
     <View
         android:id="@+id/view4"

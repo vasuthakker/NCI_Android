@@ -24,8 +24,14 @@
             android:layout_height="53dp"
             android:src="@drawable/ic_yes_bank_logo" />
 
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="38dp"
+            android:layout_height="32dp"
+            app:srcCompat="@drawable/ic_tick" />
+
         <TextView
-            android:id="@+id/toast_txtview"
+            android:id="@+id/success_toast_txtview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -35,7 +41,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/TVPoweredBy"
+            android:id="@+id/SuccessTVPoweredBy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/TVpowered_by"

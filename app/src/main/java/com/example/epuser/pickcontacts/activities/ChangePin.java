@@ -3,7 +3,10 @@ package com.example.epuser.pickcontacts.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +28,7 @@ public class ChangePin extends AppCompatActivity {
     private static final String TAG = "ChangePin";
     private EditText oldPinET,newPinET,confirmPinET;
     private Button changePinbtn;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,53 @@ public class ChangePin extends AppCompatActivity {
                 changePin();
             }
         });
+
+        oldPinET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (oldPinET.length()==4)
+                {
+                    //oldPinET.clearFocus();
+                    newPinET.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+//                if (oldPinET.length()!=4)
+//                {
+//                    oldPinET.requestFocus();
+//                    oldPinET.setError(getString(R.string.enter_valid_pin));
+//                }
+
+            }
+        });
+
+        newPinET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (newPinET.length() == 4)
+                {
+                   // newPinET.clearFocus();
+                    confirmPinET.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void init() {
@@ -52,6 +103,13 @@ public class ChangePin extends AppCompatActivity {
         confirmPinET = (EditText)findViewById(R.id.confirm_new_pin);
         confirmPinET.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
         changePinbtn = (Button)findViewById(R.id.newpinbutton);
+        toolbar  = (Toolbar)findViewById(R.id.changePinToolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     private void changePin() {
@@ -101,26 +159,20 @@ public class ChangePin extends AppCompatActivity {
     private VolleyJsonRequest.OnJsonResponse changePinResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-            try {
-                Preference.savePreference(ChangePin.this,AppConstants.IS_LOGGED_IN,true);
-                String response =jsonObj.getString(AppConstants.KEY_RESP);
-                if(response.equals(getString(R.string.request_complete))) {
-                    Toast.makeText(ChangePin.this,"Pin successfully changed",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(ChangePin.this,MainNavigationActivity.class);
-                    startActivity(intent);
-                    ChangePin.this.finish();
-
-                }
-
-            } catch (JSONException e) {
-                Log.e(TAG,"",e);
-            }
-
+            Utils.showSuccessToast(ChangePin.this,"Pin successfully changed!");
+//                    Intent intent = new Intent(ChangePin.this,MainNavigationActivity.class);
+//                    startActivity(intent);
+            onBackPressed();
+            ChangePin.this.finish();
         }
 
         @Override
         public void errorReceived(int code, String message) {
             Utils.showToast(ChangePin.this, message);
+            oldPinET.setText(null);
+            newPinET.setText(null);
+            confirmPinET.setText(null);
+            oldPinET.requestFocus();
         }
     };
 }

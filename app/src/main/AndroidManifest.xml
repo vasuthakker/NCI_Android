@@ -16,13 +16,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".activities.LoginPage">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activities.RequestMoneyActivity" />
         <activity android:name=".activities.BalanceActivity" />
@@ -31,11 +26,17 @@
         <activity android:name=".activities.SendActivity" />
         <activity android:name=".activities.ChangePin" />
         <activity android:name=".activities.CardLoad" />
-
         <activity
             android:name=".activities.MainNavigationActivity"
             android:label="@string/title_activity_main_navigation"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activities.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
