@@ -146,6 +146,7 @@ public class SendOTP extends Fragment implements View.OnClickListener {
     private VolleyJsonRequest.OnJsonResponse otpResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
+            Utils.showSuccessToast(getActivity(),"OTP Verified!");
             loginActivity.changeFragment(new CreatePinFragment());
         }
         @Override

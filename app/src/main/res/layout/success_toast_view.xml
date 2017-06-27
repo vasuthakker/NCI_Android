@@ -8,10 +8,10 @@
     app:cardBackgroundColor="#CC000000"
     app:cardCornerRadius="20dp"
     app:cardPreventCornerOverlap="false"
-    app:contentPaddingBottom="40dp"
-    app:contentPaddingLeft="50dp"
-    app:contentPaddingRight="50dp"
-    app:contentPaddingTop="20dp">
+    app:contentPaddingBottom="10dp"
+    app:contentPaddingLeft="30dp"
+    app:contentPaddingRight="30dp"
+    app:contentPaddingTop="10dp">
 
     <LinearLayout
         android:layout_width="wrap_content"

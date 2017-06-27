@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.epuser.pickcontacts.activities.SplashActivity"
-    android:background="@drawable/yes_bank">
+    android:background="@drawable/splash_screen1">
 
 </android.support.constraint.ConstraintLayout>
