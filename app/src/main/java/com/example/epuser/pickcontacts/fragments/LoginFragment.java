@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import com.example.epuser.pickcontacts.common.Utils;
 import com.example.epuser.pickcontacts.entities.PatientID;
 import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
 import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
+import com.example.epuser.pickcontacts.recyler.FaqFragment;
 import com.goodiebag.pinview.Pinview;
 
 import org.json.JSONArray;
@@ -46,10 +48,11 @@ import java.util.List;
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
 
-    private EditText edtPassword;
+
     private Pinview enterPin;
-    private Button btnLogin;
     private TextView forgot_pin_TV, registerTV;
+   // private TextView aboutUsTV, faqsTV,appTourTV , contactUsTV,offersTV;
+    private ImageView aboutUsImg , faqsImg , appTourImg , contactUsImg , offersImg;
     private static final String TAG = "LoginFragment";
     private LoginPage loginActivity;
     private PatientAdapter pAdapter;
@@ -64,13 +67,25 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private void init() {
         enterPin = (Pinview) getActivity().findViewById(R.id.enterpin);
-
-        btnLogin = (Button) getActivity().findViewById(R.id.btnlogg);
         forgot_pin_TV = (TextView) getActivity().findViewById(R.id.forgot_pin_TV);
         registerTV = (TextView) getActivity().findViewById(R.id.registerTV);
-        btnLogin.setOnClickListener(this);
+
         forgot_pin_TV.setOnClickListener(this);
         registerTV.setOnClickListener(this);
+
+        aboutUsImg = (ImageView) getActivity().findViewById(R.id.ls_Img_about);
+        faqsImg = (ImageView)getActivity().findViewById(R.id.ls_img_faq);
+        appTourImg = (ImageView)getActivity().findViewById(R.id.ls_img_tour);
+        contactUsImg = (ImageView)getActivity().findViewById(R.id.ls_img_contact_us);
+        offersImg = (ImageView)getActivity().findViewById(R.id.ls_img_offers);
+
+        aboutUsImg.setOnClickListener(this);
+        faqsImg.setOnClickListener(this);
+        appTourImg.setOnClickListener(this);
+        contactUsImg.setOnClickListener(this);
+        offersImg.setOnClickListener(this);
+
+
 
     }
 
@@ -101,6 +116,25 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         } else if (v == registerTV) {
             loginActivity.changeFragment(new RegisterFragment());
+        }
+
+
+        else if (v ==aboutUsImg){
+            loginActivity.changeFragment(new AboutUs());
+        }
+        else if (v ==faqsImg){
+            loginActivity.changeFragment( new FaqFragment());
+        }
+        else if (v == appTourImg){
+
+
+        }
+        else if (v ==contactUsImg){
+
+
+        }
+        else if (v == offersImg){
+
         }
 
     }

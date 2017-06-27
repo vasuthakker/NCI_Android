@@ -40,4 +40,5 @@ public class AboutUs extends android.support.v4.app.Fragment {
 
         myWebView.loadUrl("https://easypay.in/about-us/");
     }
+
 }

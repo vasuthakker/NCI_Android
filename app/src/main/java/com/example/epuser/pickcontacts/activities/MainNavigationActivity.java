@@ -128,7 +128,7 @@ public class MainNavigationActivity extends AppCompatActivity
             changeFragment(new MyAccountFragment());
 
         } else if (id == R.id.nav_faq) {
-
+            getSupportActionBar().setTitle(R.string.title_faqs);
             changeFragment( new FaqFragment());
 
         } else if (id == R.id.nav_contact_us) {
@@ -137,9 +137,10 @@ public class MainNavigationActivity extends AppCompatActivity
             getSupportActionBar().setTitle(R.string.title_feedback);
             changeFragment(new FeedbackFragment());
         }
-        else if (id == R.id.nav_change_device) {
-
+        else if (id == R.id.nav_change_pin) {
+            startActivity(new Intent(MainNavigationActivity.this,ChangePin.class));
         }else if(id==R.id.nav_about_us){
+            getSupportActionBar().setTitle(R.string.title_about_us);
             changeFragment(new AboutUs());
         }
 

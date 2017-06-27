@@ -64,7 +64,7 @@ public class HistoryFragment extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
         init();
-
+        spFilter.setSelection(LAST_7_DAYS);
         spFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

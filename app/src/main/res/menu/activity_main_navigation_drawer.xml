@@ -24,13 +24,10 @@
             android:icon="@drawable/ic_contactus"
             android:title="Contact Us" />
         <item
-            android:id="@+id/nav_change_device"
-            android:icon="@drawable/ic_change"
-            android:title="Change Device" />
-        <item
-            android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_logout"
-            android:title="Logout" />
+            android:id="@+id/nav_change_pin"
+            android:icon="@drawable/ic_change_pin"
+            android:title="@string/change_pin" />
+
         <item
             android:id="@+id/nav_feedback"
             android:title="Feedback"
@@ -39,8 +36,12 @@
         <item
             android:id="@+id/nav_about_us"
             android:title="About us"
-            android:icon="@drawable/icon_aboutus"
+            android:icon="@drawable/ic_about"
             />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Logout" />
     </group>
 
 </menu>

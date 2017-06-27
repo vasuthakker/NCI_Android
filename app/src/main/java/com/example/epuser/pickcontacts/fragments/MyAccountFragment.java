@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +28,7 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 public class MyAccountFragment extends Fragment implements View.OnClickListener {
    private EditText ETFirstName  , ETMobile , ETEmail ;
-   private TextView TVUpdateDetails , TVsave , TVChangePin;
+   private TextView TVUpdateDetails , TVsave ;
     private MainNavigationActivity mainNavigationActivity;
 
 
@@ -55,10 +57,26 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         ETEmail = (EditText)getActivity().findViewById(R.id.ETMyAccEmail);
         TVUpdateDetails = (TextView) getActivity().findViewById(R.id.TVUpdateDetails);
         TVsave = (TextView)getActivity().findViewById(R.id.TVMyAccSave);
-        TVChangePin = (TextView)getActivity().findViewById(R.id.TVMyAccChangePin);
         TVUpdateDetails.setOnClickListener(this);
         TVsave.setOnClickListener(this);
-        TVChangePin.setOnClickListener(this);
+
+
+//        ETFirstName.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
 
         ETFirstName.setText("Bittu Kumar");
 
@@ -76,16 +94,11 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
             // ETMobile.setEnabled(true);
             ETEmail.setEnabled(true);
             TVsave.setVisibility(View.VISIBLE);
-            TVChangePin.setVisibility(View.VISIBLE);
         }
         else if (v == TVsave)
         {
 
         }
-        else if (v == TVChangePin)
-        {
-            Intent intent = new Intent(getActivity(), ChangePin.class);
-            startActivity(intent);
-        }
+
     }
 }
