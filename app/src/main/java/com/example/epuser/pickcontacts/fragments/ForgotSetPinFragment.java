@@ -1,10 +1,13 @@
 package com.example.epuser.pickcontacts.fragments;
 
 import android.content.Context;
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,6 +57,29 @@ public class ForgotSetPinFragment extends Fragment  implements View.OnClickListe
     public void onStart() {
         super.onStart();
         init();
+        pinafterForgot.requestFocus();
+
+        pinafterForgot.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (pinafterForgot.length()==4)
+                {
+                    confirmPinForgot.requestFocus();
+                }
+
+            }
+        });
+
     }
 
     private void init() {
@@ -114,6 +140,7 @@ public class ForgotSetPinFragment extends Fragment  implements View.OnClickListe
     private VolleyJsonRequest.OnJsonResponse changePinResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
+            Utils.showSuccessToast(getActivity(),getString(R.string.toast_pin_changed));
             Preference.savePreference(getActivity(),AppConstants.IS_LOGGED_IN,true);
             loginActivity.changeFragment(new LoginFragment());
 

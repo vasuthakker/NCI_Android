@@ -55,20 +55,15 @@ public class ChangePin extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (oldPinET.length()==4)
-                {
-                    //oldPinET.clearFocus();
-                    newPinET.requestFocus();
-                }
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-//                if (oldPinET.length()!=4)
-//                {
-//                    oldPinET.requestFocus();
-//                    oldPinET.setError(getString(R.string.enter_valid_pin));
-//                }
+                if (oldPinET.length()==4)
+                {
+                    newPinET.requestFocus();
+                }
 
             }
         });
@@ -81,16 +76,15 @@ public class ChangePin extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (newPinET.length() == 4)
-                {
-                   // newPinET.clearFocus();
-                    confirmPinET.requestFocus();
-                }
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (newPinET.length() == 4)
+                {
+                    confirmPinET.requestFocus();
+                }
             }
         });
     }
@@ -159,7 +153,7 @@ public class ChangePin extends AppCompatActivity {
     private VolleyJsonRequest.OnJsonResponse changePinResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-            Utils.showSuccessToast(ChangePin.this,"Pin successfully changed!");
+            Utils.showSuccessToast(ChangePin.this,getString(R.string.toast_pin_changed));
 //                    Intent intent = new Intent(ChangePin.this,MainNavigationActivity.class);
 //                    startActivity(intent);
             onBackPressed();

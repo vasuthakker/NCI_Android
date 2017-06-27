@@ -1,5 +1,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">NCI app</string>
+    <string name="app_name">NCI</string>
     <string name="internet_not_available">Internet is not available</string>
     <string name="enter_mobile">Enter Phone Number</string>
     <string name="enter_valid_mobile">Enter valid mobile number</string>
@@ -139,5 +139,6 @@
     <string name="title_faqs">FAQs</string>
     <string name="enter_feedback">Enter Your Feedback</string>
     <string name="empty_feedback_error">Please enter your Feedback</string>
+    <string name="toast_pin_changed">Pin successfully changed!</string>
 
 </resources>
