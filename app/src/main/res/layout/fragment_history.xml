@@ -11,7 +11,7 @@
 
     <RelativeLayout
             android:id="@+id/lnblnc"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="77dp"
             android:orientation="vertical"
             android:layout_marginTop="12dp"
@@ -19,27 +19,41 @@
         app:layout_constraintLeft_toLeftOf="parent"
         tools:layout_constraintLeft_creator="1"
         android:layout_marginLeft="15dp"
-        android:background="@drawable/myrect">
+        android:background="#58a3e6"
+        android:elevation="3dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintRight_toLeftOf="@+id/relativeLayout"
+        android:layout_marginRight="8dp">
 
-            <TextView
-                android:id="@+id/blnctext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/blnctext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AVAILABLE BALANCE"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="18dp"
 
-                android:text="CURRENT BALANCE :  "
-                android:paddingTop="8dp"
-                android:paddingLeft="8dp"
-                android:textColor="@android:color/black"
-                android:textSize="18dp" />
+            android:layout_below="@+id/current_balance"
+            android:layout_centerHorizontal="true"
+
+            />
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_toLeftOf="@+id/current_balance"
+            android:layout_marginTop="23dp"
+            android:src="@drawable/ruppe"
+            />
 
             <TextView
                 android:id="@+id/current_balance"
-                android:drawableLeft="@drawable/ic_inr"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_below="@id/blnctext"
+                android:textStyle="bold"
+               android:layout_centerHorizontal="true"
+               android:layout_marginTop="23dp"
                 android:drawablePadding="5dp"
                 android:textColor="@android:color/white"
                 android:textSize="20dp"
@@ -49,15 +63,15 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="0dp"
+        android:layout_width="130dp"
         android:layout_height="77dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="15dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/myrect"
-        app:layout_constraintLeft_toRightOf="@+id/lnblnc"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="#2c87ef"
+        android:elevation="3dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent">
 
         <Spinner
             android:id="@+id/home_spfilter"
@@ -123,5 +137,10 @@
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintTop_toTopOf="@+id/home_swipelayout"
         android:layout_marginTop="8dp" />
+
+
+
+
+
 
 </android.support.constraint.ConstraintLayout>

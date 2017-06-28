@@ -5,6 +5,6 @@
     android:padding="5dp"
     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
 
-    android:textColor="@android:color/black">
+    android:textColor="@android:color/white">
 
 </TextView>
