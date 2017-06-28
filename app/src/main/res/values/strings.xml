@@ -94,6 +94,13 @@
 
     </string-array>
 
+    <array name="small_titles">
+        <item>1st</item>
+        <item>2nd</item>
+        <item>3rd</item>
+        <item>4th</item>
+    </array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="forgot_set_pin">Set a new 4-digit PIN here</string>
