@@ -2,11 +2,13 @@ package com.example.epuser.pickcontacts.activities;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.epuser.pickcontacts.R;
@@ -14,6 +16,7 @@ import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.fragments.LoginFragment;
 import com.example.epuser.pickcontacts.fragments.RegisterFragment;
+import com.example.epuser.pickcontacts.recyler.CustomPagerAdapter;
 
 /**
  * Created by epuser on 5/19/2017.
@@ -25,12 +28,35 @@ public class LoginPage extends AppCompatActivity  {
     private boolean mShowingBack = false;
     private FragmentManager manager;
 
+    private int[] images =
+            {
+                    R.drawable.slider1,
+                    R.drawable.slider1,
+                    R.drawable.slider1
+
+            };
+    private CustomPagerAdapter mCustomPagerAdapter;
+    private ViewPager mViewPager;
+    private Handler handler = new Handler();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page_login);
-
         manager = getSupportFragmentManager();
+
+        mCustomPagerAdapter = new CustomPagerAdapter(this , images);
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setAdapter(mCustomPagerAdapter);
+
+        Runnable imageSwitcher = new Runnable() {
+            @Override
+            public void run() {
+                mViewPager.setCurrentItem((mViewPager.getCurrentItem() + 1)%images.length, true);
+                handler.postDelayed(this, 3000);
+            }
+        };
+        handler.post(imageSwitcher);
     }
 
     @Override

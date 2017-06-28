@@ -8,16 +8,6 @@
     android:fitsSystemWindows="true"
     >
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="264dp"
-        android:layout_height="106dp"
-        app:srcCompat="@drawable/ic_yes_bank_logo"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="40dp" />
-
     <TextView
         android:id="@+id/forgot_pin_TV"
         android:layout_width="wrap_content"
@@ -27,9 +17,9 @@
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
         app:layout_constraintRight_toRightOf="@+id/enterpin"
-        android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@+id/enterpin"
-        android:textColor="@color/colorPrimary" />
+        android:layout_marginTop="0dp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="@+id/registerTV" />
 
 
     <TextView
@@ -41,7 +31,7 @@
         app:layout_constraintLeft_toLeftOf="@+id/enterpin"
         android:textSize="25dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@+id/enterpin"
         android:textColor="@color/colorPrimary"/>
 
@@ -50,37 +40,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/enter_a_four_digit_pin"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/enterpin"
         app:layout_constraintRight_toRightOf="parent"
 
         android:textSize="20sp"
         android:textColor="@android:color/black"
-        app:layout_constraintVertical_bias="0.755"
 
         android:layout_marginLeft="40dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="40dp" />
+        android:layout_marginStart="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="30dp" />
 
     <com.goodiebag.pinview.Pinview
         android:id="@+id/enterpin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cursorVisible="true"
-
         app:forceKeyboard="false"
-        app:inputType="number"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:inputType="text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.476"
         app:password="true"
         app:pinHeight="50dp"
         app:pinLength="4"
-        app:pinWidth="50dp" />
+        app:pinWidth="50dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/EnterPinET" />
 
     <ImageView
         android:id="@+id/imageView4"
