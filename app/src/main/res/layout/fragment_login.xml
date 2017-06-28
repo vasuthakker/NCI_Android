@@ -51,6 +51,32 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="30dp" />
 
+    <com.dpizarro.pinview.library.PinView
+        android:id="@+id/pinView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        app:colorSplit="@color/colorAccent"
+        app:colorTextPinBox="@color/colorAccent"
+        app:colorTextTitles="@color/colorAccent"
+        app:deleteOnClick="true"
+        app:drawablePinBox="@drawable/pin_bg"
+        app:keyboardMandatory="false"
+        app:nativePinBox="false"
+        app:numberCharacters="1"
+        app:numberPinBoxes="4"
+        app:password="true"
+        app:split="  "
+        app:titles="@array/small_titles"
+
+        android:layout_marginTop="84dp"
+        app:layout_constraintTop_toBottomOf="@+id/enterpin"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
     <com.goodiebag.pinview.Pinview
         android:id="@+id/enterpin"
         android:layout_width="wrap_content"

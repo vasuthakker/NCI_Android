@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dpizarro.pinview.library.PinView;
 import com.example.epuser.pickcontacts.activities.LoginPage;
 import com.example.epuser.pickcontacts.R;
 import com.example.epuser.pickcontacts.activities.MainNavigationActivity;
@@ -50,6 +51,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
 
     private Pinview enterPin;
+    private PinView pinView;
     private TextView forgot_pin_TV, registerTV;
    // private TextView aboutUsTV, faqsTV,appTourTV , contactUsTV,offersTV;
     private ImageView aboutUsImg , faqsImg , appTourImg , contactUsImg , offersImg;
@@ -66,6 +68,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void init() {
+        pinView = (PinView)getActivity().findViewById(R.id.pinView);
         enterPin = (Pinview) getActivity().findViewById(R.id.enterpin);
         forgot_pin_TV = (TextView) getActivity().findViewById(R.id.forgot_pin_TV);
         registerTV = (TextView) getActivity().findViewById(R.id.registerTV);
@@ -102,7 +105,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         enterPin.setPinViewEventListener(new Pinview.PinViewEventListener() {
             @Override
             public void onDataEntered(Pinview pinview, boolean b) {
-                login();
+                //login();
+            }
+        });
+        pinView.setOnCompleteListener(new PinView.OnCompleteListener() {
+            @Override
+            public void onComplete(boolean completed, final String pinResults) {
+                login(pinResults);
+
             }
         });
 
@@ -139,8 +149,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private void login() {
-        String pin = enterPin.getValue();
+    private void login(String pin) {
+
+      // String pin = enterPin.getValue();
 
         try {
             JSONObject requestJson = new JSONObject();

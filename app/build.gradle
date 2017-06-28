@@ -41,4 +41,5 @@ dependencies {
     compile 'com.github.GoodieBag:Pinview:v1.3'
     compile 'com.thoughtbot:expandablerecyclerview:1.0'
     testCompile 'junit:junit:4.12'
+    compile project(':library')
 }
