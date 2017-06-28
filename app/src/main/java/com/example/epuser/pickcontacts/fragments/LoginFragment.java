@@ -173,6 +173,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public void errorReceived(int code, String message) {
+            enterPin.setValue("");
             Utils.showToast(getActivity(), message);
         }
     };

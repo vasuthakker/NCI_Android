@@ -6,69 +6,20 @@
     android:layout_height="match_parent"
     android:weightSum="10"
     >
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="6">
 
+    </android.support.v4.view.ViewPager>
 
    <FrameLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:layout_weight="2"
-       android:layout_gravity="center"
+       android:layout_weight="4"
        android:id="@+id/lgcontainer"
        >
-
    </FrameLayout>
-
-    <LinearLayout
-
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="8"
-        android:elevation="19dp"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:visibility="gone">
-
-
-        <Button
-            android:id="@+id/btnreg"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/colorAccent"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:text="SIGNUP"
-            android:textSize="30dp" />
-
-        <Button
-            android:id="@+id/btnlog"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="1dp"
-            android:layout_weight="1"
-            android:background="@color/colorAccent"
-            android:text="LOGIN"
-            android:textSize="30dp" />
-
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/txtfrgt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1"
-        android:text="Forgot Password"
-        android:textSize="20dp"
-        android:visibility="gone" />
-    <!--<Button-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="server"-->
-        <!--android:id="@+id/checkserver"/>-->
 
 </LinearLayout>
