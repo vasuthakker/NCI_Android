@@ -1,11 +1,14 @@
 package com.example.epuser.pickcontacts.activities;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +18,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.SlidingDrawer;
 import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
@@ -28,6 +33,7 @@ public class MainNavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private FragmentManager manager;
     private boolean doubleBackToExitPressedOnce = false;
+    private String TAG= "activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +47,21 @@ public class MainNavigationActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+
+                InputMethodManager inputMethodManager = (InputMethodManager)
+                        getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(
+                        getCurrentFocus().getWindowToken(),
+                        0
+                );
+                super.onDrawerOpened(drawerView);
+
+            }
+        };
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -51,6 +71,8 @@ public class MainNavigationActivity extends AppCompatActivity
         getSupportActionBar().setTitle(R.string.title_my_account);
         changeFragment(new MyAccountFragment());
     }
+
+
 
     @Override
     public void onBackPressed() {

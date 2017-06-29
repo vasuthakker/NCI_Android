@@ -26,7 +26,7 @@ public class QuestionsViewHolder extends ChildViewHolder {
         phoneName.setText(questions.getName());
         if (group.getTitle().equals("Android")) {
             phoneName.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-        } else if (group.getTitle().equals("iOS")) {
+        } else if (group.getTitle().equals("wallet")) {
             phoneName.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         } else {
             phoneName.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
