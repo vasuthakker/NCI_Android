@@ -62,15 +62,15 @@ public class FaqFragment extends android.support.v4.app.Fragment {
     }
 
     private void setData() {
-        ArrayList<Questions> iphones = new ArrayList<>();
-        iphones.add(new Questions("iPhone 4"));
-        iphones.add(new Questions("iPhone 4S"));
-        iphones.add(new Questions("iPhone 5"));
-        iphones.add(new Questions("iPhone 5S"));
-        iphones.add(new Questions("iPhone 6"));
-        iphones.add(new Questions("iPhone 6Plus"));
-        iphones.add(new Questions("iPhone 6S"));
-        iphones.add(new Questions("iPhone 6S Plus"));
+        ArrayList<Questions> wallet = new ArrayList<>();
+        wallet.add(new Questions("iPhone 4"));
+        wallet.add(new Questions("iPhone 4S"));
+        wallet.add(new Questions("iPhone 5"));
+        wallet.add(new Questions("iPhone 5S"));
+        wallet.add(new Questions("iPhone 6"));
+        wallet.add(new Questions("iPhone 6Plus"));
+        wallet.add(new Questions("iPhone 6S"));
+        wallet.add(new Questions("iPhone 6S Plus"));
 
         ArrayList<Questions> nexus = new ArrayList<>();
         nexus.add(new Questions("Nexus One"));
@@ -91,7 +91,7 @@ public class FaqFragment extends android.support.v4.app.Fragment {
         windowQuestionses.add(new Questions("Nokia Lumia 820"));
         windowQuestionses.add(new Questions("Nokia Lumia 920"));
 
-        mobileOSes.add(new QuestionType("iOS", iphones));
+        mobileOSes.add(new QuestionType("wallet", wallet));
         mobileOSes.add(new QuestionType("Android", nexus));
         mobileOSes.add(new QuestionType("Window Questions", windowQuestionses));
     }
