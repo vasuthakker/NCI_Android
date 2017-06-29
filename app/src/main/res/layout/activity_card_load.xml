@@ -88,7 +88,7 @@
         android:id="@+id/cl_quickContactBadge"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        app:srcCompat="@drawable/ic_contact"
+        android:src="@drawable/ic_contact"
         android:background="@drawable/myrect"
         android:elevation="5dp"
         app:layout_constraintTop_toTopOf="@+id/textInputLayout17"
