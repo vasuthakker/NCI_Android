@@ -13,13 +13,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/forgot_pin"
-        android:textSize="25dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        app:layout_constraintRight_toRightOf="@+id/enterpin"
+        android:textSize="20sp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintRight_toRightOf="@+id/pinView"
         android:layout_marginTop="0dp"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintTop_toTopOf="@+id/registerTV" />
+        app:layout_constraintTop_toTopOf="@+id/registerTV"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:background="@drawable/bg_rectangle"/>
 
 
     <TextView
@@ -27,13 +32,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/register"
-        android:layout_marginLeft="5dp"
-        app:layout_constraintLeft_toLeftOf="@+id/enterpin"
-        android:textSize="25dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toLeftOf="@+id/pinView"
+        android:textSize="20sp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/enterpin"
-        android:textColor="@color/colorPrimary"/>
+        app:layout_constraintTop_toBottomOf="@+id/pinView"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginRight="0dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:background="@drawable/bg_rectangle"
+        />
 
     <TextView
         android:id="@+id/EnterPinET"
@@ -55,8 +67,7 @@
         android:id="@+id/pinView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"
+
         app:colorSplit="@color/colorAccent"
         app:colorTextPinBox="@color/colorAccent"
         app:colorTextTitles="@color/colorAccent"
@@ -70,12 +81,14 @@
         app:split="  "
         app:titles="@array/small_titles"
 
-        android:layout_marginTop="84dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
         app:layout_constraintTop_toBottomOf="@+id/enterpin"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        android:layout_marginRight="30dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp"/>
 
     <com.goodiebag.pinview.Pinview
         android:id="@+id/enterpin"
