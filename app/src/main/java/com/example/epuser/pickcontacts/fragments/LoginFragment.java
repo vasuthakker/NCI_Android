@@ -14,8 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +32,7 @@ import com.example.epuser.pickcontacts.common.Utils;
 import com.example.epuser.pickcontacts.entities.PatientID;
 import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
 import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
-import com.example.epuser.pickcontacts.recyler.FaqFragment;
+import com.example.epuser.pickcontacts.FAQpackage.FaqFragment;
 import com.goodiebag.pinview.Pinview;
 
 import org.json.JSONArray;

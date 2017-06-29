@@ -45,7 +45,7 @@ public class URLGenerator implements URLProvider {
     public static final String URL_SEND = "";
     public static final String URL_PATIENTID="searchmobilewithpatientid";
     public static final String URL_FEEDBACK = "feedbackform";
-
+    public static final String URL_FETCH_FAQ="according to URL";
 
 
 

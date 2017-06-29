@@ -1,6 +1,5 @@
-package com.example.epuser.pickcontacts.recyler;
+package com.example.epuser.pickcontacts.FAQpackage;
 
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;

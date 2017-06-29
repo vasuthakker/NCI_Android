@@ -1,4 +1,4 @@
-package com.example.epuser.pickcontacts.recyler;
+package com.example.epuser.pickcontacts.FAQpackage;
 
 import android.annotation.SuppressLint;
 
@@ -11,6 +11,8 @@ import java.util.List;
  */
 @SuppressLint("ParcelCreator")
 public class QuestionType extends ExpandableGroup<Questions> {
+
+
 
     public QuestionType(String title, List<Questions> items) {
         super(title, items);
