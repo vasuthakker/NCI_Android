@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dpizarro.pinview.library.PinView;
+import com.example.epuser.pickcontacts.activities.AboutAppActivity;
 import com.example.epuser.pickcontacts.activities.LoginPage;
 import com.example.epuser.pickcontacts.R;
 import com.example.epuser.pickcontacts.activities.MainNavigationActivity;
@@ -129,26 +130,41 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         if (v == forgot_pin_TV) {
             loginActivity.changeFragment(new ForgotPasswordFragment());
 
-        } else if (v == registerTV) {
+        }
+        else if (v == registerTV) {
             loginActivity.changeFragment(new RegisterFragment());
         }
 
-
         else if (v ==aboutUsImg){
-            loginActivity.changeFragment(new AboutUs());
+            Intent intent = new Intent(getActivity(), AboutAppActivity.class);
+            intent.putExtra(AppConstants.FRAGMENT_ID,getString(R.string.title_about_us));
+            startActivity(intent);
+
         }
         else if (v ==faqsImg){
-            loginActivity.changeFragment( new FaqFragment());
+            Intent intent = new Intent(getActivity(), AboutAppActivity.class);
+            intent.putExtra(AppConstants.FRAGMENT_ID,getString(R.string.title_faqs));
+            startActivity(intent);
+
+
         }
         else if (v == appTourImg){
+            Intent intent = new Intent(getActivity(), AboutAppActivity.class);
+            intent.putExtra(AppConstants.FRAGMENT_ID,getString(R.string.title_about_us));
+            startActivity(intent);
 
 
         }
         else if (v ==contactUsImg){
-
+            Intent intent = new Intent(getActivity(), AboutAppActivity.class);
+            intent.putExtra(AppConstants.FRAGMENT_ID,getString(R.string.title_about_us));
+            startActivity(intent);
 
         }
         else if (v == offersImg){
+            Intent intent = new Intent(getActivity(), AboutAppActivity.class);
+            intent.putExtra(AppConstants.FRAGMENT_ID,getString(R.string.title_about_us));
+            startActivity(intent);
 
         }
 

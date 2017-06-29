@@ -23,7 +23,7 @@ public class URLGenerator implements URLProvider {
             generator = new URLGenerator();
         return generator;
     }
-    public static final String URL_REGISTRATION_CHECK = "checkmobilenumber";
+    public static final String URL_REGISTRATION_CHECK = "wrest/checkmobilenumber";
     public static final String URL_VERIFY_USER ="checkUserForOtp" ;
     public static final String URL_LOGIN = "loginDetails";
     public static final String URL_OTP = "OtpGenerationStatus";
