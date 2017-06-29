@@ -9,12 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.epuser.pickcontacts.FAQpackage.FaqFragment;
 import com.example.epuser.pickcontacts.R;
 import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.fragments.AboutUs;
 import com.example.epuser.pickcontacts.fragments.ForgotPasswordFragment;
 import com.example.epuser.pickcontacts.fragments.RegisterFragment;
-import com.example.epuser.pickcontacts.recyler.FaqFragment;
+import com.example.epuser.pickcontacts.FAQpackage.FaqFragment;
 
 import static com.example.epuser.pickcontacts.R.id.forgot_pin_TV;
 import static com.example.epuser.pickcontacts.R.id.registerTV;

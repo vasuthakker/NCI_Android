@@ -77,6 +77,7 @@ public class LoginPage extends AppCompatActivity  {
             transaction.replace(R.id.lgcontainer, fragment);
         else
             transaction.add(R.id.lgcontainer, fragment);
+        transaction.addToBackStack(null);
         transaction.commitAllowingStateLoss();
     }
 
@@ -88,11 +89,14 @@ public class LoginPage extends AppCompatActivity  {
 
     @Override
     public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            getSupportFragmentManager().popBackStack();
+        }
 
         //else {
 //            super.onBackPressed();
 //        }
-        if(!doubleBackToExitPressedOnce){
+       else if(!doubleBackToExitPressedOnce){
             this.doubleBackToExitPressedOnce = true;
             Toast.makeText(this, "Press one more time to exit", Toast.LENGTH_SHORT).show();
 
