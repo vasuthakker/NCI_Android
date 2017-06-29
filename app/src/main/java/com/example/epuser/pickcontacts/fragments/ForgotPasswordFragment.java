@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,6 +82,11 @@ public class ForgotPasswordFragment extends Fragment implements View.OnClickList
 
     private void checkanswer() {
         String answer = answersecurity.getText().toString();
+        if (TextUtils.isEmpty(answer))
+        {
+            answersecurity.setError(getString(R.string.enter_answer));
+            return;
+        }
 
 
         try {

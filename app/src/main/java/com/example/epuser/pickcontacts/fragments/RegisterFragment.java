@@ -2,6 +2,7 @@ package com.example.epuser.pickcontacts.fragments;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -18,10 +19,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.activities.AboutAppActivity;
 import com.example.epuser.pickcontacts.activities.LoginPage;
 import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.common.Preference;
@@ -46,6 +49,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     private static final String TAG = "RegisterFragment";
     private LoginPage loginActivity;
     private String mobile = null;
+    private ImageView aboutUsImg , faqsImg , appTourImg , contactUsImg , offersImg;
 
     @Override
     public void onAttach(Context context) {
@@ -67,6 +71,18 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
 
         btnRegister.setOnClickListener(this);
         loginTV.setOnClickListener(this);
+
+        aboutUsImg = (ImageView) getActivity().findViewById(R.id.ls_Img_about);
+        faqsImg = (ImageView)getActivity().findViewById(R.id.ls_img_faq);
+        appTourImg = (ImageView)getActivity().findViewById(R.id.ls_img_tour);
+        contactUsImg = (ImageView)getActivity().findViewById(R.id.ls_img_contact_us);
+        offersImg = (ImageView)getActivity().findViewById(R.id.ls_img_offers);
+
+        aboutUsImg.setOnClickListener(this);
+        faqsImg.setOnClickListener(this);
+        appTourImg.setOnClickListener(this);
+        contactUsImg.setOnClickListener(this);
+        offersImg.setOnClickListener(this);
     }
 
     @Override
@@ -101,7 +117,38 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
             {
                 showLoginDialog();
             }
+        }
 
+        else if (v ==aboutUsImg){
+            Intent intent = new Intent(getActivity(), AboutAppActivity.class);
+            intent.putExtra(AppConstants.FRAGMENT_ID,getString(R.string.title_about_us));
+            startActivity(intent);
+
+        }
+        else if (v ==faqsImg){
+            Intent intent = new Intent(getActivity(), AboutAppActivity.class);
+            intent.putExtra(AppConstants.FRAGMENT_ID,getString(R.string.title_faqs));
+            startActivity(intent);
+
+
+        }
+        else if (v == appTourImg){
+            Intent intent = new Intent(getActivity(), AboutAppActivity.class);
+            intent.putExtra(AppConstants.FRAGMENT_ID,getString(R.string.title_about_us));
+            startActivity(intent);
+
+
+        }
+        else if (v ==contactUsImg){
+            Intent intent = new Intent(getActivity(), AboutAppActivity.class);
+            intent.putExtra(AppConstants.FRAGMENT_ID,getString(R.string.title_about_us));
+            startActivity(intent);
+
+        }
+        else if (v == offersImg){
+            Intent intent = new Intent(getActivity(), AboutAppActivity.class);
+            intent.putExtra(AppConstants.FRAGMENT_ID,getString(R.string.title_about_us));
+            startActivity(intent);
 
         }
 

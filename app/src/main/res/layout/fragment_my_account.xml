@@ -18,7 +18,7 @@
         app:contentPadding="10dp"
         android:id="@+id/cardView"
         android:layout_marginTop="0dp"
-        app:layout_constraintHorizontal_bias="0.0">
+        >
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_name"
                 android:padding="12dp"
-                android:text="BK"
+
                 android:textSize="40sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -71,7 +71,7 @@
                 android:layout_marginLeft="10dp"
 
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:enabled="false"
                 android:inputType="textPersonName"
                 android:textColor="@android:color/black"
@@ -162,7 +162,8 @@
         android:textColor="@android:color/black"
         app:layout_constraintLeft_toRightOf="@+id/MyAccImgEmail"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ETMyAccMobile" />
+        app:layout_constraintTop_toBottomOf="@+id/ETMyAccMobile"
+        android:visibility="gone"/>
 
 
     <TextView
@@ -188,7 +189,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ETMyAccEmail"
         app:layout_constraintVertical_bias="0.375"
-        app:srcCompat="@drawable/ic_mail" />
+        app:srcCompat="@drawable/ic_mail"
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/MyAccImgPhone"

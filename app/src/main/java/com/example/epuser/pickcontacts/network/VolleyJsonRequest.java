@@ -76,7 +76,7 @@ public class VolleyJsonRequest {
 
                                 Log.e(TAG, "onErrorResponse: " + error.getMessage());
                                 if (error.networkResponse != null) {
-                                    onResponse.errorReceived(error.networkResponse.statusCode, error.getLocalizedMessage());
+                                    onResponse.errorReceived(error.networkResponse.statusCode, "Server is Temporarily Down");
                                 } else
                                     Toast.makeText(context, error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                             }
