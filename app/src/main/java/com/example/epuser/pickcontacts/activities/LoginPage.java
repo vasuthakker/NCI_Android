@@ -10,13 +10,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
 import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.fragments.LoginFragment;
 import com.example.epuser.pickcontacts.fragments.RegisterFragment;
-import com.example.epuser.pickcontacts.recyler.CustomPagerAdapter;
+import com.example.epuser.pickcontacts.FAQpackage.CustomPagerAdapter;
 
 /**
  * Created by epuser on 5/19/2017.
@@ -27,7 +28,7 @@ public class LoginPage extends AppCompatActivity  {
     private static final String TAG = "LoginPage";
     private boolean mShowingBack = false;
     private FragmentManager manager;
-
+    private boolean doubleBackToExitPressedOnce = false;
     private int[] images =
             {
                     R.drawable.slider1,
@@ -82,6 +83,35 @@ public class LoginPage extends AppCompatActivity  {
     public static String getDeviceId(Context context) {
         return Settings.Secure.getString(context.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+        //else {
+//            super.onBackPressed();
+//        }
+        if(!doubleBackToExitPressedOnce){
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Press one more time to exit", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
+
+        }
+
+        else  if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+
     }
 }
 

@@ -1,6 +1,5 @@
 package com.example.epuser.pickcontacts.activities;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,7 +17,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.SlidingDrawer;
 import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
@@ -27,7 +24,7 @@ import com.example.epuser.pickcontacts.fragments.AboutUs;
 import com.example.epuser.pickcontacts.fragments.FeedbackFragment;
 import com.example.epuser.pickcontacts.fragments.HistoryFragment;
 import com.example.epuser.pickcontacts.fragments.MyAccountFragment;
-import com.example.epuser.pickcontacts.recyler.FaqFragment;
+import com.example.epuser.pickcontacts.FAQpackage.FaqFragment;
 
 public class MainNavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

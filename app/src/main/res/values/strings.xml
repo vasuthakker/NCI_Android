@@ -148,5 +148,6 @@
     <string name="empty_feedback_error">Please enter your Feedback</string>
     <string name="Faq">Frequently Asked Questions</string>
     <string name="toast_pin_changed">Pin successfully changed!</string>
+    <string name="faq_error">unable to load FAQs</string>
 
 </resources>

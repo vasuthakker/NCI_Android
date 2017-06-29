@@ -1,4 +1,4 @@
-package com.example.epuser.pickcontacts.recyler;
+package com.example.epuser.pickcontacts.FAQpackage;
 
 import android.content.Context;
 import android.view.LayoutInflater;
