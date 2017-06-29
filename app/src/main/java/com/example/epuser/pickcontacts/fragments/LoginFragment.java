@@ -111,8 +111,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         pinView.setOnCompleteListener(new PinView.OnCompleteListener() {
             @Override
             public void onComplete(boolean completed, final String pinResults) {
-                login(pinResults);
-
+                if (pinResults.length() ==4) {
+                    login(pinResults);
+                }
             }
         });
 
@@ -184,7 +185,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public void errorReceived(int code, String message) {
-            enterPin.setValue("");
+           // enterPin.setValue("");
             Utils.showToast(getActivity(), message);
         }
     };
