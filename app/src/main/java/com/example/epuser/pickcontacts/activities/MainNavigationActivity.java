@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
 import com.example.epuser.pickcontacts.fragments.AboutUs;
+import com.example.epuser.pickcontacts.fragments.ContactUsFragment;
 import com.example.epuser.pickcontacts.fragments.FeedbackFragment;
 import com.example.epuser.pickcontacts.fragments.HistoryFragment;
 import com.example.epuser.pickcontacts.fragments.MyAccountFragment;
@@ -151,6 +152,7 @@ public class MainNavigationActivity extends AppCompatActivity
             changeFragment( new FaqFragment());
 
         } else if (id == R.id.nav_contact_us) {
+            changeFragment(new ContactUsFragment());
 
         }else if(id==R.id.nav_feedback){
             getSupportActionBar().setTitle(R.string.title_feedback);
