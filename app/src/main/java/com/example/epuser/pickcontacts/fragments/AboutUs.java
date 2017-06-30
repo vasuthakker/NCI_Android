@@ -20,8 +20,6 @@ public class AboutUs extends android.support.v4.app.Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-
-
         return inflater.inflate(R.layout.fragment_about, container, false);
     }
 
@@ -33,16 +31,16 @@ public class AboutUs extends android.support.v4.app.Fragment {
 
     private void init() {
 
-        WebView myWebView = (WebView)getActivity(). findViewById(R.id.webview);
-        myWebView.setWebViewClient(new WebViewClient(){
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return true;
-            }
-        });
-        WebSettings webSettings = myWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-
-        myWebView.loadUrl("https://easypay.in/about-us/");
+//        WebView myWebView = (WebView)getActivity(). findViewById(R.id.webview);
+//        myWebView.setWebViewClient(new WebViewClient(){
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                return true;
+//            }
+//        });
+//        WebSettings webSettings = myWebView.getSettings();
+//        webSettings.setJavaScriptEnabled(true);
+//
+//        myWebView.loadUrl("http://ncinagpur.in/");
     }
 
 }

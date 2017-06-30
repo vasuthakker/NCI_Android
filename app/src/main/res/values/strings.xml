@@ -148,5 +148,8 @@
     <string name="toast_pin_changed">Pin successfully changed!</string>
     <string name="faq_error">unable to load FAQs</string>
     <string name="enter_answer">Enter Answer</string>
+    <string name="about_us_text">
+        <![CDATA[NATIONAL CANCER INSTITUTE, Nagpur is proposed as a state of the art 500 bed \'Comprehensive Cancer Care Centre\' spread over 23.5 acre campus. The campus includes main Hospital Building with total built up area of 700,000 Sft. appx. and allied facilities like Yatri Niwas, Nurses Hostel, Staff Housing, with a total built up area of 200,000 sq ft.\n \nQuaternary Care, Palliative Care and Sustainable Charity are three key phrases that sum up the mission of the Institute. \n \nThe process of planning commenced in the last quarter of 2013 and the execution commenced in March 2015 \n \nPlanning based on the values of Functionality, Sustainbility, Energy Efficiency, Safety & Aesthetics in compliance with both NABH and JCI.]]>
+    </string>
 
 </resources>
