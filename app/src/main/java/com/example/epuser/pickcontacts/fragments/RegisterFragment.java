@@ -106,8 +106,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
                 return;
             } else if (mobile.length() > 9)
                 mobile = mobile.substring(mobile.length() - 10);
-            checkIfRegistered();
-            //generateOTP();
+            //checkIfRegistered();
+            generateOTP();
         }
         else if (v ==loginTV)
         {
@@ -337,7 +337,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
             }
         }
     }
-
 
 }
 
