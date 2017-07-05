@@ -39,7 +39,7 @@ public class URLGenerator implements URLProvider {
 
     public static final String URL_OTP_BENEFACTOR="as per url2";
     public static final String URL_CARD_LOAD="as per url3";
-    public static final String  URL_FETCH_BAlANCE="checkBalance";
+    public static final String  URL_FETCH_BAlANCE="wrest/checkBalance";
 
     public static final String URL_FETCH_TRANSACTIONS="wrest/txnhistory";
     public static final String URL_SEND = "";

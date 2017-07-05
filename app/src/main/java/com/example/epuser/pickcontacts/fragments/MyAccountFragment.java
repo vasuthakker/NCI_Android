@@ -8,18 +8,28 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
 import com.example.epuser.pickcontacts.activities.ChangePin;
 import com.example.epuser.pickcontacts.activities.MainNavigationActivity;
 import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.common.Preference;
+import com.example.epuser.pickcontacts.common.URLGenerator;
+import com.example.epuser.pickcontacts.common.Utils;
+import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
+import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
@@ -30,8 +40,9 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 public class MyAccountFragment extends Fragment implements View.OnClickListener {
    private EditText ETFirstName  , ETMobile , ETEmail ;
-   private TextView TVUpdateDetails , TVsave , TVImgName ;
+   private TextView TVUpdateDetails , TVsave , TVImgName, TVBalance ;
     private MainNavigationActivity mainNavigationActivity;
+    private static final String TAG = "MyAccountFragment";
 
 
     @Override
@@ -50,10 +61,14 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
     public void onStart() {
         super.onStart();
         init();
+        getBalance();
 
     }
 
+
+
     private void init() {
+        TVBalance = (TextView)getActivity().findViewById(R.id.TVMyAccBalance);
         ETFirstName = (EditText)getActivity().findViewById(R.id.ETFirstName);
         ETMobile = (EditText)getActivity().findViewById(R.id.ETMyAccMobile);
         ETEmail = (EditText)getActivity().findViewById(R.id.ETMyAccEmail);
@@ -121,4 +136,45 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
         imgName =  imgName.toUpperCase();
         TVImgName.setText(imgName);
     }
+
+    private void getBalance() {
+
+        try {
+            JSONObject requestJson = new JSONObject();
+            JSONObject jsonObject1 = new JSONObject();
+            JSONObject jsonObject2 = new JSONObject();
+            requestJson.put("HEADER", jsonObject1);
+
+            jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
+            jsonObject2.put("hmipatientId",Preference.getStringPreference(getActivity(),AppConstants.PATIENT_ID));
+
+            requestJson.put("DATA", jsonObject2);
+
+            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_FETCH_BAlANCE), requestJson, getBalanceResp, true);
+        } catch (JSONException e) {
+            Log.e(TAG, "getBalance: JSONException", e);
+        } catch (InternetNotAvailableException e) {
+            Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private VolleyJsonRequest.OnJsonResponse getBalanceResp = new VolleyJsonRequest.OnJsonResponse() {
+        @Override
+        public void responseReceived(JSONObject jsonObj) {
+            try {
+                JSONObject data = jsonObj.getJSONObject("DATA");
+                TVBalance.setText(data.getString("BALANCE"));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        @Override
+        public void errorReceived(int code, String message) {
+            Utils.showToast(getActivity(), message);
+        }
+    };
+
 }

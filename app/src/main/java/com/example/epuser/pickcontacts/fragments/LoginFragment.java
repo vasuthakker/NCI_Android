@@ -49,10 +49,9 @@ import java.util.List;
 public class LoginFragment extends Fragment implements View.OnClickListener {
 
 
-    private Pinview enterPin;
+
     private PinView pinView;
     private TextView forgot_pin_TV, registerTV;
-   // private TextView aboutUsTV, faqsTV,appTourTV , contactUsTV,offersTV;
     private ImageView aboutUsImg , faqsImg , appTourImg , contactUsImg , offersImg;
     private static final String TAG = "LoginFragment";
     private LoginPage loginActivity;
@@ -68,7 +67,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private void init() {
         pinView = (PinView)getActivity().findViewById(R.id.pinView);
-        enterPin = (Pinview) getActivity().findViewById(R.id.enterpin);
         forgot_pin_TV = (TextView) getActivity().findViewById(R.id.forgot_pin_TV);
         registerTV = (TextView) getActivity().findViewById(R.id.registerTV);
 
@@ -101,12 +99,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
         init();
-        enterPin.setPinViewEventListener(new Pinview.PinViewEventListener() {
-            @Override
-            public void onDataEntered(Pinview pinview, boolean b) {
-                //login();
-            }
-        });
+
         pinView.setOnCompleteListener(new PinView.OnCompleteListener() {
             @Override
             public void onComplete(boolean completed, final String pinResults) {
@@ -170,8 +163,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private void login(String pin) {
 
-      // String pin = enterPin.getValue();
-
         try {
             JSONObject requestJson = new JSONObject();
             JSONObject jsonObject1 = new JSONObject();
@@ -203,7 +194,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public void errorReceived(int code, String message) {
-           // enterPin.setValue("");
+
             Utils.showToast(getActivity(), message);
         }
     };
@@ -216,8 +207,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             JSONObject jsonObject2 = new JSONObject();
             requestJson.put("HEADER", jsonObject1);
 
-             jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
-          //  jsonObject2.put("mobileNumber", "9164024091");
+            jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
             requestJson.put("DATA", jsonObject2);
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_PATIENTID), requestJson, PatientGetResp, true);
@@ -263,7 +253,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 new RecyclerItemClickListener(getContext(), recycler_patient, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        // do whatever
                         PatientID patientID = DataList.get(position);
                         Preference.savePreference(getActivity(),AppConstants.PATIENT_ID,patientID.getPatientId());
                         String PatientName = patientID.getFirstName() + " " + patientID.getMiddleName() + " " + patientID.getLastName();
@@ -271,29 +260,42 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         Intent intent = new Intent(getActivity(), MainNavigationActivity.class);
                         startActivity(intent);
                         getActivity().finish();
-                       // Toast.makeText(getActivity(), patientID.getPatientId() + " is selected!", Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override
                     public void onLongItemClick(View view, int position) {
-                        // do whatever
+
                     }
                 })
         );
 
-        dialogBuilder.setTitle("PatientID");
-        dialogBuilder.setMessage("Please choose your PatientID ");
+        dialogBuilder.setTitle("Patient ID");
+        dialogBuilder.setMessage("Please choose your Patient ID ");
         DataList = new ArrayList<>();
         PatientID patientId;
         try {
-            Log.v(TAG, "History is:" + jsonObject.toString());
+
             for (int i = 0; i < jsonObject.length(); i++) {
                 patientId = new PatientID();
                 JSONObject c = jsonObject.getJSONObject(i);
                 patientId.setPatientId(c.getString("hmipatientId"));
                 patientId.setFirstName(c.getString("firstname"));
-                patientId.setMiddleName(c.getString("middlename"));
-                patientId.setLastName(c.getString("lastname"));
+                if (c.getString("middlename") ==null || c.getString("middlename").equals("") ||c.getString("middlename").equals("null") ){
+                    patientId.setMiddleName("");
+                }
+                else
+                {
+                    patientId.setMiddleName(c.getString("middlename"));
+                }
+                if (c.getString("lastname") ==null ||  c.getString("lastname").equals("") ||c.getString("lastname").equals("null")){
+                    patientId.setLastName("");
+                }
+                else
+                {
+                    patientId.setLastName(c.getString("lastname"));
+                }
+
                 DataList.add(patientId);
             }
 
