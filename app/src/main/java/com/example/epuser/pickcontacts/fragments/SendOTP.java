@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
@@ -34,6 +36,8 @@ import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.example.epuser.pickcontacts.R.color.colorAccent;
+
 
 /**
  * Created by epuser on 5/22/2017.
@@ -43,8 +47,11 @@ public class SendOTP extends Fragment implements View.OnClickListener {
     private static final String TAG = "SendOTP";
     private static final int PERMISSION_READSMS =1 ;
     private EditText enterOTP;
-    private Button submitOTPBtn;
+    private Button submitOTPBtn ,resendOTPBtn;
     private LoginPage loginActivity;
+    private TextView otpTimer;
+    private CountDownTimer countDownTimer;
+    private long otpExpireTimeInSeconds;
 
 
     @Nullable
@@ -57,15 +64,42 @@ public class SendOTP extends Fragment implements View.OnClickListener {
     @Override
     public void onStart(){
         super.onStart();
-
         askForSMSPermission();
-
-
-
         enterOTP =(EditText)getActivity().findViewById(R.id.enterOTP_ET);
         enterOTP.setFilters(new InputFilter[]{new InputFilter.LengthFilter(6)});
+        otpTimer = (TextView) getActivity().findViewById(R.id.otp_timerTV);
         submitOTPBtn=(Button)getActivity().findViewById(R.id.submit_OTP_btn);
+        resendOTPBtn = (Button)getActivity().findViewById(R.id.resend_otp_btn);
         submitOTPBtn.setOnClickListener(this);
+        resendOTPBtn.setOnClickListener(this);
+
+        otpExpireTimeInSeconds = 300;
+
+        countDownTimer = new CountDownTimer(otpExpireTimeInSeconds*1000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                otpTimer.setText("OTP expires in: " + (millisUntilFinished / 1000 -1)  + " Seconds");
+                if (isAdded()) {
+                    otpTimer.setTextColor(getResources().getColor(R.color.colorDarkGreen));
+
+                }
+            }
+
+            public void onFinish() {
+
+                otpTimer.setText(R.string.otp_expired_message);
+                if (isAdded())
+                {
+                    otpTimer.setTextColor(getResources().getColor(R.color.colorRed));
+                }
+
+                submitOTPBtn.setVisibility(View.GONE);
+                resendOTPBtn.setVisibility(View.VISIBLE);
+
+
+            }
+        };
+        countDownTimer.start();
 
 
     }
@@ -112,17 +146,25 @@ public class SendOTP extends Fragment implements View.OnClickListener {
 
              submitOTP();
         }
+        else if (v==resendOTPBtn)
+        {
+            resendOTP();
+        }
 
     }
+
+
 
     private void submitOTP()
     {
         String otp = enterOTP.getText().toString();
         if (TextUtils.isEmpty(otp)) {
-            enterOTP.setError(getString(R.string.enter_pin));
+            enterOTP.requestFocus();
+            enterOTP.setError(getString(R.string.enter_otp));
             return;
         } else if (otp.length() != 6) {
-            enterOTP.setError(getString(R.string.enter_valid_pin));
+            enterOTP.requestFocus();
+            enterOTP.setError(getString(R.string.enter_valid_OTP));
             return;
         }
 
@@ -137,7 +179,7 @@ public class SendOTP extends Fragment implements View.OnClickListener {
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_OTP_VERIFICATION), requestJson, otpResp, true);
         } catch (JSONException e) {
-            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+            Log.e(TAG, "submitOTP: JSONException", e);
         } catch (InternetNotAvailableException e) {
             Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
         }
@@ -147,6 +189,7 @@ public class SendOTP extends Fragment implements View.OnClickListener {
         @Override
         public void responseReceived(JSONObject jsonObj) {
             Utils.showSuccessToast(getActivity(),"OTP Verified!");
+            countDownTimer.cancel();
             loginActivity.changeFragment(new CreatePinFragment());
         }
         @Override
@@ -179,5 +222,40 @@ public class SendOTP extends Fragment implements View.OnClickListener {
 
         getActivity().registerReceiver(smsReceiver,iFilter);
     }
+    private void resendOTP() {
+        try {
+            JSONObject requestJson = new JSONObject();
+            JSONObject jsonObject1 = new JSONObject();
+            JSONObject jsonObject2 = new JSONObject();
+            requestJson.put("HEADER", jsonObject1);
+            jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(),AppConstants.TEMP_MOBILE_NUMBER));
+
+            //jsonObject2.put("udid",LoginPage.getDeviceId(getActivity()));
+            requestJson.put("DATA", jsonObject2);
+
+            VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_OTP), requestJson, resendOTPResp, true);
+        } catch (JSONException e) {
+            Log.e(TAG, "resendOTP: JSONException", e);
+        } catch (InternetNotAvailableException e) {
+            Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private VolleyJsonRequest.OnJsonResponse resendOTPResp = new VolleyJsonRequest.OnJsonResponse() {
+        @Override
+        public void responseReceived(JSONObject jsonObj) {
+            countDownTimer.start();
+            resendOTPBtn.setVisibility(View.GONE);
+            submitOTPBtn.setVisibility(View.VISIBLE);
+            Utils.showSuccessToast(getActivity(),getString(R.string.otp_send_success_msg));
+
+        }
+
+        @Override
+        public void errorReceived(int code, String message) {
+            Utils.showToast(getActivity(), message);
+            otpTimer.setText("");
+        }
+    };
 }
 

@@ -1,4 +1,4 @@
-package com.example.epuser.pickcontacts.activities;
+package com.example.epuser.pickcontacts.fragments;
 
 
 //import android.content.Intent;
@@ -22,6 +22,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.activities.AddMoneyActivity;
+import com.example.epuser.pickcontacts.activities.BalanceActivity;
+import com.example.epuser.pickcontacts.activities.CardLoad;
+import com.example.epuser.pickcontacts.activities.ReceiveActivity;
+import com.example.epuser.pickcontacts.activities.RequestMoneyActivity;
+import com.example.epuser.pickcontacts.activities.SendActivity;
 //import android.widget.Toast;
 
 //import org.json.JSONException;

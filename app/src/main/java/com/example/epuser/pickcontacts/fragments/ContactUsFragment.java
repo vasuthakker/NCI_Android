@@ -38,7 +38,8 @@ public class ContactUsFragment extends Fragment implements OnMapReadyCallback,Vi
     private GoogleMap mMap;
     private Marker marker;
     private ImageView satelite,normalmap;
-    private TextView phoneCall,mailclick;
+    private TextView jamtha_phoneTV,dharampeth_phoneTV,dharampeth_faxTV;
+    private TextView info_emailTV,hr_emailTV;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -59,17 +60,27 @@ public class ContactUsFragment extends Fragment implements OnMapReadyCallback,Vi
     }
 
     private void init() {
+        jamtha_phoneTV = (TextView)getActivity().findViewById(R.id.jamtha_phone_noTV);
+        dharampeth_phoneTV = (TextView)getActivity().findViewById(R.id.dharam_phonenoTV);
+        dharampeth_faxTV = (TextView)getActivity().findViewById(R.id.dharam_fax_no_TV);
+        info_emailTV = (TextView)getActivity().findViewById(R.id.info_emailTV);
+        hr_emailTV = (TextView)getActivity().findViewById(R.id.hr_emailTV);
+
         satelite =(ImageView)getActivity().findViewById(R.id.satelite);
         normalmap=(ImageView) getActivity().findViewById(R.id.normalMap);
-        phoneCall =(TextView)getActivity().findViewById(R.id.phoneCall);
-        mailclick=(TextView)getActivity().findViewById(R.id.mailclick) ;
+
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         normalmap.setOnClickListener(this);
         satelite.setOnClickListener(this);
-        mailclick.setOnClickListener(this);
-        phoneCall.setOnClickListener(this);
+
+        jamtha_phoneTV.setOnClickListener(this);
+        dharampeth_phoneTV.setOnClickListener(this);
+        dharampeth_faxTV.setOnClickListener(this);
+        info_emailTV.setOnClickListener(this);
+        hr_emailTV.setOnClickListener(this);
+
 
 
 //
@@ -91,28 +102,52 @@ public class ContactUsFragment extends Fragment implements OnMapReadyCallback,Vi
             normalmap.setVisibility(View.VISIBLE);
             satelite.setVisibility(View.GONE);
         }
-        else if(v==phoneCall){
-            Intent callIntent = new Intent(Intent.ACTION_CALL);
-            callIntent.setData(Uri.parse("tel:"+phoneCall.getText()));
-//            if (ActivityCompat.checkSelfPermission(getActivity(),
-//                    Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-//                return;
-//            }
-            startActivity(callIntent);
+        /*
+        else if(v==jamtha_phoneTV){
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:"+jamtha_phoneTV.getText()));
+        //            if (ActivityCompat.checkSelfPermission(getActivity(),
+        //                    Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+        //                return;
+        //            }
+        startActivity(callIntent);
 
         }
-        else if(v==mailclick){
-            final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+        else if (v == dharampeth_phoneTV){
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:" + dharampeth_phoneTV.getText()));
+        startActivity(callIntent);
+        }
+        else if (v == dharampeth_faxTV){
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:" + dharampeth_faxTV.getText()));
+        startActivity(callIntent);
+        }
+        else if(v==info_emailTV){
+        final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 
 
-            emailIntent.setType("message/rfc822");
-            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"to@email.com"});
-            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject");
-            emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Text");
+        emailIntent.setType("message/rfc822");
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{info_emailTV.getText().toString()});
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "");
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "");
 
-            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
 
         }
+        else if(v==hr_emailTV){
+        final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+
+
+        emailIntent.setType("message/rfc822");
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{hr_emailTV.getText().toString()});
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "");
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "");
+
+        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+
+        }
+        */
 
 
     }
@@ -122,9 +157,12 @@ public class ContactUsFragment extends Fragment implements OnMapReadyCallback,Vi
         LatLng nci = new LatLng(21.028045,79.032894);
         marker= googleMap.addMarker(new MarkerOptions().position(nci)
                 .title("National Cancer Institute"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(nci));
+        marker.showInfoWindow();
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(nci , 14.0f));
         mMap=googleMap;
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
        // mMap.setOnMapClickListener(this);
 
     }

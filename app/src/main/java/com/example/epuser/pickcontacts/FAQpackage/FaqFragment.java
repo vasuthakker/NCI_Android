@@ -54,33 +54,26 @@ public class FaqFragment extends android.support.v4.app.Fragment {
 
     private void init() {
         nofaqs=(TextView)getActivity().findViewById(R.id.no_Faqs);
-        recyclerView = (RecyclerView)getActivity().findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView)getActivity().findViewById(R.id.faq_recycler_view);
         quesTypeList = new ArrayList<>();
         FetchData();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new RecyclerAdapter(this, quesTypeList);
-        recyclerView.setAdapter(adapter);
+
     }
 
     private void FetchData() {
-
-
         try {
             JSONObject requestJson = new JSONObject();
             JSONObject header = new JSONObject();
-            JSONObject data = new JSONObject();
             requestJson.put(getString(R.string.header), header);
 
-            // data.put("mobileNumber", Preference.getStringPreference(this, AppConstants.MOBILE_NUMBER));
-            // TODO: 6/5/2017  generalise for the number entered by the user
-            requestJson.put(getString(R.string.data), data);
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_FETCH_FAQ), requestJson, FaqResp, true);
         } catch (JSONException e) {
-            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+            Log.e(TAG, "getFAQs: JSONException", e);
         } catch (InternetNotAvailableException e) {
             Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
         }
@@ -89,11 +82,9 @@ public class FaqFragment extends android.support.v4.app.Fragment {
     private VolleyJsonRequest.OnJsonResponse FaqResp = new VolleyJsonRequest.OnJsonResponse() {
         @Override
         public void responseReceived(JSONObject jsonObj) {
-
-
             try {
                 JSONArray data = jsonObj.getJSONArray("DATA");
-               // .setText(data.getString("balance"));
+
                 setData(data);
 
             } catch (JSONException e) {
@@ -122,7 +113,7 @@ public class FaqFragment extends android.support.v4.app.Fragment {
     }
 
     private void setData(JSONArray jsonArray) {
-        ArrayList<Questions> questionsList = new ArrayList<>();
+
        // ArrayList<QuestionType> quesTypeList = new ArrayList<>();
 
 
@@ -130,23 +121,26 @@ public class FaqFragment extends android.support.v4.app.Fragment {
             //JSONArray quesCategory = jsonArray.getJSONArray("QuestionType");
             Log.v(TAG, "jsonArray is:" + jsonArray.toString());
             if (jsonArray.length() == 0) {
-
                 nofaqs.setVisibility(View.VISIBLE);
             } else {
                 nofaqs.setVisibility(View.GONE);
                 for (int i =0; i < jsonArray.length(); i++) {
+                    ArrayList<Questions> questionsList = new ArrayList<>();
                     JSONObject qt = jsonArray.getJSONObject(i);
 
-                    JSONArray quest= qt.getJSONArray("questions");
+                    JSONArray quest= qt.getJSONArray("Questions");
 
 
                      for (int j =0; j < quest.length(); j++){
                          JSONObject quesj = quest.getJSONObject(j);
-                         questionsList.add(new Questions(quesj.getString("questionj"),quesj.getString("answerj")));
+
+                         questionsList.add(new Questions(quesj.getString("Question"),quesj.getString("Answer")));
                      }
-                    quesTypeList.add( new QuestionType( qt.getString("quesCategoryi"), questionsList));
+                    quesTypeList.add( new QuestionType( qt.getString("Type"), questionsList));
 
                 }
+                adapter = new RecyclerAdapter(this, quesTypeList);
+                recyclerView.setAdapter(adapter);
 
             }
         } catch (JSONException e) {
@@ -155,18 +149,7 @@ public class FaqFragment extends android.support.v4.app.Fragment {
 
 
 
-
-
-
-
-
-
-
-
-
-
-//
-//                ArrayList<Questions> wallet = new ArrayList<>();
+//        ArrayList<Questions> wallet = new ArrayList<>();
 //        wallet.add(new Questions("iPhone 4"));
 //        wallet.add(new Questions("iPhone 4S"));
 //        wallet.add(new Questions("iPhone 5"));

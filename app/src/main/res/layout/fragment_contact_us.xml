@@ -1,68 +1,364 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.epuser.pickcontacts.fragments.ContactUsFragment" >
 
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.40"
 
-    <fragment
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp" >
+        >
+        <fragment
+            android:layout_width="0dp"
+            android:layout_height="0dp"
 
-    </fragment>
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
 
-    <ImageView
-        android:id="@+id/satelite"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="1dp"
-        android:visibility="gone"
-        app:layout_constraintLeft_toLeftOf="@+id/map"
-        app:srcCompat="@drawable/satellite"
-        app:layout_constraintTop_toTopOf="@+id/map"
-        android:layout_marginTop="1dp" />
+        </fragment>
+        <ImageView
+            android:id="@+id/satelite"
 
-    <ImageView
-        android:id="@+id/normalMap"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginStart="1dp"
+            app:layout_constraintLeft_toLeftOf="@+id/map"
+            app:srcCompat="@drawable/satellite"
+            app:layout_constraintTop_toTopOf="@+id/map" />
 
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginLeft="1dp"
-        app:layout_constraintLeft_toLeftOf="@+id/map"
-        app:srcCompat="@drawable/normalmap"
-        app:layout_constraintTop_toTopOf="@+id/map"
-        android:layout_marginTop="1dp" />
+        <ImageView
+            android:id="@+id/normalMap"
 
-    <TextView
-        android:id="@+id/phoneCall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1234567890"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/map"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <TextView
-        android:id="@+id/mailclick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="abc@easypay.com"
-        app:layout_constraintLeft_toRightOf="@+id/phoneCall"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/map" />
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="1dp"
+            app:layout_constraintLeft_toLeftOf="@+id/map"
+            app:srcCompat="@drawable/normalmap"
+            app:layout_constraintTop_toTopOf="@+id/map"
+            android:layout_marginTop="1dp"
+            android:layout_marginStart="1dp"
+            android:visibility="gone"/>
+    </android.support.constraint.ConstraintLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.60"
+        >
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/contact_phone_CV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                >
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/contact_phone_Img"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="5dp"
+                        app:srcCompat="@drawable/ic_phone"
+                        android:background="@drawable/bg_icon_contact"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="20dp"
+                        app:layout_constraintLeft_toLeftOf="parent" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/contact_phone_TV"
+                        android:text="@string/contactus_phone_tv"
+                        android:textSize="35sp"
+                        app:layout_constraintLeft_toRightOf="@+id/contact_phone_Img"
+                        android:layout_marginLeft="10dp"
+                        app:layout_constraintTop_toTopOf="@+id/contact_phone_Img"
+                        android:layout_marginTop="0dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/contact_phone_Img"
+                        android:layout_marginBottom="0dp" />
+
+                    <TextView
+                        android:id="@+id/jamtha_phoneTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/jamtha"
+                        android:textSize="@dimen/headertext_contact_us"
+                        app:layout_constraintTop_toBottomOf="@+id/contact_phone_Img"
+                        app:layout_constraintLeft_toLeftOf="@+id/contact_phone_Img"
+                        android:layout_marginTop="10dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/jamta_phoneTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/contact_us_text_top_margin"
+                        android:textSize="@dimen/text_contact_us"
+                        android:text="@string/phone_title_tv"
+                        app:layout_constraintTop_toBottomOf="@+id/jamtha_phoneTV"
+                        app:layout_constraintLeft_toLeftOf="@+id/jamtha_phoneTV"
+                        />
+
+                    <TextView
+                        android:id="@+id/jamtha_phone_noTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_contact_us"
+                        android:text="@string/jamtha_phone_number"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        android:autoLink="phone"
+                        android:linksClickable="true"
+                        app:layout_constraintTop_toTopOf="@+id/jamta_phoneTV"
+                        app:layout_constraintLeft_toRightOf="@+id/jamta_phoneTV"/>
+
+                    <TextView
+                        android:id="@+id/dharam_phoneTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/headertext_contact_us_top_margin"
+                        android:textSize="@dimen/headertext_contact_us"
+                        android:text="@string/dharampeth"
+                        app:layout_constraintTop_toBottomOf="@+id/jamta_phoneTV"
+                        app:layout_constraintLeft_toLeftOf="@+id/jamta_phoneTV"
+                        />
+
+                    <TextView
+                        android:id="@+id/dharam_phone_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/phone_title_tv"
+                        android:textSize="@dimen/text_contact_us"
+                        android:layout_marginTop="@dimen/contact_us_text_top_margin"
+                        app:layout_constraintTop_toBottomOf="@+id/dharam_phoneTV"
+                        app:layout_constraintLeft_toLeftOf="@+id/dharam_phoneTV"/>
+
+                    <TextView
+                        android:id="@+id/dharam_phonenoTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dharampeth_phone_number"
+                        android:autoLink="phone"
+                        android:linksClickable="true"
+                        android:textSize="@dimen/text_contact_us"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        app:layout_constraintTop_toTopOf="@+id/dharam_phone_id"
+                        app:layout_constraintLeft_toRightOf="@+id/dharam_phone_id"/>
+
+                    <TextView
+                        android:id="@+id/dharam_faxTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/contact_us_text_top_margin"
+                        android:textSize="@dimen/text_contact_us"
+                        android:text="@string/dharam_fax"
+                        app:layout_constraintTop_toBottomOf="@+id/dharam_phone_id"
+                        app:layout_constraintLeft_toLeftOf="@+id/dharam_phone_id"/>
+
+                    <TextView
+                        android:id="@+id/dharam_fax_no_TV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_contact_us"
+                        android:text="@string/dharam_fax_no"
+                        android:autoLink="phone"
+                        android:linksClickable="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        app:layout_constraintTop_toTopOf="@+id/dharam_faxTV"
+                        app:layout_constraintLeft_toRightOf="@+id/dharam_faxTV"/>
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/contact_email_CV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/contact_phone_CV"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:contentPaddingTop="10dp"
+                >
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/contact_email_Img"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="5dp"
+                        app:srcCompat="@drawable/ic_send"
+                        android:background="@drawable/bg_icon_contact"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="20dp"
+                        app:layout_constraintLeft_toLeftOf="parent" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/contact_email_TV"
+                        android:text="@string/contactus_emailTV"
+                        android:textSize="35sp"
+                        app:layout_constraintLeft_toRightOf="@+id/contact_email_Img"
+                        android:layout_marginLeft="10dp"
+                        app:layout_constraintTop_toTopOf="@+id/contact_email_Img"
+                        android:layout_marginTop="0dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/contact_email_Img"
+                        android:layout_marginBottom="0dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/info_emailTV"
+                        android:text="@string/info_email"
+                        android:textSize="@dimen/text_contact_us"
+                        android:autoLink="email"
+                        android:linksClickable="true"
+
+                        app:layout_constraintTop_toBottomOf="@+id/contact_email_Img"
+                        app:layout_constraintLeft_toLeftOf="@+id/contact_email_Img"
+                        android:layout_marginTop="10dp"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/hr_emailTV"
+                        android:text="@string/hr_email"
+                        android:autoLink="email"
+                        android:linksClickable="true"
+                        android:layout_marginTop="@dimen/contact_us_text_top_margin"
+                        android:textSize="@dimen/text_contact_us"
+                        app:layout_constraintTop_toBottomOf="@+id/info_emailTV"
+                        app:layout_constraintLeft_toLeftOf="@+id/info_emailTV"
+                        />
+
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/contact_address_CV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/contact_email_CV"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                >
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <ImageView
+                        android:id="@+id/contact_address_Img"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="5dp"
+                        app:srcCompat="@drawable/ic_green_pin"
+                        android:background="@drawable/bg_icon_contact"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="20dp"
+                        app:layout_constraintLeft_toLeftOf="parent" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/contact_address_TV"
+                        android:text="@string/nci_address_title"
+                        android:textSize="35sp"
+                        app:layout_constraintLeft_toRightOf="@+id/contact_address_Img"
+                        android:layout_marginLeft="10dp"
+                        app:layout_constraintTop_toTopOf="@+id/contact_address_Img"
+                        android:layout_marginTop="0dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/contact_address_Img"
+                        android:layout_marginBottom="0dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nciTV"
+                        android:text="@string/nci_title"
+                        android:textSize="@dimen/headertext_contact_us"
+
+                        app:layout_constraintTop_toBottomOf="@+id/contact_address_Img"
+                        app:layout_constraintLeft_toLeftOf="@+id/contact_address_Img"
+                        android:layout_marginTop="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/jamtha_addressIdTV"
+                        android:text="@string/jamtha"
+                        android:textSize="@dimen/headertext_contact_us"
+                        android:layout_marginTop="@dimen/headertext_contact_us_top_margin"
+                        app:layout_constraintTop_toBottomOf="@+id/nciTV"
+                        app:layout_constraintLeft_toLeftOf="@+id/nciTV"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/jamtha_addressTV"
+                        android:layout_marginTop="@dimen/contact_us_text_top_margin"
+                        android:textSize="@dimen/text_contact_us"
+                        android:text="@string/jamtha_addtess"
+                        app:layout_constraintTop_toBottomOf="@+id/jamtha_addressIdTV"
+                        app:layout_constraintLeft_toLeftOf="@+id/jamtha_addressIdTV"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dharam_addressIdTV"
+                        android:text="@string/dharampeth"
+                        android:layout_marginTop="@dimen/headertext_contact_us_top_margin"
+                        android:textSize="@dimen/headertext_contact_us"
+                        app:layout_constraintTop_toBottomOf="@+id/jamtha_addressTV"
+                        app:layout_constraintLeft_toLeftOf="@+id/jamtha_addressTV"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dharam_addressTV"
+                        android:textSize="@dimen/text_contact_us"
+                        android:paddingBottom="@dimen/headertext_contact_us_top_margin"
+                        android:layout_marginTop="@dimen/contact_us_text_top_margin"
+                        android:text="@string/dharampeth_address"
+                        app:layout_constraintTop_toBottomOf="@+id/dharam_addressIdTV"
+                        app:layout_constraintLeft_toLeftOf="@id/dharam_addressIdTV"
+                        />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+</LinearLayout>

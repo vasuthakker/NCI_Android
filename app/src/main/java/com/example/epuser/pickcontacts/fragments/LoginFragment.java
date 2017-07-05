@@ -155,7 +155,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
         else if (v ==contactUsImg){
             Intent intent = new Intent(getActivity(), AboutAppActivity.class);
-            intent.putExtra(AppConstants.FRAGMENT_ID,getString(R.string.title_about_us));
+            intent.putExtra(AppConstants.FRAGMENT_ID,getString(R.string.title_contact_us));
             startActivity(intent);
 
         }
@@ -195,10 +195,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         @Override
         public void responseReceived(JSONObject jsonObj) {
             Preference.savePreference(getActivity(), AppConstants.IS_LOGGED_IN, true);
-             Intent intent = new Intent(getActivity(), MainNavigationActivity.class);
-             startActivity(intent);
-              getActivity().finish();
-//            getPatientID();
+//             Intent intent = new Intent(getActivity(), MainNavigationActivity.class);
+//             startActivity(intent);
+//              getActivity().finish();
+            getPatientID();
         }
 
         @Override
@@ -215,14 +215,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             JSONObject jsonObject1 = new JSONObject();
             JSONObject jsonObject2 = new JSONObject();
             requestJson.put("HEADER", jsonObject1);
-            // TODO: 6/15/2017   generalise the phone number
+
              jsonObject2.put("mobileNumber", Preference.getStringPreference(getActivity(), AppConstants.MOBILE_NUMBER));
           //  jsonObject2.put("mobileNumber", "9164024091");
             requestJson.put("DATA", jsonObject2);
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_PATIENTID), requestJson, PatientGetResp, true);
         } catch (JSONException e) {
-            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+            Log.e(TAG, "getPatientId: JSONException", e);
         } catch (InternetNotAvailableException e) {
             Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
         }
@@ -266,7 +266,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         // do whatever
                         PatientID patientID = DataList.get(position);
                         Preference.savePreference(getActivity(),AppConstants.PATIENT_ID,patientID.getPatientId());
-                        Intent intent = new Intent(getActivity(), HistoryFragment.class);
+                        String PatientName = patientID.getFirstName() + " " + patientID.getMiddleName() + " " + patientID.getLastName();
+                        Preference.savePreference(getActivity(),AppConstants.CURRENT_PATIENT_NAME,PatientName);
+                        Intent intent = new Intent(getActivity(), MainNavigationActivity.class);
                         startActivity(intent);
                         getActivity().finish();
                        // Toast.makeText(getActivity(), patientID.getPatientId() + " is selected!", Toast.LENGTH_SHORT).show();

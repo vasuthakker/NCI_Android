@@ -52,7 +52,7 @@
     <string name="enter_amount">Enter Amount</string>
     <string name="remarks_optional">Remarks(Optional)</string>
     <string name="request_money">Request Money</string>
-    <string name="enter_valid_pin">enter a valid pin</string>
+    <string name="enter_valid_pin">Enter a valid pin</string>
     <string name="current_balance">Your Current Balance is</string>
     <string name="send_money">Send Money</string>
     <string name="add">Add</string>
@@ -99,7 +99,6 @@
         <item>4th</item>
     </array>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="forgot_set_pin">Set a new 4-digit PIN here</string>
     <string name="enter_phonenumber">Enter your Phone Number</string>
@@ -151,5 +150,28 @@
     <string name="about_us_text">
         <![CDATA[NATIONAL CANCER INSTITUTE, Nagpur is proposed as a state of the art 500 bed \'Comprehensive Cancer Care Centre\' spread over 23.5 acre campus. The campus includes main Hospital Building with total built up area of 700,000 Sft. appx. and allied facilities like Yatri Niwas, Nurses Hostel, Staff Housing, with a total built up area of 200,000 sq ft.\n \nQuaternary Care, Palliative Care and Sustainable Charity are three key phrases that sum up the mission of the Institute. \n \nThe process of planning commenced in the last quarter of 2013 and the execution commenced in March 2015 \n \nPlanning based on the values of Functionality, Sustainbility, Energy Efficiency, Safety & Aesthetics in compliance with both NABH and JCI.]]>
     </string>
+    <string name="title_contact_us">Contact Us</string>
+    <string name="contactus_phone_tv">Phone</string>
+    <string name="jamtha">JAMTHA</string>
+    <string name="dharampeth">DHARAMPETH</string>
+    <string name="jamtha_phone_number"><u>18002330033</u></string>
+    <string name="dharampeth_phone_number"><u>07122545562</u></string>
+    <string name="dharam_fax">Fax:</string>
+    <string name="phone_title_tv">Phone:</string>
+    <string name="dharam_fax_no"><u>07122545562</u></string>
+    <string name="contactus_emailTV">Email</string>
+    <string name="info_email"><u>info@ncinagpur.in</u></string>
+    <string name="hr_email"><u>hr@ncinagpur.in</u></string>
+    <string name="nci_title">NATIONAL CANCER INSTITUTE</string>
+    <string name="jamtha_addtess">Khasra No. 25, Outer Hingna Ring Road, Mouza Jamtha, Nagpur - 441108 (M.S.)</string>
+    <string name="dharampeth_address">293, Manorama Chambers WHC Road, Dharampeth, Nagpur - 440010</string>
+    <string name="nci_address_title">Address</string>
+    <string name="enter_valid_OTP">Enter a 6 digit OTP</string>
+    <string name="qn_not_selected_error">Please select a Security Question</string>
+    <string name="empty_seq_ans_error">Enter the Answer</string>
+    <string name="signup_success_msg">Sign up Successful! Use the Pin created to login to your Account</string>
+    <string name="otp_expired_message">OTP expired</string>
+    <string name="resend_otp_btn">Resend OTP</string>
+    <string name="otp_send_success_msg">OTP successfully sent to your registered Number</string>
 
 </resources>

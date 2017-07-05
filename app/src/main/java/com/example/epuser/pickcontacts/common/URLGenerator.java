@@ -11,7 +11,7 @@ import java.net.URL;
 
 public class URLGenerator implements URLProvider {
 
-    public static final String BASE_ADDRESS_HOST = "http://192.168.10.66:8081/";
+    public static final String BASE_ADDRESS_HOST = "http://192.168.10.68:8080/";
     public static final String URL_CONTEXT = BASE_ADDRESS_HOST + "epnci/";
 
 
@@ -45,7 +45,7 @@ public class URLGenerator implements URLProvider {
     public static final String URL_SEND = "";
     public static final String URL_PATIENTID="searchmobilewithpatientid";
     public static final String URL_FEEDBACK = "feedbackform";
-    public static final String URL_FETCH_FAQ="according to URL";
+    public static final String URL_FETCH_FAQ="showFAQ";
 
 
 

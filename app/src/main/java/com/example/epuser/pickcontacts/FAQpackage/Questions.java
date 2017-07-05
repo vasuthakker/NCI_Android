@@ -35,10 +35,6 @@ public class Questions implements Parcelable {
         solution=in.readString();
     }
 
-
-
-
-
     public Questions(String query,String solution) {
         this.query = query;
         this.solution=solution;

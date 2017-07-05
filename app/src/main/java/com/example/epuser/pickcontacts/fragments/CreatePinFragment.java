@@ -4,8 +4,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -95,6 +97,26 @@ public class CreatePinFragment extends Fragment {
 
             }
         });
+        pin_ET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (pin_ET.length() ==4)
+                {
+                    confirm_pin_ET.requestFocus();
+                }
+
+            }
+        });
 
     }
     @Override
@@ -104,11 +126,14 @@ public class CreatePinFragment extends Fragment {
     }
 
     private void createPin() {
-        if (selected_qn_position ==0)
+        if (selected_qn_position ==0) {
+            Utils.showToast(getActivity(), getString(R.string.qn_not_selected_error));
             return;
+        }
         if (TextUtils.isEmpty(secAnsET.getText().toString()))
         {
-            secAnsET.setError("Enter the Answer");
+            secAnsET.requestFocus();
+            secAnsET.setError(getString(R.string.empty_seq_ans_error));
             return;
         }
         String pin = pin_ET.getText().toString();
@@ -138,12 +163,14 @@ public class CreatePinFragment extends Fragment {
             }
             else
             {
+                confirm_pin_ET.requestFocus();
                 confirm_pin_ET.setError(getString(R.string.pins_dont_match));
             }
 
         }
         else
         {
+            pin_ET.requestFocus();
             pin_ET.setError(getString(R.string.enter_valid_pin));
 
         }
@@ -153,6 +180,7 @@ public class CreatePinFragment extends Fragment {
         public void responseReceived(JSONObject jsonObj) {
             Preference.savePreference(getActivity(),AppConstants.IS_LOGGED_IN,true);
             Preference.savePreference(getActivity(),AppConstants.MOBILE_NUMBER,Preference.getStringPreference(getActivity(),AppConstants.TEMP_MOBILE_NUMBER));
+            Utils.showSuccessToast(getActivity(),getString(R.string.signup_success_msg));
             loginActivity.changeFragment(new LoginFragment());
 
         }
@@ -176,7 +204,7 @@ public class CreatePinFragment extends Fragment {
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_GET_SEC_QNS), requestJson, securityQuestionsResp, true);
         } catch (JSONException e) {
-            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+            Log.e(TAG, "getSecurityQuestions: JSONException", e);
         } catch (InternetNotAvailableException e) {
             Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
         }

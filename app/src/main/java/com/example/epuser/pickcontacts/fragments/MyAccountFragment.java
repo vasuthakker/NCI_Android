@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.example.epuser.pickcontacts.R;
 import com.example.epuser.pickcontacts.activities.ChangePin;
 import com.example.epuser.pickcontacts.activities.MainNavigationActivity;
+import com.example.epuser.pickcontacts.common.AppConstants;
+import com.example.epuser.pickcontacts.common.Preference;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
@@ -80,10 +82,8 @@ public class MyAccountFragment extends Fragment implements View.OnClickListener 
             }
         });
 
-        ETFirstName.setText("Bittu Kumar");
-
-        ETEmail.setText("bittu.dakshana15@gmail.com");
-        ETMobile.setText("9987582933");
+        ETFirstName.setText(Preference.getStringPreference(getActivity(), AppConstants.CURRENT_PATIENT_NAME));
+        ETMobile.setText(Preference.getStringPreference(getActivity(),AppConstants.MOBILE_NUMBER));
 
         setImgName();
 

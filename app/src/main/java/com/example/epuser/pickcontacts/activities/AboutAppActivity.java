@@ -13,6 +13,7 @@ import com.example.epuser.pickcontacts.FAQpackage.FaqFragment;
 import com.example.epuser.pickcontacts.R;
 import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.fragments.AboutUs;
+import com.example.epuser.pickcontacts.fragments.ContactUsFragment;
 import com.example.epuser.pickcontacts.fragments.ForgotPasswordFragment;
 import com.example.epuser.pickcontacts.fragments.RegisterFragment;
 import com.example.epuser.pickcontacts.FAQpackage.FaqFragment;
@@ -74,6 +75,8 @@ public class AboutAppActivity extends AppCompatActivity implements View.OnClickL
 
         }
         else if (v ==contactUsImg){
+            toolbar.setTitle(getString(R.string.title_contact_us));
+            changeFragment(new ContactUsFragment());
 
 
         }
@@ -96,7 +99,11 @@ public class AboutAppActivity extends AppCompatActivity implements View.OnClickL
             changeFragment(new FaqFragment());
 
         } else if (fragmentId.equals("tour")) {
-        } else if (fragmentId.equals("contact")) {
+
+        } else if (fragmentId.equals(getString(R.string.title_contact_us))) {
+            toolbar.setTitle(getString(R.string.title_contact_us));
+            changeFragment(new ContactUsFragment());
+
         } else if (fragmentId.equals("offers")) {
         }
     }

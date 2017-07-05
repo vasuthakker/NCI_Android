@@ -1,6 +1,7 @@
 package com.example.epuser.pickcontacts.fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.epuser.pickcontacts.R;
+import com.example.epuser.pickcontacts.activities.MainNavigationActivity;
 import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.common.Preference;
 import com.example.epuser.pickcontacts.common.URLGenerator;
@@ -35,6 +37,9 @@ public class FeedbackFragment extends Fragment{
 
     private EditText feedbackET;
     private Button submitBtn;
+    private MainNavigationActivity mainNavigationActivity;
+
+
 
 
     @Nullable
@@ -42,6 +47,13 @@ public class FeedbackFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_feedback, container, false);
 
+
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mainNavigationActivity = (MainNavigationActivity) context;
 
     }
 
@@ -75,7 +87,8 @@ public class FeedbackFragment extends Fragment{
             JSONObject header = new JSONObject();
             JSONObject data = new JSONObject();
             requestJson.put("HEADER", header);
-            data.put("hmipatientId", Preference.getStringPreference(getActivity(), AppConstants.PATIENT_ID));
+            data.put("hmipatientId",2);
+           // data.put("hmipatientId", Preference.getStringPreference(getActivity(), AppConstants.PATIENT_ID));
             data.put("mobileNumber", Preference.getStringPreference(getActivity(),AppConstants.MOBILE_NUMBER));
             data.put("feedback", feedback);
 
@@ -93,6 +106,8 @@ public class FeedbackFragment extends Fragment{
         @Override
         public void responseReceived(JSONObject jsonObj) {
             Utils.showSuccessToast(getActivity(),"Feedback Successfully Sent!");
+            mainNavigationActivity.getSupportActionBar().setTitle(getString(R.string.title_my_account));
+            mainNavigationActivity.changeFragment(new MyAccountFragment());
 
         }
 

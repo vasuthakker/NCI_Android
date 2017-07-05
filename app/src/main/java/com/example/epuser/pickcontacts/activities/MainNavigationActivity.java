@@ -24,6 +24,7 @@ import com.example.epuser.pickcontacts.fragments.AboutUs;
 import com.example.epuser.pickcontacts.fragments.ContactUsFragment;
 import com.example.epuser.pickcontacts.fragments.FeedbackFragment;
 import com.example.epuser.pickcontacts.fragments.HistoryFragment;
+import com.example.epuser.pickcontacts.fragments.MainFragment;
 import com.example.epuser.pickcontacts.fragments.MyAccountFragment;
 import com.example.epuser.pickcontacts.FAQpackage.FaqFragment;
 
@@ -152,6 +153,7 @@ public class MainNavigationActivity extends AppCompatActivity
             changeFragment( new FaqFragment());
 
         } else if (id == R.id.nav_contact_us) {
+            getSupportActionBar().setTitle(getString(R.string.title_contact_us));
             changeFragment(new ContactUsFragment());
 
         }else if(id==R.id.nav_feedback){

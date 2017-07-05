@@ -120,19 +120,21 @@ public class ForgotSetPinFragment extends Fragment  implements View.OnClickListe
 
                     VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_CHANGE_FORGOT_PIN), requestJson, changePinResp, true);
                 } catch (JSONException e) {
-                    Log.e(TAG, "validateReceiveMoney: JSONException", e);
+                    Log.e(TAG, "forgotChangePin: JSONException", e);
                 } catch (InternetNotAvailableException e) {
                     Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
                 }
             }
             else
             {
+                confirmPinForgot.requestFocus();
                 confirmPinForgot.setError(getString(R.string.pins_dont_match));
             }
 
         }
         else
         {
+            pinafterForgot.requestFocus();
             pinafterForgot.setError(getString(R.string.enter_valid_pin));
 
         }

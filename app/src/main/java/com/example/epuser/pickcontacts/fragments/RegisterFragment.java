@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.inputmethodservice.Keyboard;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.content.Context;
@@ -99,24 +100,24 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         {
             mobile = regphn.getText().toString();
             if (TextUtils.isEmpty(mobile)) {
+
+                regphn.requestFocus();
                 regphn.setError(getString(R.string.enter_mobile));
                 return;
             } else if (mobile.length() < 10) {
+                regphn.requestFocus();
                 regphn.setError(getString(R.string.enter_valid_mobile));
                 return;
             } else if (mobile.length() > 9)
                 mobile = mobile.substring(mobile.length() - 10);
-            //checkIfRegistered();
-            generateOTP();
+            checkIfRegistered();
+
+
         }
         else if (v ==loginTV)
         {
-            if (Preference.getBooleanPreference(getActivity(),AppConstants.IS_LOGGED_IN))
-                loginActivity.changeFragment(new LoginFragment());
-            else
-            {
-                showLoginDialog();
-            }
+            Preference.savePreference(getActivity(),AppConstants.IS_LOGGED_IN,false);
+            showLoginDialog();
         }
 
         else if (v ==aboutUsImg){
@@ -168,7 +169,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_REGISTRATION_CHECK), requestJson, isRegisteredResp, true);
         } catch (JSONException e) {
-            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+            Log.e(TAG, "checkIfRegistered: JSONException", e);
         } catch (InternetNotAvailableException e) {
             Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
         }
@@ -188,16 +189,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     };
 
     private void Register() {
-       //  mobile = regphn.getText().toString();
-//        if (TextUtils.isEmpty(mobile)) {
-//            regphn.setError(getString(R.string.enter_mobile));
-//            return;
-//        } else if (mobile.length() < 10) {
-//            regphn.setError(getString(R.string.enter_valid_mobile));
-//            return;
-//        } else if (mobile.length() > 9)
-//            mobile = mobile.substring(mobile.length() - 10);
-
 
         try {
             JSONObject requestJson = new JSONObject();
@@ -211,7 +202,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_VERIFY_USER), requestJson, registerResp, true);
         } catch (JSONException e) {
-            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+            Log.e(TAG, "Register: JSONException", e);
         } catch (InternetNotAvailableException e) {
             Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
         }
@@ -239,12 +230,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
             requestJson.put("HEADER", jsonObject1);
             jsonObject2.put("mobileNumber", mobile);
 
-            //jsonObject2.put("udid",LoginPage.getDeviceId(getActivity()));
             requestJson.put("DATA", jsonObject2);
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_OTP), requestJson, generateOTPResp, true);
         } catch (JSONException e) {
-            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+            Log.e(TAG, "generateOTP: JSONException", e);
         } catch (InternetNotAvailableException e) {
             Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
         }
@@ -254,6 +244,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         @Override
         public void responseReceived(JSONObject jsonObj) {
             Preference.savePreference(getActivity(),AppConstants.TEMP_MOBILE_NUMBER,mobile);
+            Utils.showSuccessToast(getActivity(),getString(R.string.otp_send_success_msg));
             loginActivity.changeFragment(new SendOTP());
 
         }
@@ -301,6 +292,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
                             b.dismiss();
                         }
                         else
+                            mobileET.requestFocus();
                             mobileET.setError(getString(R.string.enter_valid_mobile));
                     }
                 });

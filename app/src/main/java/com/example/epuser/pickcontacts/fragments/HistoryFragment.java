@@ -142,9 +142,7 @@ public class HistoryFragment extends Fragment implements View.OnClickListener {
             JSONObject data = new JSONObject();
             requestJson.put(getString(R.string.header), header);
 
-            // data.put("mobileNumber", Preference.getStringPreference(this, AppConstants.MOBILE_NUMBER));
-            // TODO: 6/5/2017  generalise for the number entered by the user
-            data.put("mobileNumber", "9164024092");
+            data.put("mobileNumber", Preference.getStringPreference(getActivity(),AppConstants.MOBILE_NUMBER));
             data.put("fromDate", fromDate);
             data.put("toDate", toDate);
             data.put("hmipatientId", Preference.getStringPreference(getActivity(), AppConstants.PATIENT_ID));
@@ -153,7 +151,7 @@ public class HistoryFragment extends Fragment implements View.OnClickListener {
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_FETCH_TRANSACTIONS), requestJson, CheckBalanceResp, true);
         } catch (JSONException e) {
-            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+            Log.e(TAG, "LoadTransactions: JSONException", e);
         } catch (InternetNotAvailableException e) {
             Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
         }

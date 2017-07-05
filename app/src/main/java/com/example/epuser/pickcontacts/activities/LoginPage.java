@@ -19,6 +19,8 @@ import com.example.epuser.pickcontacts.fragments.LoginFragment;
 import com.example.epuser.pickcontacts.fragments.RegisterFragment;
 import com.example.epuser.pickcontacts.FAQpackage.CustomPagerAdapter;
 
+import me.relex.circleindicator.CircleIndicator;
+
 /**
  * Created by epuser on 5/19/2017.
  */
@@ -38,17 +40,22 @@ public class LoginPage extends AppCompatActivity  {
             };
     private CustomPagerAdapter mCustomPagerAdapter;
     private ViewPager mViewPager;
+    private CircleIndicator indicator;
     private Handler handler = new Handler();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page_login);
+
         manager = getSupportFragmentManager();
+        indicator = (CircleIndicator)findViewById(R.id.indicator);
 
         mCustomPagerAdapter = new CustomPagerAdapter(this , images);
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mCustomPagerAdapter);
+        indicator.setViewPager(mViewPager);
+       // mCustomPagerAdapter.registerDataSetObserver(indicator.getDataSetObserver());
 
         Runnable imageSwitcher = new Runnable() {
             @Override
@@ -77,7 +84,7 @@ public class LoginPage extends AppCompatActivity  {
             transaction.replace(R.id.lgcontainer, fragment);
         else
             transaction.add(R.id.lgcontainer, fragment);
-        transaction.addToBackStack(null);
+       // transaction.addToBackStack(null);
         transaction.commitAllowingStateLoss();
     }
 
@@ -87,35 +94,36 @@ public class LoginPage extends AppCompatActivity  {
     }
 
 
-    @Override
-    public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 1 &&doubleBackToExitPressedOnce) {
-            getSupportFragmentManager().popBackStack();
-        }
-
-        //else {
+//    @Override
+//    public void onBackPressed() {
+//        if (getSupportFragmentManager().getBackStackEntryCount() > 2 && !doubleBackToExitPressedOnce) {
+//            Toast.makeText(this,Integer.toString(getSupportFragmentManager().getBackStackEntryCount()),Toast.LENGTH_LONG).show();
+//            //getSupportFragmentManager().popBackStack();
+//        }
+//
+//        else {
 //            super.onBackPressed();
 //        }
-       else if(!doubleBackToExitPressedOnce){
-            this.doubleBackToExitPressedOnce = true;
-            Toast.makeText(this, "Press one more time to exit", Toast.LENGTH_SHORT).show();
-
-            new Handler().postDelayed(new Runnable() {
-
-                @Override
-                public void run() {
-                    doubleBackToExitPressedOnce = false;
-                }
-            }, 2000);
-
-        }
-
-        else  if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
-        }
-
-
-    }
+//       /*else if(!doubleBackToExitPressedOnce){
+//            this.doubleBackToExitPressedOnce = true;
+//            Toast.makeText(this, "Press one more time to exit", Toast.LENGTH_SHORT).show();
+//
+//            new Handler().postDelayed(new Runnable() {
+//
+//                @Override
+//                public void run() {
+//                    doubleBackToExitPressedOnce = false;
+//                }
+//            }, 2000);
+//
+//        }
+//
+//        else  if (doubleBackToExitPressedOnce) {
+//            super.onBackPressed();
+//            return;
+//        }
+//*/
+//
+//    }
 }
 

@@ -20,6 +20,7 @@ import com.example.epuser.pickcontacts.common.AppConstants;
 import com.example.epuser.pickcontacts.common.URLGenerator;
 import com.example.epuser.pickcontacts.common.Utils;
 import com.example.epuser.pickcontacts.exceptions.InternetNotAvailableException;
+import com.example.epuser.pickcontacts.fragments.MainFragment;
 import com.example.epuser.pickcontacts.network.VolleyJsonRequest;
 
 import org.json.JSONException;

@@ -84,6 +84,7 @@ public class ForgotPasswordFragment extends Fragment implements View.OnClickList
         String answer = answersecurity.getText().toString();
         if (TextUtils.isEmpty(answer))
         {
+            answersecurity.requestFocus();
             answersecurity.setError(getString(R.string.enter_answer));
             return;
         }
@@ -100,7 +101,7 @@ public class ForgotPasswordFragment extends Fragment implements View.OnClickList
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_SECURITY_ANS_VERIFICATION), requestJson, CheckAnsResp, true);
         } catch (JSONException e) {
-            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+            Log.e(TAG, "validateSequrityAns: JSONException", e);
         } catch (InternetNotAvailableException e) {
             Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
         }
@@ -134,7 +135,7 @@ public class ForgotPasswordFragment extends Fragment implements View.OnClickList
 
             VolleyJsonRequest.request(getActivity(), Utils.generateURL(URLGenerator.URL_GET_SEC_QN), requestJson, getsecqnResp, true);
         } catch (JSONException e) {
-            Log.e(TAG, "validateReceiveMoney: JSONException", e);
+            Log.e(TAG, "getSecurityQn: JSONException", e);
         } catch (InternetNotAvailableException e) {
             Toast.makeText(getActivity(), getString(R.string.internet_not_available), Toast.LENGTH_SHORT).show();
         }
